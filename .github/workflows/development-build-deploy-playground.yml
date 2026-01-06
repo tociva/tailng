@@ -6,6 +6,11 @@ on:
     branches: [development]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  packages: read
+  pull-requests: read
+
 jobs:
   build-and-deploy-playground-development:
     if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
@@ -20,6 +25,10 @@ jobs:
 
       - name: Checkout source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+          token: ${{ secrets.GH_PAT }}
 
       - name: Set up Node 22
         uses: actions/setup-node@v4
