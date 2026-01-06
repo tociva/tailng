@@ -2,6 +2,115 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
+export const categories = [
+  {
+    name: 'Form Controls',
+    package: '@tailng/forms',
+    components: [
+      { name: 'Autocomplete', route: '/forms/autocomplete', status: 'backlog', priority: 'high' },
+      { name: 'Checkbox', route: '/forms/checkbox', status: 'backlog', priority: 'high' },
+      { name: 'Chips', route: '/forms/chips', status: 'backlog', priority: 'medium' },
+      { name: 'Datepicker', route: '/forms/datepicker', status: 'backlog', priority: 'high' },
+      { name: 'Form Field', route: '/forms/form-field', status: 'backlog', priority: 'high' },
+      { name: 'Input', route: '/forms/input', status: 'in-progress', priority: 'high' },
+      { name: 'Radio Button', route: '/forms/radio-button', status: 'backlog', priority: 'medium' },
+      { name: 'Select', route: '/forms/select', status: 'backlog', priority: 'high' },
+      { name: 'Slider', route: '/forms/slider', status: 'backlog', priority: 'low' },
+      { name: 'Slide Toggle', route: '/forms/slide-toggle', status: 'backlog', priority: 'medium' },
+      { name: 'Timepicker', route: '/forms/timepicker', status: 'backlog', priority: 'low' },
+    ],
+  },
+
+  {
+    name: 'Buttons & Indicators',
+    package: '@tailng/primitives',
+    components: [
+      { name: 'Button', route: '/buttons/button', status: 'in-progress', priority: 'high' },
+      { name: 'Button Toggle', route: '/buttons/button-toggle', status: 'backlog', priority: 'medium' },
+      { name: 'Badge', route: '/buttons/badge', status: 'backlog', priority: 'medium' },
+      { name: 'Icon', route: '/buttons/icon', status: 'backlog', priority: 'high' },
+      { name: 'Ripples', route: '/buttons/ripples', status: 'backlog', priority: 'low' },
+      { name: 'Progress Bar', route: '/buttons/progress-bar', status: 'backlog', priority: 'medium' },
+      { name: 'Progress Spinner', route: '/buttons/progress-spinner', status: 'backlog', priority: 'medium' },
+    ],
+  },
+
+  {
+    name: 'Layout',
+    package: '@tailng/primitives',
+    components: [
+      { name: 'Card', route: '/layout/card', status: 'in-progress', priority: 'high' },
+      { name: 'Divider', route: '/layout/divider', status: 'backlog', priority: 'low' },
+      { name: 'Expansion Panel', route: '/layout/expansion-panel', status: 'backlog', priority: 'medium' },
+      { name: 'Grid List', route: '/layout/grid-list', status: 'backlog', priority: 'low' },
+      { name: 'List', route: '/layout/list', status: 'backlog', priority: 'medium' },
+      { name: 'Tabs', route: '/layout/tabs', status: 'backlog', priority: 'high' },
+      { name: 'Toolbar', route: '/layout/toolbar', status: 'backlog', priority: 'medium' },
+    ],
+  },
+
+  {
+    name: 'Navigation',
+    package: '@tailng/navigation',
+    components: [
+      { name: 'Menu', route: '/navigation/menu', status: 'backlog', priority: 'high' },
+      { name: 'Sidenav', route: '/navigation/sidenav', status: 'backlog', priority: 'high' },
+      { name: 'Stepper', route: '/navigation/stepper', status: 'backlog', priority: 'medium' },
+      { name: 'Paginator', route: '/navigation/paginator', status: 'backlog', priority: 'medium' },
+    ],
+  },
+
+  {
+    name: 'Popups & Overlays',
+    package: '@tailng/overlay',
+    components: [
+      { name: 'Dialog', route: '/overlay/dialog', status: 'backlog', priority: 'high' },
+      { name: 'Bottom Sheet', route: '/overlay/bottom-sheet', status: 'backlog', priority: 'medium' },
+      { name: 'Snackbar', route: '/overlay/snackbar', status: 'backlog', priority: 'high' },
+      { name: 'Tooltip', route: '/overlay/tooltip', status: 'backlog', priority: 'high' },
+    ],
+  },
+
+  {
+    name: 'Overlay Primitives',
+    package: '@tailng/overlay',
+    internal: true,
+    components: [
+      {
+        name: 'Connected Overlay',
+        route: '/overlay-primitives/connected-overlay',
+        status: 'in-progress',
+        priority: 'high',
+        internal: true,
+      },
+      {
+        name: 'Overlay Panel',
+        route: '/overlay-primitives/overlay-panel',
+        status: 'backlog',
+        priority: 'medium',
+        internal: true,
+      },
+      {
+        name: 'Overlay Ref',
+        route: '/overlay-primitives/overlay-ref',
+        status: 'backlog',
+        priority: 'low',
+        internal: true,
+      },
+    ],
+  },
+
+  {
+    name: 'Data Table & Structure',
+    package: '@tailng/data',
+    components: [
+      { name: 'Table', route: '/data/table', status: 'backlog', priority: 'high' },
+      { name: 'Sort Header', route: '/data/sort-header', status: 'backlog', priority: 'medium' },
+      { name: 'Tree', route: '/data/tree', status: 'backlog', priority: 'low' },
+    ],
+  },
+];
+
 @Component({
   selector: 'playground-home',
   standalone: true,
@@ -9,73 +118,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  categories = [
-    {
-      name: 'Form Controls',
-      components: [
-        { name: 'Autocomplete', route: '/form-controls/autocomplete', status:'backlog' },
-        { name: 'Checkbox', route: '/form-controls/checkbox', status:'backlog' },
-        { name: 'Chips', route: '/form-controls/chips', status:'backlog' },
-        { name: 'Datepicker', route: '/form-controls/datepicker', status:'backlog' },
-        { name: 'Form Field', route: '/form-controls/form-field', status:'backlog' },
-        { name: 'Input', route: '/form-controls/input', status:'in-progress' },
-        { name: 'Radio Button', route: '/form-controls/radio-button', status:'backlog' },
-        { name: 'Select', route: '/form-controls/select', status:'backlog' },
-        { name: 'Slider', route: '/form-controls/slider', status:'backlog' },
-        { name: 'Slide Toggle', route: '/form-controls/slide-toggle', status:'backlog' },
-        { name: 'Timepicker', route: '/form-controls/timepicker', status:'backlog' },
-      ],
-    },
-    {
-      name: 'Buttons & Indicators',
-      components: [
-        { name: 'Button', route: '/buttons-indicators/button', status:'in-progress' },
-        { name: 'Button Toggle', route: '/buttons-indicators/button-toggle', status:'backlog' },
-        { name: 'Badge', route: '/buttons-indicators/badge', status:'backlog' },
-        { name: 'Icon', route: '/buttons-indicators/icon', status:'backlog' },
-        { name: 'Ripples', route: '/buttons-indicators/ripples', status:'backlog' },
-        { name: 'Progress Bar', route: '/buttons-indicators/progress-bar', status:'backlog' },
-        { name: 'Progress Spinner', route: '/buttons-indicators/progress-spinner', status:'backlog' },
-      ],
-    },
-    {
-      name: 'Layout',
-      components: [
-        { name: 'Card', route: '/layout/card', status:'in-progress' },
-        { name: 'Divider', route: '/layout/divider', status:'backlog' },
-        { name: 'Expansion Panel', route: '/layout/expansion-panel', status:'backlog' },
-        { name: 'Grid List', route: '/layout/grid-list', status:'backlog' },
-        { name: 'List', route: '/layout/list', status:'backlog' },
-        { name: 'Tabs', route: '/layout/tabs', status:'backlog' },
-        { name: 'Toolbar', route: '/layout/toolbar', status:'backlog' },
-      ],
-    },
-    {
-      name: 'Navigation',
-      components: [
-        { name: 'Menu', route: '/navigation/menu', status:'backlog' },
-        { name: 'Sidenav', route: '/navigation/sidenav', status:'backlog' },
-        { name: 'Stepper', route: '/navigation/stepper', status:'backlog'  },
-        { name: 'Paginator', route: '/navigation/paginator', status:'backlog' },
-      ],
-    },
-    {
-      name: 'Popups & Overlays',
-      components: [
-        { name: 'Dialog', route: '/popups-overlays/dialog', status:'backlog' },
-        { name: 'Bottom Sheet', route: '/popups-overlays/bottom-sheet', status:'backlog' },
-        { name: 'Snackbar', route: '/popups-overlays/snackbar', status:'backlog' },
-        { name: 'Tooltip', route: '/popups-overlays/tooltip', status:'backlog' },
-      ],
-    },
-    {
-      name: 'Data Table & Structure',
-      components: [
-        { name: 'Table', route: '/data-table-structure/table', status:'backlog' },
-        { name: 'Sort Header', route: '/data-table-structure/sort-header', status:'backlog' },
-        { name: 'Tree', route: '/data-table-structure/tree', status:'backlog' },
-      ],
-    },
-  ];
+  categories = categories;
 }
 

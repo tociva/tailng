@@ -8,77 +8,77 @@ export const routes: Routes = [
   },
   // Form Controls
   {
-    path: 'form-controls/autocomplete',
+    path: 'forms/autocomplete',
     loadComponent: () =>
       import('./demos/form-controls/autocomplete/autocomplete-demo.component').then(
         (m) => m.AutocompleteDemoComponent
       ),
   },
   {
-    path: 'form-controls/checkbox',
+    path: 'forms/checkbox',
     loadComponent: () =>
       import('./demos/form-controls/checkbox/checkbox-demo.component').then(
         (m) => m.CheckboxDemoComponent
       ),
   },
   {
-    path: 'form-controls/chips',
+    path: 'forms/chips',
     loadComponent: () =>
       import('./demos/form-controls/chips/chips-demo.component').then(
         (m) => m.ChipsDemoComponent
       ),
   },
   {
-    path: 'form-controls/datepicker',
+    path: 'forms/datepicker',
     loadComponent: () =>
       import('./demos/form-controls/datepicker/datepicker-demo.component').then(
         (m) => m.DatepickerDemoComponent
       ),
   },
   {
-    path: 'form-controls/form-field',
+    path: 'forms/form-field',
     loadComponent: () =>
       import('./demos/form-controls/form-field/form-field-demo.component').then(
         (m) => m.FormFieldDemoComponent
       ),
   },
   {
-    path: 'form-controls/input',
+    path: 'forms/input',
     loadComponent: () =>
       import('./demos/form-controls/input/input-demo.component').then(
         (m) => m.InputDemoComponent
       ),
   },
   {
-    path: 'form-controls/radio-button',
+    path: 'forms/radio-button',
     loadComponent: () =>
       import('./demos/form-controls/radio-button/radio-button-demo.component').then(
         (m) => m.RadioButtonDemoComponent
       ),
   },
   {
-    path: 'form-controls/select',
+    path: 'forms/select',
     loadComponent: () =>
       import('./demos/form-controls/select/select-demo.component').then(
         (m) => m.SelectDemoComponent
       ),
   },
   {
-    path: 'form-controls/slider',
+    path: 'forms/slider',
     loadComponent: () =>
       import('./demos/form-controls/slider/slider-demo.component').then(
         (m) => m.SliderDemoComponent
       ),
   },
   {
-    path: 'form-controls/slide-toggle',
+    path: 'forms/slide-toggle',
     loadComponent: () =>
       import('./demos/form-controls/slide-toggle/slide-toggle-demo.component').then(
         (m) => m.SlideToggleDemoComponent
       ),
   },
   {
-    path: 'form-controls/timepicker',
+    path: 'forms/timepicker',
     loadComponent: () =>
       import('./demos/form-controls/timepicker/timepicker-demo.component').then(
         (m) => m.TimepickerDemoComponent
@@ -86,49 +86,49 @@ export const routes: Routes = [
   },
   // Buttons & Indicators
   {
-    path: 'buttons-indicators/button',
+    path: 'buttons/button',
     loadComponent: () =>
       import('./demos/buttons-indicators/button/button-demo.component').then(
         (m) => m.ButtonDemoComponent
       ),
   },
   {
-    path: 'buttons-indicators/button-toggle',
+    path: 'buttons/button-toggle',
     loadComponent: () =>
       import('./demos/buttons-indicators/button-toggle/button-toggle-demo.component').then(
         (m) => m.ButtonToggleDemoComponent
       ),
   },
   {
-    path: 'buttons-indicators/badge',
+    path: 'buttons/badge',
     loadComponent: () =>
       import('./demos/buttons-indicators/badge/badge-demo.component').then(
         (m) => m.BadgeDemoComponent
       ),
   },
   {
-    path: 'buttons-indicators/icon',
+    path: 'buttons/icon',
     loadComponent: () =>
       import('./demos/buttons-indicators/icon/icon-demo.component').then(
         (m) => m.IconDemoComponent
       ),
   },
   {
-    path: 'buttons-indicators/ripples',
+    path: 'buttons/ripples',
     loadComponent: () =>
       import('./demos/buttons-indicators/ripples/ripples-demo.component').then(
         (m) => m.RipplesDemoComponent
       ),
   },
   {
-    path: 'buttons-indicators/progress-bar',
+    path: 'buttons/progress-bar',
     loadComponent: () =>
       import('./demos/buttons-indicators/progress-bar/progress-bar-demo.component').then(
         (m) => m.ProgressBarDemoComponent
       ),
   },
   {
-    path: 'buttons-indicators/progress-spinner',
+    path: 'buttons/progress-spinner',
     loadComponent: () =>
       import('./demos/buttons-indicators/progress-spinner/progress-spinner-demo.component').then(
         (m) => m.ProgressSpinnerDemoComponent
@@ -215,50 +215,72 @@ export const routes: Routes = [
   },
   // Popups & Overlays
   {
-    path: 'popups-overlays/dialog',
+    path: 'overlay/dialog',
     loadComponent: () =>
       import('./demos/popups-overlays/dialog/dialog-demo.component').then(
         (m) => m.DialogDemoComponent
       ),
   },
   {
-    path: 'popups-overlays/bottom-sheet',
+    path: 'overlay/bottom-sheet',
     loadComponent: () =>
       import('./demos/popups-overlays/bottom-sheet/bottom-sheet-demo.component').then(
         (m) => m.BottomSheetDemoComponent
       ),
   },
   {
-    path: 'popups-overlays/snackbar',
+    path: 'overlay/snackbar',
     loadComponent: () =>
       import('./demos/popups-overlays/snackbar/snackbar-demo.component').then(
         (m) => m.SnackbarDemoComponent
       ),
   },
   {
-    path: 'popups-overlays/tooltip',
+    path: 'overlay/tooltip',
     loadComponent: () =>
       import('./demos/popups-overlays/tooltip/tooltip-demo.component').then(
         (m) => m.TooltipDemoComponent
       ),
   },
+  // Overlay Primitives
+  {
+    path: 'overlay-primitives/connected-overlay',
+    loadComponent: () =>
+      import('./demos/overlay-primitives/connected-overlay/connected-overlay-demo.component').then(
+        (m) => m.ConnectedOverlayDemoComponent
+      ),
+  },
+  {
+    path: 'overlay-primitives/overlay-panel',
+    loadComponent: () =>
+      import('./demos/overlay-primitives/overlay-panel/overlay-panel-demo.component').then(
+        (m) => m.OverlayPanelDemoComponent
+      ),
+  },
+  {
+    path: 'overlay-primitives/overlay-ref',
+    loadComponent: () =>
+      import('./demos/overlay-primitives/overlay-ref/overlay-ref-demo.component').then(
+        (m) => m.OverlayRefDemoComponent
+      ),
+  },
   // Data Table & Structure
   {
-    path: 'data-table-structure/table',
+    path: 'data/table',
     loadComponent: () =>
       import('./demos/data-table-structure/table/table-demo.component').then(
         (m) => m.TableDemoComponent
       ),
   },
   {
-    path: 'data-table-structure/sort-header',
+    path: 'data/sort-header',
     loadComponent: () =>
       import('./demos/data-table-structure/sort-header/sort-header-demo.component').then(
         (m) => m.SortHeaderDemoComponent
       ),
   },
   {
-    path: 'data-table-structure/tree',
+    path: 'data/tree',
     loadComponent: () =>
       import('./demos/data-table-structure/tree/tree-demo.component').then(
         (m) => m.TreeDemoComponent
