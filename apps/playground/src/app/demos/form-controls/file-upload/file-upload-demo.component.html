@@ -1,27 +1,40 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">File Upload</h1>
+<div class="space-y-6 max-w-xl">
+  <div class="space-y-2">
+    <h3 class="text-sm font-medium text-text">Modern file upload</h3>
 
-  <form [formGroup]="form" class="space-y-6 max-w-md">
-    <section>
-      <label class="block text-sm font-medium text-gray-700 mb-2">Upload Files</label>
-      <tng-file-upload
-        formControlName="files"
-        accept="image/*"
-        [multiple]="true"
-      ></tng-file-upload>
-      @if (filesCtrl.touched && filesCtrl.invalid) {
-        <p class="text-sm mt-2 text-red-600">Files are required</p>
-      }
-      @if (filesCtrl.value) {
-        <p class="text-sm mt-2 text-gray-600">
-          Selected: {{ filesCtrl.value.length }} file(s)
-        </p>
-      }
-    </section>
+    <tng-file-upload
+      accept="image/*,.pdf"
+      [multiple]="true"
+      (valueChange)="files.set($event)"
+      title="Upload attachments"
+      subtitle="Drag & drop files here, or click to select"
+    />
+  </div>
 
-    <pre class="text-xs bg-gray-50 border rounded p-3 overflow-auto">
-Value: {{ form.value | json }}
-</pre>
-  </form>
+  <div class="space-y-2">
+    <h3 class="text-sm font-medium text-text">Selected files (signal)</h3>
+
+    @if (files()?.length) {
+      <ul class="list-disc pl-5 text-sm text-text">
+        @for (f of files()!; track f.name) {
+          <li>{{ f.name }}</li>
+        }
+      </ul>
+    } @else {
+      <p class="text-sm text-disable">No files selected</p>
+    }
+  </div>
+
+  <div class="space-y-2">
+    <h3 class="text-sm font-medium text-text">Custom classes</h3>
+
+    <tng-file-upload
+      accept=".png,.jpg,.jpeg"
+      [multiple]="true"
+      dropzoneKlass="border-dashed"
+      title="Upload images"
+      subtitle="Drop images here or click"
+      fileItemKlass="border border-primary bg-on-primary"
+    />
+  </div>
 </div>
-

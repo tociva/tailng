@@ -22,8 +22,8 @@ export const categories = [
       { name: 'Number Input', route: '/forms/number-input', status: 'done', priority: 'high' },
 
       // Essentials
-      { name: 'Textarea', route: '/forms/textarea', status: 'backlog', priority: 'high' },
-      { name: 'File Upload', route: '/forms/file-upload', status: 'backlog', priority: 'medium' },
+      { name: 'Textarea', route: '/forms/textarea', status: 'done', priority: 'high' },
+      { name: 'File Upload', route: '/forms/file-upload', status: 'done', priority: 'medium' },
 
       { name: 'Radio Button', route: '/forms/radio-button', status: 'done', priority: 'medium' },
       { name: 'Select', route: '/forms/select', status: 'done', priority: 'high' },
