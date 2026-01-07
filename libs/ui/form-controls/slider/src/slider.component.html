@@ -1,4 +1,41 @@
-<div class="p-4 border border-gray-200 rounded-md">
-  <p class="text-gray-600">Welcome hello component - Slider</p>
-</div>
+<div [class]="rootKlass()">
+  <!-- Visual slider -->
+  <div class="relative w-full h-6">
+    <!-- Track -->
+    <div [class]="trackClasses()">
+      <!-- Fill -->
+      <div
+        [class]="fillClasses()"
+        [style.width.%]="percent()"
+      ></div>
 
+      <!-- Thumb -->
+      <div
+        [class]="thumbClasses()"
+        [style.left.%]="percent()"
+        style="transform: translate(-50%, -50%);"
+      ></div>
+
+      <!-- Native range (interactive) -->
+      <input
+        type="range"
+        [id]="id() || null"
+        [name]="name() || null"
+        [min]="min()"
+        [max]="max()"
+        [step]="step()"
+        [value]="clampedValue()"
+        [disabled]="isDisabled()"
+        [attr.aria-label]="ariaLabel()"
+        [class]="rangeClasses()"
+        (input)="onInput($event)"
+        (blur)="onBlur()"
+      />
+    </div>
+  </div>
+
+  <!-- Value (optional simple display; remove if you don't want it) -->
+  <div class="mt-1 text-xs text-disable">
+    {{ clampedValue() }}
+  </div>
+</div>

@@ -25,10 +25,10 @@ export const categories = [
       { name: 'Textarea', route: '/forms/textarea', status: 'backlog', priority: 'high' },
       { name: 'File Upload', route: '/forms/file-upload', status: 'backlog', priority: 'medium' },
 
-      { name: 'Radio Button', route: '/forms/radio-button', status: 'backlog', priority: 'medium' },
+      { name: 'Radio Button', route: '/forms/radio-button', status: 'done', priority: 'medium' },
       { name: 'Select', route: '/forms/select', status: 'done', priority: 'high' },
-      { name: 'Slider', route: '/forms/slider', status: 'backlog', priority: 'low' },
-      { name: 'Slide Toggle', route: '/forms/slide-toggle', status: 'backlog', priority: 'medium' },
+      { name: 'Slider', route: '/forms/slider', status: 'done', priority: 'low' },
+      { name: 'Slide Toggle', route: '/forms/slide-toggle', status: 'done', priority: 'medium' },
     ],
   },
 

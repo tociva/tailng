@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TailngSliderComponent } from '@tailng/ui';
 
 @Component({
@@ -7,5 +7,7 @@ import { TailngSliderComponent } from '@tailng/ui';
   imports: [TailngSliderComponent],
   templateUrl: './slider-demo.component.html',
 })
-export class SliderDemoComponent {}
-
+export class SliderDemoComponent {
+  readonly volume = signal(30);
+  readonly brightness = signal(70);
+}

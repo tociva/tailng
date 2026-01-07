@@ -1,10 +1,41 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Slider</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-slider></tng-slider>
-    </section>
+<div class="space-y-6 max-w-sm">
+  <div class="space-y-2">
+    <h3 class="text-sm font-medium text-text">Signal controlled</h3>
+
+    <tng-slider
+      [min]="0"
+      [max]="100"
+      [step]="1"
+      [value]="volume()"
+      (valueChange)="volume.set($event)"
+    />
+
+    <p class="text-xs text-disable">Value: {{ volume() }}</p>
+  </div>
+
+  <div class="space-y-2">
+    <h3 class="text-sm font-medium text-text">Disabled</h3>
+
+    <tng-slider
+      [min]="0"
+      [max]="100"
+      [value]="50"
+      [disabled]="true"
+    />
+  </div>
+
+  <div class="space-y-2">
+    <h3 class="text-sm font-medium text-text">Custom classes</h3>
+
+    <tng-slider
+      [min]="0"
+      [max]="100"
+      [value]="brightness()"
+      (valueChange)="brightness.set($event)"
+      trackKlass="h-3"
+      thumbKlass="h-5 w-5"
+    />
+
+    <p class="text-xs text-disable">Value: {{ brightness() }}</p>
   </div>
 </div>
-
