@@ -54,7 +54,7 @@ export const categories = [
     package: '@tailng/primitives',
     components: [
       { name: 'Card', route: '/layout/card', status: 'done', priority: 'high' },
-      { name: 'Divider', route: '/layout/divider', status: 'backlog', priority: 'low' },
+      { name: 'Divider', route: '/layout/divider', status: 'done', priority: 'low' },
       { name: 'Expansion Panel', route: '/layout/expansion-panel', status: 'backlog', priority: 'medium' },
       { name: 'Grid List', route: '/layout/grid-list', status: 'backlog', priority: 'low' },
       { name: 'List', route: '/layout/list', status: 'backlog', priority: 'medium' },

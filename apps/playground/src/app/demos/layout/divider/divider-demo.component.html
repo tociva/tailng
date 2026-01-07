@@ -1,10 +1,169 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Divider</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-divider></tng-divider>
-    </section>
-  </div>
-</div>
 
+<div class="max-w-4xl space-y-10">
+  <header class="space-y-2">
+    <h2 class="text-base font-semibold text-slate-800">
+      tng-divider demo
+    </h2>
+    <p class="text-sm text-slate-600">
+      Horizontal & vertical dividers with labels, alignment, dashed style, and klass-based theming.
+    </p>
+  </header>
+
+  <!-- Interactive controls -->
+  <section class="space-y-4 rounded-md border border-border p-4">
+    <h3 class="text-sm font-semibold text-slate-700">
+      Interactive controls
+    </h3>
+
+    <div class="flex flex-wrap gap-2">
+      <button class="rounded-md border border-border px-3 py-2 text-sm"
+              (click)="orientation = 'horizontal'">
+        horizontal
+      </button>
+      <button class="rounded-md border border-border px-3 py-2 text-sm"
+              (click)="orientation = 'vertical'">
+        vertical
+      </button>
+
+      <span class="mx-2 h-5 w-px bg-border"></span>
+
+      <button class="rounded-md border border-border px-3 py-2 text-sm"
+              (click)="align = 'start'">
+        align start
+      </button>
+      <button class="rounded-md border border-border px-3 py-2 text-sm"
+              (click)="align = 'center'">
+        align center
+      </button>
+      <button class="rounded-md border border-border px-3 py-2 text-sm"
+              (click)="align = 'end'">
+        align end
+      </button>
+
+      <span class="mx-2 h-5 w-px bg-border"></span>
+
+      <button class="rounded-md border border-border px-3 py-2 text-sm"
+              (click)="dashed = !dashed">
+        dashed: {{ dashed }}
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div class="space-y-1">
+        <div class="text-xs text-slate-500">label</div>
+        <input
+          class="w-full rounded-md border border-border px-3 py-2 text-sm"
+          [value]="label"
+          (input)="label = $any($event.target).value"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <div class="text-xs text-slate-500">gapKlass</div>
+        <input
+          class="w-full rounded-md border border-border px-3 py-2 text-sm"
+          [value]="gapKlass"
+          (input)="gapKlass = $any($event.target).value"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <div class="text-xs text-slate-500">lineKlass</div>
+        <input
+          class="w-full rounded-md border border-border px-3 py-2 text-sm"
+          [value]="lineKlass"
+          (input)="lineKlass = $any($event.target).value"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <div class="text-xs text-slate-500">labelKlass</div>
+        <input
+          class="w-full rounded-md border border-border px-3 py-2 text-sm"
+          [value]="labelKlass"
+          (input)="labelKlass = $any($event.target).value"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <div class="text-xs text-slate-500">thicknessKlass</div>
+        <input
+          class="w-full rounded-md border border-border px-3 py-2 text-sm"
+          [value]="thicknessKlass"
+          (input)="thicknessKlass = $any($event.target).value"
+          placeholder="border-t / border-t-2"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Live preview -->
+  <section class="space-y-4">
+    <h3 class="text-sm font-semibold text-slate-700">
+      Live preview
+    </h3>
+
+    @if (orientation === 'horizontal') {
+      <tng-divider
+        [label]="label"
+        [align]="align"
+        [dashed]="dashed"
+        [gapKlass]="gapKlass"
+        [lineKlass]="lineKlass"
+        [labelKlass]="labelKlass"
+        [thicknessKlass]="thicknessKlass"
+      />
+    } @else {
+      <!-- IMPORTANT: height + shrink-0 context -->
+      <div class="flex items-center gap-4 h-16 border border-border px-4">
+        <span class="text-sm">Left</span>
+
+        <!-- Vertical divider -->
+        <tng-divider
+          orientation="vertical"
+          rootKlass="h-full shrink-0"
+          [lineKlass]="lineKlass"
+          [dashed]="dashed"
+        />
+
+        <span class="text-sm">Right</span>
+      </div>
+    }
+  </section>
+
+  <!-- Static examples -->
+  <section class="space-y-6">
+    <h3 class="text-sm font-semibold text-slate-700">
+      Static examples
+    </h3>
+
+    <tng-divider />
+
+    <tng-divider label="OR" />
+
+    <tng-divider label="Start aligned" align="start" />
+
+    <tng-divider label="End aligned" align="end" />
+
+    <tng-divider dashed />
+
+    <tng-divider thicknessKlass="border-t-2" />
+
+    <tng-divider
+      label="Themed"
+      lineKlass="border-primary/40"
+      labelKlass="text-primary text-xs font-medium"
+    />
+
+    <!-- Vertical static example -->
+    <div class="flex items-center gap-4 h-10">
+      <span>Item A</span>
+      <tng-divider
+        orientation="vertical"
+        rootKlass="h-full shrink-0"
+        lineKlass="border-border"
+      />
+      <span>Item B</span>
+    </div>
+  </section>
+</div>
