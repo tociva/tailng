@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   ViewChild,
+  computed,
   effect,
   forwardRef,
   input,
@@ -13,14 +14,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TailngConnectedOverlayComponent } from '../../../popups-overlays/connected-overlay/src/public-api';
 import { TailngOptionListComponent } from '../../../popups-overlays/option-list/src/public-api';
 import { TailngOverlayPanelComponent } from '../../../popups-overlays/overlay-panel/src/public-api';
+import {
+  TailngOverlayRefComponent,
+  TailngOverlayCloseReason,
+} from '../../../popups-overlays/overlay-ref/src/public-api';
+
 import { handleListKeyboardEvent } from 'libs/cdk/keyboard/keyboard-navigation';
 
-export type SelectCloseReason =
-  | 'selection'
-  | 'escape'
-  | 'outside-click'
-  | 'blur'
-  | 'programmatic';
+export type SelectCloseReason = TailngOverlayCloseReason;
 
 @Component({
   selector: 'tng-select',
@@ -29,6 +30,7 @@ export type SelectCloseReason =
     TailngConnectedOverlayComponent,
     TailngOverlayPanelComponent,
     TailngOptionListComponent,
+    TailngOverlayRefComponent,
   ],
   templateUrl: './select.component.html',
   providers: [
@@ -46,20 +48,20 @@ export class TailngSelectComponent<T> implements ControlValueAccessor {
   /* =====================
    * Inputs / Outputs
    * ===================== */
-  options = input<T[]>([]);
+  readonly options = input<T[]>([]);
 
   /**
    * Optional: non-forms usage.
    * If used with forms, DO NOT bind [value] / (selected) as the source of truth.
    */
-  value = input<T | null>(null);
+  readonly value = input<T | null>(null);
 
-  placeholder = input<string>('Select…');
+  readonly placeholder = input<string>('Select…');
 
   /** External disabled input (read-only) */
-  disabled = input<boolean>(false);
+  readonly disabled = input<boolean>(false);
 
-  displayWith = input<(item: T) => string>((v) => String(v));
+  readonly displayWith = input<(item: T) => string>((v) => String(v));
 
   /** Optional: non-form usage hook */
   readonly selected = output<T>();
@@ -67,16 +69,46 @@ export class TailngSelectComponent<T> implements ControlValueAccessor {
   readonly closed = output<SelectCloseReason>();
 
   /* =====================
+   * Theming (section-wise klass inputs)
+   * ===================== */
+
+  /** Root wrapper */
+  readonly rootKlass = input<string>('relative');
+
+  /** Trigger <button> */
+  readonly triggerKlass = input<string>(
+    [
+      'w-full',
+      'flex items-center justify-between',
+      'border border-border rounded-md',
+      'px-3 py-2',
+      'text-sm',
+      'bg-background text-text',
+      'focus:outline-none',
+      'focus:ring-2 focus:ring-primary',
+    ].join(' ')
+  );
+
+  /** Value text wrapper */
+  readonly valueKlass = input<string>('truncate text-left');
+
+  /** Placeholder text */
+  readonly placeholderKlass = input<string>('text-disable');
+
+  /** Chevron / icon */
+  readonly iconKlass = input<string>('ml-2 text-disable');
+
+  /* =====================
    * State
    * ===================== */
-  isOpen = signal(false);
-  activeIndex = signal<number>(-1);
+  readonly isOpen = signal(false);
+  readonly activeIndex = signal<number>(-1);
 
   /** eslint-safe + template-safe internal disabled state */
-  protected isDisabled = signal(false);
+  protected readonly isDisabled = signal(false);
 
   /** Authoritative selected value inside component */
-  private selectedValue = signal<T | null>(null);
+  private readonly selectedValue = signal<T | null>(null);
 
   /** When true, CVA owns the value (forms mode) */
   private usingCva = false;
@@ -133,7 +165,17 @@ export class TailngSelectComponent<T> implements ControlValueAccessor {
   }
 
   /* =====================
-   * State transitions
+   * Trigger classes
+   * ===================== */
+  readonly triggerClasses = computed(() =>
+    (
+      this.triggerKlass() +
+      (this.isDisabled() ? ' opacity-60 pointer-events-none' : '')
+    ).trim()
+  );
+
+  /* =====================
+   * Overlay state transitions
    * ===================== */
   open(_reason: SelectCloseReason) {
     if (this.isDisabled()) return;
@@ -147,6 +189,8 @@ export class TailngSelectComponent<T> implements ControlValueAccessor {
     } else {
       this.activeIndex.set(this.options().length ? 0 : -1);
     }
+
+    void _reason;
   }
 
   close(reason: SelectCloseReason) {
@@ -161,11 +205,19 @@ export class TailngSelectComponent<T> implements ControlValueAccessor {
     });
   }
 
-  /* =====================
-   * Overlay callback
-   * ===================== */
+  /** OverlayRef openChange -> internal isOpen */
+  onOverlayOpenChange(open: boolean) {
+    if (this.isDisabled()) {
+      this.isOpen.set(false);
+      return;
+    }
+
+    if (open) this.open('programmatic');
+    else this.close('programmatic');
+  }
+
+  /** ConnectedOverlay/OverlayRef close -> internal close */
   onOverlayClosed(reason: SelectCloseReason) {
-    // outside-click / escape
     this.close(reason);
   }
 

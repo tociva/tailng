@@ -1,6 +1,4 @@
-<label
-  class="inline-flex items-center gap-2 cursor-pointer select-none"
->
+<label [class]="rootKlass()">
   <input
     type="checkbox"
     [id]="id() || null"
@@ -14,7 +12,7 @@
   />
 
   @if (label()) {
-    <span class="text-sm text-foreground">
+    <span [class]="labelKlass()">
       {{ label() }}
     </span>
   }

@@ -11,7 +11,7 @@
       [placeholder]="placeholder()"
       [disabled]="isDisabled()"
       (input)="onInput($event)"
-      (focus)="open('programmatic')"
+      (focus)="overlayRef.requestOpen()"
       (blur)="onBlur()"
       (keydown)="onKeydown($event)"
       autocomplete="off"
@@ -21,21 +21,28 @@
     />
   </div>
 
-  <tng-connected-overlay
+  <tng-overlay-ref
+    #overlayRef="tngOverlayRef"
     [open]="isOpen()"
-    [anchor]="inputEl"
-    placement="bottom-start"
-    width="anchor"
+    (openChange)="isOpen.set($event)"
     (closed)="onOverlayClosed($event)"
   >
-    <tng-overlay-panel>
-      <tng-option-list
-        [items]="options()"
-        [activeIndex]="focusedIndex()"
-        [displayWith]="displayWith()"
-        (optionMouseDown)="select($event.item)"
-        (optionHover)="focusedIndex.set($event)"
-      />
-    </tng-overlay-panel>
-  </tng-connected-overlay>
+    <tng-connected-overlay
+      [open]="overlayRef.isOpen()"
+      [anchor]="inputEl"
+      placement="bottom-start"
+      width="anchor"
+      (closed)="overlayRef.close($event)"
+    >
+      <tng-overlay-panel>
+        <tng-option-list
+          [items]="options()"
+          [activeIndex]="focusedIndex()"
+          [displayWith]="displayWith()"
+          (optionMouseDown)="select($event.item)"
+          (optionHover)="focusedIndex.set($event)"
+        />
+      </tng-overlay-panel>
+    </tng-connected-overlay>
+  </tng-overlay-ref>
 </div>

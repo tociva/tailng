@@ -13,15 +13,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TailngConnectedOverlayComponent } from '../../../popups-overlays/connected-overlay/src/public-api';
 import { TailngOverlayPanelComponent } from '../../../popups-overlays/overlay-panel/src/public-api';
 import { TailngOptionListComponent } from '../../../popups-overlays/option-list/src/public-api';
+import {
+  TailngOverlayRefComponent,
+  TailngOverlayCloseReason,
+} from '../../../popups-overlays/overlay-ref/src/public-api';
 
 import { handleListKeyboardEvent } from 'libs/cdk/keyboard/keyboard-navigation';
 
-export type AutocompleteCloseReason =
-  | 'selection'
-  | 'escape'
-  | 'outside-click'
-  | 'blur'
-  | 'programmatic';
+export type AutocompleteCloseReason = TailngOverlayCloseReason;
 
 @Component({
   selector: 'tng-autocomplete',
@@ -30,6 +29,7 @@ export type AutocompleteCloseReason =
     TailngConnectedOverlayComponent,
     TailngOverlayPanelComponent,
     TailngOptionListComponent,
+    TailngOverlayRefComponent,
   ],
   templateUrl: './autocomplete.component.html',
   providers: [
@@ -47,13 +47,13 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
   /* =====================
    * Inputs / Outputs
    * ===================== */
-  options = input<T[]>([]);
-  placeholder = input<string>('Start typing…');
+  readonly options = input<T[]>([]);
+  readonly placeholder = input<string>('Start typing…');
 
   /** External disabled input (read-only InputSignal) */
-  disabled = input<boolean>(false);
+  readonly disabled = input<boolean>(false);
 
-  displayWith = input<(item: T) => string>((v) => String(v));
+  readonly displayWith = input<(item: T) => string>((v) => String(v));
 
   /** Raw text for filtering / API search (not the form value) */
   readonly search = output<string>();
@@ -61,17 +61,18 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
   /** Optional: non-form usage hook */
   readonly selected = output<T>();
 
+  /** Emits whenever overlay closes (selection/escape/outside-click/blur/programmatic) */
   readonly closed = output<AutocompleteCloseReason>();
 
   /* =====================
    * Internal State
    * ===================== */
-  inputValue = signal('');
-  isOpen = signal(false);
-  focusedIndex = signal(-1);
+  readonly inputValue = signal('');
+  readonly isOpen = signal(false);
+  readonly focusedIndex = signal(-1);
 
   /** eslint-safe + template-safe internal disabled state */
-  protected isDisabled = signal(false);
+  protected readonly isDisabled = signal(false);
 
   /** Form value (selected item) */
   private value: T | null = null;
@@ -90,6 +91,9 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     });
   }
 
+  /* =====================
+   * ControlValueAccessor API
+   * ===================== */
   writeValue(value: T | null): void {
     this.value = value;
 
@@ -124,9 +128,9 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
   }
 
   /* =====================
-   * State Transitions
+   * State Transitions (single source of truth: isOpen)
    * ===================== */
-  open(_reason: AutocompleteCloseReason) {
+  open(reason: AutocompleteCloseReason) {
     if (this.isDisabled()) return;
 
     this.isOpen.set(true);
@@ -137,6 +141,9 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     } else {
       this.focusedIndex.set(-1);
     }
+
+    // reason currently unused, but kept for symmetry/future telemetry
+    void reason;
   }
 
   close(reason: AutocompleteCloseReason) {
@@ -147,11 +154,23 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     this.closed.emit(reason);
   }
 
-  /* =====================
-   * Overlay callbacks
-   * ===================== */
+  /** Used by <tng-connected-overlay (closed)="..."> and <tng-overlay-ref (closed)="..."> */
   onOverlayClosed(reason: AutocompleteCloseReason) {
     this.close(reason);
+  }
+
+  /** Used by <tng-overlay-ref (openChange)="..."> */
+  onOverlayOpenChange(open: boolean) {
+    if (this.isDisabled()) {
+      this.isOpen.set(false);
+      return;
+    }
+
+    if (open) {
+      this.open('programmatic');
+    } else {
+      this.close('programmatic');
+    }
   }
 
   /* =====================
@@ -168,6 +187,10 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     this.onChange(null);
 
     this.search.emit(text);
+    this.open('programmatic');
+  }
+
+  onFocus() {
     this.open('programmatic');
   }
 
@@ -212,6 +235,9 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     }
   }
 
+  /* =====================
+   * Selection
+   * ===================== */
   select(item: T) {
     if (this.isDisabled()) return;
 

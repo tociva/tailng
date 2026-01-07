@@ -20,14 +20,26 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class TailngCheckboxComponent implements ControlValueAccessor {
-  id = input<string>('');
-  name = input<string>('');
+  readonly id = input<string>('');
+  readonly name = input<string>('');
 
-  label = input<string>('');
-  disabled = input(false);
-  required = input(false);
+  readonly label = input<string>('');
+  readonly disabled = input(false);
+  readonly required = input(false);
 
-  klass = input<string>('');
+  /* =====================
+   * Theming / class hooks (section-wise)
+   * ===================== */
+  /** Root <label> */
+  readonly rootKlass = input<string>(
+    'inline-flex items-center gap-2 cursor-pointer select-none'
+  );
+
+  /** <input type="checkbox"> */
+  readonly inputKlass = input<string>('');
+
+  /** Label <span> */
+  readonly labelKlass = input<string>('text-sm text-text');
 
   private readonly _value = signal(false);
   readonly value = computed(() => this._value());
@@ -54,21 +66,28 @@ export class TailngCheckboxComponent implements ControlValueAccessor {
     this._formDisabled.set(isDisabled);
   }
 
-  classes = computed(() =>
+  /** Final classes */
+  readonly classes = computed(() =>
     (
+      // size + shape
       `h-4 w-4 rounded ` +
+      // theme tokens
       `border border-border bg-background ` +
       `accent-primary ` +
+      // focus ring
       `focus-visible:outline-none ` +
       `focus-visible:ring-2 focus-visible:ring-primary ` +
       `focus-visible:ring-offset-2 focus-visible:ring-offset-background ` +
+      // disabled
       `disabled:opacity-50 disabled:pointer-events-none ` +
-      this.klass()
-    ).trim(),
+      // user override
+      this.inputKlass()
+    ).trim()
   );
-  
 
   onToggle(event: Event): void {
+    if (this.isDisabled()) return;
+
     const checked = (event.target as HTMLInputElement).checked;
     this._value.set(checked);
     this.onChange(checked);

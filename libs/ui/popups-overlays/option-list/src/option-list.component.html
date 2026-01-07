@@ -1,14 +1,10 @@
-<div #listbox role="listbox" class="py-1 overflow-auto max-h-60">
+<div #listbox role="listbox" [class]="containerKlass()">
   @if (hasItems()) {
     @for (item of items(); let i = $index; track i) {
       <div
-        class="px-3 py-2 text-sm cursor-pointer select-none"
-        [class.bg-primary]="i === activeIndex()"
-        [class.text-white]="i === activeIndex()"
-        [class.bg-white]="i !== activeIndex()"
-        [class.text-gray-900]="i !== activeIndex()"
         role="option"
-        [attr.aria-selected]="i === activeIndex()"
+        [class]="optionClasses(i)"
+        [attr.aria-selected]="isActive(i)"
         [attr.data-index]="i"
         (mousedown)="onMouseDown(item, i, $event)"
         (mouseenter)="onMouseEnter(i)"
@@ -17,7 +13,7 @@
       </div>
     }
   } @else {
-    <div class="px-3 py-2 text-sm text-gray-500">
+    <div [class]="emptyKlass()">
       {{ emptyText() }}
     </div>
   }

@@ -1,20 +1,9 @@
-<div class="relative">
+<div [class]="rootKlass()">
   <!-- Trigger -->
   <button
     #triggerEl
     type="button"
-    class="
-      w-full
-      flex items-center justify-between
-      border rounded-md
-      px-3 py-2
-      text-sm
-      bg-white
-      focus:outline-none
-      focus:ring-2 focus:ring-primary
-    "
-    [class.opacity-60]="isDisabled()"
-    [class.pointer-events-none]="isDisabled()"
+    [class]="triggerClasses()"
     [disabled]="isDisabled()"
     (click)="onTriggerClick()"
     (keydown)="onKeydown($event)"
@@ -22,33 +11,40 @@
     aria-haspopup="listbox"
     [attr.aria-expanded]="isOpen()"
   >
-    <span class="truncate text-left">
+    <span [class]="valueKlass()">
       @if (currentValue()) {
         {{ display(currentValue()) }}
       } @else {
-        <span class="text-gray-400">{{ placeholder() }}</span>
+        <span [class]="placeholderKlass()">{{ placeholder() }}</span>
       }
     </span>
 
-    <span class="ml-2 text-gray-500">▾</span>
+    <span [class]="iconKlass()">▾</span>
   </button>
 
-  <!-- Overlay -->
-  <tng-connected-overlay
+  <!-- Overlay (OverlayRef = single close pipeline) -->
+  <tng-overlay-ref
+    #overlayRef="tngOverlayRef"
     [open]="isOpen()"
-    [anchor]="triggerEl"
-    placement="bottom-start"
-    width="anchor"
+    (openChange)="onOverlayOpenChange($event)"
     (closed)="onOverlayClosed($event)"
   >
-    <tng-overlay-panel>
-      <tng-option-list
-        [items]="options()"
-        [activeIndex]="activeIndex()"
-        [displayWith]="displayWith()"
-        (optionMouseDown)="select($event.item)"
-        (optionHover)="activeIndex.set($event)"
-      />
-    </tng-overlay-panel>
-  </tng-connected-overlay>
+    <tng-connected-overlay
+      [open]="overlayRef.isOpen()"
+      [anchor]="triggerEl"
+      placement="bottom-start"
+      width="anchor"
+      (closed)="overlayRef.close($event)"
+    >
+      <tng-overlay-panel>
+        <tng-option-list
+          [items]="options()"
+          [activeIndex]="activeIndex()"
+          [displayWith]="displayWith()"
+          (optionMouseDown)="select($event.item)"
+          (optionHover)="activeIndex.set($event)"
+        />
+      </tng-overlay-panel>
+    </tng-connected-overlay>
+  </tng-overlay-ref>
 </div>
