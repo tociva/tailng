@@ -15,7 +15,7 @@ export const categories = [
       { name: 'Timepicker', route: '/forms/timepicker', status: 'backlog', priority: 'low' },
 
       // Core form-field wrapper (label, hint, errors, prefix/suffix)
-      { name: 'Form Field', route: '/forms/form-field', status: 'backlog', priority: 'high' },
+      { name: 'Form Field', route: '/forms/form-field', status: 'done', priority: 'high' },
 
       // Split Input
       { name: 'Text Input', route: '/forms/text-input', status: 'done', priority: 'high' },

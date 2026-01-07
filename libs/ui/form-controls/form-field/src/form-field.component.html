@@ -1,4 +1,34 @@
-<div class="p-4 border border-gray-200 rounded-md">
-  <p class="text-gray-600">Welcome hello component - Form Field</p>
-</div>
+<div [class]="rootKlass()">
+  @if (label()) {
+    <label class="mb-1 block" [class]="labelClasses()">
+      {{ label() }}
+      @if (isRequired()) {
+        <span [class]="requiredMarkKlass()">&nbsp;*</span>
+      }
+    </label>
+  }
 
+  <div [class]="controlShellClasses()">
+    <span [class]="prefixKlass()">
+      <ng-content select="[tngPrefix]" />
+    </span>
+
+    <div class="min-w-0 flex-1">
+      <ng-content />
+    </div>
+
+    <span [class]="suffixKlass()">
+      <ng-content select="[tngSuffix]" />
+    </span>
+  </div>
+
+  @if (showHint() || showError()) {
+    <div [class]="footerKlass()">
+      @if (showError()) {
+        <div [class]="errorKlass()">{{ errorText() }}</div>
+      } @else {
+        <div [class]="hintKlass()">{{ hint() }}</div>
+      }
+    </div>
+  }
+</div>
