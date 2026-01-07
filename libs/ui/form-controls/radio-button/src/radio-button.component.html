@@ -1,4 +1,20 @@
-<div class="p-4 border border-gray-200 rounded-md">
-  <p class="text-gray-600">Welcome hello component - Radio Button</p>
-</div>
+<label [class]="rootKlass()">
+  <input
+    type="radio"
+    [id]="id() || null"
+    [name]="name() || null"
+    [value]="value()"
+    [checked]="isChecked()"
+    [disabled]="isDisabled()"
+    [required]="required()"
+    [class]="classes()"
+    (change)="onSelect($event)"
+    (blur)="onBlur()"
+  />
 
+  @if (label()) {
+    <span [class]="labelKlass()">
+      {{ label() }}
+    </span>
+  }
+</label>

@@ -1,10 +1,137 @@
 <div>
-  <h1 class="text-2xl font-bold mb-6">Radio Button</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-radio-button></tng-radio-button>
-    </section>
-  </div>
-</div>
+  <h1 class="text-2xl font-bold mb-6">Radio Button (Reactive Form)</h1>
 
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6 max-w-md">
+    <!-- Gender Selection (Required) -->
+    <section>
+      <h2 class="text-sm font-medium mb-3 text-text">Gender (Required)</h2>
+      <div class="space-y-2">
+        <tng-radio-button
+          formControlName="gender"
+          name="gender"
+          value="male"
+          label="Male"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="gender"
+          name="gender"
+          value="female"
+          label="Female"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="gender"
+          name="gender"
+          value="other"
+          label="Other"
+        ></tng-radio-button>
+      </div>
+
+      @if (genderCtrl.touched && genderCtrl.invalid) {
+        <p class="text-sm mt-2 text-red-600">Please select a gender</p>
+      }
+
+      <p class="text-sm mt-2 text-gray-600">
+        Current value: <span class="font-semibold">{{ genderCtrl.value || 'None' }}</span>
+      </p>
+    </section>
+
+    <!-- Size Selection -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-medium text-text">Size</h2>
+        <div class="flex gap-2">
+          <button
+            type="button"
+            class="text-xs px-2 py-1 border rounded"
+            (click)="disableSize()"
+          >
+            Disable
+          </button>
+          <button
+            type="button"
+            class="text-xs px-2 py-1 border rounded"
+            (click)="enableSize()"
+          >
+            Enable
+          </button>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <tng-radio-button
+          formControlName="size"
+          name="size"
+          value="small"
+          label="Small"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="size"
+          name="size"
+          value="medium"
+          label="Medium"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="size"
+          name="size"
+          value="large"
+          label="Large"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="size"
+          name="size"
+          value="xlarge"
+          label="Extra Large"
+        ></tng-radio-button>
+      </div>
+    </section>
+
+    <!-- Color Selection -->
+    <section>
+      <h2 class="text-sm font-medium mb-3 text-text">Color</h2>
+      <div class="space-y-2">
+        <tng-radio-button
+          formControlName="color"
+          name="color"
+          value="red"
+          label="Red"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="color"
+          name="color"
+          value="blue"
+          label="Blue"
+        ></tng-radio-button>
+        <tng-radio-button
+          formControlName="color"
+          name="color"
+          value="green"
+          label="Green"
+        ></tng-radio-button>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <button
+        type="submit"
+        class="h-10 px-4 border rounded bg-primary text-white"
+      >
+        Submit
+      </button>
+
+      <button
+        type="button"
+        class="h-10 px-4 border rounded"
+        (click)="form.reset({ gender: '', size: 'medium', color: 'blue' })"
+      >
+        Reset
+      </button>
+    </div>
+
+    <pre class="text-xs bg-gray-50 border rounded p-3 overflow-auto">
+Touched: {{ form.touched }}
+Valid: {{ form.valid }}
+Value: {{ form.value | json }}
+RawValue: {{ form.getRawValue() | json }}
+</pre>
+  </form>
+</div>
