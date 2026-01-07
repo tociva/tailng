@@ -1,10 +1,70 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Progress Spinner</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-progress-spinner></tng-progress-spinner>
-    </section>
-  </div>
-</div>
+<div class="max-w-3xl space-y-10">
+  <header class="space-y-2">
+    <h2 class="text-base font-semibold text-slate-800">
+      tng-progress-spinner demo
+    </h2>
+    <p class="text-sm text-slate-600">
+      Klass-based spinner with determinate & indeterminate modes.
+    </p>
+  </header>
 
+  <!-- Controls -->
+  <section class="space-y-4 rounded-md border border-border p-4">
+    <div class="flex flex-wrap gap-2">
+      <button class="border border-border px-3 py-2 rounded-md" (click)="mode = 'indeterminate'">
+        indeterminate
+      </button>
+      <button class="border border-border px-3 py-2 rounded-md" (click)="mode = 'determinate'">
+        determinate
+      </button>
+
+      <button class="border border-border px-3 py-2 rounded-md" (click)="dec()">-10</button>
+      <button class="border border-border px-3 py-2 rounded-md" (click)="inc()">+10</button>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button class="border border-border px-3 py-2 rounded-md" (click)="preset('primary')">
+        primary
+      </button>
+      <button class="border border-border px-3 py-2 rounded-md" (click)="preset('success')">
+        success
+      </button>
+      <button class="border border-border px-3 py-2 rounded-md" (click)="preset('danger')">
+        danger
+      </button>
+      <button class="border border-border px-3 py-2 rounded-md" (click)="preset('neutral')">
+        neutral
+      </button>
+    </div>
+  </section>
+
+  <!-- Live preview -->
+  <section class="space-y-4">
+    <tng-progress-spinner
+      [mode]="mode"
+      [value]="value"
+      [max]="max"
+      [sizeKlass]="sizeKlass"
+      [trackKlass]="trackKlass"
+      [indicatorKlass]="indicatorKlass"
+    />
+  </section>
+
+  <!-- Static examples -->
+  <section class="space-y-4">
+    <div class="flex items-center gap-6">
+      <tng-progress-spinner sizeKlass="w-6 h-6" />
+      <tng-progress-spinner sizeKlass="w-10 h-10" indicatorKlass="text-success" />
+      <tng-progress-spinner sizeKlass="w-14 h-14" indicatorKlass="text-danger" />
+    </div>
+
+    <div class="flex items-center gap-6">
+      <tng-progress-spinner
+        mode="determinate"
+        [value]="75"
+        indicatorKlass="text-info"
+      />
+      <span class="text-sm text-slate-500">75%</span>
+    </div>
+  </section>
+</div>

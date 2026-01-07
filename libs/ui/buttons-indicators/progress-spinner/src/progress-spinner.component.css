@@ -1,0 +1,27 @@
+@keyframes tng-spinner-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tng-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 100, 200;
+    stroke-dashoffset: -15;
+  }
+  100% {
+    stroke-dasharray: 100, 200;
+    stroke-dashoffset: -125;
+  }
+}
+
+.tng-spinner-indeterminate {
+  transform-origin: center;
+  animation:
+    tng-spinner-rotate 1.4s linear infinite,
+    tng-spinner-dash 1.4s ease-in-out infinite;
+}

@@ -42,7 +42,7 @@ export const categories = [
       { name: 'Icon', route: '/buttons/icon', status: 'done', priority: 'high' },
       { name: 'Ripples', route: '/buttons/ripples', status: 'done', priority: 'low' },
       { name: 'Progress Bar', route: '/buttons/progress-bar', status: 'done', priority: 'medium' },
-      { name: 'Progress Spinner', route: '/buttons/progress-spinner', status: 'backlog', priority: 'medium' },
+      { name: 'Progress Spinner', route: '/buttons/progress-spinner', status: 'done', priority: 'medium' },
 
       // Missing but essential indicators
       { name: 'Skeleton', route: '/buttons/skeleton', status: 'backlog', priority: 'medium' },

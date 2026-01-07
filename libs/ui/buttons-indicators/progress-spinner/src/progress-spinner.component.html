@@ -1,4 +1,43 @@
-<div class="p-4 border border-gray-200 rounded-md">
-  <p class="text-gray-600">Welcome hello component - Progress Spinner</p>
-</div>
+<div
+  [class]="rootKlass()"
+  role="progressbar"
+  [attr.aria-valuemin]="mode() === 'determinate' ? 0 : null"
+  [attr.aria-valuemax]="mode() === 'determinate' ? max() : null"
+  [attr.aria-valuenow]="mode() === 'determinate' ? value() : null"
+>
+  <svg
+    viewBox="0 0 100 100"
+    class="block"
+    [class]="sizeKlass()"
+  >
+    <!-- Track -->
+    <circle
+      cx="50"
+      cy="50"
+      [attr.r]="radius()"
+      fill="none"
+      stroke="currentColor"
+      [attr.stroke-width]="strokeWidth()"
+      class="opacity-30"
+      [class]="trackKlass()"
+    ></circle>
 
+    <!-- Indicator -->
+    <circle
+      cx="50"
+      cy="50"
+      [attr.r]="radius()"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      [attr.stroke-width]="strokeWidth()"
+      [attr.stroke-dasharray]="circumference()"
+      [attr.stroke-dashoffset]="progressOffset()"
+      [class]="
+        indicatorKlass() +
+        ' ' +
+        (mode() === 'indeterminate' ? 'tng-spinner-indeterminate' : '')
+      "
+    ></circle>
+  </svg>
+</div>
