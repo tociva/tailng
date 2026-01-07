@@ -92,7 +92,7 @@ jobs:
       - name: Deploy to Cloudflare Pages with Wrangler
         run: |
           yarn dlx wrangler pages deploy dist/apps/playground \
-            --project-name ${{ vars.CF_PROJECT_NAME }} \
+            --project-name ${{ secrets.CF_PROJECT_NAME }} \
             --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
