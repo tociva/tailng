@@ -185,20 +185,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'layout/grid-list',
-    loadComponent: () =>
-      import('./demos/layout/grid-list/grid-list-demo.component').then(
-        (m) => m.GridListDemoComponent
-      ),
-  },
-  {
-    path: 'layout/list',
-    loadComponent: () =>
-      import('./demos/layout/list/list-demo.component').then(
-        (m) => m.ListDemoComponent
-      ),
-  },
-  {
     path: 'layout/tabs',
     loadComponent: () =>
       import('./demos/layout/tabs/tabs-demo.component').then(

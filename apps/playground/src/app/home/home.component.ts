@@ -56,8 +56,6 @@ export const categories = [
       { name: 'Card', route: '/layout/card', status: 'done', priority: 'high' },
       { name: 'Divider', route: '/layout/divider', status: 'done', priority: 'low' },
       { name: 'Expansion Panel', route: '/layout/expansion-panel', status: 'done', priority: 'medium' },
-      { name: 'Grid List', route: '/layout/grid-list', status: 'backlog', priority: 'low' },
-      { name: 'List', route: '/layout/list', status: 'backlog', priority: 'medium' },
       { name: 'Tabs', route: '/layout/tabs', status: 'backlog', priority: 'high' },
       { name: 'Toolbar', route: '/layout/toolbar', status: 'backlog', priority: 'medium' },
 
