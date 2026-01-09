@@ -1,10 +1,281 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Tabs</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-tabs></tng-tabs>
-    </section>
+<div class="mx-auto max-w-5xl space-y-10 p-6">
+  <!-- Header -->
+  <div class="space-y-1">
+    <h1 class="text-xl font-semibold text-foreground">Tabs</h1>
+    <p class="text-sm text-muted-foreground">
+      Headless tabs with klass hooks, controlled/uncontrolled value, disabled tabs, and orientation.
+    </p>
   </div>
-</div>
 
+  <!-- 1) Uncontrolled (defaultValue) -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Uncontrolled (defaultValue)</h2>
+
+    <tng-tabs defaultValue="overview">
+      <tng-tab value="overview">Overview</tng-tab>
+      <tng-tab value="activity">Activity</tng-tab>
+      <tng-tab value="settings">Settings</tng-tab>
+
+      <tng-tab-panel value="overview">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Overview content.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="activity">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Activity content.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="settings">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Settings content.
+        </div>
+      </tng-tab-panel>
+    </tng-tabs>
+  </section>
+
+  <!-- 2) Disabled tab -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Disabled tab</h2>
+
+    <tng-tabs defaultValue="account">
+      <tng-tab value="account">Account</tng-tab>
+      <tng-tab value="security">Security</tng-tab>
+      <tng-tab value="billing" [disabled]="true">Billing (disabled)</tng-tab>
+
+      <tng-tab-panel value="account">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Account settings.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="security">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Security settings.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="billing">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Billing panel (should not be reachable if disabled).
+        </div>
+      </tng-tab-panel>
+    </tng-tabs>
+  </section>
+
+  <!-- 3) Controlled tabs -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Controlled</h2>
+
+    <div class="flex items-center justify-between gap-3 rounded-lg border border-border bg-background p-4">
+      <div class="text-sm text-muted-foreground">
+        Current value:
+        <code class="rounded bg-slate-100 px-1 text-slate-900">{{ value() }}</code>
+      </div>
+
+      <div class="flex gap-2">
+        <button class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+          (click)="value.set('account')">
+          Account
+        </button>
+        <button class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+          (click)="value.set('security')">
+          Security
+        </button>
+      </div>
+    </div>
+
+    <tng-tabs
+      [value]="value()"
+      (valueChange)="value.set($event)"
+      defaultValue="account"
+    >
+      <tng-tab value="account">Account</tng-tab>
+      <tng-tab value="security">Security</tng-tab>
+
+      <tng-tab-panel value="account">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Controlled: Account panel.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="security">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Controlled: Security panel.
+        </div>
+      </tng-tab-panel>
+    </tng-tabs>
+  </section>
+
+  <!-- 4) Theming with klass hooks (underline style) -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Theming (klass hooks)</h2>
+
+    <tng-tabs
+      defaultValue="one"
+      listKlass="flex gap-6 border-b border-border"
+      panelKlass="pt-5"
+    >
+      <tng-tab
+        value="one"
+        tabKlass="pb-3 text-sm font-medium border-b-2 border-transparent"
+        activeKlass="border-primary text-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground"
+      >
+        Tab One
+      </tng-tab>
+
+      <tng-tab
+        value="two"
+        tabKlass="pb-3 text-sm font-medium border-b-2 border-transparent"
+        activeKlass="border-primary text-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground"
+      >
+        Tab Two
+      </tng-tab>
+
+      <tng-tab
+        value="three"
+        tabKlass="pb-3 text-sm font-medium border-b-2 border-transparent"
+        activeKlass="border-primary text-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground"
+      >
+        Tab Three
+      </tng-tab>
+
+      <tng-tab-panel value="one">
+        <div class="rounded-lg bg-slate-50 p-4 text-sm text-slate-700">
+          Underline style with hover.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="two">
+        <div class="rounded-lg bg-slate-50 p-4 text-sm text-slate-700">
+          All visuals are controlled via klass hooks.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="three">
+        <div class="rounded-lg bg-slate-50 p-4 text-sm text-slate-700">
+          Works with any design system tokens.
+        </div>
+      </tng-tab-panel>
+    </tng-tabs>
+  </section>
+
+  <!-- 5) Pills style -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Pills style</h2>
+
+    <tng-tabs
+      defaultValue="a"
+      listKlass="inline-flex gap-1 rounded-lg bg-slate-100 p-1"
+      panelKlass="pt-4"
+    >
+      <tng-tab
+        value="a"
+        tabKlass="rounded-md px-3 py-1.5 text-sm font-medium"
+        activeKlass="bg-white text-slate-900 shadow-sm"
+        inactiveKlass="text-slate-600 hover:text-slate-900"
+      >
+        Alpha
+      </tng-tab>
+
+      <tng-tab
+        value="b"
+        tabKlass="rounded-md px-3 py-1.5 text-sm font-medium"
+        activeKlass="bg-white text-slate-900 shadow-sm"
+        inactiveKlass="text-slate-600 hover:text-slate-900"
+      >
+        Beta
+      </tng-tab>
+
+      <tng-tab
+        value="c"
+        tabKlass="rounded-md px-3 py-1.5 text-sm font-medium"
+        activeKlass="bg-white text-slate-900 shadow-sm"
+        inactiveKlass="text-slate-600 hover:text-slate-900"
+      >
+        Gamma
+      </tng-tab>
+
+      <tng-tab-panel value="a">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Pills: Alpha content.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="b">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Pills: Beta content.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="c">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Pills: Gamma content.
+        </div>
+      </tng-tab-panel>
+    </tng-tabs>
+  </section>
+
+  <!-- 6) Vertical tabs -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Vertical</h2>
+
+    <tng-tabs
+      orientation="vertical"
+      defaultValue="profile"
+      rootKlass="grid gap-6 md:grid-cols-[220px_1fr]"
+      listKlass="flex flex-col gap-1 rounded-lg border border-border bg-background p-2"
+      panelKlass="pt-0"
+    >
+      <tng-tab
+        value="profile"
+        tabKlass="rounded-md px-3 py-2 text-sm font-medium"
+        activeKlass="bg-primary text-on-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-slate-50"
+      >
+        Profile
+      </tng-tab>
+
+      <tng-tab
+        value="team"
+        tabKlass="rounded-md px-3 py-2 text-sm font-medium"
+        activeKlass="bg-primary text-on-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-slate-50"
+      >
+        Team
+      </tng-tab>
+
+      <tng-tab
+        value="notifications"
+        tabKlass="rounded-md px-3 py-2 text-sm font-medium"
+        activeKlass="bg-primary text-on-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-slate-50"
+      >
+        Notifications
+      </tng-tab>
+
+      <tng-tab-panel value="profile">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Vertical: Profile panel.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="team">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Vertical: Team panel.
+        </div>
+      </tng-tab-panel>
+
+      <tng-tab-panel value="notifications">
+        <div class="rounded-lg border border-border bg-background p-4">
+          Vertical: Notifications panel.
+        </div>
+      </tng-tab-panel>
+    </tng-tabs>
+  </section>
+</div>

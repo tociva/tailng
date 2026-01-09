@@ -56,7 +56,7 @@ export const categories = [
       { name: 'Card', route: '/layout/card', status: 'done', priority: 'high' },
       { name: 'Divider', route: '/layout/divider', status: 'done', priority: 'low' },
       { name: 'Expansion Panel', route: '/layout/expansion-panel', status: 'done', priority: 'medium' },
-      { name: 'Tabs', route: '/layout/tabs', status: 'backlog', priority: 'high' },
+      { name: 'Tabs', route: '/layout/tabs', status: 'done', priority: 'high' },
       { name: 'Toolbar', route: '/layout/toolbar', status: 'backlog', priority: 'medium' },
 
       // Missing but essential layout primitives

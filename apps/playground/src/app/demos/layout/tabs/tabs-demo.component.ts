@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
-import { TailngTabsComponent } from '@tailng/ui';
+import { Component, signal } from '@angular/core';
+import {
+  TailngTabsComponent,
+  TailngTabComponent,
+  TailngTabPanelComponent,
+} from '@tailng/ui';
 
 @Component({
   selector: 'playground-tabs-demo',
   standalone: true,
-  imports: [TailngTabsComponent],
+  imports: [TailngTabsComponent, TailngTabComponent, TailngTabPanelComponent],
   templateUrl: './tabs-demo.component.html',
 })
-export class TabsDemoComponent {}
-
+export class TabsDemoComponent {
+  // Controlled example
+  readonly value = signal<string>('account');
+}
