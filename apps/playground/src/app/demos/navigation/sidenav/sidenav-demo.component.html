@@ -1,10 +1,146 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Sidenav</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-sidenav></tng-sidenav>
-    </section>
-  </div>
-</div>
+<div class="mx-auto max-w-6xl space-y-10 p-6">
+  <h1 class="text-xl font-semibold text-foreground">SideNav</h1>
 
+  <!-- 1) Minimal -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Minimal</h2>
+
+    <div class="h-64 overflow-hidden rounded-md border border-border">
+      <tng-sidenav>
+        <div class="p-4 font-medium">Navigation</div>
+
+        <div class="flex flex-col gap-1 p-2">
+          <a class="rounded px-3 py-2 hover:bg-slate-100">Dashboard</a>
+          <a class="rounded px-3 py-2 hover:bg-slate-100">Reports</a>
+          <a class="rounded px-3 py-2 hover:bg-slate-100">Settings</a>
+        </div>
+      </tng-sidenav>
+    </div>
+  </section>
+
+  <!-- 2) Collapsible -->
+  <!-- 2) Collapsible -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Collapsible</h2>
+
+    <div class="flex items-center gap-2">
+      <button class="rounded-md border border-border bg-background px-3 py-1.5 text-sm" (click)="toggle()">
+        Toggle collapse
+      </button>
+
+      <span class="text-xs text-muted-foreground">
+        Collapsed: {{ collapsed() }}
+      </span>
+    </div>
+
+    <div class="flex h-64 overflow-hidden rounded-md border border-border">
+      <tng-sidenav [collapsed]="collapsed()">
+        <!-- Header -->
+        <div tngSidenavHeader class="px-4 py-3 text-lg font-semibold overflow-hidden
+                 max-h-14 opacity-100
+                 transition-[max-height,opacity] duration-200 ease-in-out
+                 group-data-[collapsed=true]:max-h-0
+                 group-data-[collapsed=true]:opacity-0">
+          Tailng
+        </div>
+
+        <!-- Nav items -->
+        <div class="flex flex-col gap-1 p-2">
+          <!-- Item -->
+          <a class="flex items-center rounded hover:bg-slate-100">
+            <!-- Icon rail (always centered, smooth) -->
+            <span class="grid h-10 w-12 place-items-center text-lg shrink-0
+                     transition-[width] duration-200 ease-in-out
+                     group-data-[collapsed=true]:w-full">
+              🏠
+            </span>
+
+            <!-- Label (smooth collapse) -->
+            <span class="overflow-hidden whitespace-nowrap
+                     max-w-[12rem] opacity-100
+                     transition-[max-width,opacity] duration-200 ease-in-out
+                     group-data-[collapsed=true]:max-w-0
+                     group-data-[collapsed=true]:opacity-0">
+              Home
+            </span>
+          </a>
+
+          <a class="flex items-center rounded hover:bg-slate-100">
+            <span class="grid h-10 w-12 place-items-center text-lg shrink-0
+                     transition-[width] duration-200 ease-in-out
+                     group-data-[collapsed=true]:w-full">
+              📦
+            </span>
+
+            <span class="overflow-hidden whitespace-nowrap
+                     max-w-[12rem] opacity-100
+                     transition-[max-width,opacity] duration-200 ease-in-out
+                     group-data-[collapsed=true]:max-w-0
+                     group-data-[collapsed=true]:opacity-0">
+              Products
+            </span>
+          </a>
+
+          <a class="flex items-center rounded hover:bg-slate-100">
+            <span class="grid h-10 w-12 place-items-center text-lg shrink-0
+                     transition-[width] duration-200 ease-in-out
+                     group-data-[collapsed=true]:w-full">
+              📊
+            </span>
+
+            <span class="overflow-hidden whitespace-nowrap
+                     max-w-[12rem] opacity-100
+                     transition-[max-width,opacity] duration-200 ease-in-out
+                     group-data-[collapsed=true]:max-w-0
+                     group-data-[collapsed=true]:opacity-0">
+              Reports
+            </span>
+          </a>
+        </div>
+
+        <!-- Footer -->
+        <div tngSidenavFooter class="px-3 py-2 text-xs text-muted-foreground overflow-hidden
+                 max-h-10 opacity-100
+                 transition-[max-height,opacity] duration-200 ease-in-out
+                 group-data-[collapsed=true]:max-h-0
+                 group-data-[collapsed=true]:opacity-0">
+          v1.0.0
+        </div>
+      </tng-sidenav>
+
+
+      <!-- Content area -->
+      <div class="flex-1 p-6 text-sm text-muted-foreground">
+        Main content area
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 3) Desktop layout -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Desktop layout</h2>
+
+    <div class="grid h-72 grid-cols-[auto_1fr] overflow-hidden rounded-md border border-border">
+      <tng-sidenav>
+        <div tngSidenavHeader class="p-4 text-lg font-semibold">
+          App
+        </div>
+
+        <div class="flex flex-col gap-1 p-2">
+          <a class="rounded px-3 py-2 hover:bg-slate-100">Overview</a>
+          <a class="rounded px-3 py-2 hover:bg-slate-100">Users</a>
+          <a class="rounded px-3 py-2 hover:bg-slate-100">Billing</a>
+        </div>
+
+        <div tngSidenavFooter class="p-3 text-xs text-muted-foreground">
+          Footer
+        </div>
+      </tng-sidenav>
+
+      <div class="p-6 text-sm text-muted-foreground">
+        Typical desktop layout using CSS grid.
+      </div>
+    </div>
+  </section>
+</div>

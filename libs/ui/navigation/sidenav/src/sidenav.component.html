@@ -1,4 +1,20 @@
-<div class="p-4 border border-gray-200 rounded-md">
-  <p class="text-gray-600">Welcome hello component - Sidenav</p>
-</div>
+<nav
+  [class]="classes()"
+  [attr.data-collapsed]="dataCollapsed()"
+  aria-label="Primary navigation"
+>
+  <!-- Header slot -->
+  <div class="shrink-0">
+    <ng-content select="[tngSidenavHeader]"></ng-content>
+  </div>
 
+  <!-- Main navigation -->
+  <div [class]="contentKlass()">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- Footer slot -->
+  <div [class]="footerKlass()">
+    <ng-content select="[tngSidenavFooter]"></ng-content>
+  </div>
+</nav>

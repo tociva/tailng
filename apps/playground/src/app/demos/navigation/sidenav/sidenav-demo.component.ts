@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
-import { TailngSidenavComponent } from '@tailng/ui';
+import { Component, signal } from '@angular/core';
+import { TailngSidenavComponent, TailngSidenavFooterSlotDirective, TailngSidenavHeaderSlotDirective } from '@tailng/ui';
 
 @Component({
   selector: 'playground-sidenav-demo',
   standalone: true,
-  imports: [TailngSidenavComponent],
+  imports: [TailngSidenavComponent, TailngSidenavHeaderSlotDirective, TailngSidenavFooterSlotDirective],
   templateUrl: './sidenav-demo.component.html',
 })
-export class SidenavDemoComponent {}
+export class SidenavDemoComponent {
+  readonly collapsed = signal(false);
 
+  toggle(): void {
+    this.collapsed.set(!this.collapsed());
+  }
+}
