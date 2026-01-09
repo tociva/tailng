@@ -192,13 +192,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'layout/toolbar',
-    loadComponent: () =>
-      import('./demos/layout/toolbar/toolbar-demo.component').then(
-        (m) => m.ToolbarDemoComponent
-      ),
-  },
-  {
     path: 'layout/accordion',
     loadComponent: () =>
       import('./demos/layout/accordion/accordion-demo.component').then(

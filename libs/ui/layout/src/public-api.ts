@@ -4,5 +4,4 @@ export * from '../divider/src/public-api';
 export * from '../expansion-panel/src/public-api';
 export * from '../stepper-layout/src/public-api';
 export * from '../tabs/src/public-api';
-export * from '../toolbar/src/public-api';
 
