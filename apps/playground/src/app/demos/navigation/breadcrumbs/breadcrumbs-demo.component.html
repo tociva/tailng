@@ -1,16 +1,66 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Breadcrumbs</h1>
+<div class="mx-auto max-w-5xl space-y-10 p-6">
+  <h1 class="text-xl font-semibold text-foreground">Breadcrumbs</h1>
 
-  <div class="space-y-6 max-w-md">
-    <section>
-      <h2 class="text-lg font-semibold mb-4">Default Breadcrumbs</h2>
-      <tng-breadcrumbs [items]="items"></tng-breadcrumbs>
-    </section>
+  <!-- 1) Basic -->
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-foreground">Basic</h2>
 
-    <section>
-      <h2 class="text-lg font-semibold mb-4">Custom Separator</h2>
-      <tng-breadcrumbs [items]="items" separator=">"></tng-breadcrumbs>
-    </section>
-  </div>
+    <tng-breadcrumbs [items]="basic"></tng-breadcrumbs>
+  </section>
+
+  <!-- 2) With Home -->
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-foreground">With home</h2>
+
+    <tng-breadcrumbs
+      [home]="{ label: 'Home', route: '/' }"
+      [items]="withHome"
+    ></tng-breadcrumbs>
+  </section>
+
+  <!-- 3) Disabled crumb -->
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-foreground">Disabled item</h2>
+
+    <tng-breadcrumbs
+      [home]="{ label: 'Home', route: '/' }"
+      [items]="disabled"
+    ></tng-breadcrumbs>
+  </section>
+
+  <!-- 4) External links -->
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-foreground">External links</h2>
+
+    <tng-breadcrumbs
+      separator="→"
+      [items]="external"
+    ></tng-breadcrumbs>
+  </section>
+
+  <!-- 5) Explicit current -->
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-foreground">
+      Explicit current (not last)
+    </h2>
+
+    <tng-breadcrumbs
+      [home]="{ label: 'Home', route: '/' }"
+      [items]="explicitCurrent"
+    ></tng-breadcrumbs>
+  </section>
+
+  <!-- 6) Styled -->
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-foreground">Styled</h2>
+
+    <tng-breadcrumbs
+      [home]="{ label: 'Home', route: '/' }"
+      [items]="withHome"
+      rootKlass="flex items-center text-sm"
+      linkKlass="text-blue-600 hover:text-blue-800 hover:underline"
+      currentKlass="text-slate-900 font-semibold"
+      separatorKlass="mx-2 text-slate-300"
+    ></tng-breadcrumbs>
+  </section>
 </div>
-

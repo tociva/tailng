@@ -1,17 +1,41 @@
-<nav class="flex items-center space-x-2 text-sm">
-  @for (item of items(); track $index; let last = $last) {
-    <div class="flex items-center">
-      @if (item.route) {
-        <a [routerLink]="item.route" class="text-primary hover:underline">
-          {{ item.label }}
-        </a>
-      } @else {
-        <span class="text-gray-600">{{ item.label }}</span>
-      }
-      @if (!last) {
-        <span class="mx-2 text-gray-400">{{ separator() }}</span>
-      }
-    </div>
-  }
-</nav>
+<nav [attr.aria-label]="ariaLabel()" [class]="rootKlass()">
+  <ol [class]="listKlass()">
+    @for (item of resolvedItems(); track $index; let i = $index; let last = $last) {
+      <li [class]="itemClasses(item, i)">
+        <!-- Internal route -->
+        @if (item.route && isClickable(item, i)) {
+          <a
+            [routerLink]="item.route"
+            [class]="labelClasses(item, i)"
+          >
+            {{ item.label }}
+          </a>
+        }
+        <!-- External link -->
+        @else if (item.href && isClickable(item, i)) {
+          <a
+            [href]="item.href"
+            [target]="item.target ?? null"
+            [attr.rel]="relFor(item)"
+            [class]="labelClasses(item, i)"
+          >
+            {{ item.label }}
+          </a>
+        }
+        <!-- Current/disabled/plain -->
+        @else {
+          <span
+            [class]="labelClasses(item, i)"
+            [attr.aria-current]="isCurrent(i) ? 'page' : null"
+          >
+            {{ item.label }}
+          </span>
+        }
 
+        @if (!last) {
+          <span [class]="separatorKlass()">{{ separator() }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

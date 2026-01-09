@@ -73,7 +73,7 @@ export const categories = [
       { name: 'Paginator', route: '/navigation/paginator', status: 'backlog', priority: 'medium' },
 
       // Missing but essential navigation
-      { name: 'Breadcrumbs', route: '/navigation/breadcrumbs', status: 'backlog', priority: 'low' },
+      { name: 'Breadcrumbs', route: '/navigation/breadcrumbs', status: 'done', priority: 'low' },
     ],
   },
 
