@@ -83,7 +83,6 @@ export const categories = [
     package: '@tailng/overlay',
     components: [
       { name: 'Dialog', route: '/overlay/dialog', status: 'backlog', priority: 'high' },
-      { name: 'Bottom Sheet', route: '/overlay/bottom-sheet', status: 'backlog', priority: 'medium' },
       { name: 'Snackbar', route: '/overlay/snackbar', status: 'backlog', priority: 'high' },
       { name: 'Tooltip', route: '/overlay/tooltip', status: 'backlog', priority: 'high' },
 

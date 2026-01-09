@@ -250,13 +250,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'overlay/bottom-sheet',
-    loadComponent: () =>
-      import('./demos/popups-overlays/bottom-sheet/bottom-sheet-demo.component').then(
-        (m) => m.BottomSheetDemoComponent
-      ),
-  },
-  {
     path: 'overlay/snackbar',
     loadComponent: () =>
       import('./demos/popups-overlays/snackbar/snackbar-demo.component').then(
