@@ -59,7 +59,7 @@ export const categories = [
       { name: 'Tabs', route: '/layout/tabs', status: 'done', priority: 'high' },
 
       // Missing but essential layout primitives
-      { name: 'Accordion', route: '/layout/accordion', status: 'backlog', priority: 'low' },
+      { name: 'Accordion', route: '/layout/accordion', status: 'done', priority: 'low' },
       { name: 'Stepper Layout', route: '/layout/stepper-layout', status: 'backlog', priority: 'low' },
     ],
   },

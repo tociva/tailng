@@ -1,5 +1,274 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Accordion</h1>
-  <tng-accordion></tng-accordion>
-</div>
+<div class="mx-auto max-w-4xl space-y-10 p-6">
+  <!-- Header -->
+  <div class="space-y-1">
+    <h1 class="text-xl font-semibold text-foreground">Accordion</h1>
+    <p class="text-sm text-muted-foreground">
+      Group behavior for expansion panels: single vs multiple open, collapsible control, and klass hooks.
+    </p>
+  </div>
 
+  <!-- 1) Default: single-open -->
+  <section class="space-y-3">
+    <div class="flex items-center justify-between gap-4">
+      <h2 class="text-sm font-semibold text-foreground">Default (single open)</h2>
+      <div class="text-xs text-muted-foreground">
+        Open indexes:
+        <code class="rounded bg-slate-100 px-1 text-slate-900">{{ openSingle() | json }}</code>
+      </div>
+    </div>
+
+    <tng-accordion (openIndexesChange)="openSingle.set($event)">
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Panel A</div>
+        <div tngExpansionContent>
+          Only one panel stays open at a time (default).
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Panel B</div>
+        <div tngExpansionContent>
+          Opening this closes the others.
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Panel C</div>
+        <div tngExpansionContent>
+          This is classic accordion behavior.
+        </div>
+      </tng-expansion-panel>
+    </tng-accordion>
+  </section>
+
+  <!-- 2) Multiple open -->
+  <section class="space-y-3">
+    <div class="flex items-center justify-between gap-4">
+      <h2 class="text-sm font-semibold text-foreground">Multiple open</h2>
+      <div class="text-xs text-muted-foreground">
+        Open indexes:
+        <code class="rounded bg-slate-100 px-1 text-slate-900">{{ openMulti() | json }}</code>
+      </div>
+    </div>
+
+    <tng-accordion [multiple]="true" (openIndexesChange)="openMulti.set($event)">
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Filters</div>
+        <div tngExpansionContent>
+          Multiple panels can be open at the same time.
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Sort</div>
+        <div tngExpansionContent>
+          Useful for settings panels / sidebars.
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Advanced</div>
+        <div tngExpansionContent>
+          This mode behaves like collapsible sections.
+        </div>
+      </tng-expansion-panel>
+    </tng-accordion>
+  </section>
+
+  <!-- 3) Non-collapsible + auto open first -->
+  <section class="space-y-3">
+    <div class="flex items-center justify-between gap-4">
+      <h2 class="text-sm font-semibold text-foreground">Non-collapsible + autoOpenFirst</h2>
+      <div class="text-xs text-muted-foreground">
+        Open indexes:
+        <code class="rounded bg-slate-100 px-1 text-slate-900">{{ openLocked() | json }}</code>
+      </div>
+    </div>
+
+    <tng-accordion
+      [collapsible]="false"
+      [autoOpenFirst]="true"
+      (openIndexesChange)="openLocked.set($event)"
+    >
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Always one open</div>
+        <div tngExpansionContent>
+          You cannot close the last open panel in this mode.
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel>
+        <div tngExpansionTitle>Second panel</div>
+        <div tngExpansionContent>
+          Switching panels is allowed, but at least one remains open.
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel [disabled]="true" [open]="true">
+        <div tngExpansionTitle>Disabled panel</div>
+        <div tngExpansionContent>
+          Disabled + open is respected by the panel; accordion won’t force-toggle it.
+        </div>
+      </tng-expansion-panel>
+    </tng-accordion>
+  </section>
+
+  <!-- 4) Theming via klass hooks -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Theming (klass hooks)</h2>
+
+    <tng-accordion rootKlass="w-full" stackKlass="space-y-3">
+      <tng-expansion-panel
+        rootKlass="rounded-xl border border-slate-200 bg-white shadow-sm"
+        headerKlass="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60"
+        contentPaddingKlass="px-5 pb-5 pt-2"
+        contentBodyKlass="text-sm text-slate-600"
+      >
+        <div tngExpansionTitle>Styled header</div>
+        <div tngExpansionContent>
+          Accordion itself is headless; panels control the visuals via klass inputs.
+        </div>
+      </tng-expansion-panel>
+
+      <tng-expansion-panel
+        rootKlass="rounded-xl border border-slate-200 bg-white shadow-sm"
+        headerKlass="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60"
+        contentPaddingKlass="px-5 pb-5 pt-2"
+        contentBodyKlass="text-sm text-slate-600"
+      >
+        <div tngExpansionTitle>Another panel</div>
+        <div tngExpansionContent>
+          Works for settings pages, FAQs, sidebars.
+        </div>
+      </tng-expansion-panel>
+    </tng-accordion>
+  </section>
+
+  <!-- 5) Custom icons (left status + right open/close toggle) -->
+<section class="space-y-3">
+  <h2 class="text-sm font-semibold text-foreground">
+    Custom icons (open / close)
+  </h2>
+
+  <tng-accordion>
+    <!-- Panel 1 -->
+    <tng-expansion-panel>
+      <div tngExpansionTitle class="flex items-center gap-2">
+        <!-- Optional: left-side status icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          class="h-4 w-4 text-primary"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4v16m8-8H4" />
+        </svg>
+
+        <span>Add item</span>
+      </div>
+
+      <!-- Right-side toggle icons -->
+      <svg
+        tngExpansionIconClose
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="h-5 w-5 text-primary"
+        aria-hidden="true"
+      >
+        <!-- plus -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 5v14m7-7H5" />
+      </svg>
+
+      <svg
+        tngExpansionIconOpen
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="h-5 w-5 text-primary"
+        aria-hidden="true"
+      >
+        <!-- minus -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 12h14" />
+      </svg>
+
+      <div tngExpansionContent>
+        This panel uses custom <strong>plus/minus</strong> toggle icons on the right.
+      </div>
+    </tng-expansion-panel>
+
+    <!-- Panel 2 -->
+    <tng-expansion-panel>
+      <div tngExpansionTitle class="flex items-center gap-2">
+        <!-- Optional: left-side status icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          class="h-4 w-4 text-amber-600"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 9v2m0 4h.01M10.29 3.86l-7.4 12.82A1 1 0 003.7 18h16.6a1 1 0 00.87-1.32L13.77 3.86a1 1 0 00-1.74 0z" />
+        </svg>
+
+        <span>Warnings</span>
+      </div>
+
+      <!-- Right-side toggle icons -->
+      <svg
+        tngExpansionIconClose
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="h-5 w-5 text-amber-600"
+        aria-hidden="true"
+      >
+        <!-- chevron down -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M19 9l-7 7-7-7" />
+      </svg>
+
+      <svg
+        tngExpansionIconOpen
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="h-5 w-5 text-amber-600"
+        aria-hidden="true"
+      >
+        <!-- chevron up -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 15l7-7 7 7" />
+      </svg>
+
+      <div tngExpansionContent>
+        This panel uses custom <strong>chevron up/down</strong> icons for toggle state.
+      </div>
+    </tng-expansion-panel>
+
+    <!-- Panel 3 (no custom toggle icon → fallback chevron) -->
+    <tng-expansion-panel>
+      <div tngExpansionTitle>
+        Default icon fallback
+      </div>
+
+      <div tngExpansionContent>
+        No <code>tngExpansionIconOpen</code>/<code>tngExpansionIconClose</code> provided → default
+        chevron SVG is rendered.
+      </div>
+    </tng-expansion-panel>
+  </tng-accordion>
+</section>
+
+</div>
