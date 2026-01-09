@@ -1,11 +1,109 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  ElementRef,
+  TemplateRef,
+  ViewChild,
+  effect,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+
+import { TailngConnectedOverlayComponent } from '../../../popups-overlays/connected-overlay/src/public-api';
+import { TailngOverlayPanelComponent } from '../../../popups-overlays/overlay-panel/src/public-api';
+import {
+  TailngOverlayRefComponent,
+  TailngOverlayCloseReason,
+} from '../../../popups-overlays/overlay-ref/src/public-api';
+
+export type MenuCloseReason = TailngOverlayCloseReason;
+
+export type TngMenuPlacement =
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'top-start'
+  | 'top-end';
 
 @Component({
   selector: 'tng-menu',
   standalone: true,
+  imports: [
+    NgIf,
+    NgTemplateOutlet,
+    TailngConnectedOverlayComponent,
+    TailngOverlayPanelComponent,
+    TailngOverlayRefComponent,
+  ],
   templateUrl: './menu.component.html',
 })
 export class TailngMenuComponent {
-  // Welcome hello component - placeholder for Menu
-}
+  @ContentChild(TemplateRef, { descendants: true })
+  menuTpl?: TemplateRef<unknown>;
 
+  @ViewChild('triggerEl', { static: true })
+  triggerEl!: ElementRef<HTMLElement>;
+
+  readonly placement = input<TngMenuPlacement>('bottom-start');
+  readonly offset = input<number>(6);
+  readonly width = input<'anchor' | number>('anchor');
+
+  readonly closeOnOutsideClick = input<boolean>(true);
+  readonly closeOnEscape = input<boolean>(true);
+  readonly closeOnItemClick = input<boolean>(true);
+
+  readonly rootKlass = input<string>('relative inline-block');
+  readonly triggerKlass = input<string>('inline-flex');
+  readonly panelKlass = input<string>('p-1');
+
+  readonly opened = output<void>();
+  readonly closed = output<MenuCloseReason>();
+
+  readonly isOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (this.isOpen()) return;
+      queueMicrotask(() => this.triggerEl?.nativeElement?.focus());
+    });
+  }
+
+  open(_reason: MenuCloseReason) {
+    this.isOpen.set(true);
+    void _reason;
+  }
+
+  close(reason: MenuCloseReason) {
+    if (!this.isOpen()) return;
+    this.isOpen.set(false);
+    this.closed.emit(reason);
+  }
+
+  onOverlayOpenChange(open: boolean) {
+    if (open) this.open('programmatic');
+    else this.close('programmatic');
+  }
+
+  onOverlayOpened() {
+    this.opened.emit();
+  }
+
+  onOverlayClosed(reason: MenuCloseReason) {
+    this.close(reason);
+  }
+
+  onTriggerClick() {
+    this.isOpen() ? this.close('programmatic') : this.open('programmatic');
+  }
+
+  requestCloseOnSelection(): void {
+    if (!this.closeOnItemClick()) return;
+    this.close('selection');
+  }
+
+  // Back-compat
+  onItemSelected(): void {
+    this.requestCloseOnSelection();
+  }
+}

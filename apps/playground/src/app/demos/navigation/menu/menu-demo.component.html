@@ -1,10 +1,114 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Menu</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-menu></tng-menu>
-    </section>
-  </div>
-</div>
+<div class="mx-auto max-w-xl space-y-8 p-6">
+  <h1 class="text-xl font-semibold text-foreground">Menu</h1>
 
+  <!-- Basic Menu -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Basic</h2>
+
+    <tng-menu>
+      <!-- Trigger -->
+      <button
+        tngMenuTrigger
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+      >
+        Open menu
+      </button>
+
+      <!-- Menu content -->
+      <ng-template>
+        <button
+          tngMenuItem
+          class="w-full rounded px-3 py-2 text-left text-sm hover:bg-slate-50"
+          (click)="onAction('Profile')"
+        >
+          Profile
+        </button>
+
+        <button
+          tngMenuItem
+          class="w-full rounded px-3 py-2 text-left text-sm hover:bg-slate-50"
+          (click)="onAction('Settings')"
+        >
+          Settings
+        </button>
+
+        <div class="my-1 h-px bg-border"></div>
+
+        <button
+          tngMenuItem
+          class="w-full rounded px-3 py-2 text-left text-sm text-danger hover:bg-slate-50"
+          (click)="onAction('Logout')"
+        >
+          Logout
+        </button>
+      </ng-template>
+    </tng-menu>
+  </section>
+
+
+    <!-- Styled Menu -->
+    <section class="space-y-3">
+      <h2 class="text-sm font-semibold text-foreground">Styled</h2>
+  
+      <tng-menu
+        placement="bottom-end"
+        panelKlass="p-1 min-w-48"
+      >
+        <button
+          tngMenuTrigger
+          class="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-sm text-on-primary"
+        >
+          Actions
+          <span class="text-xs">▼</span>
+        </button>
+  
+        <ng-template>
+          <button
+            tngMenuItem
+            class="flex w-full items-center gap-2 rounded px-3 py-2 text-sm hover:bg-slate-50"
+          >
+            ✏️ Edit
+          </button>
+  
+          <button
+            tngMenuItem
+            class="flex w-full items-center gap-2 rounded px-3 py-2 text-sm hover:bg-slate-50"
+          >
+            📄 Duplicate
+          </button>
+  
+          <button
+            tngMenuItem
+            class="flex w-full items-center gap-2 rounded px-3 py-2 text-sm hover:bg-slate-50 text-danger"
+          >
+            🗑 Delete
+          </button>
+        </ng-template>
+      </tng-menu>
+    </section>
+
+      <!-- Close reason demo -->
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Close reason</h2>
+
+    <tng-menu (closed)="onMenuClosed($event)">
+      <button
+        tngMenuTrigger
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+      >
+        Debug menu
+      </button>
+
+      <ng-template>
+        <button tngMenuItem class="w-full px-3 py-2 text-left text-sm hover:bg-slate-50">
+          Selection close
+        </button>
+      </ng-template>
+    </tng-menu>
+
+    <p class="text-xs text-muted-foreground">
+      Open devtools and watch the close reason:
+      <code>selection</code>, <code>outside-click</code>, <code>escape</code>
+    </p>
+  </section>
+</div>
