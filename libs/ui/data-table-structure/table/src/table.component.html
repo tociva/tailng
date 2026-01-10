@@ -1,4 +1,51 @@
-<div class="p-4 border border-gray-200 rounded-md">
-  <p class="text-gray-600">Welcome hello component - Table</p>
-</div>
+<table [class]="tableKlass()">
+  <thead [class]="theadKlass()">
+    <tr>
+      @for (col of columns(); track col.id) {
+        <th
+          scope="col"
+          [class]="(thKlass() + ' ' + alignClass(col.align) + (col.klass ? ' ' + col.klass : '')).trim()"
+          [ngStyle]="styleWidth(col)"
+        >
+          @if (col.headerTpl) {
+            <ng-container
+              [ngTemplateOutlet]="col.headerTpl"
+              [ngTemplateOutletContext]="headerCtx(col)"
+            />
+          } @else {
+            {{ col.header }}
+          }
+        </th>
+      }
+    </tr>
+  </thead>
 
+  <tbody [class]="tbodyKlass()">
+    @if (hasRows()) {
+      @for (row of rows(); let rowIndex = $index; track trackRow) {
+        <tr>
+          @for (col of columns(); track col.id) {
+            <td
+              [class]="(tdKlass() + ' ' + alignClass(col.align) + (col.klass ? ' ' + col.klass : '')).trim()"
+            >
+              @if (col.cellTpl) {
+                <ng-container
+                  [ngTemplateOutlet]="col.cellTpl"
+                  [ngTemplateOutletContext]="cellCtx(row, rowIndex, col)"
+                />
+              } @else {
+                {{ col.value?.(row) }}
+              }
+            </td>
+          }
+        </tr>
+      }
+    } @else {
+      <tr>
+        <td [attr.colspan]="columns().length || 1" class="px-3 py-8 text-center text-disable">
+          {{ emptyText() }}
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

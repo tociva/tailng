@@ -1,11 +1,108 @@
-import { Component } from '@angular/core';
+// table-demo.component.ts
+import { Component, signal } from '@angular/core';
 import { TailngTableComponent } from '@tailng/ui';
+
+// Prefer importing these from @tailng/ui once you export them there.
+import { TailngColComponent } from '@tailng/ui';
+import { TngCellDefDirective } from '@tailng/ui';
+
+type Txn = {
+  id: string;
+  date: string;
+  description: string;
+  amount: number;
+  status: 'Success' | 'Pending' | 'Failed';
+};
 
 @Component({
   selector: 'playground-table-demo',
   standalone: true,
-  imports: [TailngTableComponent],
+  imports: [TailngTableComponent, TailngColComponent, TngCellDefDirective],
   templateUrl: './table-demo.component.html',
 })
-export class TableDemoComponent {}
+export class TableDemoComponent {
+  private readonly seed: Txn[] = [
+    { id: 'TXN-1001', date: '2026-01-08', description: 'UPI • Amazon Pay', amount: -1299, status: 'Success' },
+    { id: 'TXN-1002', date: '2026-01-08', description: 'NEFT • Salary Credit', amount: 65000, status: 'Success' },
+    { id: 'TXN-1003', date: '2026-01-09', description: 'Card • Fuel', amount: -1200.5, status: 'Pending' },
+    { id: 'TXN-1004', date: '2026-01-09', description: 'IMPS • Rent', amount: -15000, status: 'Failed' },
+  ];
 
+  readonly rows = signal<Txn[]>([...this.seed]);
+
+  // ✅ bind function references (no arrow functions in template)
+  readonly dateValue = (r: Txn) => r.date;
+  readonly descValue = (r: Txn) => r.description;
+  readonly amountValue = (r: Txn) => r.amount;
+  readonly statusValue = (r: Txn) => r.status;
+
+  // ---- actions ----
+  addRow(): void {
+    const next = this.makeRandomTxn();
+    this.rows.set([next, ...this.rows()]);
+  }
+
+  removeFirst(): void {
+    const curr = this.rows();
+    if (!curr.length) return;
+    this.rows.set(curr.slice(1));
+  }
+
+  removeLast(): void {
+    const curr = this.rows();
+    if (!curr.length) return;
+    this.rows.set(curr.slice(0, -1));
+  }
+
+  removeById(id: string): void {
+    const curr = this.rows();
+    this.rows.set(curr.filter((r) => r.id !== id));
+  }
+
+  clear(): void {
+    this.rows.set([]);
+  }
+
+  reset(): void {
+    this.rows.set([...this.seed]);
+  }
+
+  // ---- helpers for templates ----
+  isPositive(v: unknown): boolean {
+    return Number(v) >= 0;
+  }
+
+  isNegative(v: unknown): boolean {
+    return Number(v) < 0;
+  }
+
+  badgeClass(status: unknown): string {
+    switch (String(status)) {
+      case 'Success':
+        return 'bg-success text-white';
+      case 'Pending':
+        return 'bg-warning text-black';
+      case 'Failed':
+        return 'bg-danger text-white';
+      default:
+        return 'bg-info text-white';
+    }
+  }
+
+  private makeRandomTxn(): Txn {
+    const idNum = 1000 + this.rows().length + 1 + Math.floor(Math.random() * 50);
+    const statuses: Txn['status'][] = ['Success', 'Pending', 'Failed'];
+    const descs = ['UPI • Grocery', 'Card • Fuel', 'IMPS • Transfer', 'NEFT • Credit', 'UPI • Recharge'];
+    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    const description = descs[Math.floor(Math.random() * descs.length)];
+    const amount = (Math.random() > 0.5 ? 1 : -1) * Math.round((200 + Math.random() * 5000) * 100) / 100;
+
+    return {
+      id: `TXN-${idNum}`,
+      date: new Date().toISOString().slice(0, 10),
+      description,
+      amount,
+      status,
+    };
+  }
+}

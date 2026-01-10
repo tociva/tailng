@@ -1,10 +1,100 @@
-<div>
-  <h1 class="text-2xl font-bold mb-6">Table</h1>
-  <div class="space-y-4">
-    <section>
-      <h2 class="text-lg font-semibold mb-3">Basic Usage</h2>
-      <tng-table></tng-table>
-    </section>
-  </div>
-</div>
+<!-- table-demo.component.html -->
+<section class="space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h2 class="text-lg font-semibold">tng-table demo</h2>
+      <p class="text-sm text-gray-600">Add / remove / clear / reset demo actions.</p>
+    </div>
 
+    <div class="flex flex-wrap items-center gap-2">
+      <button
+        type="button"
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+        (click)="addRow()"
+      >
+        Add row
+      </button>
+
+      <button
+        type="button"
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+        (click)="removeFirst()"
+      >
+        Remove first
+      </button>
+
+      <button
+        type="button"
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+        (click)="removeLast()"
+      >
+        Remove last
+      </button>
+
+      <button
+        type="button"
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+        (click)="clear()"
+      >
+        Clear
+      </button>
+
+      <button
+        type="button"
+        class="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <div class="overflow-auto rounded-md border border-border">
+    <tng-table [rows]="rows()" rowKey="id" emptyText="No transactions">
+      <tng-col id="date" header="Date" [value]="dateValue"></tng-col>
+
+      <tng-col id="description" header="Description" [value]="descValue">
+        <ng-template tngCell let-row let-value="value">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-col">
+              <span class="font-medium">{{ value }}</span>
+              <span class="text-xs text-gray-500">{{ row.id }}</span>
+            </div>
+
+            <button
+              type="button"
+              class="rounded-md border border-border bg-background px-2 py-1 text-xs"
+              (click)="removeById(row.id)"
+              aria-label="Remove row"
+            >
+              Remove
+            </button>
+          </div>
+        </ng-template>
+      </tng-col>
+
+      <tng-col id="amount" header="Amount" align="right" width="140px" [value]="amountValue">
+        <ng-template tngCell let-value="value">
+          <span
+            class="font-semibold"
+            [class.text-green-600]="isPositive(value)"
+            [class.text-red-600]="isNegative(value)"
+          >
+            ₹ {{ value }}
+          </span>
+        </ng-template>
+      </tng-col>
+
+      <tng-col id="status" header="Status" width="120px" [value]="statusValue">
+        <ng-template tngCell let-value="value">
+          <span
+            class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold"
+            [class]="badgeClass(value)"
+          >
+            {{ value }}
+          </span>
+        </ng-template>
+      </tng-col>
+    </tng-table>
+  </div>
+</section>

@@ -279,20 +279,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'overlay-primitives/overlay-panel',
-    loadComponent: () =>
-      import('./demos/overlay-primitives/overlay-panel/overlay-panel-demo.component').then(
-        (m) => m.OverlayPanelDemoComponent
-      ),
-  },
-  {
-    path: 'overlay-primitives/overlay-ref',
-    loadComponent: () =>
-      import('./demos/overlay-primitives/overlay-ref/overlay-ref-demo.component').then(
-        (m) => m.OverlayRefDemoComponent
-      ),
-  },
-  {
     path: 'overlay-primitives/option-list',
     loadComponent: () =>
       import('./demos/overlay-primitives/option-list/option-list-demo.component').then(
