@@ -22,7 +22,7 @@
 
   <tbody [class]="tbodyKlass()">
     @if (hasRows()) {
-      @for (row of rows(); let rowIndex = $index; track trackRow) {
+      @for (row of viewRows(); let rowIndex = $index; track trackRow) {
         <tr>
           @for (col of columns(); track col.id) {
             <td

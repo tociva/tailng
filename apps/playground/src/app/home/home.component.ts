@@ -117,7 +117,7 @@ export const categories = [
     name: 'Data Table & Structure',
     package: '@tailng/data',
     components: [
-      { name: 'Table', route: '/data/table', status: 'backlog', priority: 'high' },
+      { name: 'Table Basic', route: '/data/table', status: 'backlog', priority: 'high' },
       { name: 'Sort Header', route: '/data/sort-header', status: 'backlog', priority: 'medium' },
       { name: 'Tree', route: '/data/tree', status: 'backlog', priority: 'low' },
 

@@ -289,14 +289,14 @@ export const routes: Routes = [
   {
     path: 'data/table',
     loadComponent: () =>
-      import('./demos/data-table-structure/table/table-demo.component').then(
+      import('./demos/data-table-structure/table/basic/table-demo.component').then(
         (m) => m.TableDemoComponent
       ),
   },
   {
     path: 'data/sort-header',
     loadComponent: () =>
-      import('./demos/data-table-structure/sort-header/sort-header-demo.component').then(
+      import('./demos/data-table-structure/table/sort-header/sort-header-demo.component').then(
         (m) => m.SortHeaderDemoComponent
       ),
   },

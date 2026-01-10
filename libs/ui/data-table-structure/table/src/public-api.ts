@@ -3,3 +3,7 @@ export * from './col.component';
 export * from './cell.def';
 export * from './header.def';
 export * from './table.types';
+export * from './table.controller';
+export * from './table.token';
+export * from './sort-header.directive';
+export * from './sort-icon.component';
