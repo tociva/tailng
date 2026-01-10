@@ -1,17 +1,21 @@
+// autocomplete.component.ts
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
-  effect,
   ElementRef,
+  TemplateRef,
+  ViewChild,
+  computed,
+  effect,
   forwardRef,
   input,
   output,
   signal,
-  TemplateRef,
-  ViewChild,
-  computed,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { OptionTplContext } from '@tailng/cdk';
 
 import { TailngConnectedOverlayComponent } from '../../../popups-overlays/connected-overlay/src/public-api';
 import { TailngOptionListComponent } from '../../../popups-overlays/option-list/src/public-api';
@@ -20,10 +24,6 @@ import {
   TailngOverlayCloseReason,
   TailngOverlayRefComponent,
 } from '../../../popups-overlays/overlay-ref/src/public-api';
-
-import { handleListKeyboardEvent } from 'libs/cdk/keyboard/keyboard-navigation';
-import { OptionTplContext } from '@tailng/cdk';
-import { NgTemplateOutlet } from '@angular/common';
 
 export type AutocompleteCloseReason = TailngOverlayCloseReason;
 
@@ -61,6 +61,10 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
 
   @ViewChild('inputEl', { static: true })
   inputEl!: ElementRef<HTMLInputElement>;
+
+  // We call optionList.onKeydown(ev) from the INPUT keydown handler
+  @ViewChild(TailngOptionListComponent)
+  optionList?: TailngOptionListComponent<T>;
 
   /* =====================
    * Inputs / Outputs
@@ -165,7 +169,7 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
   /* =====================
    * State Transitions
    * ===================== */
-  open(reason: AutocompleteCloseReason) {
+  open(_reason: AutocompleteCloseReason) {
     if (this.isDisabled()) return;
 
     this.isOpen.set(true);
@@ -176,8 +180,6 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     } else {
       this.focusedIndex.set(-1);
     }
-
-    void reason;
   }
 
   close(reason: AutocompleteCloseReason) {
@@ -219,49 +221,81 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
     this.search.emit(text);
     this.open('programmatic');
   }
-
-  onFocus() {
-    this.open('programmatic');
-  }
-
+  
   onBlur() {
     this.onTouched();
-    this.close('blur');
+  
+    queueMicrotask(() => {
+      if (document.activeElement === this.inputEl.nativeElement) return;
+      this.close('blur');
+    });
   }
 
+  /**
+   * Key handling updated to match OptionList architecture:
+   * - Escape is handled here (OptionList doesn't close overlays)
+   * - Navigation/Enter are delegated to optionList.onKeydown(ev)
+   * - Printable keys are NOT delegated (input typing controls filtering)
+   */
   onKeydown(ev: KeyboardEvent) {
     if (this.isDisabled()) return;
-
-    if (!this.isOpen() && (ev.key === 'ArrowDown' || ev.key === 'ArrowUp')) {
-      this.open('programmatic');
+  
+    // Close on escape
+    if (ev.key === 'Escape' && this.isOpen()) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      this.close('escape');
       return;
     }
-
-    const action = handleListKeyboardEvent(ev, {
-      activeIndex: this.focusedIndex(),
-      itemCount: this.options().length,
-      loop: false,
-    });
-
-    switch (action.type) {
-      case 'move':
-        this.focusedIndex.set(action.index);
-        break;
-
-      case 'select': {
-        const item = this.options()[action.index];
-        if (item !== undefined) this.select(item);
-        break;
-      }
-
-      case 'close':
-        this.close('escape');
-        break;
-
-      case 'noop':
-      default:
-        break;
+  
+    // If closed: ArrowDown/Up should open + delegate once overlay is painted
+    if (!this.isOpen() && (ev.key === 'ArrowDown' || ev.key === 'ArrowUp')) {
+      ev.preventDefault();
+      ev.stopPropagation();
+  
+      this.open('programmatic');
+  
+      // wait for overlay + optionList to exist
+      requestAnimationFrame(() => this.optionList?.onKeydown(ev));
+      return;
     }
+  
+    if (!this.isOpen()) return;
+  
+    // Delegate only list-navigation keys
+    if (!this.isListNavigationKey(ev)) return;
+  
+    ev.stopPropagation(); // helps if parent/global handlers exist
+    this.optionList?.onKeydown(ev);
+  }
+
+  private isListNavigationKey(ev: KeyboardEvent): boolean {
+    // Match the keys handled by OptionList (excluding typeahead)
+    switch (ev.key) {
+      case 'ArrowDown':
+      case 'ArrowUp':
+      case 'Home':
+      case 'End':
+      case 'PageDown':
+      case 'PageUp':
+      case 'Enter':
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  /* =====================
+   * OptionList wiring
+   * ===================== */
+  onFocusedIndexChange(i: number) {
+    this.focusedIndex.set(i);
+  }
+
+  requestSelectActive() {
+    const i = this.focusedIndex();
+    const item = this.options()[i];
+    if (item !== undefined) this.select(item);
   }
 
   /* =====================

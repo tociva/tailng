@@ -4,6 +4,7 @@ import {
   computed,
   ContentChild,
   ElementRef,
+  effect,
   input,
   output,
   signal,
@@ -120,6 +121,28 @@ export class TailngOptionListComponent<T> {
    * Computeds
    * ===================== */
   readonly hasItems = computed(() => (this.items()?.length ?? 0) > 0);
+
+  constructor() {
+    /**
+     * ✅ Scroll follows the controlled `activeIndex`:
+     * This guarantees scrolling even when parent changes activeIndex via:
+     * - hover
+     * - open() initialization
+     * - programmatic updates
+     * - any external state
+     *
+     * (Not just when OptionList handles keydown.)
+     */
+    effect(() => {
+      const i = this.activeIndex();
+      if (i < 0) return;
+
+      // Wait for DOM update / projection / overlay paint
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => this.scrollIndexIntoView(i));
+      });
+    });
+  }
 
   get tpl(): TemplateRef<OptionTplContext<T>> | undefined {
     return this.optionTemplate() ?? this.optionTpl;
@@ -282,26 +305,18 @@ export class TailngOptionListComponent<T> {
   }
 
   /**
-   * ✅ Controlled activeIndex + reliable scroll
-   * - emit to parent
-   * - after DOM paint, scroll the option into view
+   * ✅ Controlled activeIndex
+   * - Emit activeIndexChange (parent owns state)
+   * - Scrolling is handled by the effect() reacting to activeIndex()
    */
   private commitActive(index: number): void {
     if (index < 0) return;
-
     this.activeIndexChange.emit(index);
-
-    // Wait for DOM update / projection / overlay paint
-    requestAnimationFrame(() => {
-      // In some overlays, the first RAF is still early; a second RAF makes it rock-solid.
-      requestAnimationFrame(() => this.scrollIndexIntoView(index));
-    });
   }
 
   /**
-   * ✅ The simplest + most robust way:
-   * Let the browser find the correct scroll container (nearest overflow ancestor)
-   * Works in modal overlays, transformed containers, projected DOM, etc.
+   * ✅ Scroll the active option into view.
+   * Let the browser pick the nearest scrollable ancestor.
    */
   private scrollIndexIntoView(index: number): void {
     const root = this.listbox?.nativeElement;
