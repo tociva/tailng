@@ -1,0 +1,128 @@
+<section class="space-y-4">
+  <div>
+    <h2 class="text-lg font-semibold">Filter header demo</h2>
+    <p class="text-sm text-gray-600">Default filters (text, number, date, enum) + filter trigger in header.</p>
+  </div>
+
+  <div class="overflow-auto rounded-md border border-border">
+    <tng-table [rows]="rows()" rowKey="id" emptyText="No invoices">
+      <!-- Customer -->
+      <tng-col id="customer" header="Customer" [value]="customerValue" [filter]="filterText('Search customer…')">
+        <ng-template tngHeader let-colId="colId" let-header="header">
+          <div class="flex w-full items-center justify-between gap-2">
+            <button
+              type="button"
+              class="inline-flex items-center gap-1 hover:underline"
+              tngSortHeader
+              [colId]="colId"
+            >
+              <span class="truncate">{{ header }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="rounded-md border border-border bg-background px-2 py-1 text-xs"
+              tngFilterTrigger
+              [colId]="colId"
+              aria-label="Filter customer"
+            >
+              Filter
+            </button>
+          </div>
+        </ng-template>
+      </tng-col>
+
+      <!-- Amount -->
+      <tng-col id="amount" header="Amount" align="right" [value]="amountValue" [filter]="filterNumber()">
+        <ng-template tngHeader let-colId="colId" let-header="header">
+          <div class="flex w-full items-center justify-end gap-2">
+            <button
+              type="button"
+              class="inline-flex items-center gap-1 hover:underline"
+              tngSortHeader
+              [colId]="colId"
+            >
+              <span>{{ header }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="rounded-md border border-border bg-background px-2 py-1 text-xs"
+              tngFilterTrigger
+              [colId]="colId"
+              aria-label="Filter amount"
+            >
+              Filter
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template tngCell let-value="value">
+          <span class="font-semibold">{{ value }}</span>
+        </ng-template>
+      </tng-col>
+
+      <!-- Bill Date -->
+      <tng-col id="billDate" header="Bill Date" [value]="billDateValue" [filter]="filterDate()">
+        <ng-template tngHeader let-colId="colId" let-header="header">
+          <div class="flex w-full items-center justify-between gap-2">
+            <button
+              type="button"
+              class="inline-flex items-center gap-1 hover:underline"
+              tngSortHeader
+              [colId]="colId"
+            >
+              <span class="truncate">{{ header }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="rounded-md border border-border bg-background px-2 py-1 text-xs"
+              tngFilterTrigger
+              [colId]="colId"
+              aria-label="Filter bill date"
+            >
+              Filter
+            </button>
+          </div>
+        </ng-template>
+      </tng-col>
+
+      <!-- Status -->
+      <tng-col id="status" header="Status" width="140px" [value]="statusValue" [filter]="filterStatus()">
+        <ng-template tngHeader let-colId="colId" let-header="header">
+          <div class="flex w-full items-center justify-between gap-2">
+            <button
+              type="button"
+              class="inline-flex items-center gap-1 hover:underline"
+              tngSortHeader
+              [colId]="colId"
+            >
+              <span class="truncate">{{ header }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="rounded-md border border-border bg-background px-2 py-1 text-xs"
+              tngFilterTrigger
+              [colId]="colId"
+              aria-label="Filter status"
+            >
+              Filter
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template tngCell let-value="value">
+          <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold"
+                [class]="badgeClass(value)">
+            {{ value }}
+          </span>
+        </ng-template>
+      </tng-col>
+
+      <!-- ONE filter panel for the whole table -->
+      <tng-filter-panel />
+    </tng-table>
+  </div>
+</section>

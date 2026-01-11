@@ -7,4 +7,7 @@ export * from './core/table.types';
 export * from './core/table.controller';
 export * from './core/table.token';
 export * from './directives/sort-header.directive';
+export * from './directives/filter-trigger.directive';
+export * from './ui/filter-panel.component';
 export * from './features/sort.feature';
+export * from './features/filter.feature';

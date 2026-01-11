@@ -37,3 +37,29 @@ export type TngResolvedColumn<T> = {
 
 export type TngSortDir = '' | 'asc' | 'desc';
 export type TngSort = { active: string; direction: TngSortDir };
+
+// -------------------- FILTER --------------------
+export type TngFilterType = 'text' | 'number' | 'date' | 'enum';
+
+export type TngTextFilter = string; // contains
+export type TngNumberFilter = { min?: number; max?: number };
+export type TngDateFilter = { from?: string; to?: string }; // ISO yyyy-mm-dd
+export type TngEnumFilter = string[]; // multi-select by default
+
+export type TngFilterValue = TngTextFilter | TngNumberFilter | TngDateFilter | TngEnumFilter;
+export type TngFilters = Record<string, TngFilterValue>;
+
+// Column-level filter metadata (used by defaults)
+export type TngEnumOption = { value: string; label: string };
+
+export type TngColumnFilterMeta =
+  | { type: 'text'; placeholder?: string }
+  | { type: 'number' }
+  | { type: 'date' }
+  | { type: 'enum'; options: TngEnumOption[] };
+
+export type TngColumnMeta = {
+  id: string;
+  label?: string;
+  filter?: TngColumnFilterMeta;
+};

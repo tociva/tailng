@@ -40,7 +40,7 @@ export class TailngTableComponent<T extends Record<string, any> = any> implement
    * Inputs
    * ===================== */
   readonly rows = input<T[]>([]);
-  readonly rowKey = input<string | null>(null);
+  readonly rowKey = input<string>('id');
 
   /** ✅ Default: client (static) sort */
   readonly sortMode = input<'client' | 'server'>('client');
@@ -121,10 +121,11 @@ export class TailngTableComponent<T extends Record<string, any> = any> implement
 
   readonly hasRows = computed(() => (this.viewRows()?.length ?? 0) > 0);
 
-  trackRow = (index: number, row: T) => {
-    const key = this.rowKey();
-    return key ? (row as any)?.[key] ?? index : index;
+  trackRow = (_: number, row: any) => {
+    const k = this.rowKey();
+    return row?.[k] ?? _;
   };
+  
 
   /* =====================
    * Rendering helpers

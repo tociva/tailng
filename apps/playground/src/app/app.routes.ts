@@ -301,6 +301,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'data/filter-header',
+    loadComponent: () =>
+      import('./demos/data-table-structure/table/filter-header/filter-header-demo.component').then(
+        (m) => m.FilterHeaderDemoComponent
+      ),
+  },
+  {
     path: 'data/tree',
     loadComponent: () =>
       import('./demos/data-table-structure/tree/tree-demo.component').then(

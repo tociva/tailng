@@ -1,5 +1,6 @@
-import { Component, ContentChild, TemplateRef, input } from '@angular/core';
-import { TngAlign } from '../core/table.types';
+import { Component, ContentChild, TemplateRef, effect, inject, input } from '@angular/core';
+import { TNG_TABLE } from '../core/table.token';
+import type { TngAlign, TngColumnFilterMeta } from '../core/table.types';
 import { TngCellDefDirective } from '../defs/cell.def';
 import { TngHeaderDefDirective } from '../defs/header.def';
 
@@ -27,12 +28,32 @@ export class TailngColComponent<T> {
   /** extra CSS classes applied to th/td */
   readonly klass = input<string | null>(null);
 
+  /** default filter meta (used by tng-filter-panel) */
+  readonly filter = input<TngColumnFilterMeta | null>(null);
+
+  private readonly table = inject(TNG_TABLE);
+
   // Projected templates
   @ContentChild(TngCellDefDirective)
   cellDef?: TngCellDefDirective<T>;
 
   @ContentChild(TngHeaderDefDirective)
   headerDef?: TngHeaderDefDirective;
+
+  constructor() {
+    // Register column meta for default filter panel + any future features
+    effect((onCleanup) => {
+      const id = this.id();
+
+      this.table.registerColumn({
+        id,
+        label: this.resolveHeader(),
+        filter: this.filter() ?? undefined,
+      });
+
+      onCleanup(() => this.table.unregisterColumn(id));
+    });
+  }
 
   resolveHeader(): string {
     return this.header() || this.id();

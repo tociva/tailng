@@ -1,0 +1,131 @@
+<tng-overlay-ref
+  #overlayRef="tngOverlayRef"
+  [open]="isOpen()"
+  (openChange)="onOverlayOpenChange($event)"
+  (closed)="onOverlayClosed()"
+>
+  <tng-connected-overlay
+    [open]="overlayRef.isOpen()"
+    [anchor]="anchorEl()"
+    placement="bottom-start"
+    (closed)="overlayRef.close($event)"
+  >
+    <!-- ✅ set width at panel level (menu-style) -->
+    <tng-overlay-panel class="min-w-80 max-w-[360px] p-0">
+      <div class="w-full">
+        <div class="flex items-center justify-between gap-3 border-b border-slate-200 px-3 py-2">
+          <div class="min-w-0">
+            <div class="truncate text-sm font-semibold text-slate-900">
+              Filter{{ titleSuffix() }}
+            </div>
+            <div class="truncate text-xs text-slate-500">{{ activeColId() }}</div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              class="rounded px-2 py-1 text-xs text-slate-600 hover:bg-slate-50"
+              (click)="clear()"
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              class="rounded px-2 py-1 text-xs text-slate-600 hover:bg-slate-50"
+              (click)="close()"
+              aria-label="Close filter"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <div class="p-3">
+          @switch (filterType()) {
+            @case ('text') {
+              <label class="text-xs font-medium text-slate-700">Contains</label>
+              <input
+                class="mt-2 w-full rounded border border-slate-200 px-2 py-1 text-sm outline-none focus:border-slate-400"
+                [placeholder]="textPlaceholder()"
+                [value]="textValue()"
+                (input)="onTextInput($event)"
+              />
+            }
+
+            @case ('number') {
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Min</label>
+                  <input
+                    type="number"
+                    class="mt-2 w-full rounded border border-slate-200 px-2 py-1 text-sm outline-none focus:border-slate-400"
+                    [value]="numberMin()"
+                    (input)="onNumberMinInput($event)"
+                  />
+                </div>
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Max</label>
+                  <input
+                    type="number"
+                    class="mt-2 w-full rounded border border-slate-200 px-2 py-1 text-sm outline-none focus:border-slate-400"
+                    [value]="numberMax()"
+                    (input)="onNumberMaxInput($event)"
+                  />
+                </div>
+              </div>
+            }
+
+            @case ('date') {
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs font-medium text-slate-700">From</label>
+                  <input
+                    type="date"
+                    class="mt-2 w-full rounded border border-slate-200 px-2 py-1 text-sm outline-none focus:border-slate-400"
+                    [value]="dateFrom()"
+                    (input)="onDateFromInput($event)"
+                  />
+                </div>
+                <div>
+                  <label class="text-xs font-medium text-slate-700">To</label>
+                  <input
+                    type="date"
+                    class="mt-2 w-full rounded border border-slate-200 px-2 py-1 text-sm outline-none focus:border-slate-400"
+                    [value]="dateTo()"
+                    (input)="onDateToInput($event)"
+                  />
+                </div>
+              </div>
+            }
+
+            @case ('enum') {
+              <div class="space-y-2">
+                <div class="text-xs font-medium text-slate-700">Select</div>
+
+                <div class="max-h-56 overflow-auto rounded border border-slate-200">
+                  @for (opt of enumOptions(); track opt.value) {
+                    <label class="flex cursor-pointer items-center gap-2 px-2 py-1 text-sm hover:bg-slate-50">
+                      <input
+                        type="checkbox"
+                        class="h-4 w-4"
+                        [checked]="enumChecked(opt.value)"
+                        (change)="toggleEnum(opt.value)"
+                      />
+                      <span class="truncate">{{ opt.label }}</span>
+                    </label>
+                  }
+                </div>
+              </div>
+            }
+
+            @default {
+              <div class="text-sm text-slate-600">
+                No default filter configured for this column.
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </tng-overlay-panel>
+  </tng-connected-overlay>
+</tng-overlay-ref>
