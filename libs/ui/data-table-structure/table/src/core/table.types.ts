@@ -34,3 +34,6 @@ export type TngResolvedColumn<T> = {
   headerTpl?: TemplateRef<TngHeaderContext>;
   cellTpl?: TemplateRef<TngCellContext<T>>;
 };
+
+export type TngSortDir = '' | 'asc' | 'desc';
+export type TngSort = { active: string; direction: TngSortDir };

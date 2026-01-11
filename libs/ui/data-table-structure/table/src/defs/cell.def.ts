@@ -1,5 +1,5 @@
 import { Directive, TemplateRef } from '@angular/core';
-import { TngCellContext } from './table.types';
+import { TngCellContext } from '../core/table.types';
 
 @Directive({
   selector: 'ng-template[tngCell]',

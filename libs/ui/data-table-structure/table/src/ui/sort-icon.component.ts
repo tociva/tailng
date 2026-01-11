@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TngSortHeaderDirective } from './sort-header.directive';
+import { TngSortHeaderDirective } from '../directives/sort-header.directive';
 
 @Component({
   selector: 'tng-sort-icon',

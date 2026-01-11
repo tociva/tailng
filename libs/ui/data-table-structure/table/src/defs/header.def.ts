@@ -1,5 +1,5 @@
 import { Directive, TemplateRef } from '@angular/core';
-import { TngHeaderContext } from './table.types';
+import { TngHeaderContext } from '../core/table.types';
 
 @Directive({
   selector: 'ng-template[tngHeader]',

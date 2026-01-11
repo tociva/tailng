@@ -14,10 +14,11 @@ import {
 } from '@angular/core';
 
 import { TailngColComponent } from './col.component';
-import { TngAlign, TngCellContext, TngHeaderContext, TngResolvedColumn } from './table.types';
+import { TngAlign, TngCellContext, TngHeaderContext, TngResolvedColumn } from '../core/table.types';
 
-import { TngSort, TngTableController } from './table.controller';
-import { TNG_TABLE } from './table.token';
+import { TngTableController } from '../core/table.controller';
+import type { TngSort } from '../core/table.types';
+import { TNG_TABLE } from '../core/table.token';
 
 @Component({
   selector: 'tng-table',

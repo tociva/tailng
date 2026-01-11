@@ -1,7 +1,7 @@
 import { Component, ContentChild, TemplateRef, input } from '@angular/core';
-import { TngAlign } from './table.types';
-import { TngCellDefDirective } from './cell.def';
-import { TngHeaderDefDirective } from './header.def';
+import { TngAlign } from '../core/table.types';
+import { TngCellDefDirective } from '../defs/cell.def';
+import { TngHeaderDefDirective } from '../defs/header.def';
 
 @Component({
   selector: 'tng-col',

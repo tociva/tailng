@@ -1,12 +1,10 @@
+// core/features/sort.feature.ts
 import { signal } from '@angular/core';
+import type { TngSort, TngSortDir } from '../core/table.types';
 
-export type TngSortDir = '' | 'asc' | 'desc';
-export type TngSort = { active: string; direction: TngSortDir };
-
-export class TngTableController {
+export class TngTableSortFeature {
   readonly sort = signal<TngSort>({ active: '', direction: '' });
 
-  /** Toggle: none -> asc -> desc -> none */
   toggleSort(active: string): void {
     const cur = this.sort();
     const same = cur.active === active;
