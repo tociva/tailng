@@ -11,7 +11,10 @@
     (closed)="overlayRef.close($event)"
   >
     <!-- ✅ set width at panel level (menu-style) -->
-    <tng-overlay-panel class="min-w-80 max-w-[360px] p-0">
+    <tng-overlay-panel [klass]="panelKlass()"
+    (pointerdown)="$event.stopPropagation()"
+  (mousedown)="$event.stopPropagation()"
+  (click)="$event.stopPropagation()">
       <div class="w-full">
         <div class="flex items-center justify-between gap-3 border-b border-slate-200 px-3 py-2">
           <div class="min-w-0">

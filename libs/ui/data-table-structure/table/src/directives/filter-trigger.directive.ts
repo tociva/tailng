@@ -20,6 +20,8 @@ export class TailngFilterTriggerDirective {
   private readonly table = inject(TNG_TABLE);
   private readonly el = inject(ElementRef<HTMLElement>);
 
+  readonly panelKlass = input<string>('');
+
   readonly isFiltered = computed(() => this.table.isFiltered(this.colId()));
   readonly isOpen = computed(() => this.table.isFilterOpenFor(this.colId()));
 
@@ -35,6 +37,7 @@ export class TailngFilterTriggerDirective {
 
   @HostListener('click')
   onClick(): void {
+    this.table.setFilterPanelKlass(this.panelKlass()); // ✅ store it
     this.table.toggleFilter(this.colId(), this.el.nativeElement);
   }
 
@@ -42,6 +45,7 @@ export class TailngFilterTriggerDirective {
   @HostListener('keydown.space', ['$event'])
   onKey(ev: KeyboardEvent): void {
     ev.preventDefault();
+    this.table.setFilterPanelKlass(this.panelKlass()); // ✅ store it
     this.table.toggleFilter(this.colId(), this.el.nativeElement);
   }
 }

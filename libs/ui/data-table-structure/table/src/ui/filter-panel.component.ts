@@ -39,6 +39,12 @@ export class TailngFilterPanelComponent {
     return label ? ` • ${label}` : '';
   });
 
+  readonly panelKlass = computed(() => {
+    const base = 'min-w-80 max-w-[360px] p-0';
+    const fromTrigger = this.table.filterPanelKlass();
+    return `${base} ${fromTrigger}`.trim();
+  });
+  
   // ---- open/close wiring ----
   onOverlayOpenChange(open: boolean): void {
     // if overlay closes, reflect that back to controller

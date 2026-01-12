@@ -37,6 +37,15 @@ export class TailngTableController {
   readonly filters = this.filterFeature.filters;
   readonly openFilterColId = this.filterFeature.openFilterColId;
   readonly filterAnchorEl = this.filterFeature.anchorEl;
+  private readonly _filterPanelKlass = signal<string>('');
+
+  setFilterPanelKlass(v: string): void {
+    this._filterPanelKlass.set(v);
+  }
+
+  filterPanelKlass(): string {
+    return this._filterPanelKlass();
+  }
 
   openFilter(colId: string, anchorEl?: HTMLElement | null): void {
     this.filterFeature.openFilter(colId, anchorEl);
