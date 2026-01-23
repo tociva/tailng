@@ -3,16 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'docs-button-toggle',
-  template: `
-    <div class="max-w-4xl mx-auto py-12 px-4">
-      <h1 class="text-4xl font-bold mb-4">Button Toggle</h1>
-      <p class="text-lg text-slate-600 mb-8">
-        Button toggle control for tailng.
-      </p>
-      <p class="text-slate-700">
-        Documentation coming soon...
-      </p>
-    </div>
-  `,
+  templateUrl: './button-toggle-docs.component.html',
 })
 export class ButtonToggleDocsComponent {}

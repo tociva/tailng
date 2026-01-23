@@ -6,7 +6,7 @@ import { SeoService } from './shared/seo/seo.service';
   selector: 'docs-root',
   standalone: true,
   imports: [RouterOutlet],
-  template: `<router-outlet />`,
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
   private readonly seo = inject(SeoService);
