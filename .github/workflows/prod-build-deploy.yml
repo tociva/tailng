@@ -79,9 +79,7 @@ jobs:
       # INPUT VALIDATION
       # ------------------------------------
       - name: Validate inputs
-        run: node tools/release/validate-inputs.mjs \
-          "${{ inputs.targets }}" \
-          "${{ inputs.release_type }}"
+        run: node tools/release/validate-inputs.mjs "${{ inputs.targets }}" "${{ inputs.release_type }}"
 
       - name: Export TARGETS
         run: echo "TARGETS=,${{ inputs.targets }}," >> $GITHUB_ENV

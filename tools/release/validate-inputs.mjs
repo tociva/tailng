@@ -1,5 +1,5 @@
-const targets = process.argv[2] ?? "";
-const releaseType = process.argv[3] ?? "";
+const targets = (process.argv[2] ?? "").trim();
+const releaseType = (process.argv[3] ?? "").trim();
 
 const VALID = new Set(["cdk", "theme", "icons", "ui", "docs"]);
 
@@ -8,8 +8,10 @@ if (!targets) {
   process.exit(1);
 }
 
+// Check for spaces in the targets string (after trimming)
 if (targets.includes(" ")) {
   console.error("ERROR: targets must not contain spaces. Example: cdk,ui,docs");
+  console.error(`Received: "${targets}"`);
   process.exit(1);
 }
 
