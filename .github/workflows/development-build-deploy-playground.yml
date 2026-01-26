@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   packages: read
   pull-requests: read
 
@@ -18,17 +18,10 @@ jobs:
     environment: development
 
     steps:
-      - name: Set Git User
-        run: |
-          git config --global user.email "prince.francis@tociva.com"
-          git config --global user.name "Tociva Technologies"
-
       - name: Checkout source
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          persist-credentials: true
-          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 1
 
       - name: Set up Node 22
         uses: actions/setup-node@v4
@@ -41,90 +34,26 @@ jobs:
           corepack prepare yarn@4.12.0 --activate
           yarn --version
 
-      - name: Increment version
-        run: yarn version patch
-
-      - name: Get branch name
-        run: |
-          BRANCH_NAME=${GITHUB_REF_NAME:-$(git rev-parse --abbrev-ref HEAD)}
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-          VERSION=$(node -p "require('./package.json').version")
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          VERSION_FULL="v${VERSION}-${BRANCH_NAME}"
-          echo "VERSION_FULL=$VERSION_FULL" >> $GITHUB_ENV
-
-      - name: Update versions.md
-        run: |
-          CURRENT_DATE=$(date +"%Y-%m-%d")
-          {
-            echo "# Version Details"
-            echo "## Version: $VERSION"
-            echo "## Date: $CURRENT_DATE"
-            echo "BRANCH_NAME=$BRANCH_NAME"
-            echo "BUILD_VERSION=$VERSION_FULL"
-            echo ""
-            cat versions.md
-          } > versions.tmp && mv versions.tmp versions.md
-      
-      - name: Commit and Push Changes
-        run: |
-          git add package.json
-          git add versions.md
-          git commit -m "ci: bump version to $VERSION [skip ci]"
-          git push origin HEAD:$BRANCH_NAME
-
       - name: Install dependencies with Yarn
         run: yarn install --frozen-lockfile
 
       - name: Build Angular App (production)
         run: yarn build
-            
-      - name: Add deployment info to info.txt
+
+      - name: Write deployment info (optional)
         run: |
           mkdir -p dist/apps/playground
-          
-          # Write info.txt
-          echo "branch : $BRANCH_NAME" > dist/apps/playground/info.txt
-          echo "version : $VERSION" >> dist/apps/playground/info.txt
-          echo "version_full : $VERSION_FULL" >> dist/apps/playground/info.txt
+          BRANCH_NAME="${GITHUB_REF_NAME:-development}"
+          SHORT_SHA="$(git rev-parse --short HEAD)"
+          echo "branch : ${BRANCH_NAME}" > dist/apps/playground/info.txt
+          echo "commit : ${SHORT_SHA}" >> dist/apps/playground/info.txt
           echo "time : $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> dist/apps/playground/info.txt
 
       - name: Deploy to Cloudflare Pages with Wrangler
         run: |
           yarn dlx wrangler pages deploy dist/apps/playground \
-            --project-name ${{ secrets.CF_PROJECT_NAME }} \
-            --branch main
+            --project-name "${{ secrets.CF_PLAYGROUND_PROJECT_NAME }}" \
+            --branch development
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID:        ${{ secrets.CF_ACCOUNT_ID }}
-
-      - name: Create and Push Tag
-        run: |
-          TAG_NAME="${{ env.VERSION_FULL }}"
-          git tag $TAG_NAME
-          git push origin $TAG_NAME
-
-      - name: Get User, Release Date and Time
-        run: |
-          echo "RELEASE_DATETIME=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
-          echo "RELEASE_USER=${{ github.actor }}" >> $GITHUB_ENV
-
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: '${{ env.VERSION_FULL }}'
-          name: 'Development Release ${{ env.VERSION_FULL }}'
-          body: |
-            ## Release Details
-            - **Title:** `Development Release ${{ env.VERSION_FULL }}`
-            - **Environment:** `Development`
-            - **Branch:** `${{ env.BRANCH_NAME }}`
-            - **Version:** `${{ env.VERSION }}`
-            - **Version Full Name:** `${{ env.VERSION_FULL }}`
-            - **Release Date:** `${{ env.RELEASE_DATETIME }}`
-            - **Released By:** `${{ env.RELEASE_USER }}`
-          draft: false
-          prerelease: true
-
-
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
