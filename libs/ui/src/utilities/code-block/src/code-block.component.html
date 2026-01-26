@@ -9,9 +9,8 @@
     }
 
     <pre [class]="preKlassFinal()">
-<code [class]="codeKlassFinal()" [innerHTML]="escapedCode()"></code>
+<code [class]="codeKlassFinal()" [innerHTML]="renderedHtml()"></code>
 
-<!-- hidden projected source (only used when content() is null) -->
 <span #projected class="hidden"><ng-content></ng-content></span>
     </pre>
   </div>

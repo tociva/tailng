@@ -1,4 +1,6 @@
-import { Component, ElementRef, computed, input, viewChild } from '@angular/core';
+import { Component, ElementRef, computed, input, viewChild, inject } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TngCodeHighlighter, TngCodeLanguage } from './code-highlighter.type';
 
 @Component({
   selector: 'tng-code-block',
@@ -6,15 +8,19 @@ import { Component, ElementRef, computed, input, viewChild } from '@angular/core
   templateUrl: './code-block.component.html',
 })
 export class TailngCodeBlockComponent {
-  // -------------------------
-  // API (code-only)
-  // -------------------------
-  content = input<string | null>(null);
-  showLineNumbers = input<boolean>(false);
-  wrap = input<boolean>(false);
+  private sanitizer = inject(DomSanitizer);
 
   // -------------------------
-  // klass hooks (user overrides)
+  // API
+  // -------------------------
+  content = input<string | null>(null);
+  language = input<TngCodeLanguage>('text');
+  showLineNumbers = input<boolean>(false);
+  wrap = input<boolean>(false);
+  highlighter = input<TngCodeHighlighter | null>(null);
+
+  // -------------------------
+  // klass hooks
   // -------------------------
   rootKlass = input<string>('');
   bodyKlass = input<string>('');
@@ -22,36 +28,42 @@ export class TailngCodeBlockComponent {
   preKlass = input<string>('');
   codeKlass = input<string>('');
 
-  // -------------------------
-  // Projection (fallback)
-  // -------------------------
   private projectedEl = viewChild<ElementRef<HTMLElement>>('projected');
 
-  // -------------------------
-  // Derived
-  // -------------------------
   readonly code = computed(() => {
     const c = this.content();
     if (c != null) return c;
-
-    const el = this.projectedEl();
-    return el?.nativeElement?.innerText ?? '';
+    return this.projectedEl()?.nativeElement?.innerText ?? '';
   });
-
-  readonly escapedCode = computed(() => this.escapeHtml(this.code()));
 
   readonly lines = computed(() => {
     const text = this.code();
-    if (!text) return 0;
-    return text.split(/\r\n|\r|\n/).length;
+    return text ? text.split(/\r\n|\r|\n/).length : 0;
   });
 
   readonly lineNumbers = computed(() =>
     Array.from({ length: this.lines() }, (_, i) => i + 1),
   );
 
+  /**
+   * IMPORTANT:
+   * - Without highlighter: return escaped string (safe)
+   * - With highlighter: return SafeHtml via bypassSecurityTrustHtml
+   *   because Shiki uses inline styles which Angular sanitization strips.
+   */
+  readonly renderedHtml = computed((): string | SafeHtml => {
+    const text = this.code();
+    if (!text) return '';
+
+    const h = this.highlighter();
+    if (!h) return this.escapeHtml(text);
+
+    const html = h.highlight(text, this.language());
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  });
+
   // -------------------------
-  // klass (defaults + user overrides)
+  // klass finals
   // -------------------------
   readonly rootKlassFinal = computed(() =>
     this.join(
@@ -78,13 +90,8 @@ export class TailngCodeBlockComponent {
     ),
   );
 
-  readonly codeKlassFinal = computed(() =>
-    this.join('block', this.codeKlass()),
-  );
+  readonly codeKlassFinal = computed(() => this.join('block', this.codeKlass()));
 
-  // -------------------------
-  // Utils
-  // -------------------------
   private join(...parts: Array<string | null | undefined>): string {
     return parts.map((p) => (p ?? '').trim()).filter(Boolean).join(' ');
   }

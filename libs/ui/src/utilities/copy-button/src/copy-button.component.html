@@ -1,11 +1,13 @@
 <button type="button" (click)="copy()" [class]="klass()">
-  <!-- Normal state -->
-  <span *ngIf="!copied()" class="inline-flex items-center gap-1.5">
-    <ng-content />
-  </span>
+  @if (!copied()) {
+    <span class="inline-flex items-center gap-1.5">
+      <ng-content />
+    </span>
+  }
 
-  <!-- Copied state -->
-  <span *ngIf="copied()" class="inline-flex items-center gap-1.5">
-    <ng-content select="[tngCopied]" />
-  </span>
+  @if (copied()) {
+    <span class="inline-flex items-center gap-1.5">
+      <ng-content select="[tngCopied]" />
+    </span>
+  }
 </button>

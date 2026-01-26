@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   TailngBadgeComponent,
@@ -6,6 +6,8 @@ import {
   TailngCodeBlockComponent,
   TailngCopyButtonComponent,
 } from '@tociva/tailng-ui';
+import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
+import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
 
 @Component({
   standalone: true,
@@ -20,6 +22,11 @@ import {
   templateUrl: './code-block-demo.component.html',
 })
 export class CodeBlockDemoComponent {
+
+  private shiki = inject(ShikiHighlighterService);
+
+  readonly highlighter = new TngShikiAdapter(this.shiki);
+  
   readonly inlineExample = computed(
     () => `import { Component, input } from '@angular/core';
 

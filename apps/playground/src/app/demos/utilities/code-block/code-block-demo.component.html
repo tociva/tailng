@@ -23,7 +23,10 @@
     </div>
 
     <div class="relative">
-      <tng-code-block [content]="inlineExample()" [showLineNumbers]="true" />
+      <tng-code-block [content]="inlineExample()" [showLineNumbers]="true" 
+        [highlighter]="highlighter"
+        language="typescript"
+      />
 
       <!-- copy overlay (material style) -->
       <div class="absolute right-3 top-3">
@@ -43,7 +46,10 @@
     </div>
 
     <div class="relative">
-      <tng-code-block [content]="klassSignalSnippet()" [showLineNumbers]="true" />
+      <tng-code-block [content]="klassSignalSnippet()" [showLineNumbers]="true" 
+        [highlighter]="highlighter"
+        language="typescript"
+      />
 
       <div class="absolute right-3 top-3">
         <tng-copy-button [text]="klassSignalSnippet()">
@@ -62,7 +68,10 @@
     </div>
 
     <div class="relative">
-      <tng-code-block [content]="klassSignalSnippet()" [wrap]="true" />
+      <tng-code-block [content]="klassSignalSnippet()" [wrap]="true" 
+        [highlighter]="highlighter"
+        language="typescript"
+      />
 
       <div class="absolute right-3 top-3">
         <tng-copy-button [text]="klassSignalSnippet()">
@@ -81,7 +90,10 @@
     </div>
 
     <div class="relative">
-      <tng-code-block [content]="jsonSnippet()" [showLineNumbers]="true" [wrap]="true" />
+      <tng-code-block [content]="jsonSnippet()" [showLineNumbers]="true" [wrap]="true" 
+        [highlighter]="highlighter"
+        language="json"
+      />
 
       <div class="absolute right-3 top-3">
         <tng-copy-button [text]="jsonSnippet()">
