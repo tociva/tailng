@@ -1,9 +1,17 @@
 import fs from "node:fs";
 
-const targets = process.argv[2] ?? "";
-const releaseType = process.argv[3] ?? "";
+const targets = (process.argv[2] ?? "").trim();
+const releaseType = (process.argv[3] ?? "").trim().toLowerCase();
 
 const has = (t) => ("," + targets + ",").includes("," + t + ",");
+
+// Validate releaseType
+if (!["minor", "major"].includes(releaseType)) {
+  console.error(`ERROR: Invalid release_type '${releaseType}'. Use minor|major`);
+  process.exit(1);
+}
+
+console.log(`Bumping versions with release_type: ${releaseType}`);
 
 const bumpSemver = (v) => {
   const [majS, minS, patS] = v.split(".");
@@ -14,10 +22,12 @@ const bumpSemver = (v) => {
   if (releaseType === "minor") {
     minor += 1;
     patch = 0;
-  } else {
+  } else if (releaseType === "major") {
     major += 1;
     minor = 0;
     patch = 0;
+  } else {
+    throw new Error(`Invalid releaseType: ${releaseType}`);
   }
   return `${major}.${minor}.${patch}`;
 };
