@@ -1,7 +1,10 @@
 import { execSync } from "node:child_process";
 import fs from "node:fs";
 
-const targets = process.argv[2] ?? "";
+const targets =
+  process.env.TARGETS?.replace(/^,|,$/g, "") ??
+  process.argv[2] ??
+  "";
 const npmTag = process.argv[3] ?? "latest";
 
 const has = (t) => ("," + targets + ",").includes("," + t + ",");
