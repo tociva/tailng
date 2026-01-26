@@ -53,7 +53,7 @@ jobs:
         run: |
           yarn dlx wrangler pages deploy dist/apps/docs \
             --project-name "${{ secrets.CF_DOCS_PROJECT_NAME }}" \
-            --branch development
+            --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
