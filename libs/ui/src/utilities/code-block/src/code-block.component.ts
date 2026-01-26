@@ -1,13 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  computed,
-  input,
-  signal,
-  viewChild,
-} from '@angular/core';
-
-type CodeLanguage = 'text' | 'bash' | 'json' | 'typescript' | 'ts' | 'html' | 'css';
+import { Component, ElementRef, computed, input, viewChild } from '@angular/core';
 
 @Component({
   selector: 'tng-code-block',
@@ -16,21 +7,16 @@ type CodeLanguage = 'text' | 'bash' | 'json' | 'typescript' | 'ts' | 'html' | 'c
 })
 export class TailngCodeBlockComponent {
   // -------------------------
-  // API
+  // API (code-only)
   // -------------------------
   content = input<string | null>(null);
-  language = input<CodeLanguage>('text');
   showLineNumbers = input<boolean>(false);
-  copyable = input<boolean>(true);
   wrap = input<boolean>(false);
 
   // -------------------------
-  // klass hooks (theming)
+  // klass hooks (user overrides)
   // -------------------------
   rootKlass = input<string>('');
-  headerKlass = input<string>('');
-  languageKlass = input<string>('');
-  copyButtonKlass = input<string>('');
   bodyKlass = input<string>('');
   gutterKlass = input<string>('');
   preKlass = input<string>('');
@@ -40,11 +26,6 @@ export class TailngCodeBlockComponent {
   // Projection (fallback)
   // -------------------------
   private projectedEl = viewChild<ElementRef<HTMLElement>>('projected');
-
-  // -------------------------
-  // State
-  // -------------------------
-  copied = signal(false);
 
   // -------------------------
   // Derived
@@ -70,43 +51,25 @@ export class TailngCodeBlockComponent {
   );
 
   // -------------------------
-  // klass (defaults + overrides)
+  // klass (defaults + user overrides)
   // -------------------------
-  readonly klass = computed(() =>
+  readonly rootKlassFinal = computed(() =>
     this.join(
       'relative rounded-lg border border-border bg-alternate-background text-text',
       this.rootKlass(),
     ),
   );
 
-  readonly headerK = computed(() =>
-    this.join(
-      'flex items-center justify-between border-b border-border px-3 py-2 text-xs text-text/70',
-      this.headerKlass(),
-    ),
-  );
+  readonly bodyKlassFinal = computed(() => this.join('relative', this.bodyKlass()));
 
-  readonly languageK = computed(() =>
-    this.join('font-semibold uppercase tracking-wide', this.languageKlass()),
-  );
-
-  readonly copyButtonK = computed(() =>
-    this.join(
-      'rounded border border-border bg-background px-2 py-1 font-semibold text-text hover:border-border-hover',
-      this.copyButtonKlass(),
-    ),
-  );
-
-  readonly bodyK = computed(() => this.join('relative', this.bodyKlass()));
-
-  readonly gutterK = computed(() =>
+  readonly gutterKlassFinal = computed(() =>
     this.join(
       'absolute inset-y-0 left-0 w-10 select-none border-r border-border bg-background px-2 py-4 text-right text-xs leading-6 text-text/60',
       this.gutterKlass(),
     ),
   );
 
-  readonly preK = computed(() =>
+  readonly preKlassFinal = computed(() =>
     this.join(
       'overflow-auto p-4 text-xs leading-6 text-text',
       this.showLineNumbers() ? 'pl-14' : '',
@@ -115,30 +78,9 @@ export class TailngCodeBlockComponent {
     ),
   );
 
-  readonly codeK = computed(() =>
-    this.join(
-      'block',
-      this.codeKlass(),
-    ),
+  readonly codeKlassFinal = computed(() =>
+    this.join('block', this.codeKlass()),
   );
-
-  // -------------------------
-  // Actions
-  // -------------------------
-  copy(): void {
-    const text = this.code();
-    if (!text) return;
-
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        this.copied.set(true);
-        setTimeout(() => this.copied.set(false), 1200);
-      })
-      .catch(() => {
-        /* noop */
-      });
-  }
 
   // -------------------------
   // Utils

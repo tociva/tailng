@@ -1,25 +1,15 @@
-<div [class]="klass()">
-  <div [class]="headerK()">
-    <span [class]="languageK()">{{ language() }}</span>
-
-    @if (copyable()) {
-      <button type="button" [class]="copyButtonK()" (click)="copy()">
-        {{ copied() ? 'Copied' : 'Copy' }}
-      </button>
-    }
-  </div>
-
-  <div [class]="bodyK()">
+<div [class]="rootKlassFinal()">
+  <div [class]="bodyKlassFinal()">
     @if (showLineNumbers()) {
-      <div [class]="gutterK()" aria-hidden="true">
+      <div [class]="gutterKlassFinal()" aria-hidden="true">
         @for (n of lineNumbers(); track n) {
           <div>{{ n }}</div>
         }
       </div>
     }
 
-    <pre [class]="preK()">
-<code [class]="codeK()" [innerHTML]="escapedCode()"></code>
+    <pre [class]="preKlassFinal()">
+<code [class]="codeKlassFinal()" [innerHTML]="escapedCode()"></code>
 
 <!-- hidden projected source (only used when content() is null) -->
 <span #projected class="hidden"><ng-content></ng-content></span>

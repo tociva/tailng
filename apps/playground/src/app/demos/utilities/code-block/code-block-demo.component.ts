@@ -4,12 +4,19 @@ import {
   TailngBadgeComponent,
   TailngButtonComponent,
   TailngCodeBlockComponent,
+  TailngCopyButtonComponent,
 } from '@tociva/tailng-ui';
 
 @Component({
   standalone: true,
   selector: 'tng-code-block-demo',
-  imports: [RouterLink, TailngCodeBlockComponent, TailngBadgeComponent, TailngButtonComponent],
+  imports: [
+    RouterLink,
+    TailngCodeBlockComponent,
+    TailngCopyButtonComponent,
+    TailngBadgeComponent,
+    TailngButtonComponent,
+  ],
   templateUrl: './code-block-demo.component.html',
 })
 export class CodeBlockDemoComponent {
