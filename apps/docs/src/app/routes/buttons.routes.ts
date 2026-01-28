@@ -41,6 +41,45 @@ export const buttonsRoutes: Routes = [
     data: { title: 'Badge – tailng', description: 'Badge component for tailng.' },
   },
   {
+    path: 'buttons/tag',
+    loadComponent: () =>
+      import('../pages/components/buttons/tag/tag-docs.component').then((m) => m.TagDocsComponent),
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full',
+      },
+      {
+        path: 'overview',
+        loadComponent: () =>
+          import('../pages/components/buttons/tag/overview/overview.component').then(
+            (m) => m.TagOverviewComponent,
+          ),
+      },
+      {
+        path: 'api',
+        loadComponent: () =>
+          import('../pages/components/buttons/tag/api/api.component').then((m) => m.TagApiComponent),
+      },
+      {
+        path: 'styling',
+        loadComponent: () =>
+          import('../pages/components/buttons/tag/styling/styling.component').then(
+            (m) => m.TagStylingComponent,
+          ),
+      },
+      {
+        path: 'examples',
+        loadComponent: () =>
+          import('../pages/components/buttons/tag/examples/examples.component').then(
+            (m) => m.TagExamplesComponent,
+          ),
+      },
+    ],
+    data: { title: 'Tag – tailng', description: 'Tag component for labels and status indicators.' },
+  },
+  {
     path: 'buttons/button',
     loadComponent: () =>
       import('../pages/components/buttons/button/button-docs.component').then((m) => m.ButtonDocsComponent),
