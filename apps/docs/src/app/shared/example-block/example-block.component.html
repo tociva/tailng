@@ -1,0 +1,93 @@
+<div class="rounded-xl border border-border bg-background p-6 shadow-sm space-y-4">
+  <!-- Title Section -->
+  <div class="flex items-center gap-2">
+    <span>Title Section</span>
+    @if (docLink()) {
+      <button
+        type="button"
+        class="p-2 rounded hover:bg-gray-100"
+        title="Copy link"
+        (click)="copyDocLink()"
+      >
+        <tng-icon name="bootstrapLink45deg"></tng-icon>
+      </button>
+    }
+    <button
+      type="button"
+      class="p-2 rounded hover:bg-gray-100"
+      title="View code"
+      (click)="toggleCodePanel()"
+    >
+      <tng-icon [name]="isCodePanelOpen() ? 'bootstrapCodeSlash' : 'bootstrapCode'"></tng-icon>
+    </button>
+    @if (stackBlitzLink()) {
+      <button
+        type="button"
+        class="p-2 rounded hover:bg-gray-100"
+        title="Open in StackBlitz"
+        (click)="openStackBlitz()"
+      >
+        <tng-icon name="bootstrapShare"></tng-icon>
+      </button>
+    }
+  </div>
+
+  <!-- Code Panel -->
+  <tng-expansion-panel rootKlass="border-0" headerKlass="hidden" [open]="isCodePanelOpen()">
+    <tng-tabs defaultValue="html" tngExpansionContent>
+      <tng-tab
+        value="html"
+        tabKlass="px-3 py-2 text-sm font-medium cursor-pointer"
+        activeKlass="text-primary border-b-2 border-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-gray-50"
+        >HTML</tng-tab
+      >
+      <tng-tab
+        value="ts"
+        tabKlass="px-3 py-2 text-sm font-medium cursor-pointer"
+        activeKlass="text-primary border-b-2 border-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-gray-50"
+        >TS</tng-tab
+      >
+      <tng-tab
+        value="css"
+        tabKlass="px-3 py-2 text-sm font-medium cursor-pointer"
+        activeKlass="text-primary border-b-2 border-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-gray-50"
+        >CSS</tng-tab
+      >
+      <tng-tab-panel value="html">
+        @if (htmlContent()) {
+          <tng-code-block
+            [content]="htmlContent()"
+            [highlighter]="highlighter"
+            language="html"
+          />
+        }
+      </tng-tab-panel>
+      <tng-tab-panel value="ts">
+        @if (tsContent()) {
+          <tng-code-block
+            [content]="tsContent()"
+            [highlighter]="highlighter"
+            language="typescript"
+          />
+        }
+      </tng-tab-panel>
+      <tng-tab-panel value="css">
+        @if (styleContent()) {
+          <tng-code-block
+            [content]="styleContent()"
+            [highlighter]="highlighter"
+            language="css"
+          />
+        }
+      </tng-tab-panel>
+    </tng-tabs>
+  </tng-expansion-panel>
+
+  <!-- Demo Component -->
+  <div class="my-2">
+    <ng-content select="[tngExampleDemo]"></ng-content>
+  </div>
+</div>

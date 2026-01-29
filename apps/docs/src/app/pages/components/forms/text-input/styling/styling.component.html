@@ -12,6 +12,18 @@
       element in the component structure.
     </p>
   </div>
+  
+  <docs-example-block
+    [docLink]="'https://example.com/docs'"
+    [stackBlitzLink]="'https://stackblitz.com/example'"
+    [htmlContent]="rootKlassExample()"
+    [tsContent]="prefixKlassExample()"
+    [styleContent]="suffixKlassExample()"
+  >
+    <div tngExampleDemo>
+      <tng-text-input placeholder="Custom root styling" rootKlass="border-2 border-blue-500 rounded-lg shadow-md" />
+    </div>
+  </docs-example-block>
 
   <!-- rootKlass -->
   <div class="rounded-xl border border-border bg-background p-6 shadow-sm space-y-4">

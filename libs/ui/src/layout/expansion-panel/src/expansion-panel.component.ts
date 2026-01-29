@@ -137,8 +137,53 @@ export class TailngExpansionPanelComponent {
 
   readonly chevronRotateKlass = computed(() => (this.isOpen() ? 'rotate-180' : ''));
 
-  readonly resolvedContentBodyKlass = computed(() => {
+  /* =====================
+   * Final Klass (defaults + user overrides)
+   * ===================== */
+
+  readonly finalRootKlass = computed(() =>
+    this.join('rounded-lg border border-border bg-background', this.rootKlass()),
+  );
+
+  readonly finalHeaderKlass = computed(() =>
+    this.join(
+      'flex w-full items-center justify-between gap-4 px-4 py-3 text-left text-sm font-medium text-foreground',
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+      'disabled:cursor-not-allowed disabled:opacity-60',
+      this.headerKlass(),
+    ),
+  );
+
+  readonly finalTitleKlass = computed(() => this.join('flex-1', this.titleKlass()));
+
+  readonly finalIconWrapperKlass = computed(() =>
+    this.join('ml-2 shrink-0 inline-flex items-center justify-center', this.iconWrapperKlass()),
+  );
+
+  readonly finalChevronKlass = computed(() =>
+    this.join('h-4 w-4 shrink-0 transition-transform duration-200', this.chevronKlass()),
+  );
+
+  readonly finalContentOuterKlass = computed(() =>
+    this.join(
+      'grid transition-[grid-template-rows] duration-200 ease-in-out',
+      this.contentOuterKlass(),
+    ),
+  );
+
+  readonly finalContentClipKlass = computed(() =>
+    this.join('overflow-hidden', this.contentClipKlass()),
+  );
+
+  readonly finalContentBodyKlass = computed(() => {
     const pad = this.padded() ? this.contentPaddingKlass() : '';
-    return `${this.contentBodyKlass()} ${pad}`.trim();
+    return this.join('text-sm text-muted-foreground', pad, this.contentBodyKlass());
   });
+
+  private join(...parts: Array<string | null | undefined>): string {
+    return parts
+      .map((p) => (p ?? '').trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 }

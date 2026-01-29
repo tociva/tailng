@@ -1,8 +1,10 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
-import { TailngCodeBlockComponent, TailngTextInputComponent, TailngBadgeComponent, TailngCopyButtonComponent, TailngTabComponent, TailngTabPanelComponent, TailngTabsComponent } from '@tociva/tailng-ui';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TailngIconComponent } from '@tociva/tailng-icons';
+import { TailngBadgeComponent, TailngCodeBlockComponent, TailngCopyButtonComponent, TailngTabComponent, TailngTabPanelComponent, TailngTabsComponent,
+   TailngTextInputComponent } from '@tociva/tailng-ui';
 import { ShikiHighlighterService } from '../../../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../../../shared/tng-shiki.adapter';
+import { ExampleBlockComponent, TailngExampleDemoDirective } from '../../../../../shared/example-block/example-block.component';
 
 @Component({
   standalone: true,
@@ -16,8 +18,9 @@ import { TngShikiAdapter } from '../../../../../shared/tng-shiki.adapter';
     TailngTabComponent,
     TailngTabsComponent,
     TailngTabPanelComponent,
-    TailngCopyButtonComponent
-   
+    TailngCopyButtonComponent,
+    ExampleBlockComponent,
+    TailngExampleDemoDirective,
 ],
 })
 export class TextInputStylingComponent {
@@ -105,5 +108,10 @@ export class TextInputStylingComponent {
   />
 </tng-text-input>
 `);
+
+  readonly isCodePanelOpen = signal(false);
+  toggleCodePanel(): void {
+    this.isCodePanelOpen.set(!this.isCodePanelOpen());
+  }
 
 }
