@@ -2,46 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-:root {
-  --background-color: #FFFFFF;
-  --alternate-background-color: #f8f9fa;
-  --text-color: #1A1A1A;
-
-  --primary-color: #12284b;
-  --primary-color-hover: #3f5b86;
-  --on-primary-color: #FDF6EC;
-
-  --danger-color: #DC3545;
-  --danger-color-hover: #b72d3a;
-  --on-danger-color: #FFFFFF;
-
-  --warning-color: #FFC107;
-  --warning-color-hover: #e0a800;
-  --on-warning-color: #1A1A1A;
-
-  --success-color: #28A745;
-  --success-color-hover: #208638;
-  --on-success-color: #FFFFFF;
-
-  --info-color: #17A2B8;
-  --info-color-hover: #117686;
-  --on-info-color: #FFFFFF;
-
-  --border-color: #E0E0E0;
-  --border-color-hover: #B0B0B0;
-
-  --disable-color: #6c757d;
-
-  /* -----------------------
-   Code highlighting tokens
-   ----------------------- */
-   --code-keyword-color: var(--primary-color);
-   --code-string-color: var(--success-color);
-   --code-comment-color: var(--disable-color);
-   --code-number-color: var(--info-color);
-   --code-tag-color: var(--danger-color);
-   --code-attr-color: var(--warning-color);
-   --code-decorator-color: var(--primary-color-hover);
+/* your custom styles below */
+/* Default theme */
+html { 
+  background: var(--background-color);
+  color: var(--text-color);
 }
-body{ margin:0; font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif; background:#fff; }
+
+/* App base */
+body {
+  margin: 0;
+  font-family: var(--font-sans, Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif);
+  background: var(--background-color);
+  color: var(--text-color);
+}

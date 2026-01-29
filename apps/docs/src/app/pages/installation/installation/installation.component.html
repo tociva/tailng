@@ -1,9 +1,112 @@
-<div class="max-w-4xl mx-auto py-12 px-4">
-  <h1 class="text-4xl font-bold mb-4">Installation</h1>
-  <p class="text-lg text-slate-600 mb-8">
-    Install tailng and get started quickly.
-  </p>
-  <p class="text-slate-700">
-    Documentation coming soon...
-  </p>
+<div class="max-w-4xl mx-auto py-12 px-4 space-y-12">
+  <!-- Header -->
+  <header class="space-y-4">
+    <h1 class="text-4xl font-bold tracking-tight">Installation</h1>
+    <p class="text-lg text-slate-600">
+      Set up <span class="font-medium text-slate-900">tailng</span> in your Angular project
+      and start building clean, modern UI with Tailwind.
+    </p>
+  </header>
+
+  <!-- Requirements -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">Requirements</h2>
+    <ul class="list-disc pl-6 text-slate-700 space-y-2">
+      <li>Angular <strong>v21+</strong> (standalone &amp; signals-first)</li>
+      <li>Node.js <strong>v20+</strong></li>
+    </ul>
+
+    <p class="text-slate-600 text-sm">
+      tailng is built on Tailwind CSS. Angular 21 provides first-class Tailwind
+      integration, so no additional setup is required for most projects.
+    </p>
+  </section>
+
+  <!-- Step 1 -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">1. Install packages</h2>
+    <p class="text-slate-700">
+      Install the core tailng UI package.
+    </p>
+
+    <tng-code-block [highlighter]="highlighter" language="bash" content="npm install @tailng/ui" />
+  </section>
+
+  <!-- Step 2 -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">2. Configure Tailwind</h2>
+    <p class="text-slate-700">
+      Ensure Tailwind scans tailng components for class usage.
+    </p>
+
+    <tng-code-block [highlighter]="highlighter" language="js" content="
+// tailwind.config.js
+module.exports = {
+  content: [
+    './src/**/*.{html,ts}',
+    './node_modules/@tailng/ui/**/*.{html,ts}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+      " />
+  </section>
+
+  <!-- Step 3 -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">3. Import styles (optional)</h2>
+    <p class="text-slate-700">
+      tailng is fully Tailwind-based and does not require global CSS.
+      Import only if you use optional theme utilities.
+    </p>
+
+    <tng-code-block [highlighter]="highlighter" language="css" content='@import "@tailng/ui/styles.css";' />
+  </section>
+
+  <!-- Step 4 -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">4. Start using components</h2>
+    <p class="text-slate-700">
+      tailng components are standalone and work seamlessly with Angular signals.
+    </p>
+
+    <tng-code-block [highlighter]="highlighter" language="html" content='
+<tng-text-input
+  placeholder="Your name"
+  rootKlass="w-[300px]"
+/>
+      ' />
+  </section>
+
+  <!-- Notes -->
+  <section class="rounded-xl border border-slate-200 bg-slate-50 p-6 space-y-2">
+    <h3 class="text-lg font-semibold">Good to know</h3>
+    <ul class="list-disc pl-6 text-slate-700 space-y-1">
+      <li>No Angular Material dependency</li>
+      <li>No runtime CSS generation</li>
+      <li>Fully tree-shakable</li>
+      <li>Signal-first component APIs</li>
+    </ul>
+  </section>
+
+  <!-- Next steps -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">Next steps</h2>
+    <p class="text-slate-700">
+      Explore individual components, theming, and advanced patterns.
+    </p>
+
+    <div class="flex gap-4">
+      <a href="/docs/components"
+        class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-white hover:opacity-90">
+        Browse components
+      </a>
+      <a href="/docs/theming"
+        class="inline-flex items-center rounded-md border border-slate-300 px-4 py-2 text-slate-700 hover:bg-slate-100">
+        Theming guide
+      </a>
+    </div>
+  </section>
 </div>

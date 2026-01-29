@@ -1,0 +1,5 @@
+/* @tailng/theme - index.css
+   Convenience import: base + light + dark */
+@import './base.css';
+@import './light.css';
+@import './dark.css';

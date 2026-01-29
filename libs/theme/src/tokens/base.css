@@ -1,0 +1,10 @@
+/* @tailng/theme - base.css
+   Shared (non-theme) tokens. */
+:root {
+  --font-sans: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+
+  /* Optional radius tokens */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+}
