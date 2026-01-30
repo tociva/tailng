@@ -26,15 +26,26 @@
       <tng-code-block [content]="inlineExample()" [showLineNumbers]="true" 
         [highlighter]="highlighter"
         language="typescript"
+        rootKlass="bg-white"
       />
 
       <!-- copy overlay (material style) -->
-      <div class="absolute right-3 top-3">
-        <tng-copy-button [text]="inlineExample()">
+      <!-- <div class="absolute right-2 top-2 z-10">
+        <tng-copy-button variant="outline" [text]="inlineExample()">
+    <i class="bi bi-clipboard"></i>
+    <span>Copy</span>
+
+    <span tngCopied>
+      <i class="bi bi-check2"></i>
+      <span>Copied</span>
+    </span>
+  </tng-copy-button> -->
+        <!-- <tng-copy-button [text]="inlineExample()">
+           <tng-icon name="bootstrapCopy" klass="bg-alternate-background"></tng-icon>
           <i class="bi bi-clipboard"></i>
           <span tngCopied><i class="bi bi-check2"></i></span>
         </tng-copy-button>
-      </div>
+      </div> -->
     </div>
   </div>
 
