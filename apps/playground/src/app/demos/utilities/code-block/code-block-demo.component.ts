@@ -8,6 +8,7 @@ import {
 } from '@tociva/tailng-ui';
 import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
+import { TailngIconComponent } from '@tociva/tailng-icons';
 
 @Component({
   standalone: true,
@@ -18,6 +19,7 @@ import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
     TailngCopyButtonComponent,
     TailngBadgeComponent,
     TailngButtonComponent,
+    TailngIconComponent
   ],
   templateUrl: './code-block-demo.component.html',
 })

@@ -1,4 +1,4 @@
-import { Component, computed, Directive, inject, input, signal } from '@angular/core';
+import { Component, computed, Directive, effect, inject, input, signal } from '@angular/core';
 import { TailngCodeBlockComponent, TailngExpansionPanelComponent, TailngTabComponent, TailngTabPanelComponent, TailngTabsComponent } from '@tociva/tailng-ui';
 import { TailngIconComponent } from '@tociva/tailng-icons';
 import { ShikiHighlighterService } from '../shiki-highlighter.service';
@@ -39,6 +39,13 @@ export class ExampleBlockComponent {
   private shiki = inject(ShikiHighlighterService);
   readonly highlighter = new TngShikiAdapter(this.shiki);
 
+  htmlSource = computed(() => this.htmlContent());
+tsSource   = computed(() => this.tsContent());
+cssSource  = computed(() => this.styleContent());
+
+
+copied = signal(false);
+
   // Inputs
   readonly docLink = input<string>('');
   readonly stackBlitzLink = input<string>('');
@@ -51,7 +58,7 @@ export class ExampleBlockComponent {
   readonly isCodePanelOpen = signal(false);
 
   readonly finalKlass = computed(() => {
-    return ['rounded-xl border border-border bg-background p-6 shadow-sm space-y-4 mt-6', this.klass()].join(' ');
+    return ['rounded-xl border border-border bg-background p-4 shadow-sm space-y-2', this.klass()].join(' ');
   });
 
   toggleCodePanel(): void {
@@ -75,4 +82,7 @@ export class ExampleBlockComponent {
       window.open(link, '_blank');
     }
   }
+
+
+
 }

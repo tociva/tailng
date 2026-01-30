@@ -9,6 +9,10 @@
     }
 
     <pre [class]="preKlassFinal()">
+      <span (click)="copyCode()" [class]="copyklass()">
+  {{ copyLabel() }}
+</span>
+
 <code [class]="codeKlassFinal()" [innerHTML]="renderedHtml()"></code>
 
 <span #projected class="hidden"><ng-content></ng-content></span>

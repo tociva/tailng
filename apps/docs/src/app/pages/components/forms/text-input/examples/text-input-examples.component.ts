@@ -1,26 +1,26 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { TailngCodeBlockComponent, TailngTextInputComponent, TailngBadgeComponent } from '@tociva/tailng-ui';
+import { TailngCodeBlockComponent, TailngTextInputComponent, TailngBadgeComponent, TailngTagComponent } from '@tociva/tailng-ui';
 import { TailngIconComponent } from '@tociva/tailng-icons';
-import { ShikiHighlighterService } from '../../../../../shared/shiki-highlighter.service';
-import { TngShikiAdapter } from '../../../../../shared/tng-shiki.adapter';
+
+import { ExampleBlockComponent, TailngExampleDemoDirective } from '../../../../../shared/example-block/example-block.component';
 
 @Component({
   standalone: true,
   selector: 'docs-text-input-examples',
   templateUrl: './text-input-examples.component.html',
   imports: [
-    TailngCodeBlockComponent,
-    TailngTextInputComponent,
+     TailngTextInputComponent,
     TailngIconComponent,
-    TailngBadgeComponent,
     ReactiveFormsModule,
+    ExampleBlockComponent,
+    TailngExampleDemoDirective,
+    TailngTagComponent
+
   ],
 })
 export class TextInputExamplesComponent {
-  private shiki = inject(ShikiHighlighterService);
-  readonly highlighter = new TngShikiAdapter(this.shiki);
 
   // Form for reactive forms example
   form = new FormGroup({

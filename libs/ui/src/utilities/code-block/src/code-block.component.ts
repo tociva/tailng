@@ -1,4 +1,4 @@
-import { Component, ElementRef, computed, input, viewChild, inject } from '@angular/core';
+import { Component, ElementRef, computed, input, viewChild, inject, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TngCodeHighlighter, TngCodeLanguage } from './code-highlighter.type';
 
@@ -103,5 +103,20 @@ export class TailngCodeBlockComponent {
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#39;');
+  }
+  
+copyklass = input<string>(
+  'absolute top-2 right-2 px-1 py-1 rounded cursor-pointer text-black text-xs'
+);
+
+copyLabel = input<string>('Copy');
+
+  text = input<string>('');
+  copied = signal(false);
+  copyCode() {
+    navigator.clipboard.writeText(this.text()).then(() => {
+      this.copied.set(true);
+      setTimeout(() => this.copied.set(false), 2000);
+    });
   }
 }
