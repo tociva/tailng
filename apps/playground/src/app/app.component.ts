@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { categories } from './home/home.component';
@@ -9,14 +9,6 @@ import {
   TailngSlideToggleComponent,
 } from '@tociva/tailng-ui';
 import { TailngTheme, ThemeService } from './shared/theme.service';
-
-const THEME_LIST: { id: TailngTheme; label: string }[] = [
-  { id: 'default', label: 'Default' },
-  { id: 'slate', label: 'Slate' },
-  { id: 'indigo', label: 'Indigo' },
-  { id: 'emerald', label: 'Emerald' },
-  { id: 'rose', label: 'Rose' },
-];
 
 @Component({
   selector: 'playground-root',
@@ -34,12 +26,9 @@ const THEME_LIST: { id: TailngTheme; label: string }[] = [
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  private readonly themeService = inject(ThemeService);
+  readonly themeService = inject(ThemeService);
   year = new Date().getFullYear();
   categories = categories;
-  readonly themes = THEME_LIST;
-  readonly isDarkMode = computed(() => this.themeService.mode() === 'dark');
-  readonly modeLabel = computed(() => (this.isDarkMode() ? 'Light' : 'Dark'));
 
   changeTheme(theme: TailngTheme): void {
     this.themeService.setTheme(theme);
