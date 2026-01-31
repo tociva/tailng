@@ -4,7 +4,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6 max-w-md">
     <!-- Gender Selection (Required) -->
     <section>
-      <h2 class="text-sm font-medium mb-3 text-text">Gender (Required)</h2>
+      <h2 class="text-sm font-medium mb-3 text-fg">Gender (Required)</h2>
       <div class="space-y-2">
         <tng-radio-button
           formControlName="gender"
@@ -38,7 +38,7 @@
     <!-- Size Selection -->
     <section>
       <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-medium text-text">Size</h2>
+        <h2 class="text-sm font-medium text-fg">Size</h2>
         <div class="flex gap-2">
           <button
             type="button"
@@ -86,7 +86,7 @@
 
     <!-- Color Selection -->
     <section>
-      <h2 class="text-sm font-medium mb-3 text-text">Color</h2>
+      <h2 class="text-sm font-medium mb-3 text-fg">Color</h2>
       <div class="space-y-2">
         <tng-radio-button
           formControlName="color"

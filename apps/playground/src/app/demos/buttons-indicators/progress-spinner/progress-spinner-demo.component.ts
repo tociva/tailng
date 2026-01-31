@@ -33,7 +33,7 @@ export class ProgressSpinnerDemoComponent {
         this.indicatorKlass = 'text-danger';
         break;
       case 'neutral':
-        this.indicatorKlass = 'text-text/40';
+        this.indicatorKlass = 'text-fg/40';
         break;
       default:
         this.indicatorKlass = 'text-primary';

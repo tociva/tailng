@@ -195,5 +195,15 @@
       </tng-expansion-panel>
     </div>
   </section>
+  <section class="space-y-3">
+    <h2 class="text-sm font-semibold text-foreground">Open/Close from outside 
+        <tng-button (click)="toggleOutsidePanel()">Click</tng-button>  
+    </h2>
+
+      <tng-expansion-panel [open]="outsideOpen()" rootKlass="border-0" headerKlass="hidden">
+        <div tngExpansionTitle>Open/Close from outside</div>
+        <div tngExpansionContent>Content…</div>
+      </tng-expansion-panel>
+  </section>
 
 </div>

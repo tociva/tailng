@@ -1,0 +1,24 @@
+/* @tailng/theme - semantic/theme-indigo.css
+   Modern SaaS theme */
+
+   :where(html.theme-indigo, .theme-indigo) {
+    --primary-color: #4f46e5;        /* indigo-600 */
+    --primary-color-hover: #4338ca;  /* indigo-700 */
+    --on-primary-color: #ffffff;
+  
+    --danger-color: #ef4444;
+    --danger-color-hover: #dc2626;
+    --on-danger-color: #ffffff;
+  
+    --warning-color: #f59e0b;
+    --warning-color-hover: #d97706;
+    --on-warning-color: #020617;
+  
+    --success-color: #22c55e;
+    --success-color-hover: #16a34a;
+    --on-success-color: #ffffff;
+  
+    --info-color: #06b6d4;
+    --info-color-hover: #0891b2;
+    --on-info-color: #ffffff;
+  }

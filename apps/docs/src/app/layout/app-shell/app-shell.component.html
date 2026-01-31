@@ -1,0 +1,156 @@
+<div class="h-screen overflow-hidden bg-white text-slate-900 flex flex-col">
+  <!-- Single header for entire app -->
+  <header class="sticky top-0 z-20 h-14 border-b border-slate-200 bg-white flex-shrink-0">
+    <div class="flex w-full items-center justify-between px-4 h-full">
+      <div class="flex items-center gap-3 md:gap-4">
+        @if (isComponentsRoute()) {
+          <button
+            class="md:hidden rounded border border-slate-200 px-3 py-2"
+            (click)="mobileOpen.set(!mobileOpen())"
+          >
+            Menu
+          </button>
+        }
+        <a routerLink="/" class="flex items-center gap-2 font-semibold tracking-tight">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 160 160"
+            class="h-10 w-30"
+            role="img"
+            aria-label="tailng icon"
+          >
+            <polygon fill="var(--primary)" points="80,6 148,46 148,114 80,154 12,114 12,46" />
+            <text
+              x="80"
+              y="98"
+              text-anchor="middle"
+              fill="#ffffff"
+              style="font: 700 72px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+            >
+              tng
+            </text>
+            <path
+              d="M105 103 C92 120 84 132 72 144"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+          </svg>
+          tailng
+        </a>
+        <nav class="flex items-center gap-4">
+          <a
+            routerLink="/components"
+            routerLinkActive="text-slate-900"
+            class="text-sm text-slate-600 hover:text-slate-900"
+          >
+            Components
+          </a>
+          <a
+            routerLink="/theme"
+            routerLinkActive="text-slate-900"
+            class="text-sm text-slate-600 hover:text-slate-900"
+          >
+            Theme
+          </a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <tng-menu
+          placement="bottom-end"
+          panelKlass="p-1 min-w-44"
+          triggerKlass="text-sm text-slate-600 hover:text-slate-900 inline-flex items-center gap-1"
+        >
+          <span tngMenuTrigger>npm <span class="text-xs">▼</span></span>
+          <ng-template tngMenuTemplate>
+            <a
+              tngMenuItem
+              href="https://www.npmjs.com/package/@tociva/tailng-ui"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+            >
+              UI
+            </a>
+            <a
+              tngMenuItem
+              href="https://www.npmjs.com/package/@tociva/tailng-theme"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+            >
+              Theme
+            </a>
+            <a
+              tngMenuItem
+              href="https://www.npmjs.com/package/@tociva/tailng-icons"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+            >
+              Icons
+            </a>
+            <a
+              tngMenuItem
+              href="https://www.npmjs.com/package/@tociva/tailng-cdk"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+            >
+              CDK
+            </a>
+          </ng-template>
+        </tng-menu>
+        <a
+          class="text-sm text-slate-600 hover:text-slate-900"
+          href="https://github.com"
+          target="_blank"
+        >
+          <tng-icon name="bootstrapGithub" klass="me-1"></tng-icon>GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- App body -->
+  <main class="flex flex-1 flex-col overflow-hidden min-h-0">
+    <router-outlet />
+  </main>
+
+  <!-- Mobile drawer (components nav) – only when on /components -->
+  @if (isComponentsRoute() && mobileOpen()) {
+    <div class="fixed inset-0 z-20 bg-black/30 md:hidden" (click)="mobileOpen.set(false)"></div>
+    <div
+      class="fixed inset-y-0 left-0 z-30 w-80 bg-white p-4 overflow-y-auto md:hidden border-r border-slate-200"
+    >
+      <div class="mb-4 flex items-center justify-between">
+        <div class="font-semibold">Docs</div>
+        <button class="rounded border border-slate-200 px-3 py-2" (click)="mobileOpen.set(false)">
+          Close
+        </button>
+      </div>
+      <nav class="space-y-6">
+        @for (section of nav; track section.title) {
+          <div>
+            <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+              {{ section.title }}
+            </div>
+            <div class="space-y-1">
+              @for (item of section.children ?? []; track item.title) {
+                <a
+                  [routerLink]="item.route"
+                  (click)="mobileOpen.set(false)"
+                  routerLinkActive="bg-slate-100 text-slate-900"
+                  class="block rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                >
+                  {{ item.title }}
+                </a>
+              }
+            </div>
+          </div>
+        }
+      </nav>
+    </div>
+  }
+</div>

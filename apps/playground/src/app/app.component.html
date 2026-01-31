@@ -1,32 +1,46 @@
-<div class="min-h-screen bg-gray-50 flex flex-col">
+<div class="min-h-screen bg-alternate-background flex flex-col">
   <!-- Header -->
-  <header class="h-16 bg-white border-b border-gray-200">
+  <header class="h-16 bg-bg border-b border-border">
     <div class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="h-9 w-9 rounded-md bg-primary/10 flex items-center justify-center text-primary font-semibold">
           T
         </div>
         <div class="leading-tight">
-          <div class="text-sm text-gray-500">TailNG</div>
-          <h1 class="text-base sm:text-lg font-semibold">Playground</h1>
+          <div class="text-sm text-disable">TailNG</div>
+          <h1 class="text-base sm:text-lg font-semibold text-fg">Playground</h1>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <a
-          routerLink="/"
-          class="px-3 py-2 rounded-md text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition"
-          routerLinkActive="text-primary bg-primary/10"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
+        <tng-menu placement="bottom-end" panelKlass="p-1 min-w-48">
+          <button tngMenuTrigger type="button"
+            class="inline-flex items-center gap-2 rounded-md bg-bg px-3 py-1.5 text-sm text-fg">
+            Themes
+            <span class="text-xs">▼</span>
+          </button>
+          <ng-template tngMenuTemplate>
+            @for (theme of themeService.themeList; track theme.id) {
+              <button tngMenuItem type="button"
+                class="flex w-full items-center gap-2 rounded px-3 py-2 text-sm hover:bg-fg hover:text-bg"
+                (click)="changeTheme(theme.id)">
+                {{ theme.label }}
+              </button>
+            }
+          </ng-template>
+        </tng-menu>
+        <tng-slide-toggle
+          [label]="themeService.modeLabel()"
+          [checked]="themeService.isDark()"
+          (checkedChange)="onModeToggle($event)"
+        />
+        <a routerLink="/"
+          class="px-3 py-2 rounded-md text-sm text-fg hover:text-fg hover:bg-alternate-background transition"
+          routerLinkActive="text-primary bg-primary/10" [routerLinkActiveOptions]="{ exact: true }">
           Home
         </a>
-        <a
-          href="https://tailng.com"
-          target="_blank"
-          rel="noreferrer"
-          class="px-3 py-2 rounded-md text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition"
-        >
+        <a href="https://tailng.com" target="_blank" rel="noreferrer"
+          class="px-3 py-2 rounded-md text-sm text-fg hover:text-fg hover:bg-alternate-background transition">
           tailng.com
         </a>
       </div>
@@ -39,27 +53,26 @@
       <div class="grid grid-cols-12 gap-6">
         <!-- Left Panel -->
         <aside class="col-span-12 md:col-span-3 lg:col-span-2">
-          <div class="bg-white border border-gray-200 rounded-lg p-3 sticky top-6 max-h-[calc(100vh-8rem)] overflow-y-auto">
+          <div
+            class="bg-bg border border-border rounded-lg p-3 sticky top-6 max-h-[calc(100vh-8rem)] overflow-y-auto">
             <nav class="space-y-4">
               @for (category of categories; track category.name) {
-                <div>
-                  <div class="px-2 py-2 text-xs font-semibold text-gray-500 tracking-wide uppercase">
-                    {{ category.name }}
-                  </div>
-                  <div class="mt-1 space-y-1">
-                    @for (component of category.components; track component.name) {
-                      <a
-                        [routerLink]="component.route"
-                        class="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50 transition"
-                        routerLinkActive="bg-primary/10 text-primary font-medium"
-                        [routerLinkActiveOptions]="{ exact: false }"
-                      >
-                        <span class="h-2 w-2 rounded-full bg-gray-300"></span>
-                        {{ component.name }}
-                      </a>
-                    }
-                  </div>
+              <div>
+                <div class="px-2 py-2 text-xs font-semibold text-disable tracking-wide uppercase">
+                  {{ category.name }}
                 </div>
+                <div class="mt-1 space-y-1">
+                  @for (component of category.components; track component.name) {
+                  <a [routerLink]="component.route"
+                    class="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-fg hover:bg-alternate-background transition"
+                    routerLinkActive="bg-primary/10 text-primary font-medium"
+                    [routerLinkActiveOptions]="{ exact: false }">
+                    <span class="h-2 w-2 rounded-full bg-disable"></span>
+                    {{ component.name }}
+                  </a>
+                  }
+                </div>
+              </div>
               }
             </nav>
           </div>
@@ -67,7 +80,7 @@
 
         <!-- Content -->
         <section class="col-span-12 md:col-span-9 lg:col-span-10">
-          <div class="bg-white border border-gray-200 rounded-lg min-h-[60vh]">
+          <div class="bg-bg border border-border rounded-lg min-h-[60vh]">
             <div class="p-4 sm:p-6">
               <router-outlet></router-outlet>
             </div>
@@ -78,12 +91,13 @@
   </div>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-200 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
-      <div class="text-sm text-gray-600">
+  <footer class="border-t border-border bg-bg">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+      <div class="text-sm text-fg">
         © {{ year }} TailNG
       </div>
-      <div class="text-sm text-gray-500">
+      <div class="text-sm text-disable">
         Built with Angular + Tailwind • Playground only
       </div>
     </div>

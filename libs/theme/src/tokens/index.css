@@ -1,0 +1,27 @@
+/* @tailng/theme - tokens/index.css
+   Import this once in your app. */
+
+@import "./foundation/base.css";
+@import "./foundation/motion.css";
+@import "./foundation/typography.css";
+@import "./foundation/elevation.css";
+@import "./foundation/shapes.css";
+
+/* Optional palettes (not required) */
+@import "./palettes/default.css";
+@import "./palettes/slate.css";
+
+/* Theme (brand identity) */
+@import "./semantic/theme-default.css";
+@import "./semantic/theme-slate.css";
+@import "./semantic/theme-indigo.css";
+@import "./semantic/theme-emerald.css";
+@import "./semantic/theme-rose.css";
+
+/* Modes (light/dark/night) */
+@import "./modes/mode-light.css";
+@import "./modes/mode-dark.css";
+@import "./modes/mode-night.css";
+
+/* Component-level tokens (optional) */
+@import "./components/code.css";

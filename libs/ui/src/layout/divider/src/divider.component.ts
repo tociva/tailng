@@ -21,7 +21,7 @@ export class TailngDividerComponent {
   /** Must include border color: border-border or border-slate-300 */
   lineKlass = input<string>('border-border');
 
-  labelKlass = input<string>('text-xs text-text/70');
+  labelKlass = input<string>('text-xs text-fg/70');
   gapKlass = input<string>('my-4');
   thicknessKlass = input<string>('border-t');
 

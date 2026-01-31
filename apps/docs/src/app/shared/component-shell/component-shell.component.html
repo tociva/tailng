@@ -1,44 +1,45 @@
-<div class="px-5 pt-5">
-  <!-- Tab Navigation -->
-  <nav class="inline-flex gap-10 p-0 w-full border-b">
-    <a
-      routerLink="overview"
-      routerLinkActive="border-b-2 border-primary"
-      [routerLinkActiveOptions]="{ exact: false }"
-      class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
-    >
-      OVERVIEW
-    </a>
-    <a
-      routerLink="api"
-      routerLinkActive="border-b-2 border-primary"
-      [routerLinkActiveOptions]="{ exact: false }"
-      class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
-    >
-      API
-    </a>
-    <a
-      routerLink="styling"
-      routerLinkActive="border-b-2 border-primary"
-      [routerLinkActiveOptions]="{ exact: false }"
-      class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
-    >
-      STYLING
-    </a>
-    <a
-      routerLink="examples"
-      routerLinkActive="border-b-2 border-primary"
-      [routerLinkActiveOptions]="{ exact: false }"
-      class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
-    >
-      EXAMPLES
-    </a>
-  </nav>
+<!-- <div class="px-5 pt-5"> -->
+<!-- Tab Navigation -->
+  <nav class="flex gap-10 p-0 w-full border-b sticky top-0 z-30 bg-bg px-5 pt-2">
+  <a
+    routerLink="overview"
+    routerLinkActive="border-b-2 border-primary"
+    [routerLinkActiveOptions]="{ exact: false }"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+  >
+    OVERVIEW
+  </a>
+  <a
+    routerLink="api"
+    routerLinkActive="border-b-2 border-primary"
+    [routerLinkActiveOptions]="{ exact: false }"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+  >
+    API
+  </a>
+  <a
+    routerLink="styling"
+    routerLinkActive="border-b-2 border-primary"
+    [routerLinkActiveOptions]="{ exact: false }"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+  >
+    STYLING
+  </a>
+  <a
+    routerLink="examples"
+    routerLinkActive="border-b-2 border-primary"
+    [routerLinkActiveOptions]="{ exact: false }"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+  >
+    EXAMPLES
+  </a>
+</nav>
 
-  <!-- Content Area -->
-  <div class="pt-4">
-    <div class="bg-background p-4">
-      <router-outlet />
-    </div>
+<!-- Content Area -->
+<div class="pt-4 px-4">
+  <div class="bg-bg p-4">
+    <router-outlet />
   </div>
 </div>
+
+<!-- </div> -->

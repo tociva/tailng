@@ -68,7 +68,7 @@ export class ProgressBarDemoComponent {
 
       case 'neutral':
         this.trackKlass = 'bg-alternate-background';
-        this.barKlass = 'bg-text/40';
+        this.barKlass = 'bg-fg/40';
         this.heightKlass = 'h-1';
         break;
 

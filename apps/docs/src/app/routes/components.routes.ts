@@ -7,6 +7,7 @@ import { overlayRoutes } from './overlay.routes';
 import { overlayPrimitivesRoutes } from './overlay-primitives.routes';
 import { dataRoutes } from './data.routes';
 import { utilitiesRoutes } from './utilities.routes';
+import { installationRoutes } from './installation.routes';
 
 export const componentsRoutes: Routes = [
   {
@@ -26,6 +27,9 @@ export const componentsRoutes: Routes = [
           description: 'Browse tailng components, examples, and usage guidelines.',
         },
       },
+
+      // Getting Started routes
+      ...installationRoutes,
 
       // Import all category routes
       ...formsRoutes,

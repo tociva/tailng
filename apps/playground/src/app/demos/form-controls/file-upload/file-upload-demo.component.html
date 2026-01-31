@@ -1,6 +1,6 @@
 <div class="space-y-6 max-w-xl">
   <div class="space-y-2">
-    <h3 class="text-sm font-medium text-text">Modern file upload</h3>
+    <h3 class="text-sm font-medium text-fg">Modern file upload</h3>
 
     <tng-file-upload
       accept="image/*,.pdf"
@@ -12,10 +12,10 @@
   </div>
 
   <div class="space-y-2">
-    <h3 class="text-sm font-medium text-text">Selected files (signal)</h3>
+    <h3 class="text-sm font-medium text-fg">Selected files (signal)</h3>
 
     @if (files()?.length) {
-      <ul class="list-disc pl-5 text-sm text-text">
+      <ul class="list-disc pl-5 text-sm text-fg">
         @for (f of files()!; track f.name) {
           <li>{{ f.name }}</li>
         }
@@ -26,7 +26,7 @@
   </div>
 
   <div class="space-y-2">
-    <h3 class="text-sm font-medium text-text">Custom classes</h3>
+    <h3 class="text-sm font-medium text-fg">Custom classes</h3>
 
     <tng-file-upload
       accept=".png,.jpg,.jpeg"

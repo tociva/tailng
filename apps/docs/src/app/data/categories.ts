@@ -36,6 +36,7 @@ export const categories = [
     components: [
       { name: 'Button', route: '/buttons/button', status: 'done', priority: 'high' },
       { name: 'Badge', route: '/buttons/badge', status: 'done', priority: 'medium' },
+      { name: 'Tag', route: '/buttons/tag', status: 'done', priority: 'medium' },
       { name: 'Icon', route: '/buttons/icon', status: 'done', priority: 'high' },
       { name: 'Ripples', route: '/buttons/ripples', status: 'done', priority: 'low' },
       { name: 'Progress Bar', route: '/buttons/progress-bar', status: 'done', priority: 'medium' },

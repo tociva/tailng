@@ -5,6 +5,7 @@ import { TailngBadgeComponent, TailngButtonComponent } from '@tociva/tailng-ui';
 @Component({
   standalone: true,
   selector: 'tng-project-home',
+  host: { class: 'block flex-1 min-h-0 overflow-auto' },
   imports: [RouterLink, TailngButtonComponent, TailngBadgeComponent],
   templateUrl: './home.component.html',
 })

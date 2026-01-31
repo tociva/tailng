@@ -1,0 +1,24 @@
+/* @tailng/theme - semantic/theme-rose.css
+   Soft but professional theme */
+
+   :where(html.theme-rose, .theme-rose) {
+    --primary-color: #e11d48;        /* rose-600 */
+    --primary-color-hover: #be123c;  /* rose-700 */
+    --on-primary-color: #ffffff;
+  
+    --danger-color: #dc2626;
+    --danger-color-hover: #b91c1c;
+    --on-danger-color: #ffffff;
+  
+    --warning-color: #f59e0b;
+    --warning-color-hover: #d97706;
+    --on-warning-color: #020617;
+  
+    --success-color: #22c55e;
+    --success-color-hover: #16a34a;
+    --on-success-color: #ffffff;
+  
+    --info-color: #0ea5e9;
+    --info-color-hover: #0284c7;
+    --on-info-color: #ffffff;
+  }

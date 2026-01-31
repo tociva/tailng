@@ -1,0 +1,128 @@
+<div [class]="finalKlass()">
+  <!-- Title Section -->
+  <div class="flex items-center justify-between mb-2">
+    <ng-content select="[tngExampleTitle]"></ng-content>
+    <div class="flex items-center gap-2">
+      @if (docLink()) {
+        <tng-icon
+          name="bootstrapLink45deg"
+          size="1.5em"
+          title="Copy link"
+          (click)="copyDocLink()"
+          klass="cursor-pointer hover:bg-slate-100 hover:text-slate-900"
+        ></tng-icon>
+      }
+
+      <tng-icon
+        [name]="isCodePanelOpen() ? 'bootstrapCodeSlash' : 'bootstrapCode'"
+        size="1.5em"
+        title="View code"
+        (click)="toggleCodePanel()"
+        klass="cursor-pointer hover:bg-slate-100 hover:text-slate-900"
+      ></tng-icon>
+
+      @if (stackBlitzLink()) {
+        <tng-icon
+          name="bootstrapShare"
+          size="1em"
+          title="Open in StackBlitz"
+          (click)="openStackBlitz()"
+          klass="cursor-pointer hover:bg-slate-100 hover:text-slate-900"
+        ></tng-icon>
+      }
+    </div>
+  </div>
+
+  <!-- Code Panel -->
+  <tng-expansion-panel rootKlass="border-0 mt-4" headerKlass="hidden" [open]="isCodePanelOpen()">
+    <tng-tabs defaultValue="html" tngExpansionContent>
+      <tng-tab
+        value="html"
+        tabKlass="px-3 py-2 text-sm font-medium cursor-pointer"
+        activeKlass="text-primary border-b-2 border-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-gray-50"
+        >HTML</tng-tab
+      >
+      <tng-tab
+        value="ts"
+        tabKlass="px-3 py-2 text-sm font-medium cursor-pointer"
+        activeKlass="text-primary border-b-2 border-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-gray-50"
+        >TS</tng-tab
+      >
+      <tng-tab
+        value="css"
+        tabKlass="px-3 py-2 text-sm font-medium cursor-pointer"
+        activeKlass="text-primary border-b-2 border-primary"
+        inactiveKlass="text-muted-foreground hover:text-foreground hover:bg-gray-50"
+        >CSS</tng-tab
+      >
+      <tng-tab-panel value="html">
+        @if (htmlSource()) {
+          <div class="relative">
+            <tng-code-block [content]="htmlSource()" [highlighter]="highlighter" language="html" />
+            <div class="absolute top-2 right-2">
+              <tng-copy-button [text]="htmlSource()" (copied)="copied.set(true)">
+                @if (!copied()) {
+                  <tng-icon name="bootstrapCopy"></tng-icon>
+                } @else {
+                  <span>
+                    <i class="bi bi-check2"></i>
+                    Copied successfully!
+                  </span>
+                }
+              </tng-copy-button>
+            </div>
+          </div>
+        }
+      </tng-tab-panel>
+      <tng-tab-panel value="ts">
+        @if (tsSource()) {
+          <div class="relative">
+            <tng-code-block
+              [content]="tsSource()"
+              [highlighter]="highlighter"
+              language="typescript"
+            />
+            <div class="absolute top-2 right-2">
+              <tng-copy-button [text]="tsSource()" (copied)="copied.set(true)">
+                @if (!copied()) {
+                  <tng-icon name="bootstrapCopy"></tng-icon>
+                } @else {
+                  <span>
+                    <i class="bi bi-check2"></i>
+                    Copied successfully!
+                  </span>
+                }
+              </tng-copy-button>
+            </div>
+          </div>
+        }
+      </tng-tab-panel>
+      <tng-tab-panel value="css">
+        @if (cssSource()) {
+          <div class="relative">
+            <tng-code-block [content]="cssSource()" [highlighter]="highlighter" language="css" />
+            <div class="absolute top-2 right-2">
+              <tng-copy-button [text]="cssSource()" (copied)="copied.set(true)">
+                @if (!copied()) {
+                  <tng-icon name="bootstrapCopy"></tng-icon>
+                } @else {
+                  <span>
+                    <i class="bi bi-check2"></i>
+                    Copied successfully!
+                  </span>
+                }
+              </tng-copy-button>
+            </div>
+          </div>
+        }
+      </tng-tab-panel>
+    </tng-tabs>
+  </tng-expansion-panel>
+
+  <!-- Demo Component -->
+  <div class="my-2">
+    <ng-content select="[tngExampleDemo]"></ng-content>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+/* @tailng/theme - tokens/foundation/base.css
+   Shared (non-theme) tokens. */
+:root {
+  --font-sans: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+
+  /* Radius scale */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Border widths */
+  --border-width: 1px;
+}

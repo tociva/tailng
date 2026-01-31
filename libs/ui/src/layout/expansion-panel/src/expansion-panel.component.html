@@ -1,19 +1,19 @@
-<div [class]="rootKlass()">
+<div [class]="finalRootKlass()">
  
   <button
     type="button"
-    [class]="headerKlass()"
+    [class]="finalHeaderKlass()"
     [disabled]="disabled()"
     [attr.aria-expanded]="isOpen()"
     (click)="toggle()"
     (keydown.enter)="toggle()"
     (keydown.space)="toggle()"
   >
-    <span [class]="titleKlass()">
+    <span [class]="finalTitleKlass()">
       <ng-content select="[tngExpansionTitle]"></ng-content>
     </span>
 
-    <span [class]="iconWrapperKlass()">
+    <span [class]="finalIconWrapperKlass()">
       @if (hasAnyCustomIcon()) {
         <!-- Keep both ng-content slots always present -->
         <span [hidden]="!showOpenIcon()">
@@ -30,7 +30,7 @@
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          [class]="chevronKlass() + ' ' + chevronRotateKlass()"
+          [class]="finalChevronKlass() + ' ' + chevronRotateKlass()"
           aria-hidden="true"
         >
           <path
@@ -45,9 +45,9 @@
     
   </button>
 
-  <div [class]="contentOuterKlass() + ' ' + contentRowsKlass()">
-    <div [class]="contentClipKlass()">
-      <div [class]="resolvedContentBodyKlass()">
+  <div [class]="finalContentOuterKlass() + ' ' + contentRowsKlass()">
+    <div [class]="finalContentClipKlass()">
+      <div [class]="finalContentBodyKlass()">
         <ng-content select="[tngExpansionContent]"></ng-content>
       </div>
     </div>

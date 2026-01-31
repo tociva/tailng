@@ -95,7 +95,7 @@ export class TailngChipsComponent<T> implements ControlValueAccessor {
       'w-full min-h-[42px] px-2 py-1 text-sm',
       'flex flex-wrap items-center gap-2',
       'border border-border rounded-md',
-      'bg-background text-text',
+      'bg-bg text-fg',
       'focus-within:ring-2 focus-within:ring-primary',
     ].join(' ')
   );
@@ -109,7 +109,7 @@ export class TailngChipsComponent<T> implements ControlValueAccessor {
   );
 
   readonly chipLabelKlass = input<string>('truncate max-w-[200px]');
-  readonly removeButtonKlass = input<string>('ml-1 text-disable hover:text-text');
+  readonly removeButtonKlass = input<string>('ml-1 text-disable hover:text-fg');
   readonly inputKlass = input<string>('flex-1 min-w-[140px] px-2 py-2 outline-none bg-transparent');
 
   /* =====================

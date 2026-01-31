@@ -1,4 +1,4 @@
-import { Component, ElementRef, computed, input, viewChild, inject } from '@angular/core';
+import { Component, ElementRef, computed, input, viewChild, inject, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TngCodeHighlighter, TngCodeLanguage } from './code-highlighter.type';
 
@@ -67,7 +67,7 @@ export class TailngCodeBlockComponent {
   // -------------------------
   readonly rootKlassFinal = computed(() =>
     this.join(
-      'relative rounded-lg border border-border bg-alternate-background text-text',
+      'relative rounded-lg border border-border bg-alternate-background text-fg',
       this.rootKlass(),
     ),
   );
@@ -76,14 +76,14 @@ export class TailngCodeBlockComponent {
 
   readonly gutterKlassFinal = computed(() =>
     this.join(
-      'absolute inset-y-0 left-0 w-10 select-none border-r border-border bg-background px-2 py-4 text-right text-xs leading-6 text-text/60',
+      'absolute inset-y-0 left-0 w-10 select-none border-r border-border bg-bg px-2 py-4 text-right text-xs leading-6 text-fg/60',
       this.gutterKlass(),
     ),
   );
 
   readonly preKlassFinal = computed(() =>
     this.join(
-      'overflow-auto p-4 text-xs leading-6 text-text',
+      'overflow-auto p-4 text-xs leading-6 text-fg',
       this.showLineNumbers() ? 'pl-14' : '',
       this.wrap() ? 'whitespace-pre-wrap break-words' : 'whitespace-pre',
       this.preKlass(),
@@ -103,5 +103,20 @@ export class TailngCodeBlockComponent {
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#39;');
+  }
+  
+copyklass = input<string>(
+  'absolute top-2 right-2 px-1 py-1 rounded cursor-pointer text-black text-xs'
+);
+
+copyLabel = input<string>('Copy');
+
+  text = input<string>('');
+  copied = signal(false);
+  copyCode() {
+    navigator.clipboard.writeText(this.text()).then(() => {
+      this.copied.set(true);
+      setTimeout(() => this.copied.set(false), 2000);
+    });
   }
 }

@@ -135,7 +135,7 @@ export class TailngBadgeComponent {
       case 'primary':
         return 'bg-primary text-on-primary';
       case 'neutral':
-        return 'bg-alternate-background text-text border border-border';
+        return 'bg-alternate-background text-fg border border-border';
       case 'success':
         return 'bg-success text-on-primary';
       case 'warning':

@@ -4,12 +4,10 @@
   "sourceRoot": "libs/theme/src",
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
+      "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/libs/theme"],
       "options": {
-        "outputPath": "dist/libs/theme",
-        "main": "libs/theme/src/index.ts",
-        "tsConfig": "libs/theme/tsconfig.lib.json"
+        "project": "libs/theme/ng-package.json"
       }
     }
   },

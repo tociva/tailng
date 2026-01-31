@@ -67,7 +67,7 @@ export class TailngFormFieldComponent {
    * ===================== */
   readonly rootKlass = input<string>('w-full');
 
-  readonly labelKlass = input<string>('text-sm font-medium text-text');
+  readonly labelKlass = input<string>('text-sm font-medium text-fg');
   readonly requiredMarkKlass = input<string>('text-danger');
 
   readonly hintKlass = input<string>('text-xs text-disable');
@@ -189,7 +189,7 @@ export class TailngFormFieldComponent {
   private readonly appearanceShell = computed(() => {
     return this.appearance() === 'filled'
       ? 'bg-alternate-background border-border'
-      : 'bg-background border-border';
+      : 'bg-bg border-border';
   });
 
   readonly controlShellClasses = computed(() => {
@@ -197,7 +197,7 @@ export class TailngFormFieldComponent {
     this._tick();
 
     const base =
-      'w-full flex items-center gap-2 rounded-md border transition text-text ' +
+      'w-full flex items-center gap-2 rounded-md border transition text-fg ' +
       'focus-within:ring-2 focus-within:ring-primary ' +
       'focus-within:ring-offset-2 focus-within:ring-offset-background';
 

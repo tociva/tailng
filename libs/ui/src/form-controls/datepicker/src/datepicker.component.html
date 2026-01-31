@@ -1,14 +1,13 @@
-<div class="relative">
+<div [class]="hostKlassFinal()">
   <!-- =====================
        Input + calendar icon
        ===================== -->
-  <div [class.opacity-60]="isDisabled()" [class.pointer-events-none]="isDisabled()">
-    <div class="relative">
+  <div [class]="disabledKlassFinal()" [class.opacity-60]="isDisabled()" [class.pointer-events-none]="isDisabled()">
+    <div [class]="fieldKlassFinal()">
       <input
         #inputEl
         type="text"
-        class="w-full rounded-md border border-slate-200 bg-white px-3 py-2 pr-10 text-sm
-               focus:outline-none focus:ring-2 focus:ring-primary"
+        [class]="inputKlassFinal()"
         [value]="inputValue()"
         [placeholder]="displayFormat()"
         [disabled]="isDisabled()"
@@ -22,15 +21,14 @@
       <!-- Calendar icon -->
       <button
         type="button"
-        class="absolute inset-y-0 right-0 flex w-10 items-center justify-center
-               rounded-r-md text-slate-600 hover:bg-slate-50"
+        [class]="toggleKlassFinal()"
         (click)="toggleOverlay()"
         aria-label="Open calendar"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          class="h-5 w-5"
+          [class]="toggleIconKlassFinal()"
           fill="currentColor"
         >
           <path
@@ -61,26 +59,23 @@
       [closeOnInsideClick]="false"
       (closed)="overlayRef.close($event)"
     >
-      <tng-overlay-panel klass="w-[372px] h-[322px] max-h-[322px] p-0">
+      <tng-overlay-panel [klass]="panelKlassFinal()">
         <!-- Popup frame -->
-        <div
-          class="w-[370px] h-[320px] overflow-hidden rounded-lg
-                 border border-slate-200 bg-white shadow-lg"
-        >
+        <div [class]="panelFrameKlassFinal()">
           <!-- =====================
                Body layout
                ===================== -->
-          <div class="grid h-full grid-cols-[64px_1fr_64px]">
+          <div [class]="panelLayoutKlassFinal()">
 
             <!-- ========= Months ========= -->
-            <div class="bg-slate-900 p-1 text-white">
-              <div class="space-y-0.5">
+            <div [class]="monthRailKlassFinal()">
+              <div [class]="monthListKlassFinal()">
                 @for (m of months; track m.index) {
                   <button
                     type="button"
-                    class="w-full rounded px-1 py-0.5 text-[11px] font-semibold transition"
-                    [class.bg-white]="isMonthSelected(m.index)"
-                    [class.text-slate-900]="isMonthSelected(m.index)"
+                    [class]="monthItemKlassFinal()"
+                    [class.bg-fg]="isMonthSelected(m.index)"
+                    [class.text-bg]="isMonthSelected(m.index)"
                     [class.opacity-40]="isMonthDisabled(m.index)"
                     [disabled]="isMonthDisabled(m.index)"
                     (click)="selectMonth(m.index)"
@@ -92,34 +87,32 @@
             </div>
 
             <!-- ========= Calendar ========= -->
-            <div class="flex h-full flex-col p-2">
-              <div class="mb-1 text-center text-sm font-semibold">
+            <div [class]="calendarKlassFinal()">
+              <div [class]="titleKlassFinal()">
                 Select Date
               </div>
 
               <!-- Weekdays -->
-              <div
-                class="grid grid-cols-7 gap-0.5 text-[10px]
-                       font-semibold text-slate-500"
-              >
+              <div [class]="weekdayRowKlassFinal()">
                 @for (d of weekdays; track d) {
-                  <div class="text-center">{{ d }}</div>
+                  <div [class]="weekdayCellKlassFinal()">{{ d }}</div>
                 }
               </div>
 
               <!-- Days -->
-              <div class="mt-1 grid grid-cols-7 gap-0.5">
+              <div [class]="dayGridKlassFinal()">
                 @for (cell of calendarCells(); track $index) {
                   <button
                     type="button"
-                    class="h-7 rounded text-[11px] transition"
-                    [class.text-slate-300]="cell.isOutsideMonth"
-                    [class.hover:bg-slate-100]="!isCellDisabled(cell) && !isCellSelected(cell)"
-                    [class.bg-slate-900]="isCellSelected(cell)"
-                    [class.text-white]="isCellSelected(cell)"
+                    [class]="dayCellKlassFinal()"
+                    [class.text-fg]="cell.isOutsideMonth"
+                    [class.hover:bg-fg]="!isCellDisabled(cell) && !isCellSelected(cell)"
+                    [class.hover:text-bg]="!isCellDisabled(cell) && !isCellSelected(cell)"
+                    [class.bg-fg]="isCellSelected(cell)"
+                    [class.text-bg]="isCellSelected(cell)"
                     [class.opacity-40]="isCellDisabled(cell)"
                     [class.ring-2]="isCellFocused(cell) && !isCellSelected(cell)"
-                    [class.ring-slate-400]="isCellFocused(cell) && !isCellSelected(cell)"
+                    [class.ring-border]="isCellFocused(cell) && !isCellSelected(cell)"
                     [disabled]="isCellDisabled(cell)"
                     (click)="selectDay(cell)"
                   >
@@ -129,17 +122,15 @@
               </div>
 
               <!-- Preview -->
-              <div class="pt-2 text-center text-[11px] text-slate-500">
+              <div [class]="previewTextKlassFinal()">
                 {{ previewLabel() }}
               </div>
 
               <!-- Actions -->
-              <div class="mt-auto flex items-center justify-end gap-2 pt-4">
+              <div [class]="actionBarKlassFinal()">
                 <button
                   type="button"
-                  class="rounded-md border border-slate-200 bg-white
-                         px-3 py-1.5 text-[11px] font-semibold text-slate-700
-                         shadow-sm hover:bg-slate-50 active:translate-y-[1px]"
+                  [class]="cancelKlassFinal()"
                   (click)="cancel()"
                 >
                   Cancel
@@ -147,9 +138,7 @@
 
                 <button
                   type="button"
-                  class="rounded-md bg-slate-900
-                         px-3 py-1.5 text-[11px] font-semibold text-white
-                         shadow-sm hover:opacity-95 active:translate-y-[1px]"
+                  [class]="confirmKlassFinal()"
                   (click)="confirm()"
                 >
                   Confirm
@@ -158,14 +147,12 @@
             </div>
 
             <!-- ========= Years (10 at a time) ========= -->
-            <div class="bg-slate-900 p-1 text-white flex flex-col">
+            <div [class]="yearRailKlassFinal()">
 
               <!-- Up -->
               <button
                 type="button"
-                class="mx-auto mb-1 flex h-6 w-6 items-center justify-center
-                       rounded bg-white/10 text-[12px]
-                       hover:bg-white/15 disabled:opacity-40"
+                [class]="yearNavPrevKlassFinal()"
                 (click)="prevYearWindow()"
                 [disabled]="!canPrevYearWindow()"
                 aria-label="Previous 10 years"
@@ -174,13 +161,13 @@
               </button>
 
               <!-- Year list -->
-              <div class="space-y-0.5">
+              <div [class]="yearListKlassFinal()">
                 @for (y of years(); track (yearBase() + ':' + y)) {
                   <button
                     type="button"
-                    class="w-full rounded px-1 py-0.5 text-[11px] font-semibold transition"
-                    [class.bg-white]="isYearSelected(y)"
-                    [class.text-slate-900]="isYearSelected(y)"
+                    [class]="yearItemKlassFinal()"
+                    [class.bg-fg]="isYearSelected(y)"
+                    [class.text-bg]="isYearSelected(y)"
                     [class.opacity-40]="isYearDisabled(y)"
                     [disabled]="isYearDisabled(y)"
                     (click)="selectYear(y)"
@@ -193,9 +180,7 @@
               <!-- Down -->
               <button
                 type="button"
-                class="mx-auto mt-1 flex h-6 w-6 items-center justify-center
-                       rounded bg-white/10 text-[12px]
-                       hover:bg-white/15 disabled:opacity-40"
+                [class]="yearNavNextKlassFinal()"
                 (click)="nextYearWindow()"
                 [disabled]="!canNextYearWindow()"
                 aria-label="Next 10 years"

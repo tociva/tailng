@@ -13,6 +13,7 @@ import { TailngIconComponent } from '@tociva/tailng-icons';
 @Component({
   standalone: true,
   selector: 'docs-shell',
+  host: { class: 'flex flex-1 flex-col min-h-0 overflow-hidden' },
   imports: [
     RouterOutlet,
     RouterLink,

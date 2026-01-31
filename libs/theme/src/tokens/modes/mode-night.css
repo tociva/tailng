@@ -1,0 +1,14 @@
+/* @tailng/theme - tokens/modes/mode-night.css
+   Mode tokens (night / true-black).
+   Apply by setting: <html class="mode-night"> */
+
+:where(html.mode-night, .mode-night) {
+  --background-color: #000000;
+  --alternate-background-color: #070a10;
+  --text-color: #e5e7eb;
+
+  --border-color: #111827;
+  --border-color-hover: #1f2937;
+
+  --disable-color: #9ca3af;
+}

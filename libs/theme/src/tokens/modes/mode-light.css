@@ -1,0 +1,14 @@
+/* @tailng/theme - tokens/modes/mode-light.css
+   Mode tokens (light).
+   Apply by setting: <html class="mode-light"> */
+
+:where(html.mode-light, .mode-light) {
+  --background-color: #ffffff;
+  --alternate-background-color: #f8fafc;
+  --text-color: #0f172a;
+
+  --border-color: #e2e8f0;
+  --border-color-hover: #cbd5e1;
+
+  --disable-color: #64748b;
+}

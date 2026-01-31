@@ -36,6 +36,7 @@
 # -------------------------
 /components/buttons/button
 /components/buttons/badge
+/components/buttons/tag
 /components/buttons/icon
 /components/buttons/ripples
 /components/buttons/progress-bar

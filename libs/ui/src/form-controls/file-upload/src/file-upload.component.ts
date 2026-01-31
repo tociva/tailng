@@ -41,12 +41,12 @@ export class TailngFileUploadComponent implements ControlValueAccessor {
   // theming hooks (section-wise)
   readonly rootKlass = input<string>('w-full');
   readonly dropzoneKlass = input<string>(''); // outer box
-  readonly titleKlass = input<string>('text-sm font-medium text-text');
+  readonly titleKlass = input<string>('text-sm font-medium text-fg');
   readonly subtitleKlass = input<string>('text-xs text-disable');
   readonly hintKlass = input<string>('text-xs text-disable');
   readonly fileListKlass = input<string>('mt-2 space-y-1');
   readonly fileItemKlass = input<string>(
-    'flex items-center justify-between rounded-md border border-border bg-background px-3 py-2 text-sm text-text'
+    'flex items-center justify-between rounded-md border border-border bg-bg px-3 py-2 text-sm text-fg'
   );
   readonly clearButtonKlass = input<string>(
     'text-xs text-danger hover:text-danger-hover'
@@ -87,7 +87,7 @@ export class TailngFileUploadComponent implements ControlValueAccessor {
   readonly dropzoneClasses = computed(() => {
     const base =
       'relative w-full rounded-md border px-4 py-4 transition ' +
-      'bg-background text-text border-border ' +
+      'bg-bg text-fg border-border ' +
       'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background';
 
     const disabled = this.isDisabled() ? ' opacity-60 pointer-events-none' : ' cursor-pointer';

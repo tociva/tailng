@@ -1,0 +1,12 @@
+/* @tailng/theme - tokens/components/code.css
+   Code highlighting tokens (semantic). */
+
+:root {
+  --code-keyword-color: var(--primary-color);
+  --code-string-color: var(--success-color);
+  --code-comment-color: var(--disable-color);
+  --code-number-color: var(--info-color);
+  --code-tag-color: var(--danger-color);
+  --code-attr-color: var(--warning-color);
+  --code-decorator-color: var(--primary-color-hover);
+}

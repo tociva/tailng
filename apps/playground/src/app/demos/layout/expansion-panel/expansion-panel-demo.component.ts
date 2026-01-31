@@ -1,10 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { TailngExpansionIconCloseDirective, TailngExpansionIconOpenDirective, TailngExpansionPanelComponent } from '@tociva/tailng-ui';
+  import { Component, signal } from '@angular/core';
+import { TailngExpansionIconCloseDirective, TailngExpansionIconOpenDirective, TailngExpansionPanelComponent, TailngButtonComponent } from '@tociva/tailng-ui';
 
 @Component({
   selector: 'playground-expansion-panel-demo',
   standalone: true,
-  imports: [TailngExpansionPanelComponent, TailngExpansionIconOpenDirective, TailngExpansionIconCloseDirective],
+  imports: [TailngExpansionPanelComponent, TailngExpansionIconOpenDirective, TailngExpansionIconCloseDirective,  TailngButtonComponent],
   templateUrl: './expansion-panel-demo.component.html',
 })
 export class ExpansionPanelDemoComponent {
@@ -14,5 +14,9 @@ export class ExpansionPanelDemoComponent {
 
   toggle(id: 'basic' | 'themed' | 'disabled' | 'nopad'): void {
     this.openId.update(v => (v === id ? null : id));
+  }
+  readonly outsideOpen = signal(false);
+  toggleOutsidePanel(): void {
+    this.outsideOpen.set(!this.outsideOpen());
   }
 }

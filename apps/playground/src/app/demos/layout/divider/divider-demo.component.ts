@@ -16,7 +16,7 @@ export class DividerDemoComponent {
   // klass hooks
   rootKlass = '';
   lineKlass = 'border-border';
-  labelKlass = 'text-xs text-text/70';
+  labelKlass = 'text-xs text-fg/70';
   gapKlass = 'my-4';
   thicknessKlass = 'border-t';
 
@@ -24,14 +24,14 @@ export class DividerDemoComponent {
     switch (p) {
       case 'subtle':
         this.lineKlass = 'border-border/40';
-        this.labelKlass = 'text-text/50';
+        this.labelKlass = 'text-fg/50';
         this.thicknessKlass = 'border-t';
         this.dashed = false;
         break;
 
       case 'strong':
         this.lineKlass = 'border-text/60';
-        this.labelKlass = 'text-text font-medium';
+        this.labelKlass = 'text-fg font-medium';
         this.thicknessKlass = 'border-t-2';
         this.dashed = false;
         break;
@@ -44,7 +44,7 @@ export class DividerDemoComponent {
 
       default:
         this.lineKlass = 'border-border';
-        this.labelKlass = 'text-xs text-text/70';
+        this.labelKlass = 'text-xs text-fg/70';
         this.thicknessKlass = 'border-t';
         this.dashed = false;
     }

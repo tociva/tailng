@@ -38,7 +38,7 @@ export class TailngSlideToggleComponent implements ControlValueAccessor {
   readonly rootKlass = input<string>('inline-flex items-center gap-2 select-none');
   readonly trackKlass = input<string>('');
   readonly thumbKlass = input<string>('');
-  readonly labelKlass = input<string>('text-sm text-text');
+  readonly labelKlass = input<string>('text-sm text-fg');
   readonly inputKlass = input<string>('sr-only');
 
   private readonly _value = signal(false);

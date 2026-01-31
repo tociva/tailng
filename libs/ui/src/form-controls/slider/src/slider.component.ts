@@ -47,7 +47,7 @@ export class TailngSliderComponent implements ControlValueAccessor {
 
   // theming / section-wise klass hooks
   readonly rootKlass = input<string>('w-full');
-  readonly labelKlass = input<string>('text-sm text-text');
+  readonly labelKlass = input<string>('text-sm text-fg');
   readonly trackKlass = input<string>(''); // base track
   readonly fillKlass = input<string>('');  // filled part
   readonly thumbKlass = input<string>(''); // thumb
