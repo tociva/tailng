@@ -23,7 +23,7 @@ import {
   TngOverlayPanel,
   TngOverlayRef,
   type TngOverlayCloseReason,
-} from '../../../../popups-overlays/src/public-api';
+} from '@tociva/tailng-ui/popups-overlays';
 
 export type AutocompleteCloseReason = TngOverlayCloseReason;
 
