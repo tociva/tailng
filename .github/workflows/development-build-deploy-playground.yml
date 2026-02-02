@@ -1,10 +1,9 @@
 name: Build and Deploy Playground to Development
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [development]
-  workflow_dispatch:
+  push:
+    branches: [development]   # runs when a PR is merged into development
+  workflow_dispatch:          # allow manual runs too
 
 permissions:
   contents: read
