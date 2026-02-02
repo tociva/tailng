@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { booleanAttribute, numberAttribute } from '@angular/core';
 
-export type TailngProgressMode = 'determinate' | 'indeterminate';
+export type TngProgressMode = 'determinate' | 'indeterminate';
 
 @Component({
   selector: 'tng-progress-bar',
@@ -9,13 +9,13 @@ export type TailngProgressMode = 'determinate' | 'indeterminate';
   templateUrl: './progress-bar.component.html',
   styleUrl: './progress-bar.component.css',
 })
-export class TailngProgressBarComponent {
+export class TngProgressBar {
   /* =====================
    * Inputs
    * ===================== */
 
   /** determinate | indeterminate */
-  mode = input<TailngProgressMode>('determinate');
+  mode = input<TngProgressMode>('determinate');
 
   /** Progress value (0–max) */
   value = input(0, { transform: numberAttribute });

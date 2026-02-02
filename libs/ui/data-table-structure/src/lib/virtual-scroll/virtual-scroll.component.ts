@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './virtual-scroll.component.html',
 })
-export class TailngVirtualScrollComponent {
+export class TngVirtualScroll {
   // Placeholder for Virtual Scroll component
 }

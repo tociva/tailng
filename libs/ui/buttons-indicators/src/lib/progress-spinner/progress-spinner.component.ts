@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { numberAttribute } from '@angular/core';
 
-export type TailngSpinnerMode = 'indeterminate' | 'determinate';
+export type TngSpinnerMode = 'indeterminate' | 'determinate';
 
 @Component({
   selector: 'tng-progress-spinner',
@@ -9,13 +9,13 @@ export type TailngSpinnerMode = 'indeterminate' | 'determinate';
   templateUrl: './progress-spinner.component.html',
   styleUrl: './progress-spinner.component.css',
 })
-export class TailngProgressSpinnerComponent {
+export class TngProgressSpinner {
   /* =====================
    * Inputs
    * ===================== */
 
   /** indeterminate | determinate */
-  mode = input<TailngSpinnerMode>('indeterminate');
+  mode = input<TngSpinnerMode>('indeterminate');
 
   /** Progress value (0–max) for determinate mode */
   value = input(0, { transform: numberAttribute });

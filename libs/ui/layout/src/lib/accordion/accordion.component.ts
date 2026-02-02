@@ -6,14 +6,14 @@ import {
   input,
   output
 } from '@angular/core';
-import { TailngExpansionPanelComponent } from '../expansion-panel/expansion-panel.component';
+import { TngExpansionPanel } from '../expansion-panel/expansion-panel.component';
 
 @Component({
   selector: 'tng-accordion',
   standalone: true,
   templateUrl: './accordion.component.html',
 })
-export class TailngAccordionComponent {
+export class TngAccordion {
   /* =====================
    * Inputs
    * ===================== */
@@ -49,7 +49,7 @@ export class TailngAccordionComponent {
    * ===================== */
 
   // All projected expansion panels (descendants enabled so nested layouts still work)
-  readonly panels = contentChildren(TailngExpansionPanelComponent, { descendants: true });
+  readonly panels = contentChildren(TngExpansionPanel, { descendants: true });
 
 
   constructor() {
@@ -74,7 +74,7 @@ export class TailngAccordionComponent {
     });
   }
 
-  private onPanelToggled(panel: TailngExpansionPanelComponent, nextOpen: boolean): void {
+  private onPanelToggled(panel: TngExpansionPanel, nextOpen: boolean): void {
     const panels = this.panels();
 
     // If a panel just opened and multiple is false, close all others.
@@ -101,7 +101,7 @@ export class TailngAccordionComponent {
     this.emitOpenIndexes();
   }
 
-  private getOpenPanels(): TailngExpansionPanelComponent[] {
+  private getOpenPanels(): TngExpansionPanel[] {
     return this.panels().filter((p) => p.isOpen());
   }
 

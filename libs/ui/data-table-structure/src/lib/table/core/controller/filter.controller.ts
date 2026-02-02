@@ -1,9 +1,9 @@
 import { signal } from '@angular/core';
 import { TngTableFilterFeature } from '../../features/filter.feature';
-import type { TailngFilterValue, TailngFilters } from '../types';
-import type { TailngControllerFeature } from './controller-feature';
+import type { TngFilterValue, TngFilters } from '../types';
+import type { TngControllerFeature } from './controller-feature';
 
-export class TailngFilterController implements TailngControllerFeature {
+export class TngFilterController implements TngControllerFeature {
   
   readonly featureId = 'filter';
   
@@ -35,7 +35,7 @@ export class TailngFilterController implements TailngControllerFeature {
     return this.feature.isFilterOpenFor(colId);
   }
 
-  setFilter(colId: string, value: TailngFilterValue): void {
+  setFilter(colId: string, value: TngFilterValue): void {
     this.feature.setFilter(colId, value);
   }
   clearFilter(colId: string): void {
@@ -45,14 +45,14 @@ export class TailngFilterController implements TailngControllerFeature {
     this.feature.clearAllFilters();
   }
 
-  filterValueFor(colId: string): TailngFilterValue | undefined {
+  filterValueFor(colId: string): TngFilterValue | undefined {
     return this.feature.filterValueFor(colId);
   }
   isFiltered(colId: string): boolean {
     return this.feature.isFiltered(colId);
   }
 
-  setFilters(filters: TailngFilters): void {
+  setFilters(filters: TngFilters): void {
     this.filters.set(filters);
   }
 }

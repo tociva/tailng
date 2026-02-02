@@ -13,7 +13,7 @@ import { booleanAttribute } from '@angular/core';
   standalone: true,
   templateUrl: './tabs.component.html',
 })
-export class TailngTabsComponent {
+export class TngTabs {
   /* =====================
    * Inputs
    * ===================== */

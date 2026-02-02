@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { OptionTplContext } from '@tociva/tailng-cdk/util';
 
-import { TailngOverlayPanelComponent } from '../overlay-panel/overlay-panel.component';
+import { TngOverlayPanel } from '../overlay-panel/overlay-panel.component';
 
 type TypeaheadMatchMode = 'startsWith' | 'includes';
 export type TngOptionListKeyAction = 'move' | 'select' | 'typeahead' | 'none';
@@ -31,10 +31,10 @@ export type TngOptionListKeyStroke = {
 @Component({
   selector: 'tng-option-list',
   standalone: true,
-  imports: [CommonModule, TailngOverlayPanelComponent],
+  imports: [CommonModule, TngOverlayPanel],
   templateUrl: './option-list.component.html',
 })
-export class TailngOptionListComponent<T> {
+export class TngOptionList<T> {
   // IMPORTANT: because #listbox is under @if branches (modal/non-modal),
   // keep static:false so Angular always resolves the *current* element.
   @ViewChild('listbox', { read: ElementRef })

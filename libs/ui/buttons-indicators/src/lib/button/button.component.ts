@@ -1,7 +1,7 @@
 import { computed, input } from "@angular/core";
 
 import { Component } from "@angular/core";
-import { TailngButtonSize, TailngButtonVariant } from "./button.types";
+import { TngButtonSize, TngButtonVariant } from "./button.types";
 import { buttonClasses } from "./button.variants";
 
 @Component({
@@ -9,9 +9,9 @@ import { buttonClasses } from "./button.variants";
   standalone: true,
   templateUrl: './button.component.html',
 })
-export class TailngButtonComponent {
-  variant = input<TailngButtonVariant>('solid');
-  size = input<TailngButtonSize>('md');
+export class TngButton {
+  variant = input<TngButtonVariant>('solid');
+  size = input<TngButtonSize>('md');
   disabled = input(false);
   loading = input(false);
   block = input(false);

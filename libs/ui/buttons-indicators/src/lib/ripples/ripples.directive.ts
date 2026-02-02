@@ -13,7 +13,7 @@ import { booleanAttribute, numberAttribute } from '@angular/core';
   selector: '[tngRipple]',
   standalone: true,
 })
-export class TailngRippleDirective implements AfterViewInit, OnDestroy {
+export class TngRipple implements AfterViewInit, OnDestroy {
   rippleDisabled = input(false, { transform: booleanAttribute });
   rippleCentered = input(false, { transform: booleanAttribute });
   rippleColor = input<string>('currentColor');

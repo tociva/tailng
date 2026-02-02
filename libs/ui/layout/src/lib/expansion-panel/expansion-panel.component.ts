@@ -18,7 +18,7 @@ import { booleanAttribute } from '@angular/core';
   selector: '[tngExpansionIconOpen]',
   standalone: true,
 })
-export class TailngExpansionIconOpenDirective {}
+export class TngExpansionIconOpen {}
 
 /**
  * CLOSE-state icon marker.
@@ -28,14 +28,14 @@ export class TailngExpansionIconOpenDirective {}
   selector: '[tngExpansionIconClose]',
   standalone: true,
 })
-export class TailngExpansionIconCloseDirective {}
+export class TngExpansionIconClose {}
 
 @Component({
   selector: 'tng-expansion-panel',
   standalone: true,
   templateUrl: './expansion-panel.component.html',
 })
-export class TailngExpansionPanelComponent {
+export class TngExpansionPanel {
   /* =====================
    * Inputs
    * ===================== */
@@ -84,8 +84,8 @@ export class TailngExpansionPanelComponent {
    * Slots (state icons only)
    * ===================== */
 
-    readonly iconOpen = contentChild(TailngExpansionIconOpenDirective);
-    readonly iconClose = contentChild(TailngExpansionIconCloseDirective);
+    readonly iconOpen = contentChild(TngExpansionIconOpen);
+    readonly iconClose = contentChild(TngExpansionIconClose);
   
     readonly hasOpenIcon = computed(() => !!this.iconOpen());
     readonly hasCloseIcon = computed(() => !!this.iconClose());

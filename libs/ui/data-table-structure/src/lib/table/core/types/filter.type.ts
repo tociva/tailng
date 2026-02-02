@@ -1,14 +1,14 @@
-export type TailngFilterType = 'text' | 'number' | 'date' | 'enum';
+export type TngFilterType = 'text' | 'number' | 'date' | 'enum';
 
-export type TailngTextFilter = string; // contains
-export type TailngNumberFilter = { min?: number; max?: number };
-export type TailngDateFilter = { from?: string; to?: string }; // ISO yyyy-mm-dd
-export type TailngEnumFilter = string[]; // multi-select by default
+export type TngTextFilter = string; // contains
+export type TngNumberFilter = { min?: number; max?: number };
+export type TngDateFilter = { from?: string; to?: string }; // ISO yyyy-mm-dd
+export type TngEnumFilter = string[]; // multi-select by default
 
-export type TailngFilterValue =
-  | TailngTextFilter
-  | TailngNumberFilter
-  | TailngDateFilter
-  | TailngEnumFilter;
+export type TngFilterValue =
+  | TngTextFilter
+  | TngNumberFilter
+  | TngDateFilter
+  | TngEnumFilter;
 
-export type TailngFilters = Record<string, TailngFilterValue>;
+export type TngFilters = Record<string, TngFilterValue>;

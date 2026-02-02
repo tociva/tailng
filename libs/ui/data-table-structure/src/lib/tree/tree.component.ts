@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './tree.component.html',
 })
-export class TailngTreeComponent {
+export class TngTree {
   // Welcome hello component - placeholder for Tree
 }

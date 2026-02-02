@@ -10,22 +10,22 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-import { TailngFileDropzoneDirective } from './file-dropzone.directive';
+import { TngFileDropzone } from './file-dropzone.directive';
 
 @Component({
   selector: 'tng-file-upload',
   standalone: true,
-  imports: [TailngFileDropzoneDirective],
+  imports: [TngFileDropzone],
   templateUrl: './file-upload.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngFileUploadComponent),
+      useExisting: forwardRef(() => TngFileUpload),
       multi: true,
     },
   ],
 })
-export class TailngFileUploadComponent implements ControlValueAccessor {
+export class TngFileUpload implements ControlValueAccessor {
   @ViewChild('fileInput', { static: true })
   fileInput!: ElementRef<HTMLInputElement>;
 

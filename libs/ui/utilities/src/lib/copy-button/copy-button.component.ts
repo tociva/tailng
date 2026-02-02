@@ -8,7 +8,7 @@ type CopyButtonSize = 'sm' | 'md';
   standalone: true,
   templateUrl: './copy-button.component.html',
 })
-export class TailngCopyButtonComponent {
+export class TngCopyButton {
   text = input.required<string>();
 
   variant = input<CopyButtonVariant>('ghost');

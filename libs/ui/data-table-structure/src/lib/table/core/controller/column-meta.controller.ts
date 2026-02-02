@@ -1,14 +1,14 @@
 import { signal } from '@angular/core';
-import type { TailngColumnMeta } from '../types';
-import type { TailngControllerFeature } from './controller-feature';
+import type { TngColumnMeta } from '../types';
+import type { TngControllerFeature } from './controller-feature';
 
-export class TailngColumnMetaController implements TailngControllerFeature {
+export class TngColumnMetaController implements TngControllerFeature {
 
   readonly featureId = 'column-meta';
   
-  private readonly colMeta = signal<Record<string, TailngColumnMeta>>({});
+  private readonly colMeta = signal<Record<string, TngColumnMeta>>({});
 
-  registerColumn(meta: TailngColumnMeta): void {
+  registerColumn(meta: TngColumnMeta): void {
     this.colMeta.update((cur) => ({ ...cur, [meta.id]: meta }));
   }
 
@@ -21,7 +21,7 @@ export class TailngColumnMetaController implements TailngControllerFeature {
     });
   }
 
-  metaFor(colId: string): TailngColumnMeta | undefined {
+  metaFor(colId: string): TngColumnMeta | undefined {
     return this.colMeta()[colId];
   }
 }

@@ -1,13 +1,13 @@
 import { Component, HostBinding, inject, input } from '@angular/core';
-import { TailngTabsComponent } from './tabs.component';
+import { TngTabs } from './tabs.component';
 
 @Component({
   selector: 'tng-tab-panel',
   standalone: true,
   template: `<ng-content />`,
 })
-export class TailngTabPanelComponent {
-  private readonly tabs = inject(TailngTabsComponent);
+export class TngTabPanel {
+  private readonly tabs = inject(TngTabs);
 
   value = input.required<string>();
 

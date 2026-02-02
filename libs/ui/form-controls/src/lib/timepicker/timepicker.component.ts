@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './timepicker.component.html',
 })
-export class TailngTimepickerComponent {
+export class TngTimepicker {
   // Welcome hello component - placeholder for Timepicker
 }
 

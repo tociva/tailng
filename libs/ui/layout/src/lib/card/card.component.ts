@@ -5,7 +5,7 @@ import { Component, computed, contentChild, input } from '@angular/core';
   standalone: true,
   templateUrl: './card.component.html',
 })
-export class TailngCardComponent {
+export class TngCard {
   /* =====================
    * Klass hooks
    * ===================== */

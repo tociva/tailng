@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type TailngButtonToggleValue = string | number;
+export type TngButtonToggleValue = string | number;
 
-export type TailngButtonToggleOption<
-  T extends TailngButtonToggleValue = TailngButtonToggleValue,
+export type TngButtonToggleOption<
+  T extends TngButtonToggleValue = TngButtonToggleValue,
 > = {
   value: T;
   label: string;
@@ -24,7 +24,7 @@ export type TailngButtonToggleOption<
  * - single mode: T | null
  * - multiple mode: T[]
  */
-export type TailngButtonToggleSelection<T extends TailngButtonToggleValue> =
+export type TngButtonToggleSelection<T extends TngButtonToggleValue> =
   | T
   | null
   | T[];
@@ -36,12 +36,12 @@ export type TailngButtonToggleSelection<T extends TailngButtonToggleValue> =
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngButtonToggleComponent),
+      useExisting: forwardRef(() => TngButtonToggle),
       multi: true,
     },
   ],
 })
-export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
+export class TngButtonToggle<T extends TngButtonToggleValue>
   implements ControlValueAccessor
 {
   /* =====================
@@ -49,14 +49,14 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
    * ===================== */
 
   /** Options for the segmented control */
-  options = input<TailngButtonToggleOption<T>[]>([]);
+  options = input<TngButtonToggleOption<T>[]>([]);
 
   /**
    * Direct mode value (optional).
    * In forms mode, CVA is source of truth.
    */
-  value = input<TailngButtonToggleSelection<T>>(null);
-  readonly valueChange = output<TailngButtonToggleSelection<T>>();
+  value = input<TngButtonToggleSelection<T>>(null);
+  readonly valueChange = output<TngButtonToggleSelection<T>>();
 
   /** External disabled input (read-only) */
   disabled = input(false);
@@ -100,7 +100,7 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
   protected isDisabled = signal(false);
 
   /** Authoritative selected value inside component */
-  private selectedValue = signal<TailngButtonToggleSelection<T>>(null);
+  private selectedValue = signal<TngButtonToggleSelection<T>>(null);
 
   /** When true, CVA owns the value (forms mode) */
   private usingCva = false;
@@ -108,7 +108,7 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
   /* =====================
    * ControlValueAccessor
    * ===================== */
-  private onChange: (value: TailngButtonToggleSelection<T>) => void = () => {};
+  private onChange: (value: TngButtonToggleSelection<T>) => void = () => {};
   private onTouched: () => void = () => {};
 
   constructor() {
@@ -136,12 +136,12 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
     });
   }
 
-  writeValue(value: TailngButtonToggleSelection<T>): void {
+  writeValue(value: TngButtonToggleSelection<T>): void {
     this.usingCva = true;
     this.selectedValue.set(this.normalizeIncoming(value));
   }
 
-  registerOnChange(fn: (value: TailngButtonToggleSelection<T>) => void): void {
+  registerOnChange(fn: (value: TngButtonToggleSelection<T>) => void): void {
     this.usingCva = true;
     this.onChange = fn;
   }
@@ -160,21 +160,21 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
 
   currentValue = computed(() => this.selectedValue());
 
-  isOptionDisabled(opt: TailngButtonToggleOption<T>): boolean {
+  isOptionDisabled(opt: TngButtonToggleOption<T>): boolean {
     return this.isDisabled() || !!opt.disabled;
   }
 
-  isSelected(opt: TailngButtonToggleOption<T>): boolean {
+  isSelected(opt: TngButtonToggleOption<T>): boolean {
     const v = this.selectedValue();
     if (Array.isArray(v)) return v.includes(opt.value);
     return v === opt.value;
   }
 
-  select(opt: TailngButtonToggleOption<T>) {
+  select(opt: TngButtonToggleOption<T>) {
     if (this.isOptionDisabled(opt)) return;
 
     const cur = this.selectedValue();
-    let next: TailngButtonToggleSelection<T>;
+    let next: TngButtonToggleSelection<T>;
 
     if (this.multiple()) {
       const currArr = this.toArray(cur);
@@ -297,7 +297,7 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
     ).trim()
   );
 
-  buttonClasses(opt: TailngButtonToggleOption<T>): string {
+  buttonClasses(opt: TngButtonToggleOption<T>): string {
     const active = this.isSelected(opt);
     const disabled = this.isOptionDisabled(opt);
 
@@ -317,18 +317,18 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
    * ===================== */
 
   private normalizeIncoming(
-    value: TailngButtonToggleSelection<T>,
-  ): TailngButtonToggleSelection<T> {
+    value: TngButtonToggleSelection<T>,
+  ): TngButtonToggleSelection<T> {
     return this.multiple() ? this.toArray(value) : this.toSingle(value);
   }
 
-  private toArray(value: TailngButtonToggleSelection<T>): T[] {
+  private toArray(value: TngButtonToggleSelection<T>): T[] {
     if (Array.isArray(value)) return value;
     if (value === null || value === undefined) return [];
     return [value];
   }
 
-  private toSingle(value: TailngButtonToggleSelection<T>): T | null {
+  private toSingle(value: TngButtonToggleSelection<T>): T | null {
     if (Array.isArray(value)) return value[0] ?? null;
     return value ?? null;
   }
@@ -338,8 +338,8 @@ export class TailngButtonToggleComponent<T extends TailngButtonToggleValue>
   }
 
   private shallowEqual(
-    a: TailngButtonToggleSelection<T>,
-    b: TailngButtonToggleSelection<T>,
+    a: TngButtonToggleSelection<T>,
+    b: TngButtonToggleSelection<T>,
   ): boolean {
     if (a === b) return true;
     const aArr = Array.isArray(a);

@@ -1,18 +1,18 @@
-export type { TailngAlign } from './align.type';
-export type { TailngCellContext, TailngHeaderContext } from './context.type';
-export type { TailngResolvedColumn } from './column.type';
-export type { TailngSortDir, TailngSort } from './sort.type';
+export type { TngAlign } from './align.type';
+export type { TngCellContext, TngHeaderContext } from './context.type';
+export type { TngResolvedColumn } from './column.type';
+export type { TngSortDir, TngSort } from './sort.type';
 export type {
-  TailngFilterType,
-  TailngTextFilter,
-  TailngNumberFilter,
-  TailngDateFilter,
-  TailngEnumFilter,
-  TailngFilterValue,
-  TailngFilters,
+  TngFilterType,
+  TngTextFilter,
+  TngNumberFilter,
+  TngDateFilter,
+  TngEnumFilter,
+  TngFilterValue,
+  TngFilters,
 } from './filter.type';
 export type {
-  TailngEnumOption,
-  TailngColumnFilterMeta,
-  TailngColumnMeta,
+  TngEnumOption,
+  TngColumnFilterMeta,
+  TngColumnMeta,
 } from './column-meta.type';

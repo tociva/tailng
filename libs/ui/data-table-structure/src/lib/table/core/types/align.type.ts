@@ -1,1 +1,1 @@
-export type TailngAlign = 'left' | 'center' | 'right';
+export type TngAlign = 'left' | 'center' | 'right';

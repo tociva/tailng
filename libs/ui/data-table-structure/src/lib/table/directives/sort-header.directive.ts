@@ -7,18 +7,18 @@ import {
   inject,
 } from '@angular/core';
 import { TNG_TABLE } from '../core/tokens/table.token';
-import type { TailngSortDir } from '../core/types';
+import type { TngSortDir } from '../core/types';
 
 @Directive({
   selector: '[tngSortHeader]',
   standalone: true,
 })
-export class TailngSortHeaderDirective {
+export class TngSortHeaderDirective {
   readonly colId = input.required<string>();
 
   private readonly table = inject(TNG_TABLE);
 
-  readonly direction = computed<TailngSortDir>(() => this.table.directionFor(this.colId()));
+  readonly direction = computed<TngSortDir>(() => this.table.directionFor(this.colId()));
   readonly isSorted = computed(() => this.direction() !== '');
 
   // a11y

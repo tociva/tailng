@@ -11,15 +11,15 @@ import {
 } from '@angular/core';
 import { FocusTrapFactory } from '@angular/cdk/a11y';
 import {
-  createTailngFocusTrap,
-  TailngFocusTrapHandle,
+  createTngFocusTrap,
+  TngFocusTrapHandle,
 } from './focus-trap.util';
 
 @Directive({
   selector: '[tngFocusTrap]',
   standalone: true,
 })
-export class TailngFocusTrapDirective implements OnDestroy {
+export class TngFocusTrap implements OnDestroy {
   /** Enable / disable focus trapping */
   readonly tngFocusTrap = input(true);
 
@@ -38,7 +38,7 @@ export class TailngFocusTrapDirective implements OnDestroy {
   // Inject CDK factory in injection context (field initializer)
   private readonly focusTrapFactory = inject(FocusTrapFactory);
 
-  private handle: TailngFocusTrapHandle | null = null;
+  private handle: TngFocusTrapHandle | null = null;
 
   constructor() {
     effect(() => {
@@ -59,7 +59,7 @@ export class TailngFocusTrapDirective implements OnDestroy {
   private enable(): void {
     if (this.handle) return;
 
-    this.handle = createTailngFocusTrap(
+    this.handle = createTngFocusTrap(
       this.focusTrapFactory,
       this.host.nativeElement,
       {

@@ -1,18 +1,18 @@
 import { Component, computed, input } from '@angular/core';
 import { booleanAttribute } from '@angular/core';
 
-export type TailngDividerOrientation = 'horizontal' | 'vertical';
-export type TailngDividerAlign = 'start' | 'center' | 'end';
+export type TngDividerOrientation = 'horizontal' | 'vertical';
+export type TngDividerAlign = 'start' | 'center' | 'end';
 
 @Component({
   selector: 'tng-divider',
   standalone: true,
   templateUrl: './divider.component.html',
 })
-export class TailngDividerComponent {
-  orientation = input<TailngDividerOrientation>('horizontal');
+export class TngDivider {
+  orientation = input<TngDividerOrientation>('horizontal');
   label = input<string>('');
-  align = input<TailngDividerAlign>('center');
+  align = input<TngDividerAlign>('center');
   dashed = input(false, { transform: booleanAttribute });
 
   /* klass hooks */

@@ -1,17 +1,17 @@
-import type { TailngControllerFeature } from './controller-feature';
-import { TailngSortController } from './sort.controller';
-import { TailngFilterController } from './filter.controller';
-import { TailngColumnMetaController } from './column-meta.controller';
+import type { TngControllerFeature } from './controller-feature';
+import { TngSortController } from './sort.controller';
+import { TngFilterController } from './filter.controller';
+import { TngColumnMetaController } from './column-meta.controller';
 
-export class TailngTableController {
+export class TngTableController {
 
   readonly _featureId = 'table';
   // Keep references to run lifecycle hooks if you need them later
-  private readonly features: TailngControllerFeature[] = [];
+  private readonly features: TngControllerFeature[] = [];
 
-  readonly sortCtrl = new TailngSortController();
-  readonly filterCtrl = new TailngFilterController();
-  readonly colMetaCtrl = new TailngColumnMetaController();
+  readonly sortCtrl = new TngSortController();
+  readonly filterCtrl = new TngFilterController();
+  readonly colMetaCtrl = new TngColumnMetaController();
 
   constructor() {
     this.features = [this.sortCtrl, this.filterCtrl, this.colMetaCtrl];

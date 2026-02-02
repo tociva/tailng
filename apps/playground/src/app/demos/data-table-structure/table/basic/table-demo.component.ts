@@ -1,6 +1,6 @@
 // table-demo.component.ts
 import { Component, signal } from '@angular/core';
-import { TailngColComponent, TailngCellDefDirective, TailngTableComponent } from '@tociva/tailng-ui/data-table-structure';
+import { TngCol, TngCellDef, TngTable } from '@tociva/tailng-ui/data-table-structure';
 
 type Txn = {
   id: string;
@@ -13,7 +13,7 @@ type Txn = {
 @Component({
   selector: 'playground-table-demo',
   standalone: true,
-  imports: [TailngTableComponent, TailngColComponent, TailngCellDefDirective],
+  imports: [TngTable, TngCol, TngCellDef],
   templateUrl: './table-demo.component.html',
 })
 export class TableDemoComponent {

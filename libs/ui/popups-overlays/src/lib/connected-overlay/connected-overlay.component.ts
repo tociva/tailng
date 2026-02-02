@@ -17,7 +17,7 @@ export type TngOverlayPlacement =
   | 'top-start'
   | 'top-end';
 
-export type TngOverlayCloseReason =
+export type TngConnectedOverlayCloseReason =
   | 'outside-click'
   | 'inside-click'
   | 'escape'
@@ -30,7 +30,7 @@ export type TngOverlayCloseReason =
   imports: [NgStyle],
   templateUrl: './connected-overlay.component.html',
 })
-export class TailngConnectedOverlayComponent {
+export class TngConnectedOverlay {
   /**
    * Control
    */
@@ -66,7 +66,7 @@ export class TailngConnectedOverlayComponent {
    * Events
    */
   readonly opened = output<void>();
-  readonly closed = output<TngOverlayCloseReason>();
+  readonly closed = output<TngConnectedOverlayCloseReason>();
   readonly backdropClick = output<void>();
 
   @ViewChild('overlayRoot', { static: false })
@@ -139,7 +139,7 @@ export class TailngConnectedOverlayComponent {
   /**
    * Public API: parent can call close programmatically (optional)
    */
-  close(reason: TngOverlayCloseReason = 'programmatic'): void {
+  close(reason: TngConnectedOverlayCloseReason = 'programmatic'): void {
     // Controlled component: parent must set [open]=false.
     this.closed.emit(reason);
   }

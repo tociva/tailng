@@ -14,12 +14,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngCheckboxComponent),
+      useExisting: forwardRef(() => TngCheckbox),
       multi: true,
     },
   ],
 })
-export class TailngCheckboxComponent implements ControlValueAccessor {
+export class TngCheckbox implements ControlValueAccessor {
   readonly id = input<string>('');
   readonly name = input<string>('');
 

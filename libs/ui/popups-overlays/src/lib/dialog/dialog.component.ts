@@ -11,7 +11,7 @@ import {
   runInInjectionContext,
   viewChild,
 } from '@angular/core';
-import { TailngFocusTrapDirective } from '@tociva/tailng-cdk/a11y';
+import { TngFocusTrap } from '@tociva/tailng-cdk/a11y';
 
 export type TngDialogCloseReason =
   | 'confirm'
@@ -23,10 +23,10 @@ export type TngDialogCloseReason =
 @Component({
   selector: 'tng-dialog',
   standalone: true,
-  imports: [TailngFocusTrapDirective],
+  imports: [TngFocusTrap],
   templateUrl: './dialog.component.html',
 })
-export class TailngDialogComponent {
+export class TngDialog {
   /** Controlled open state */
   readonly open = input<boolean>(false);
 

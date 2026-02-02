@@ -4,7 +4,7 @@ import { Directive, HostBinding } from '@angular/core';
   selector: '[tngDialogInitialFocus]',
   standalone: true,
 })
-export class TailngDialogInitialFocusDirective {
+export class TngDialogInitialFocus {
   // Attribute CDK FocusTrap looks for
   @HostBinding('attr.cdk-focus-initial')
   readonly cdkFocusInitialAttr = '';

@@ -1,13 +1,13 @@
 import { Component, computed, input } from '@angular/core';
 import { booleanAttribute, numberAttribute } from '@angular/core';
 
-export type TailngBadgePosition =
+export type TngBadgePosition =
   | 'top-right'
   | 'top-left'
   | 'bottom-right'
   | 'bottom-left';
 
-export type TailngBadgeVariant =
+export type TngBadgeVariant =
   | 'primary'
   | 'neutral'
   | 'success'
@@ -15,14 +15,14 @@ export type TailngBadgeVariant =
   | 'danger'
   | 'info';
 
-export type TailngBadgeSize = 'sm' | 'md';
+export type TngBadgeSize = 'sm' | 'md';
 
 @Component({
   selector: 'tng-badge',
   standalone: true,
   templateUrl: './badge.component.html',
 })
-export class TailngBadgeComponent {
+export class TngBadge {
   /* =====================
    * Inputs
    * ===================== */
@@ -43,16 +43,16 @@ export class TailngBadgeComponent {
   max = input(99, { transform: numberAttribute });
 
   /** Position relative to host */
-  position = input<TailngBadgePosition>('top-right');
+  position = input<TngBadgePosition>('top-right');
 
   /** Overlap host (Material-ish). When false, badge sits outside edge a bit. */
   overlap = input(true, { transform: booleanAttribute });
 
   /** Visual variant */
-  variant = input<TailngBadgeVariant>('danger');
+  variant = input<TngBadgeVariant>('danger');
 
   /** Size */
-  size = input<TailngBadgeSize>('md');
+  size = input<TngBadgeSize>('md');
 
   /** Accessible label override (recommended when badge is meaningful) */
   ariaLabel = input<string>('');

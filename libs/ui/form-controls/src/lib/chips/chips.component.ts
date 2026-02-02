@@ -16,16 +16,16 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import {
-  TailngConnectedOverlayComponent,
-  TailngOptionListComponent,
-  TailngOverlayPanelComponent,
-  TailngOverlayRefComponent,
-  type TailngOverlayCloseReason,
+  TngConnectedOverlay,
+  TngOptionList,
+  TngOverlayPanel,
+  TngOverlayRef,
+  type TngOverlayCloseReason,
 } from '../../../../popups-overlays/src/public-api';
 
 import { OptionTplContext } from '@tociva/tailng-cdk/util';
 
-export type ChipsCloseReason = TailngOverlayCloseReason;
+export type ChipsCloseReason = TngOverlayCloseReason;
 export type ChipTplContext<T> = { $implicit: T; index: number };
 
 @Component({
@@ -33,21 +33,21 @@ export type ChipTplContext<T> = { $implicit: T; index: number };
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    TailngConnectedOverlayComponent,
-    TailngOverlayPanelComponent,
-    TailngOptionListComponent,
-    TailngOverlayRefComponent,
+    TngConnectedOverlay,
+    TngOverlayPanel,
+    TngOptionList,
+    TngOverlayRef,
   ],
   templateUrl: './chips.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngChipsComponent),
+      useExisting: forwardRef(() => TngChips),
       multi: true,
     },
   ],
 })
-export class TailngChipsComponent<T> implements ControlValueAccessor {
+export class TngChips<T> implements ControlValueAccessor {
   /* =====================
    * Projected templates
    * ===================== */
@@ -61,8 +61,8 @@ export class TailngChipsComponent<T> implements ControlValueAccessor {
   inputEl!: ElementRef<HTMLInputElement>;
 
   // Delegate list keys to OptionList
-  @ViewChild(TailngOptionListComponent)
-  optionList?: TailngOptionListComponent<T>;
+  @ViewChild(TngOptionList)
+  optionList?: TngOptionList<T>;
 
   /* =====================
    * Inputs / Outputs

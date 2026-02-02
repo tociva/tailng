@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 
-import { TailngConnectedOverlayComponent } from '../connected-overlay/connected-overlay.component';
-import { TailngOverlayPanelComponent } from '../overlay-panel/overlay-panel.component';
+import { TngConnectedOverlay } from '../connected-overlay/connected-overlay.component';
+import { TngOverlayPanel } from '../overlay-panel/overlay-panel.component';
 
 export type TngTooltipPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
 export type TngTooltipCloseReason = 'escape' | 'blur' | 'programmatic';
@@ -21,10 +21,10 @@ export type TngTooltipCloseReason = 'escape' | 'blur' | 'programmatic';
 @Component({
   selector: 'tng-tooltip',
   standalone: true,
-  imports: [NgTemplateOutlet, TailngConnectedOverlayComponent, TailngOverlayPanelComponent],
+  imports: [NgTemplateOutlet, TngConnectedOverlay, TngOverlayPanel],
   templateUrl: './tooltip.component.html',
 })
-export class TailngTooltipComponent {
+export class TngTooltip {
   @ViewChild('triggerEl', { static: true })
   triggerEl!: ElementRef<HTMLElement>;
 

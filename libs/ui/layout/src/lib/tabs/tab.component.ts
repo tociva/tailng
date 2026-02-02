@@ -6,15 +6,15 @@ import {
   input,
 } from '@angular/core';
 import { booleanAttribute } from '@angular/core';
-import { TailngTabsComponent } from './tabs.component';
+import { TngTabs } from './tabs.component';
 
 @Component({
   selector: 'tng-tab',
   standalone: true,
   template: `<ng-content />`,
 })
-export class TailngTabComponent {
-  private readonly tabs = inject(TailngTabsComponent);
+export class TngTab {
+  private readonly tabs = inject(TngTabs);
 
   value = input.required<string>();
   disabled = input(false, { transform: booleanAttribute });

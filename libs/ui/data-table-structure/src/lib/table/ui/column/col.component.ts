@@ -1,15 +1,15 @@
 import { Component, ContentChild, TemplateRef, effect, inject, input } from '@angular/core';
 import { TNG_TABLE } from '../../core/tokens/table.token';
-import type { TailngAlign, TailngColumnFilterMeta } from '../../core/types';
-import { TailngCellDefDirective } from '../../defs/cell.def';
-import { TailngHeaderDefDirective } from '../../defs/header.def';
+import type { TngAlign, TngColumnFilterMeta } from '../../core/types';
+import { TngCellDef } from '../../defs/cell.def';
+import { TngHeaderDef } from '../../defs/header.def';
 
 @Component({
   selector: 'tng-col',
   standalone: true,
   template: '',
 })
-export class TailngColComponent<T> {
+export class TngCol<T> {
   /** unique column id */
   readonly id = input.required<string>();
 
@@ -23,22 +23,22 @@ export class TailngColComponent<T> {
   readonly width = input<string | null>(null);
 
   /** alignment */
-  readonly align = input<TailngAlign>('left');
+  readonly align = input<TngAlign>('left');
 
   /** extra CSS classes applied to th/td */
   readonly klass = input<string | null>(null);
 
   /** default filter meta (used by tng-filter-panel) */
-  readonly filter = input<TailngColumnFilterMeta | null>(null);
+  readonly filter = input<TngColumnFilterMeta | null>(null);
 
   private readonly table = inject(TNG_TABLE);
 
   // Projected templates
-  @ContentChild(TailngCellDefDirective)
-  cellDef?: TailngCellDefDirective<T>;
+  @ContentChild(TngCellDef)
+  cellDef?: TngCellDef<T>;
 
-  @ContentChild(TailngHeaderDefDirective)
-  headerDef?: TailngHeaderDefDirective;
+  @ContentChild(TngHeaderDef)
+  headerDef?: TngHeaderDef;
 
   constructor() {
     // Register column meta for default filter panel + any future features

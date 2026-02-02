@@ -11,19 +11,19 @@ import {
   signal,
 } from '@angular/core';
 
-import { TailngOverlayCloseReason } from '../../../../popups-overlays/src/public-api';
-import { TailngFocusTrapDirective } from '@tociva/tailng-cdk/a11y';
+import { TngOverlayCloseReason } from '../../../../popups-overlays/src/public-api';
+import { TngFocusTrap } from '@tociva/tailng-cdk/a11y';
 
 export type TngDrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
-export type DrawerCloseReason = TailngOverlayCloseReason;
+export type DrawerCloseReason = TngOverlayCloseReason;
 
 @Component({
   selector: 'tng-drawer',
   standalone: true,
-  imports: [TailngFocusTrapDirective],
+  imports: [TngFocusTrap],
   templateUrl: './drawer.component.html',
 })
-export class TailngDrawerComponent {
+export class TngDrawer {
   /* =====================
    * Projected content
    * ===================== */

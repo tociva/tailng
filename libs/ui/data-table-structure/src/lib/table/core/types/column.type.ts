@@ -1,17 +1,17 @@
 import type { TemplateRef } from '@angular/core';
-import type { TailngAlign } from './align.type';
-import type { TailngCellContext, TailngHeaderContext } from './context.type';
+import type { TngAlign } from './align.type';
+import type { TngCellContext, TngHeaderContext } from './context.type';
 
-export type TailngResolvedColumn<T> = {
+export type TngResolvedColumn<T> = {
   id: string;
   header: string;
 
-  align?: TailngAlign;
+  align?: TngAlign;
   width?: string;
   klass?: string;
 
   value?: (row: T) => unknown;
 
-  headerTpl?: TemplateRef<TailngHeaderContext>;
-  cellTpl?: TemplateRef<TailngCellContext<T>>;
+  headerTpl?: TemplateRef<TngHeaderContext>;
+  cellTpl?: TemplateRef<TngCellContext<T>>;
 };

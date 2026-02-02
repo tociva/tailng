@@ -1,8 +1,8 @@
 import { signal } from '@angular/core';
-import type { TailngFilterValue, TailngFilters } from '../core/types';
+import type { TngFilterValue, TngFilters } from '../core/types';
 
 export class TngTableFilterFeature {
-  readonly filters = signal<TailngFilters>({});
+  readonly filters = signal<TngFilters>({});
 
   /** Active filter UI column id ('' means closed) */
   readonly openFilterColId = signal<string>('');
@@ -32,7 +32,7 @@ export class TngTableFilterFeature {
     return this.openFilterColId() === colId;
   }
 
-  setFilter(colId: string, value: TailngFilterValue): void {
+  setFilter(colId: string, value: TngFilterValue): void {
     this.filters.update((cur) => ({ ...cur, [colId]: value }));
   }
 
@@ -52,7 +52,7 @@ export class TngTableFilterFeature {
     this.closeFilter();
   }
 
-  filterValueFor(colId: string): TailngFilterValue | undefined {
+  filterValueFor(colId: string): TngFilterValue | undefined {
     return this.filters()[colId];
   }
 

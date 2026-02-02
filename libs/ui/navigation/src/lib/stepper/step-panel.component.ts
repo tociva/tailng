@@ -1,13 +1,13 @@
 import { Component, HostBinding, inject, input, computed } from '@angular/core';
-import { TailngStepperComponent } from './stepper.component';
+import { TngStepper } from './stepper.component';
 
 @Component({
   selector: 'tng-step-panel',
   standalone: true,
   template: `<ng-content />`,
 })
-export class TailngStepPanelComponent {
-  private readonly stepper = inject(TailngStepperComponent);
+export class TngStepPanel {
+  private readonly stepper = inject(TngStepper);
 
   /** Panel index this content belongs to */
   index = input.required<number>();

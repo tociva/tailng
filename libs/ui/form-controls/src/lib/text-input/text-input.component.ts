@@ -14,12 +14,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngTextInputComponent),
+      useExisting: forwardRef(() => TngTextInput),
       multi: true,
     },
   ],
 })
-export class TailngTextInputComponent implements ControlValueAccessor {
+export class TngTextInput implements ControlValueAccessor {
   /* ─────────────────────────
    * Inputs (public API)
    * ───────────────────────── */

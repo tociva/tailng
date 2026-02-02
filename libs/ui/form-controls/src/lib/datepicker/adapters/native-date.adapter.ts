@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TngDateAdapter, TngDateInput } from './tng-date-adapter';
 
 @Injectable({ providedIn: 'root' })
-export class TailngNativeDateAdapter implements TngDateAdapter {
+export class TngNativeDateAdapter implements TngDateAdapter {
   now(): Date {
     return new Date();
   }

@@ -1,4 +1,4 @@
-export type TailngCellContext<T> = {
+export type TngCellContext<T> = {
   /** row */
   $implicit: T;
   row: T;
@@ -13,7 +13,7 @@ export type TailngCellContext<T> = {
   value: unknown;
 };
 
-export type TailngHeaderContext = {
+export type TngHeaderContext = {
   colId: string;
   header: string;
 };

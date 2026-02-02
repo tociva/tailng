@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TailngSortHeaderDirective } from '../../directives/sort-header.directive';
+import { TngSortHeaderDirective } from '../../directives/sort-header.directive';
 
 @Component({
   selector: 'tng-sort-icon',
@@ -12,7 +12,7 @@ import { TailngSortHeaderDirective } from '../../directives/sort-header.directiv
     }
   `,
 })
-export class TailngSortIconComponent {
-  private readonly host = inject(TailngSortHeaderDirective);
+export class TngSortIcon {
+  private readonly host = inject(TngSortHeaderDirective);
   readonly dir = this.host.direction;
 }

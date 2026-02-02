@@ -14,12 +14,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngRadioButtonComponent),
+      useExisting: forwardRef(() => TngRadioButton),
       multi: true,
     },
   ],
 })
-export class TailngRadioButtonComponent implements ControlValueAccessor {
+export class TngRadioButton implements ControlValueAccessor {
   readonly id = input<string>('');
   readonly name = input<string>('');
 

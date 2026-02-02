@@ -1,9 +1,9 @@
 import { Component, ContentChild, ElementRef, TemplateRef, ViewChild, computed, effect, input, output, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 
-import { TailngConnectedOverlayComponent } from '../connected-overlay/connected-overlay.component';
-import { TailngOverlayPanelComponent } from '../overlay-panel/overlay-panel.component';
-import { TailngOverlayRefComponent } from '../overlay-ref/overlay-ref.component';
+import { TngConnectedOverlay } from '../connected-overlay/connected-overlay.component';
+import { TngOverlayPanel } from '../overlay-panel/overlay-panel.component';
+import { TngOverlayRef } from '../overlay-ref/overlay-ref.component';
 
 export type TngPopoverPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
 export type TngPopoverCloseReason = 'outside-click' | 'escape' | 'programmatic';
@@ -13,13 +13,13 @@ export type TngPopoverCloseReason = 'outside-click' | 'escape' | 'programmatic';
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    TailngConnectedOverlayComponent,
-    TailngOverlayPanelComponent,
-    TailngOverlayRefComponent,
+    TngConnectedOverlay,
+    TngOverlayPanel,
+    TngOverlayRef,
   ],
   templateUrl: './popover.component.html',
 })
-export class TailngPopoverComponent {
+export class TngPopover {
   /* =====================
    * Slots
    * ===================== */

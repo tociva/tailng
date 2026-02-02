@@ -2,7 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { booleanAttribute } from '@angular/core';
 
-type TailngIconSize = number | string;
+type TngIconSize = number | string;
 
 @Component({
   selector: 'tng-icon',
@@ -10,7 +10,7 @@ type TailngIconSize = number | string;
   imports: [NgIconComponent],
   templateUrl: './icon.component.html',
 })
-export class TailngIconComponent {
+export class TngIcon {
   /** Icon name from @ng-icons registry */
   name = input.required<string>();
 
@@ -19,7 +19,7 @@ export class TailngIconComponent {
    * - number => px
    * - string => passed as-is (e.g. '1em', '20px', '1.25rem')
    */
-  size = input<TailngIconSize>('1em');
+  size = input<TngIconSize>('1em');
 
   /** Additional classes for host element */
   klass = input<string>('');

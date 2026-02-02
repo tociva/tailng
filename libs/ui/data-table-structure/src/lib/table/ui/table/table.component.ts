@@ -13,10 +13,10 @@ import {
   signal,
 } from '@angular/core';
 
-import { TailngColComponent } from '../column/col.component';
+import { TngCol } from '../column/col.component';
 
-import { TailngTableController } from '../../core/controller/table.controller';
-import type { TailngSort, TailngAlign, TailngResolvedColumn, TailngCellContext, TailngHeaderContext } from '../../core/types';
+import { TngTableController } from '../../core/controller/table.controller';
+import type { TngSort, TngAlign, TngResolvedColumn, TngCellContext, TngHeaderContext } from '../../core/types';
 import { TNG_TABLE } from '../../core/tokens/table.token';
 
 @Component({
@@ -24,16 +24,16 @@ import { TNG_TABLE } from '../../core/tokens/table.token';
   standalone: true,
   imports: [NgTemplateOutlet, NgStyle],
   templateUrl: './table.component.html',
-  providers: [{ provide: TNG_TABLE, useFactory: () => new TailngTableController() }],
+  providers: [{ provide: TNG_TABLE, useFactory: () => new TngTableController() }],
 })
-export class TailngTableComponent<T extends Record<string, any> = any> implements AfterContentInit {
-  @ContentChildren(TailngColComponent)
-  private colDefs!: QueryList<TailngColComponent<T>>;
+export class TngTable<T extends Record<string, any> = any> implements AfterContentInit {
+  @ContentChildren(TngCol)
+  private colDefs!: QueryList<TngCol<T>>;
 
   private readonly controller = inject(TNG_TABLE);
 
   /** Emits on any sort change (both client & server modes). */
-  @Output() readonly sortChange = new EventEmitter<TailngSort>();
+  @Output() readonly sortChange = new EventEmitter<TngSort>();
 
   /* =====================
    * Inputs
@@ -57,7 +57,7 @@ export class TailngTableComponent<T extends Record<string, any> = any> implement
   /* =====================
    * Internal projected columns signal
    * ===================== */
-  private readonly projectedCols = signal<TailngColComponent<T>[]>([]);
+  private readonly projectedCols = signal<TngCol<T>[]>([]);
 
   constructor() {
     // Emit sortChange whenever controller.sort changes (skip initial emission)
@@ -81,7 +81,7 @@ export class TailngTableComponent<T extends Record<string, any> = any> implement
   /* =====================
    * Columns
    * ===================== */
-  readonly columns = computed<TailngResolvedColumn<T>[]>(() =>
+  readonly columns = computed<TngResolvedColumn<T>[]>(() =>
     this.projectedCols().map((c) => ({
       id: c.id(),
       header: c.resolveHeader(),
@@ -128,7 +128,7 @@ export class TailngTableComponent<T extends Record<string, any> = any> implement
   /* =====================
    * Rendering helpers
    * ===================== */
-  alignClass(align?: TailngAlign): string {
+  alignClass(align?: TngAlign): string {
     switch (align) {
       case 'right':
         return 'text-right';
@@ -139,16 +139,16 @@ export class TailngTableComponent<T extends Record<string, any> = any> implement
     }
   }
 
-  styleWidth(col: TailngResolvedColumn<T>): Record<string, string> | null {
+  styleWidth(col: TngResolvedColumn<T>): Record<string, string> | null {
     return col.width ? { width: col.width } : null;
   }
 
-  cellCtx(row: T, rowIndex: number, col: TailngResolvedColumn<T>): TailngCellContext<T> {
+  cellCtx(row: T, rowIndex: number, col: TngResolvedColumn<T>): TngCellContext<T> {
     const value = col.value ? col.value(row) : (row as any)?.[col.id];
     return { $implicit: row, row, rowIndex, colId: col.id, value };
   }
 
-  headerCtx(col: TailngResolvedColumn<T>): TailngHeaderContext {
+  headerCtx(col: TngResolvedColumn<T>): TngHeaderContext {
     return { colId: col.id, header: col.header };
   }
 

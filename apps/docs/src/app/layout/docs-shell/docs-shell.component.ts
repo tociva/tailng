@@ -2,13 +2,13 @@ import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
-  TailngAccordionComponent,
-  TailngExpansionPanelComponent,
+  TngAccordion,
+  TngExpansionPanel,
 } from '@tociva/tailng-ui/layout';
-import { TailngTextInputComponent } from '@tociva/tailng-ui/form-controls';
-import { TailngSidenavComponent } from '@tociva/tailng-ui/navigation';
+import { TngTextInput } from '@tociva/tailng-ui/form-controls';
+import { TngSidenav } from '@tociva/tailng-ui/navigation';
 import { docsNav } from '../../data/nav';
-import { TailngIconComponent } from '@tociva/tailng-icons/icon';
+import { TngIcon } from '@tociva/tailng-icons/icon';
 
 @Component({
   standalone: true,
@@ -18,12 +18,12 @@ import { TailngIconComponent } from '@tociva/tailng-icons/icon';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    TailngAccordionComponent,
-    TailngExpansionPanelComponent,
-    TailngSidenavComponent,
-    TailngTextInputComponent,
+    TngAccordion,
+    TngExpansionPanel,
+    TngSidenav,
+    TngTextInput,
     ReactiveFormsModule,
-    TailngIconComponent,
+    TngIcon,
   ],
   templateUrl: './docs-shell.component.html',
 })

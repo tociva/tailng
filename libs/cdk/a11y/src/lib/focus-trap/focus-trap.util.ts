@@ -1,6 +1,6 @@
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 
-export type TailngFocusTrapOptions = {
+export type TngFocusTrapOptions = {
   /** CDK 21 signature uses this boolean */
   deferCaptureElements?: boolean;
 
@@ -11,17 +11,17 @@ export type TailngFocusTrapOptions = {
   restoreFocus?: boolean;
 };
 
-export type TailngFocusTrapHandle = {
+export type TngFocusTrapHandle = {
   trap: FocusTrap;
   activate: () => void;
   destroy: () => void;
 };
 
-export const createTailngFocusTrap = (
+export const createTngFocusTrap = (
   factory: FocusTrapFactory,
   element: HTMLElement,
-  options: TailngFocusTrapOptions = {},
-): TailngFocusTrapHandle => {
+  options: TngFocusTrapOptions = {},
+): TngFocusTrapHandle => {
   const previousActive =
     options.restoreFocus === false
       ? null

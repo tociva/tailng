@@ -12,15 +12,15 @@ import { NgControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, of } from 'rxjs';
 
-export type TailngFormFieldSize = 'sm' | 'md' | 'lg';
-export type TailngFormFieldAppearance = 'outline' | 'filled';
+export type TngFormFieldSize = 'sm' | 'md' | 'lg';
+export type TngFormFieldAppearance = 'outline' | 'filled';
 
 @Component({
   selector: 'tng-form-field',
   standalone: true,
   templateUrl: './form-field.component.html',
 })
-export class TailngFormFieldComponent {
+export class TngFormField {
   // Get NgControl from projected child (input/select/custom CVA)
   private readonly ngControl = contentChild(NgControl, { descendants: true });
 
@@ -59,8 +59,8 @@ export class TailngFormFieldComponent {
   /* =====================
    * Variants
    * ===================== */
-  readonly size = input<TailngFormFieldSize>('md');
-  readonly appearance = input<TailngFormFieldAppearance>('outline');
+  readonly size = input<TngFormFieldSize>('md');
+  readonly appearance = input<TngFormFieldAppearance>('outline');
 
   /* =====================
    * Theming / class hooks (section-wise)

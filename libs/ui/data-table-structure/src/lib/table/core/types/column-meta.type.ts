@@ -1,13 +1,13 @@
-export type TailngEnumOption = { value: string; label: string };
+export type TngEnumOption = { value: string; label: string };
 
-export type TailngColumnFilterMeta =
+export type TngColumnFilterMeta =
   | { type: 'text'; placeholder?: string }
   | { type: 'number' }
   | { type: 'date' }
-  | { type: 'enum'; options: TailngEnumOption[] };
+  | { type: 'enum'; options: TngEnumOption[] };
 
-export type TailngColumnMeta = {
+export type TngColumnMeta = {
   id: string;
   label?: string;
-  filter?: TailngColumnFilterMeta;
+  filter?: TngColumnFilterMeta;
 };

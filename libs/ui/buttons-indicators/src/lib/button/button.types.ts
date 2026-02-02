@@ -1,2 +1,2 @@
-export type TailngButtonVariant = 'solid' | 'outline' | 'ghost';
-export type TailngButtonSize = 'sm' | 'md' | 'lg';
+export type TngButtonVariant = 'solid' | 'outline' | 'ghost';
+export type TngButtonSize = 'sm' | 'md' | 'lg';

@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './sort-header.component.html',
 })
-export class TailngSortHeaderComponent {
+export class TngSortHeader {
   // Welcome hello component - placeholder for Sort Header
 }

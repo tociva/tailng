@@ -5,7 +5,7 @@ import { Component, input, computed } from '@angular/core';
   standalone: true,
   templateUrl: './sidenav.component.html',
 })
-export class TailngSidenavComponent {
+export class TngSidenav {
   /* =====================
    * State
    * ===================== */

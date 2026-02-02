@@ -7,7 +7,7 @@ type TagColor = 'default' | 'primary' | 'success' | 'danger';
   standalone: true,
   templateUrl: './tag.component.html',
 })
-export class TailngTagComponent {
+export class TngTag {
   label = input<string | null>('Text');
   disabled = input<boolean>(false);
 

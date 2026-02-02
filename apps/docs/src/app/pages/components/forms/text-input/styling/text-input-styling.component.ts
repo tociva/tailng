@@ -1,21 +1,21 @@
 import { Component, computed, signal } from '@angular/core';
-import { TailngIconComponent } from '@tociva/tailng-icons/icon';
+import { TngIcon } from '@tociva/tailng-icons/icon';
 import {
-  TailngTextInputComponent
+  TngTextInput
 } from '@tociva/tailng-ui/form-controls';
-import { TailngTagComponent } from '@tociva/tailng-ui/buttons-indicators';
-import { ExampleBlockComponent, TailngExampleDemoDirective } from '../../../../../shared/example-block/example-block.component';
+import { TngTag } from '@tociva/tailng-ui/buttons-indicators';
+import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
 @Component({
   standalone: true,
   selector: 'docs-text-input-styling',
   templateUrl: './text-input-styling.component.html',
   imports: [
-    TailngTextInputComponent,
-    TailngIconComponent,
-    TailngTagComponent,
+    TngTextInput,
+    TngIcon,
+    TngTag,
     ExampleBlockComponent,
-    TailngExampleDemoDirective,
+    TngExampleDemo,
 
 ],
 })

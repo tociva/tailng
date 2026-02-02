@@ -1,6 +1,6 @@
 import { Component, computed, input, output } from '@angular/core';
 
-export type TailngOverlayCloseReason =
+export type TngOverlayCloseReason =
   | 'selection'
   | 'escape'
   | 'outside-click'
@@ -13,7 +13,7 @@ export type TailngOverlayCloseReason =
   templateUrl: './overlay-ref.component.html',
   exportAs: 'tngOverlayRef',
 })
-export class TailngOverlayRefComponent<R = TailngOverlayCloseReason> {
+export class TngOverlayRef<R = TngOverlayCloseReason> {
   /**
    * Controlled open state (parent owns state).
    * Use [(open)]="signal()" style with openChange.

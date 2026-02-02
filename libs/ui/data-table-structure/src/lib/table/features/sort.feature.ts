@@ -1,15 +1,15 @@
 // core/features/sort.feature.ts
 import { signal } from '@angular/core';
-import type { TailngSort, TailngSortDir } from '../core/types';
+import type { TngSort, TngSortDir } from '../core/types';
 
 export class TngTableSortFeature {
-  readonly sort = signal<TailngSort>({ active: '', direction: '' });
+  readonly sort = signal<TngSort>({ active: '', direction: '' });
 
   toggleSort(active: string): void {
     const cur = this.sort();
     const same = cur.active === active;
 
-    const nextDir: TailngSortDir =
+    const nextDir: TngSortDir =
       !same ? 'asc' : cur.direction === 'asc' ? 'desc' : cur.direction === 'desc' ? '' : 'asc';
 
     this.sort.set({
@@ -18,7 +18,7 @@ export class TngTableSortFeature {
     });
   }
 
-  setSort(sort: TailngSort): void {
+  setSort(sort: TngSort): void {
     this.sort.set(sort);
   }
 
@@ -26,7 +26,7 @@ export class TngTableSortFeature {
     this.sort.set({ active: '', direction: '' });
   }
 
-  directionFor(colId: string): TailngSortDir {
+  directionFor(colId: string): TngSortDir {
     const s = this.sort();
     return s.active === colId ? s.direction : '';
   }

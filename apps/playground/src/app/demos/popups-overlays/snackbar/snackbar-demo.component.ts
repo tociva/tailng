@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import {
-  TailngSnackbarHostComponent,
+  TngSnackbarHost,
   TngSnackbarItem,
 } from '@tociva/tailng-ui/popups-overlays';
 
@@ -9,7 +9,7 @@ const uid = () => Math.random().toString(36).slice(2, 9);
 @Component({
   selector: 'playground-snackbar-demo',
   standalone: true,
-  imports: [TailngSnackbarHostComponent],
+  imports: [TngSnackbarHost],
   templateUrl: './snackbar-demo.component.html',
 })
 export class SnackbarDemoComponent {

@@ -15,16 +15,16 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import {
-  TailngConnectedOverlayComponent,
-  TailngOptionListComponent,
-  TailngOverlayPanelComponent,
-  TailngOverlayRefComponent,
-  type TailngOverlayCloseReason,
+  TngConnectedOverlay,
+  TngOptionList,
+  TngOverlayPanel,
+  TngOverlayRef,
+  type TngOverlayCloseReason,
 } from '../../../../popups-overlays/src/public-api';
 
 import { OptionTplContext } from '@tociva/tailng-cdk/util';
 
-export type SelectCloseReason = TailngOverlayCloseReason;
+export type SelectCloseReason = TngOverlayCloseReason;
 export type SelectValueTplContext<T> = { $implicit: T };
 
 @Component({
@@ -32,21 +32,21 @@ export type SelectValueTplContext<T> = { $implicit: T };
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    TailngConnectedOverlayComponent,
-    TailngOverlayPanelComponent,
-    TailngOptionListComponent,
-    TailngOverlayRefComponent,
+    TngConnectedOverlay,
+    TngOverlayPanel,
+    TngOptionList,
+    TngOverlayRef,
   ],
   templateUrl: './select.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngSelectComponent),
+      useExisting: forwardRef(() => TngSelect),
       multi: true,
     },
   ],
 })
-export class TailngSelectComponent<T> implements ControlValueAccessor {
+export class TngSelect<T> implements ControlValueAccessor {
   /* =====================
    * Projected templates
    * ===================== */
@@ -61,8 +61,8 @@ export class TailngSelectComponent<T> implements ControlValueAccessor {
   triggerEl!: ElementRef<HTMLElement>;
 
   // Delegate list navigation keys to OptionList
-  @ViewChild(TailngOptionListComponent)
-  optionList?: TailngOptionListComponent<T>;
+  @ViewChild(TngOptionList)
+  optionList?: TngOptionList<T>;
 
   /* =====================
    * Inputs / Outputs

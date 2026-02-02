@@ -1,4 +1,4 @@
-import type { TailngButtonSize, TailngButtonVariant } from './button.types';
+import type { TngButtonSize, TngButtonVariant } from './button.types';
 
 const base =
   'inline-flex items-center justify-center gap-2 font-medium select-none ' +
@@ -8,13 +8,13 @@ const base =
   'focus-visible:ring-offset-2 focus-visible:ring-offset-background ' +
   'disabled:opacity-50 disabled:pointer-events-none';
 
-const sizes: Record<TailngButtonSize, string> = {
+const sizes: Record<TngButtonSize, string> = {
   sm: 'h-8 px-3 text-sm rounded',
   md: 'h-10 px-4 text-sm rounded-md',
   lg: 'h-12 px-5 text-base rounded-lg',
 };
 
-const variants: Record<TailngButtonVariant, string> = {
+const variants: Record<TngButtonVariant, string> = {
   solid:
     'bg-primary text-on-primary hover:bg-primary-hover',
 
@@ -27,8 +27,8 @@ const variants: Record<TailngButtonVariant, string> = {
 };
 
 export const buttonClasses = (
-  variant: TailngButtonVariant,
-  size: TailngButtonSize,
+  variant: TngButtonVariant,
+  size: TngButtonSize,
   opts?: { block?: boolean }
 ) =>
   [

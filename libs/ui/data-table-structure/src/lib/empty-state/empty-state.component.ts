@@ -5,7 +5,7 @@ import { Component, input } from '@angular/core';
   standalone: true,
   templateUrl: './empty-state.component.html',
 })
-export class TailngEmptyStateComponent {
+export class TngEmptyState {
   title = input<string>('No data available');
   message = input<string>('');
   icon = input<string>('');

@@ -7,7 +7,7 @@ import { TngCodeHighlighter, TngCodeLanguage } from './code-highlighter.type';
   standalone: true,
   templateUrl: './code-block.component.html',
 })
-export class TailngCodeBlockComponent {
+export class TngCodeBlock {
   private sanitizer = inject(DomSanitizer);
 
   // -------------------------

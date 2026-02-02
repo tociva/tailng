@@ -9,16 +9,16 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { TailngStepComponent } from './step.component';
+import { TngStep } from './step.component';
 
-export type TailngStepperOrientation = 'horizontal' | 'vertical';
+export type TngStepperOrientation = 'horizontal' | 'vertical';
 
 @Component({
   selector: 'tng-stepper',
   standalone: true,
   templateUrl: './stepper.component.html',
 })
-export class TailngStepperComponent {
+export class TngStepper {
   /* =====================
    * Inputs
    * ===================== */
@@ -37,7 +37,7 @@ export class TailngStepperComponent {
   linear = input(false, { transform: booleanAttribute });
 
   /** Orientation */
-  orientation = input<TailngStepperOrientation>('horizontal');
+  orientation = input<TngStepperOrientation>('horizontal');
 
   /* =====================
    * Outputs
@@ -58,7 +58,7 @@ export class TailngStepperComponent {
    * Children
    * ===================== */
 
-  readonly steps = contentChildren(TailngStepComponent, { descendants: true });
+  readonly steps = contentChildren(TngStep, { descendants: true });
 
   /* =====================
    * State

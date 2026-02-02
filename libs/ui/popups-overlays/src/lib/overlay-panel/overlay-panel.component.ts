@@ -1,13 +1,13 @@
 import { Component, computed, input } from '@angular/core';
-import { TailngFocusTrapDirective } from '@tociva/tailng-cdk/a11y';
+import { TngFocusTrap } from '@tociva/tailng-cdk/a11y';
 
 @Component({
   selector: 'tng-overlay-panel',
   standalone: true,
-  imports: [TailngFocusTrapDirective],
+  imports: [TngFocusTrap],
   templateUrl: './overlay-panel.component.html',
 })
-export class TailngOverlayPanelComponent {
+export class TngOverlayPanel {
   /** Consumer-provided class overrides / extensions */
   readonly klass = input<string>('');
 

@@ -1,12 +1,12 @@
 import { Directive, HostListener, inject } from '@angular/core';
-import { TailngMenuComponent } from './menu.component';
+import { TngMenu } from './menu.component';
 
 @Directive({
   selector: '[tngMenuItem]',
   standalone: true,
 })
-export class TailngMenuItemDirective {
-  private readonly menu = inject(TailngMenuComponent, { optional: true });
+export class TngMenuItem {
+  private readonly menu = inject(TngMenu, { optional: true });
 
   @HostListener('click')
   onClick(): void {

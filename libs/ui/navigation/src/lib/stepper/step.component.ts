@@ -9,15 +9,15 @@ import {
   signal,
 } from '@angular/core';
 import { booleanAttribute } from '@angular/core';
-import { TailngStepperComponent } from './stepper.component';
+import { TngStepper } from './stepper.component';
 
 @Component({
   selector: 'tng-step',
   standalone: true,
   template: `<ng-content />`,
 })
-export class TailngStepComponent {
-  private readonly stepper = inject(TailngStepperComponent);
+export class TngStep {
+  private readonly stepper = inject(TngStepper);
   private readonly el = inject(ElementRef<HTMLElement>);
 
   /* =====================

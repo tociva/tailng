@@ -15,12 +15,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngSliderComponent),
+      useExisting: forwardRef(() => TngSlider),
       multi: true,
     },
   ],
 })
-export class TailngSliderComponent implements ControlValueAccessor {
+export class TngSlider implements ControlValueAccessor {
   // ids
   readonly id = input<string>('');
   readonly name = input<string>('');

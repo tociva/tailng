@@ -14,7 +14,7 @@ export type TngSnackbarPosition =
   standalone: true,
   templateUrl: './snackbar-host.component.html',
 })
-export class TailngSnackbarHostComponent {
+export class TngSnackbarHost {
   /** Controlled items array */
   readonly items = input<TngSnackbarItem[]>([]);
 

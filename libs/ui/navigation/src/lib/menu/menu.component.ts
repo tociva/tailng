@@ -12,15 +12,15 @@ import {
 } from '@angular/core';
 
 import {
-  TailngConnectedOverlayComponent,
-  TailngOverlayPanelComponent,
-  TailngOverlayRefComponent,
-  type TailngOverlayCloseReason,
+  TngConnectedOverlay,
+  TngOverlayPanel,
+  TngOverlayRef,
+  type TngOverlayCloseReason,
 } from '../../../../popups-overlays/src/public-api';
 
-export type MenuCloseReason = TailngOverlayCloseReason;
+export type MenuCloseReason = TngOverlayCloseReason;
 
-import { TailngMenuTemplateDirective } from './menu-template.directive';
+import { TngMenuTemplate } from './menu-template.directive';
 
 export type TngMenuPlacement =
   | 'bottom-start'
@@ -34,16 +34,16 @@ export type TngMenuPlacement =
   imports: [
     CommonModule,
     NgTemplateOutlet,
-    TailngConnectedOverlayComponent,
-    TailngOverlayPanelComponent,
-    TailngOverlayRefComponent,
+    TngConnectedOverlay,
+    TngOverlayPanel,
+    TngOverlayRef,
   ],
   templateUrl: './menu.component.html',
 })
-export class TailngMenuComponent {
+export class TngMenu {
   
-  @ContentChild(TailngMenuTemplateDirective)
-  private readonly tplDir?: TailngMenuTemplateDirective;
+  @ContentChild(TngMenuTemplate)
+  private readonly tplDir?: TngMenuTemplate;
 
   get menuTemplate() {
     return this.tplDir?.tpl;

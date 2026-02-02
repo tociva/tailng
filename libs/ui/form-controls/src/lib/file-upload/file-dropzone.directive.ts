@@ -1,6 +1,6 @@
 import { Directive, HostListener, input, output, signal, computed } from '@angular/core';
 
-export type TailngFileDrop = {
+export type TngFileDrop = {
   files: File[];
   items?: DataTransferItemList;
   raw?: DataTransfer;
@@ -11,7 +11,7 @@ export type TailngFileDrop = {
   standalone: true,
   exportAs: 'tngFileDropzone',
 })
-export class TailngFileDropzoneDirective {
+export class TngFileDropzone {
   /** Disable drag/drop interactions */
   readonly disabled = input(false);
 

@@ -25,7 +25,7 @@ export type TngBreadcrumbItem = {
   imports: [RouterLink],
   templateUrl: './breadcrumbs.component.html',
 })
-export class TailngBreadcrumbsComponent {
+export class TngBreadcrumbs {
   /** Items */
   readonly items = input<TngBreadcrumbItem[]>([]);
 

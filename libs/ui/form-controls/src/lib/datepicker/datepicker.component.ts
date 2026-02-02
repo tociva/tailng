@@ -13,13 +13,13 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import {
-  TailngConnectedOverlayComponent,
-  TailngOverlayPanelComponent,
-  TailngOverlayRefComponent,
-  type TailngOverlayCloseReason,
+  TngConnectedOverlay,
+  TngOverlayPanel,
+  TngOverlayRef,
+  type TngOverlayCloseReason,
 } from '../../../../popups-overlays/src/public-api';
 
-import { TailngNativeDateAdapter } from './adapters/native-date.adapter';
+import { TngNativeDateAdapter } from './adapters/native-date.adapter';
 import { TNG_DATE_ADAPTER, TngDateAdapter } from './adapters/tng-date-adapter';
 import {
   computeNextCaretPos,
@@ -54,21 +54,21 @@ type CalendarCell = {
   selector: 'tng-datepicker',
   standalone: true,
   imports: [
-    TailngOverlayRefComponent,
-    TailngConnectedOverlayComponent,
-    TailngOverlayPanelComponent,
+    TngOverlayRef,
+    TngConnectedOverlay,
+    TngOverlayPanel,
   ],
   templateUrl: './datepicker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngDatepickerComponent),
+      useExisting: forwardRef(() => TngDatepicker),
       multi: true,
     },
   ],
 })
-export class TailngDatepickerComponent implements ControlValueAccessor {
+export class TngDatepicker implements ControlValueAccessor {
   /* =====================
    * Inputs
    * ===================== */
@@ -124,7 +124,7 @@ export class TailngDatepickerComponent implements ControlValueAccessor {
   readonly isDisabled = signal(false);
 
   private readonly injectedAdapter = inject(TNG_DATE_ADAPTER, { optional: true });
-  private readonly nativeAdapter = inject(TailngNativeDateAdapter);
+  private readonly nativeAdapter = inject(TngNativeDateAdapter);
 
   readonly adapter = computed(
     () => this.dateAdapter() ?? this.injectedAdapter ?? this.nativeAdapter,
@@ -426,7 +426,7 @@ export class TailngDatepickerComponent implements ControlValueAccessor {
   /* =====================
    * Overlay control
    * ===================== */
-  open(_reason: TailngOverlayCloseReason) {
+  open(_reason: TngOverlayCloseReason) {
     if (this.isDisabled()) return;
     this.isOpen.set(true);
   
@@ -442,7 +442,7 @@ export class TailngDatepickerComponent implements ControlValueAccessor {
   }
   
 
-  close(_reason: TailngOverlayCloseReason) {
+  close(_reason: TngOverlayCloseReason) {
     if (!this.isOpen()) return;
     this.isOpen.set(false);
   }
@@ -455,7 +455,7 @@ export class TailngDatepickerComponent implements ControlValueAccessor {
     open ? this.open('programmatic') : this.close('programmatic');
   }
 
-  onOverlayClosed(reason: TailngOverlayCloseReason) {
+  onOverlayClosed(reason: TngOverlayCloseReason) {
     this.close(reason);
   }
 

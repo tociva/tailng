@@ -1,4 +1,4 @@
-export interface TailngControllerFeature {
+export interface TngControllerFeature {
   readonly featureId: string;
 
   onInit?(): void;

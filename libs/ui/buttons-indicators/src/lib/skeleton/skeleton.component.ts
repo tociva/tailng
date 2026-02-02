@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { booleanAttribute } from '@angular/core';
 
-export type TailngSkeletonVariant = 'text' | 'circular' | 'rectangular';
+export type TngSkeletonVariant = 'text' | 'circular' | 'rectangular';
 
 @Component({
   selector: 'tng-skeleton',
@@ -9,12 +9,12 @@ export type TailngSkeletonVariant = 'text' | 'circular' | 'rectangular';
   templateUrl: './skeleton.component.html',
   styleUrl: './skeleton.component.css',
 })
-export class TailngSkeletonComponent {
+export class TngSkeleton {
   /* =====================
    * Inputs
    * ===================== */
 
-  variant = input<TailngSkeletonVariant>('text');
+  variant = input<TngSkeletonVariant>('text');
 
   /**
    * Prefer widthKlass/heightKlass for Tailwind-first usage.

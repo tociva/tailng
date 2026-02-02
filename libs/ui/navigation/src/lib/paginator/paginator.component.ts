@@ -11,7 +11,7 @@ export type TngPaginatorChange = {
   standalone: true,
   templateUrl: './paginator.component.html',
 })
-export class TailngPaginatorComponent {
+export class TngPaginator {
   /* =====================
    * Inputs
    * ===================== */

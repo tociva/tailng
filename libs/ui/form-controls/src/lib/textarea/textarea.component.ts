@@ -14,12 +14,12 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngTextareaComponent),
+      useExisting: forwardRef(() => TngTextarea),
       multi: true,
     },
   ],
 })
-export class TailngTextareaComponent implements ControlValueAccessor {
+export class TngTextarea implements ControlValueAccessor {
   placeholder = input<string>('');
   disabled = input(false);
   rows = input<number>(4);

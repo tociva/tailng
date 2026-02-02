@@ -18,35 +18,35 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionTplContext } from '@tociva/tailng-cdk/util';
 
 import {
-  TailngConnectedOverlayComponent,
-  TailngOptionListComponent,
-  TailngOverlayPanelComponent,
-  TailngOverlayRefComponent,
-  type TailngOverlayCloseReason,
+  TngConnectedOverlay,
+  TngOptionList,
+  TngOverlayPanel,
+  TngOverlayRef,
+  type TngOverlayCloseReason,
 } from '../../../../popups-overlays/src/public-api';
 
-export type AutocompleteCloseReason = TailngOverlayCloseReason;
+export type AutocompleteCloseReason = TngOverlayCloseReason;
 
 @Component({
   selector: 'tng-autocomplete',
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    TailngConnectedOverlayComponent,
-    TailngOverlayPanelComponent,
-    TailngOptionListComponent,
-    TailngOverlayRefComponent,
+    TngConnectedOverlay,
+    TngOverlayPanel,
+    TngOptionList,
+    TngOverlayRef,
   ],
   templateUrl: './autocomplete.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TailngAutocompleteComponent),
+      useExisting: forwardRef(() => TngAutocomplete),
       multi: true,
     },
   ],
 })
-export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
+export class TngAutocomplete<T> implements ControlValueAccessor {
   /* =====================
    * Projected templates
    * ===================== */
@@ -63,8 +63,8 @@ export class TailngAutocompleteComponent<T> implements ControlValueAccessor {
   inputEl!: ElementRef<HTMLInputElement>;
 
   // We call optionList.onKeydown(ev) from the INPUT keydown handler
-  @ViewChild(TailngOptionListComponent)
-  optionList?: TailngOptionListComponent<T>;
+  @ViewChild(TngOptionList)
+  optionList?: TngOptionList<T>;
 
   
   /* =====================

@@ -1,2 +1,2 @@
-export type TailngSortDir = '' | 'asc' | 'desc';
-export type TailngSort = { active: string; direction: TailngSortDir };
+export type TngSortDir = '' | 'asc' | 'desc';
+export type TngSort = { active: string; direction: TngSortDir };

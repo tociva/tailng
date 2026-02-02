@@ -5,6 +5,6 @@ import { Directive, TemplateRef } from '@angular/core';
   selector: 'ng-template[tngMenuTemplate]',
   standalone: true,
 })
-export class TailngMenuTemplateDirective {
+export class TngMenuTemplate {
   constructor(public readonly tpl: TemplateRef<unknown>) {}
 }
