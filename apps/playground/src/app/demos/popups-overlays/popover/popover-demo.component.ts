@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { TngPopover } from '@tociva/tailng-ui/popups-overlays';
+import { TngPopover } from '@tociva/tailng-ui/overlay';
 
 @Component({
   selector: 'playground-popover-demo',

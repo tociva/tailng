@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { TngOptionList, TngOverlayPanel } from '@tociva/tailng-ui/popups-overlays';
+import { TngOptionList, TngOverlayPanel } from '@tociva/tailng-ui/overlay';
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 
 interface Person {

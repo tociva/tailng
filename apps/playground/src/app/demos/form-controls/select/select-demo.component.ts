@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TngSelect } from '@tociva/tailng-ui/form-controls';
+import { TngSelect } from '@tociva/tailng-ui/form';
 
 interface Country {
   code: string;

@@ -5,7 +5,7 @@ import {
   TngAccordion,
   TngExpansionPanel,
 } from '@tociva/tailng-ui/layout';
-import { TngTextInput } from '@tociva/tailng-ui/form-controls';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 import { TngSidenav } from '@tociva/tailng-ui/navigation';
 import { docsNav } from '../../data/nav';
 import { TngIcon } from '@tociva/tailng-icons/icon';

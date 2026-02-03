@@ -7,7 +7,7 @@ import {
   TngMenuItem,
   TngMenuTemplate,
 } from '@tociva/tailng-ui/navigation';
-import { TngSlideToggle } from '@tociva/tailng-ui/form-controls';
+import { TngSlideToggle } from '@tociva/tailng-ui/form';
 import { DemoThemeService, TngTheme } from './shared/demo-theme.service';
 
 @Component({

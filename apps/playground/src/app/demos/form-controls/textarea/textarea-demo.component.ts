@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TngTextarea } from '@tociva/tailng-ui/form-controls';
+import { TngTextarea } from '@tociva/tailng-ui/form';
 
 @Component({
   selector: 'playground-textarea-demo',

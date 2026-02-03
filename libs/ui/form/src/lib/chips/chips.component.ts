@@ -21,7 +21,7 @@ import {
   TngOverlayPanel,
   TngOverlayRef,
   type TngOverlayCloseReason,
-} from '@tociva/tailng-ui/popups-overlays';
+} from '@tociva/tailng-ui/overlay';
 
 import { OptionTplContext } from '@tociva/tailng-cdk/util';
 

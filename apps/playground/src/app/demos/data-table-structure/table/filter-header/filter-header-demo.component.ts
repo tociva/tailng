@@ -9,7 +9,7 @@ import {
   TngFilterTrigger,
   TngSortHeaderDirective,
   TngColumnFilterMeta,
-} from '@tociva/tailng-ui/data-table-structure';
+} from '@tociva/tailng-ui/table';
 
 type InvoiceRow = {
   id: string;

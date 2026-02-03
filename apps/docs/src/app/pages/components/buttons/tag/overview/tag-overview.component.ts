@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TngTag, TngBadge} from '@tociva/tailng-ui/buttons-indicators';
+import { TngTag, TngBadge} from '@tociva/tailng-ui/primitives';
 
 @Component({
   standalone: true,

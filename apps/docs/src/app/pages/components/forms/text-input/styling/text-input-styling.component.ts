@@ -2,8 +2,8 @@ import { Component, computed, signal } from '@angular/core';
 import { TngIcon } from '@tociva/tailng-icons/icon';
 import {
   TngTextInput
-} from '@tociva/tailng-ui/form-controls';
-import { TngTag } from '@tociva/tailng-ui/buttons-indicators';
+} from '@tociva/tailng-ui/form';
+import { TngTag } from '@tociva/tailng-ui/primitives';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
 @Component({

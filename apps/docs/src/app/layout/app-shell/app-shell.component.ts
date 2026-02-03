@@ -8,7 +8,7 @@ import {
 import { TngIcon } from '@tociva/tailng-icons/icon';
 import { docsNav } from '../../data/nav';
 import { DocsThemeService, TngTheme } from '../../shared/docs-theme.service';
-import { TngSlideToggle } from '@tociva/tailng-ui/form-controls';
+import { TngSlideToggle } from '@tociva/tailng-ui/form';
 
 @Component({
   standalone: true,

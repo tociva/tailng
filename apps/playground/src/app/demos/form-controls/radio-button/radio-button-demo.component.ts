@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TngRadioButton } from '@tociva/tailng-ui/form-controls';
+import { TngRadioButton } from '@tociva/tailng-ui/form';
 
 @Component({
   selector: 'playground-radio-button-demo',

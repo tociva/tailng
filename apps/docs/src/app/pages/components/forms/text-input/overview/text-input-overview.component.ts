@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { TngIcon } from '@tociva/tailng-icons/icon';
-import { TngTag } from '@tociva/tailng-ui/buttons-indicators';
-import { TngTextInput } from '@tociva/tailng-ui/form-controls';
+import { TngTag } from '@tociva/tailng-ui/primitives';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
 @Component({

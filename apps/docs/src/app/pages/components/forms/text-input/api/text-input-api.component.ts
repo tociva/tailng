@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, computed, inject, signal } from '@angular/core';
 import { TngCodeBlock } from '@tociva/tailng-ui/utilities';
-import { TngTable, TngCol } from '@tociva/tailng-ui/data-table-structure';
-import { TngTag } from '@tociva/tailng-ui/buttons-indicators';
+import { TngTable, TngCol } from '@tociva/tailng-ui/table';
+import { TngTag } from '@tociva/tailng-ui/primitives';
 import { ShikiHighlighterService } from '../../../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../../../shared/tng-shiki.adapter';
 

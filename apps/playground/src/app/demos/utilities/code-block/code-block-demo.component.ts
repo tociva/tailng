@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TngIcon } from '@tociva/tailng-icons/icon';
-import { TngBadge, TngButton } from '@tociva/tailng-ui/buttons-indicators';
+import { TngBadge, TngButton } from '@tociva/tailng-ui/primitives';
 import {
   TngCodeBlock
 } from '@tociva/tailng-ui/utilities';

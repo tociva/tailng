@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TngTextInput } from '@tociva/tailng-ui/form-controls';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 import { TngIcon } from '@tociva/tailng-icons/icon';
 
 @Component({

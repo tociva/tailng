@@ -1,6 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TngBadge, TngButton } from '@tociva/tailng-ui/buttons-indicators';
+import { TngBadge, TngButton } from '@tociva/tailng-ui/primitives';
 
 @Component({
   standalone: true,

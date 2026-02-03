@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TngRipple } from '@tociva/tailng-ui/buttons-indicators';
+import { TngRipple } from '@tociva/tailng-ui/primitives';
 import { TngIcon } from '@tociva/tailng-icons/icon';
 
 @Component({
