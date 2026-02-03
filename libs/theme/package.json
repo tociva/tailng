@@ -11,9 +11,8 @@
   "bugs": {
     "url": "https://github.com/tociva/tailng/issues"
   },
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": ["*.css", "tailwind/*.cjs"],
+  "files": ["tokens", "tailwind", "package.json", "README.md", "LICENSE"],
   "peerDependencies": {
     "tailwindcss": "^3.4.0"
   },

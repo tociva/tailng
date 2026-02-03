@@ -12,6 +12,7 @@
     "url": "https://github.com/tociva/tailng/issues"
   },
   "sideEffects": false,
+  "files": ["fesm2022", "types", "tailwind", "package.json", "README.md", "LICENSE"],
   "peerDependencies": {
     "@angular/core": "^21.0.0",
     "@angular/common": "^21.0.0",

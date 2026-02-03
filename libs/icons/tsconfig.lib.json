@@ -2,15 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "../../",
-
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
     "declaration": true,
     "declarationMap": true,
     "lib": ["ES2022", "DOM"],
-
     "paths": {
       "@tociva/tailng-cdk": ["libs/cdk/src/public-api.ts"],
       "@tociva/tailng-icons": ["libs/icons/src/public-api.ts"],
@@ -18,9 +15,7 @@
       "@tociva/tailng-ui": ["libs/ui/src/public-api.ts"]
     }
   },
-  "angularCompilerOptions": {
-    "compilationMode": "partial"
-  },
+  "angularCompilerOptions": { "compilationMode": "partial" },
   "include": ["src/**/*.ts"],
   "exclude": ["**/*.spec.ts", "node_modules", "dist"]
 }
