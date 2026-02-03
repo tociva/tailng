@@ -4,14 +4,14 @@
   <tng-sidenav class="hidden md:block">
     <aside class="hidden md:flex flex-col flex-shrink-0 w-full px-5 ">
       <!-- Sidebar search -->
-      <div class="sticky top-0 z-30 bg-bg p-0 border-b border-slate-200">
+      <div class="sticky top-0 z-30 bg-bg p-0 border-b border-primary">
         <form [formGroup]="form">
           <tng-text-input
-            rootKlass="focus-within:!ring-0 focus-within:!ring-offset-0 border-0 focus-within:border-b-2 focus-within:border-black rounded-none"
+            rootKlass="focus-within:!ring-0 focus-within:!ring-offset-0 border-0 focus-within:border-b-2 focus-within:border-primary rounded-none"
             formControlName="text"
             placeholder="Search…"
           >
-            <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-gray-400"></tng-icon>
+            <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-fg"></tng-icon>
           </tng-text-input>
         </form>
       </div>
@@ -27,8 +27,8 @@
                   @if (item.title.toLowerCase().includes(normalizedQuery())) {
                     <a
                       [routerLink]="item.route"
-                      routerLinkActive="bg-slate-100 text-slate-900"
-                      class="block rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      routerLinkActive="bg-slate-100 text-primary"
+                      class="block rounded px-3 py-2 text-sm text-fg hover:bg-slate-50"
                     >
                       {{ item.title }}
                     </a>

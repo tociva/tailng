@@ -25,7 +25,7 @@ import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/exa
 })
 export class TextInputExamplesComponent {
 
-  // Form for reactive forms example
+   // Form for reactive forms example
   form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -75,62 +75,48 @@ export class TextInputExamplesComponent {
   }
 
   // Code examples
-  readonly basicExample = computed(() => `<tng-text-input
-  placeholder="Enter text..."
-/>
-`);
+  readonly basicExampleHtml = computed(
+    () => `
+  <form [formGroup]="form">
+    <tng-text-input
+      formControlName=username
+      placeholder="Enter Username"
+    />
+  </form>
+`,
+  );
 
-  readonly reactiveFormsExample = computed(() => `import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { computed } from '@angular/core';
-
+  readonly basicExampleTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
+import { TailngTextInputComponent } from '@tociva/tailng-ui';
 @Component({
-  // ...
-  imports: [ReactiveFormsModule, TngTextInput, TngIcon],
+  selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TailngTextInputComponent],
+  templateUrl: './text-input.component.html',
 })
-export class MyComponent {
+export class TextInputDemoComponent {
   form = new FormGroup({
-    email: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.email],
-    }),
-    search: new FormControl('', { nonNullable: true }),
-  });
+    username: new FormControl('', { nonNullable: true })
+});
+`,
+  );
 
-  get emailCtrl() {
-    return this.form.controls.email;
-  }
-
-  get searchCtrl() {
-    return this.form.controls.search;
-  }
-
-  // Show clear icon only when search has value
-  readonly hasSearchValue = computed(() => this.searchCtrl.value.length > 0);
-
-  clearSearch(): void {
-    this.searchCtrl.setValue('');
-  }
-}
-
-<!-- Template -->
+  readonly reactiveFormsExampleHtml = computed(
+    () => `
 <form [formGroup]="form">
   <tng-text-input
     formControlName="email"
     placeholder="Enter email"
     type="email"
   />
-  
-  @if (emailCtrl.touched && emailCtrl.invalid) {
-    <p class="text-sm text-red-600 mt-1">
-      @if (emailCtrl.hasError('required')) {
-        Email is required
-      } @else if (emailCtrl.hasError('email')) {
-        Please enter a valid email
-      }
-    </p>
-  }
-
-  <!-- Search with clear icon -->
+  <tng-text-input
+    formControlName="password"
+    placeholder="Enter password"
+    type="password"
+  />
   <tng-text-input
     formControlName="search"
     placeholder="Search..."
@@ -141,115 +127,183 @@ export class MyComponent {
       name="bootstrapSearch"
       class="ml-3 text-muted"
     />
-    @if (hasSearchValue()) {
-      <tng-icon
-        tngSuffix
-        name="bootstrapX"
-        class="mr-3 text-muted cursor-pointer hover:text-foreground"
-        (click)="clearSearch()"
-      />
-    }
   </tng-text-input>
 </form>
-`);
+`,
+  );
 
-  readonly prefixSuffixExample = computed(() => `<tng-text-input placeholder="Search...">
+  readonly reactiveFormsExampleTs = computed(
+    () => `
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { computed } from '@angular/core';
+import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+
+@Component({
+ selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  templateUrl: './text-input.component.html',
+})
+export class MyComponent {
+  form = new FormGroup({
+    email: new FormControl('', { nonNullable: true }),
+    password: new FormControl('', { nonNullable: true })
+    search: new FormControl('', { nonNullable: true }),
+  });
+}
+`
+  );
+
+  readonly prefixSuffixExampleHtml = computed(
+    () => `
+<form [formGroup]="form">    
+<tng-text-input placeholder="Search...">
   <tng-icon
     tngPrefix
     name="bootstrapSearch"
     class="ml-3 text-muted"
   />
 </tng-text-input>
+  <tng-text-input placeholder="Enter email">
+    <tng-icon
+      tngSuffix
+      name="bootstrapCheck"
+      class="mr-3 text-green-600"
+    />
+  </tng-text-input>
+  <tng-text-input placeholder="Search users...">
+    <tng-icon
+      tngPrefix
+      name="bootstrapSearch"
+      class="ml-3 text-muted"
+    />
+    <tng-icon
+      tngSuffix
+      name="bootstrapX"
+      class="mr-3 text-red-500 cursor-pointer"
+    />
+  </tng-text-input>
+</form>
+`,
+  );
 
-<!-- With suffix -->
-<tng-text-input placeholder="Enter email">
-  <tng-icon
-    tngSuffix
-    name="bootstrapCheck"
-    class="mr-3 text-green-600"
+  readonly prefixSuffixExampleTs = computed(
+    () => `
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { computed } from '@angular/core';
+import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+
+@Component({
+ selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  templateUrl: './text-input.component.html',
+})
+export class MyComponent {
+  form = new FormGroup({
+    email: new FormControl('', { nonNullable: true }),
+    search: new FormControl('', { nonNullable: true }),
+  });
+}
+`
+  );
+
+  readonly inputTypesExampleHtml = computed(
+    () => `
+<form [formGroup]="form">  
+  <tng-text-input
+    formControlName="name"
+    placeholder="Enter name"
+    type="text"
   />
-</tng-text-input>
-
-<!-- With both prefix and suffix -->
-<tng-text-input placeholder="Search users...">
-  <tng-icon
-    tngPrefix
-    name="bootstrapSearch"
-    class="ml-3 text-muted"
+  <!-- Email input -->
+  <tng-text-input
+  formControlName="email"
+    placeholder="Enter email"
+    type="email"
   />
-  <tng-icon
-    tngSuffix
-    name="bootstrapX"
-    class="mr-3 text-red-500 cursor-pointer"
-    (click)="clearSearch()"
+  <!-- Password input -->
+  <tng-text-input
+  formControlName="password"
+    placeholder="Enter password"
+    type="password"
   />
-</tng-text-input>
-`);
+  <!-- Search input -->
+  <tng-text-input
+  formControlName="search"
+    placeholder="Search..."
+    type="search"
+  />
+  <!-- URL input -->
+  <tng-text-input
+  formControlName="url"
+    placeholder="Enter URL"
+    type="url"
+  />
+  <!-- Tel input -->
+  <tng-text-input
+  formControlName="tel"
+    placeholder="Enter phone number"
+    type="tel"
+  />
+</form>
+`,
+  );
+  readonly inputTypesExampleTs = computed(
+    () => `
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { computed } from '@angular/core';
+import { TailngTextInputComponent } from '@tociva/tailng-ui';
 
-  readonly inputTypesExample = computed(() => `<!-- Text input -->
-<tng-text-input
-  placeholder="Enter name"
-  type="text"
-/>
+@Component({
+ selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TailngTextInputComponent],
+  templateUrl: './text-input.component.html',
+})
+export class MyComponent {
+  form = new FormGroup({
+    name: new FormControl('', { nonNullable: true }),
+    email: new FormControl('', { nonNullable: true }),
+    password: new FormControl('', { nonNullable: true }),
+    search: new FormControl('', { nonNullable: true }),
+    url: new FormControl('', { nonNullable: true }),
+    tel: new FormControl('', { nonNullable: true }),
+  });
+}
+`
+  );
+  readonly statesExample = computed(
+    () => `
+<form [formGroup]="form">  
+  <tng-text-input
+    placeholder="Disabled input"
+    [disabled]="true"
+  />
+  <!-- Readonly state with form control -->
+  <tng-text-input
+    formControlName="readonlyValue"
+    placeholder="Readonly input"
+    [readonly]="true"
+  />
 
-<!-- Email input -->
-<tng-text-input
-  placeholder="Enter email"
-  type="email"
-/>
+  <!-- Pre-filled value with form control -->
+  <tng-text-input
+    formControlName="prefilledValue"
+    placeholder="Enter text"
+  />
 
-<!-- Password input -->
-<tng-text-input
-  placeholder="Enter password"
-  type="password"
-/>
+  <!-- Or using ngModel for template-driven forms -->
+  <tng-text-input
+    [(ngModel)]="myValue"
+    placeholder="Enter text"
+  />
+</form>
+`,
+  );
 
-<!-- Search input -->
-<tng-text-input
-  placeholder="Search..."
-  type="search"
-/>
-
-<!-- URL input -->
-<tng-text-input
-  placeholder="Enter URL"
-  type="url"
-/>
-
-<!-- Tel input -->
-<tng-text-input
-  placeholder="Enter phone number"
-  type="tel"
-/>
-`);
-
-  readonly statesExample = computed(() => `<!-- Disabled state -->
-<tng-text-input
-  placeholder="Disabled input"
-  [disabled]="true"
-/>
-
-<!-- Readonly state with form control -->
-<tng-text-input
-  formControlName="readonlyValue"
-  placeholder="Readonly input"
-  [readonly]="true"
-/>
-
-<!-- Pre-filled value with form control -->
-<tng-text-input
-  formControlName="prefilledValue"
-  placeholder="Enter text"
-/>
-
-<!-- Or using ngModel for template-driven forms -->
-<tng-text-input
-  [(ngModel)]="myValue"
-  placeholder="Enter text"
-/>
-`);
-
-  readonly validationExample = computed(() => `import { Validators } from '@angular/forms';
+  readonly validationExample = computed(
+    () => `import { Validators } from '@angular/forms';
 
 form = new FormGroup({
   username: new FormControl('', {
@@ -262,7 +316,6 @@ form = new FormGroup({
   }),
 });
 
-<!-- Template with validation messages -->
 <tng-text-input
   formControlName="username"
   placeholder="Username"
@@ -284,18 +337,25 @@ form = new FormGroup({
     }
   </div>
 }
-`);
+`,
+  );
 
-  readonly customStylingExample = computed(() => `<tng-text-input
-  placeholder="Custom styled input"
-  rootKlass="border-2 border-purple-500 rounded-xl shadow-lg"
-  inputKlass="text-purple-700 placeholder:text-purple-300"
->
-  <tng-icon
-    tngPrefix
-    name="bootstrapSearch"
-    class="ml-3 text-purple-600"
-  />
-</tng-text-input>
-`);
+  readonly customStylingExample = computed(
+    () => `
+<form [formGroup]="form">  
+  <tng-text-input
+    placeholder="Custom styled input"
+    rootKlass="border-2 border-purple-500 rounded-xl shadow-lg"
+    inputKlass="text-purple-700 placeholder:text-purple-300"
+    >
+    <tng-icon
+      tngPrefix
+      name="bootstrapSearch"
+      class="ml-3 text-purple-600"
+    />
+  </tng-text-input>
+</form>
+`,
+  );
 }
+

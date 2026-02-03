@@ -1,15 +1,51 @@
-<div class="h-screen overflow-hidden bg-white text-slate-900 flex flex-col">
+<div class="h-screen overflow-hidden bg-bg text-primary flex flex-col">
   <!-- Single header for entire app -->
-  <header class="sticky top-0 z-20 h-14 border-b border-slate-200 bg-white flex-shrink-0">
+  <header class="relative top-0 z-50 h-14 border-b border-border bg-bg flex-shrink-0">
     <div class="flex w-full items-center justify-between px-4 h-full">
       <div class="flex items-center gap-3 md:gap-4">
-        @if (isComponentsRoute()) {
-          <button
-            class="md:hidden rounded border border-slate-200 px-3 py-2"
+        @if (!mobileOpen()) {
+          <tng-menu
+            placement="bottom-end"
+            rootKlass="md:hidden"
+            panelKlass="fixed inset-y-10 left-0 z-30 h-screen w-80 bg-white p-4 overflow-y-auto border-primary"
+          >
+            <tng-icon tngMenuTrigger name="bootstrapList" class="text-2xl"></tng-icon>
+            <ng-template tngMenuTemplate>
+              @for (section of nav; track section.title) {
+                <div>
+                  <div
+                    class="mb-2 text-xs w-full font-semibold uppercase tracking-wide text-primary"
+                  >
+                    {{ section.title }}
+                  </div>
+                  <div class="space-y-1">
+                    @for (item of section.children ?? []; track item.title) {
+                      <a
+                        tngMenuItem
+                        [routerLink]="item.route"
+                        routerLinkActive="bg-slate-100 text-slate-900"
+                        class="block rounded px-3 py-2 text-sm text-fg hover:bg-fg"
+                      >
+                        {{ item.title }}
+                      </a>
+                    }
+                  </div>
+                </div>
+              }
+            </ng-template>
+          </tng-menu>
+
+          <!-- <button
+            class="md:hidden rounded border border-primary px-3 py-2"
             (click)="mobileOpen.set(!mobileOpen())"
           >
             Menu
-          </button>
+          </button> -->
+          <!-- <tng-icon
+      name="bootstrapList"
+      class="cursor-pointer md:hidden"
+      (click)="mobileOpen.set(true)">
+    </tng-icon> -->
         }
         <a routerLink="/" class="flex items-center gap-2 font-semibold tracking-tight">
           <svg
@@ -25,7 +61,15 @@
               y="98"
               text-anchor="middle"
               fill="#ffffff"
-              style="font: 700 72px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+              style="
+                font:
+                  700 72px/1 system-ui,
+                  -apple-system,
+                  Segoe UI,
+                  Roboto,
+                  Arial,
+                  sans-serif;
+              "
             >
               tng
             </text>
@@ -42,25 +86,45 @@
         <nav class="flex items-center gap-4">
           <a
             routerLink="/components"
-            routerLinkActive="text-slate-900"
-            class="text-sm text-slate-600 hover:text-slate-900"
+            routerLinkActive="text-primary"
+            class="text-sm text-primary hover:text-primary"
           >
             Components
           </a>
           <a
             routerLink="/theme"
-            routerLinkActive="text-slate-900"
-            class="text-sm text-slate-600 hover:text-slate-900"
+            routerLinkActive="text-primary"
+            class="text-sm text-primary hover:text-primary"
           >
             Theme
           </a>
         </nav>
       </div>
       <div class="flex items-center gap-4">
+        <tng-menu placement="bottom-end" panelKlass="p-1 min-w-48">
+          <tng-icon tngMenuTrigger name="bootstrapPalette"></tng-icon>
+          <ng-template tngMenuTemplate>
+            @for (theme of docsThemeService.themeList; track theme.id) {
+              <button
+                tngMenuItem
+                type="button"
+                class="flex w-full items-center gap-2 rounded px-3 py-2 text-sm hover:bg-fg hover:text-bg"
+                (click)="changeTheme(theme.id)"
+              >
+                {{ theme.label }}
+              </button>
+            }
+          </ng-template>
+        </tng-menu>
+        <tng-slide-toggle
+          [label]="docsThemeService.modeLabel()"
+          [checked]="docsThemeService.isDark()"
+          (checkedChange)="onModeToggle($event)"
+        />
         <tng-menu
           placement="bottom-end"
           panelKlass="p-1 min-w-44"
-          triggerKlass="text-sm text-slate-600 hover:text-slate-900 inline-flex items-center gap-1"
+          triggerKlass="text-sm sm text-primary hover:text-primary  inline-flex items-center gap-1"
         >
           <span tngMenuTrigger>npm <span class="text-xs">▼</span></span>
           <ng-template tngMenuTemplate>
@@ -69,7 +133,7 @@
               href="https://www.npmjs.com/package/@tociva/tailng-ui"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+              class="flex w-full rounded px-3 py-2 text-sm text-primary hover:bg-fg-100 hover:text-fg-100"
             >
               UI
             </a>
@@ -78,7 +142,7 @@
               href="https://www.npmjs.com/package/@tociva/tailng-theme"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+              class="flex w-full rounded px-3 py-2 text-sm text-primary hover:bg-fg-100 hover:text-fg-100"
             >
               Theme
             </a>
@@ -87,7 +151,7 @@
               href="https://www.npmjs.com/package/@tociva/tailng-icons"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+              class="flex w-full rounded px-3 py-2 text-sm text-primary hover:bg-fg-100 hover:text-fg-100"
             >
               Icons
             </a>
@@ -96,17 +160,13 @@
               href="https://www.npmjs.com/package/@tociva/tailng-cdk"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-full rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+              class="flex w-full rounded px-3 py-2 text-sm text-primary hover:bg-fg-100 hover:text-fg-100"
             >
               CDK
             </a>
           </ng-template>
         </tng-menu>
-        <a
-          class="text-sm text-slate-600 hover:text-slate-900"
-          href="https://github.com"
-          target="_blank"
-        >
+        <a class="text-sm text-primary hover:text-fg-100" href="https://github.com" target="_blank">
           <tng-icon name="bootstrapGithub" klass="me-1"></tng-icon>GitHub
         </a>
       </div>
@@ -119,7 +179,7 @@
   </main>
 
   <!-- Mobile drawer (components nav) – only when on /components -->
-  @if (isComponentsRoute() && mobileOpen()) {
+  <!-- @if (isComponentsRoute() && mobileOpen()) {
     <div class="fixed inset-0 z-20 bg-black/30 md:hidden" (click)="mobileOpen.set(false)"></div>
     <div
       class="fixed inset-y-0 left-0 z-30 w-80 bg-white p-4 overflow-y-auto md:hidden border-r border-slate-200"
@@ -152,5 +212,5 @@
         }
       </nav>
     </div>
-  }
+  } -->
 </div>

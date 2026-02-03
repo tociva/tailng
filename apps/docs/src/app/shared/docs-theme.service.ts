@@ -23,7 +23,8 @@ const THEME_CLASSES = THEME_LIST.map(x => `theme-${x.id}`) as ReadonlyArray<stri
 const MODE_CLASSES = MODE_LIST.map(x => `mode-${x.id}`) as ReadonlyArray<string>;
 
 @Injectable({ providedIn: 'root' })
-export class ThemeService {
+
+export class DocsThemeService {
   readonly themeList = THEME_LIST;
   readonly modeList = MODE_LIST;
 

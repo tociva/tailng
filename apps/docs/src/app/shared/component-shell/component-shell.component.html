@@ -1,11 +1,10 @@
 <!-- <div class="px-5 pt-5"> -->
-<!-- Tab Navigation -->
-  <nav class="flex gap-10 p-0 w-full border-b sticky top-0 z-30 bg-bg px-5 pt-2">
+<nav class="hidden md:flex gap-10 p-0 w-full border-b sticky top-0 z-30 bg-bg px-5 pt-2">
   <a
     routerLink="overview"
     routerLinkActive="border-b-2 border-primary"
     [routerLinkActiveOptions]="{ exact: false }"
-    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-primary hover:text-primary/20"
   >
     OVERVIEW
   </a>
@@ -13,7 +12,7 @@
     routerLink="api"
     routerLinkActive="border-b-2 border-primary"
     [routerLinkActiveOptions]="{ exact: false }"
-    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-primary hover:text-primary/20"
   >
     API
   </a>
@@ -21,7 +20,7 @@
     routerLink="styling"
     routerLinkActive="border-b-2 border-primary"
     [routerLinkActiveOptions]="{ exact: false }"
-    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-primary hover:text-primary/20"
   >
     STYLING
   </a>
@@ -29,15 +28,74 @@
     routerLink="examples"
     routerLinkActive="border-b-2 border-primary"
     [routerLinkActiveOptions]="{ exact: false }"
-    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-slate-600 hover:text-slate-900"
+    class="px-3 py-1.5 text-sm font-medium min-w-40 text-center pb-1 text-primary hover:text-primary/20"
   >
     EXAMPLES
   </a>
 </nav>
 
+<!-- Mobile menu -->
+@if (true) {
+  <nav class="relative w-full border-b bg-bg md:hidden flex items-center p-2">
+    <button
+      class="p-2 text-primary disabled:text-gray-300"
+      aria-label="Scroll left"
+      (click)="scrollLeft()"
+      [disabled]="isAtStart()"
+    >
+      <tng-icon name="bootstrapArrowLeft"></tng-icon>
+    </button>
+
+    <!-- Scrollable Links -->
+    <div #scrollContainer class="flex gap-10 overflow-x-hidden flex-1">
+      <a
+        routerLink="overview"
+        routerLinkActive="border-b-2 border-primary"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="px-3 py-1.5 text-sm font-medium text-center pb-1 text-primary hover:text-primary/20 whitespace-nowrap"
+      >
+        OVERVIEW
+      </a>
+      <a
+        routerLink="api"
+        routerLinkActive="border-b-2 border-primary"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="px-3 py-1.5 text-sm font-medium text-center pb-1 text-primary hover:text-primary/20 whitespace-nowrap"
+      >
+        API
+      </a>
+      <a
+        routerLink="styling"
+        routerLinkActive="border-b-2 border-primary"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="px-3 py-1.5 text-sm font-medium text-center pb-1 text-primary hover:text-primary/20 whitespace-nowrap"
+      >
+        STYLING
+      </a>
+      <a
+        routerLink="examples"
+        routerLinkActive="border-b-2 border-primary"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="px-3 py-1.5 text-sm font-medium text-center pb-1 text-primary hover:text-primary/20 whitespace-nowrap"
+      >
+        EXAMPLES
+      </a>
+    </div>
+
+    <button
+      class="p-2 text-primary disabled:text-gray-300"
+      aria-label="Scroll right"
+      (click)="scrollRight()"
+      [disabled]="isAtEnd()"
+    >
+      <tng-icon name="bootstrapArrowRight"></tng-icon>
+    </button>
+  </nav>
+}
+
 <!-- Content Area -->
-<div class="pt-4 px-4">
-  <div class="bg-bg p-4">
+<div class="pt-4 px-4 bg-bg">
+  <div class="p-4">
     <router-outlet />
   </div>
 </div>
