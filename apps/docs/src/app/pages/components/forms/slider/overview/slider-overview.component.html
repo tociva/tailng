@@ -1,1 +1,68 @@
-Overview content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <div id="overview" class="rounded-xl border bg-bg p-6 shadow-sm space-y-3 text-fg">
+      <h2 class="text-base font-semibold text-primary">Overview</h2>
+      <p class="text-sm leading-6 text-muted">
+        <span class="font-mono text-primary/20">tng-slider</span> is a range slider that implements
+        <span class="font-mono text-primary/20">ControlValueAccessor</span>. It supports
+        <span class="font-mono text-primary/20">min</span>, <span class="font-mono text-primary/20">max</span>,
+        <span class="font-mono text-primary/20">step</span>, <span class="font-mono text-primary/20">disabled</span>,
+        and klass hooks for track, fill, thumb, and label.
+      </p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <tng-tag label="CVA" color="default"></tng-tag>
+        <tng-tag label="min / max / step" color="default"></tng-tag>
+        <tng-tag label="Klass hooks" color="default"></tng-tag>
+        <tng-tag label="Standalone" color="default"></tng-tag>
+      </div>
+    </div>
+
+    <div id="QuickExample" class="relative rounded-xl border p-4 shadow-sm space-y-2 text-fg">
+      <div class="flex justify-end">
+        <tng-tag label="Reactive Forms" color="default"></tng-tag>
+      </div>
+      <h3 class="text-sm font-semibold text-primary">Quick example</h3>
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="basicHtml()"
+        [tsContent]="basicTs()"
+      >
+        <span tngExampleTitle>Basic</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-sm space-y-2">
+            <tng-slider formControlName="volume" [min]="0" [max]="100" [step]="1" />
+            <p class="text-xs text-muted">Value: {{ form.get('volume')?.value }}</p>
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+
+    <div id="features" class="rounded-xl border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Features</h3>
+      <div class="grid gap-3 sm:grid-cols-1">
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">min / max / step</div>
+          <p class="text-xs leading-5 text-muted">Defaults: 0, 100, 1. Value is clamped to min/max.</p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Value: number</div>
+          <p class="text-xs leading-5 text-muted">Form value is a number. Use with <span class="font-mono text-foreground">formControlName</span> or controlled <span class="font-mono text-foreground">[value]</span> / <span class="font-mono text-foreground">(valueChange)</span>.</p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Klass hooks</div>
+          <p class="text-xs leading-5 text-muted">rootKlass, labelKlass, trackKlass, fillKlass, thumbKlass, rangeKlass for full theming.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden">
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">On this page</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li><a href="#overview" class="flex items-center gap-2 p-0 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Overview</a></li>
+      <li><a href="#QuickExample" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Quick example</a></li>
+      <li><a href="#features" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Features</a></li>
+    </ul>
+  </aside>
+</div>

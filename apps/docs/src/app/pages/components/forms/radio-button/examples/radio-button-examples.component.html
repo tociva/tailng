@@ -1,1 +1,60 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Group radios with the same <span class="font-mono">formControlName</span> and <span class="font-mono">name</span>; each has a unique <span class="font-mono">value</span> and optional <span class="font-mono">label</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="space-y-2">
+          <div class="text-xs font-semibold text-muted">Gender</div>
+          <tng-radio-button formControlName="gender" name="gender" value="male" label="Male" />
+          <tng-radio-button formControlName="gender" name="gender" value="female" label="Female" />
+          <tng-radio-button formControlName="gender" name="gender" value="other" label="Other" />
+          @if (genderCtrl.touched && genderCtrl.invalid) {
+            <p class="text-xs text-red-600">Please select one.</p>
+          }
+        </form>
+        <p class="text-xs text-muted mt-2">Selected: {{ form.controls.gender.value ?? '—' }}</p>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Multiple groups</h3>
+      <tng-tag label="name"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use different <span class="font-mono">formControlName</span> and <span class="font-mono">name</span> for each group.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicTs()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="space-y-4">
+          <div>
+            <div class="text-xs font-semibold text-muted mb-1">Gender</div>
+            <tng-radio-button formControlName="gender" name="gender" value="male" label="Male" />
+            <tng-radio-button formControlName="gender" name="gender" value="female" label="Female" />
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-muted mb-1">Size</div>
+            <tng-radio-button formControlName="size" name="size" value="s" label="Small" />
+            <tng-radio-button formControlName="size" name="size" value="m" label="Medium" />
+            <tng-radio-button formControlName="size" name="size" value="l" label="Large" />
+          </div>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

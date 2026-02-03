@@ -1,1 +1,25 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-radio-button</span> exposes <span class="font-mono">rootKlass</span>,
+      <span class="font-mono">inputKlass</span>, and <span class="font-mono">labelKlass</span>.
+    </p>
+  </div>
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <h3 class="text-sm font-semibold text-primary">rootKlass / inputKlass</h3>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="rootKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="flex flex-col gap-2">
+          <tng-radio-button formControlName="choice" name="choice" value="a" label="Option A" rootKlass="inline-flex items-center gap-3 cursor-pointer p-2 rounded border-2 border-blue-500" />
+          <tng-radio-button formControlName="choice" name="choice" value="b" label="Option B" inputKlass="h-5 w-5 accent-green-600" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

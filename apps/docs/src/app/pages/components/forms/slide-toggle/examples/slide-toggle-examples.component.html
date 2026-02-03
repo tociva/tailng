@@ -1,1 +1,66 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">formControlName</span> and optional <span class="font-mono">label</span>. Value is <span class="font-mono">boolean</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="flex flex-col gap-3">
+          <tng-slide-toggle formControlName="notifications" label="Enable notifications" />
+          <tng-slide-toggle formControlName="darkMode" label="Dark mode" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Disabled state</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[disabled]="true"</span> or disable the form control.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="disabledHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="flex flex-col gap-3">
+          <tng-slide-toggle formControlName="notifications" label="Enabled" />
+          <tng-slide-toggle formControlName="darkMode" label="Disabled" [disabled]="true" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Without label</h3>
+      <tng-tag label="label"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Omit <span class="font-mono">label</span> for an icon-only or inline toggle.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="noLabelHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-slide-toggle formControlName="notifications" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

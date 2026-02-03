@@ -1,1 +1,58 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-file-upload</span> exposes klass hooks: <span class="font-mono">rootKlass</span>,
+      <span class="font-mono">dropzoneKlass</span>, <span class="font-mono">titleKlass</span>,
+      <span class="font-mono">subtitleKlass</span>, <span class="font-mono">hintKlass</span>,
+      <span class="font-mono">fileListKlass</span>, <span class="font-mono">fileItemKlass</span>,
+      <span class="font-mono">clearButtonKlass</span>.
+    </p>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">dropzoneKlass</h3>
+      <tng-tag label="dropzone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the drag-and-drop area (border, padding, focus ring).</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="dropzoneKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" dropzoneKlass="border-2 border-dashed border-primary rounded-xl bg-primary/5" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">titleKlass & subtitleKlass</h3>
+      <tng-tag label="text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Style the dropzone title and subtitle.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="titleSubtitleHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload
+            formControlName="files"
+            title="Drop files here"
+            subtitle="or click to browse"
+            titleKlass="text-base font-bold text-primary"
+            subtitleKlass="text-sm text-disable"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

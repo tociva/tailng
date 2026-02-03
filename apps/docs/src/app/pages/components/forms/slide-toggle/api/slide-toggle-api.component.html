@@ -1,1 +1,83 @@
-Api content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <h3 class="text-2xl font-semibold text-primary">API reference for slide-toggle</h3>
+    <div class="border border-border bg-bg">
+      <tng-code-block
+        [content]="importExample()"
+        [highlighter]="highlighter"
+        language="typescript"
+        preKlass="bg-bg h-15"
+        rootKlass="border-0 bg-bg h-20 overflow-y-hidden"
+      >
+      </tng-code-block>
+    </div>
+    <header class="flex flex-col gap-1">
+      <h3 class="text-2xl font-semibold text-primary">Inputs &amp; outputs</h3>
+      <p class="text-sm text-fg">Form value is <span class="font-mono">boolean</span>.</p>
+    </header>
+
+    <section id="identity" class="flex flex-col gap-4 text-fg">
+      <h3 class="text-base font-semibold text-primary">Identity &amp; label</h3>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="identityRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="state" class="flex flex-col gap-4 text-fg">
+      <h3 class="text-base font-semibold text-primary">State</h3>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="stateRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="outputs" class="flex flex-col gap-4 text-fg">
+      <h3 class="text-base font-semibold text-primary">Outputs</h3>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="outputRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="klass-hooks" class="flex flex-col gap-4 text-fg">
+      <h3 class="text-base font-semibold text-primary">Klass hooks</h3>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="klassRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <div id="form-integration" class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Forms integration</h3>
+      <p class="text-sm leading-6 text-muted">Implements <span class="font-mono">ControlValueAccessor</span>. Use <span class="font-mono">formControlName</span> or <span class="font-mono">ngModel</span>. Optional controlled <span class="font-mono">[checked]</span> / <span class="font-mono">(checkedChange)</span>.</p>
+    </div>
+  </section>
+
+  <aside class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden">
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">API Overview</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li><a href="#identity" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Identity &amp; label</a></li>
+      <li><a href="#state" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> State</a></li>
+      <li><a href="#outputs" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Outputs</a></li>
+      <li><a href="#klass-hooks" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Klass hooks</a></li>
+      <li><a href="#form-integration" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Forms integration</a></li>
+    </ul>
+  </aside>
+</div>

@@ -1,1 +1,87 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Bind <span class="font-mono">options</span>, <span class="font-mono">displayWith</span>, and <span class="font-mono">formControlName</span>. Value is the selected item or <span class="font-mono">null</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md space-y-2">
+          <tng-select
+            formControlName="fruit"
+            [options]="fruits"
+            [displayWith]="displayFruit"
+            placeholder="Choose a fruit…"
+          />
+          @if (form.controls.fruit.value) {
+            <p class="text-xs text-muted">Selected: {{ displayFruit(form.controls.fruit.value) }}</p>
+          }
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Disabled state</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[disabled]="true"</span> or disable the form control.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="disabledHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-xs">
+          <tng-select
+            formControlName="fruit"
+            [options]="fruits"
+            [displayWith]="displayFruit"
+            placeholder="Disabled"
+            [disabled]="true"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">(selected) output</h3>
+      <tng-tag label="output"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Listen to <span class="font-mono">(selected)</span> to react when the user picks an option.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="selectedHtml()"
+      [tsContent]="selectedTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md space-y-2">
+          <tng-select
+            formControlName="fruit"
+            [options]="fruits"
+            [displayWith]="displayFruit"
+            placeholder="Choose…"
+            (selected)="onSelected($event)"
+          />
+          @if (lastSelected()) {
+            <p class="text-xs text-muted">Last selected: {{ lastSelected() }}</p>
+          }
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

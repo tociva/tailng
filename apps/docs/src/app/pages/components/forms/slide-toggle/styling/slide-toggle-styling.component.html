@@ -1,1 +1,93 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-slide-toggle</span> exposes five klass hooks:
+      <span class="font-mono">rootKlass</span> (wrapper),
+      <span class="font-mono">trackKlass</span> (track),
+      <span class="font-mono">thumbKlass</span> (thumb),
+      <span class="font-mono">labelKlass</span> (label text),
+      <span class="font-mono">inputKlass</span> (hidden input).
+    </p>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">rootKlass</h3>
+      <tng-tag label="wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the root wrapper. Default: inline-flex items-center gap-2 select-none.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="rootKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-slide-toggle formControlName="on" label="Custom root" rootKlass="inline-flex items-center gap-3 p-2 rounded-lg border-2 border-primary/30" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">trackKlass</h3>
+      <tng-tag label="track"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the track (pill background). Use for color or size.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="trackKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-slide-toggle formControlName="on" label="Wide track" trackKlass="h-4 w-14" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">thumbKlass</h3>
+      <tng-tag label="thumb"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the thumb (moving circle). Use for size or shadow.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="thumbKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-slide-toggle formControlName="on" label="Large thumb" thumbKlass="h-4 w-4 shadow-lg" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">labelKlass</h3>
+      <tng-tag label="label text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the label <span class="font-mono">&lt;span&gt;</span>. Default: text-sm text-fg.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="labelKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-slide-toggle formControlName="on" label="Custom label" labelKlass="text-lg font-bold text-primary" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

@@ -1,1 +1,57 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-button-toggle</span> exposes klass hooks:
+      <span class="font-mono">rootKlass</span>, <span class="font-mono">groupKlass</span>,
+      <span class="font-mono">buttonKlass</span>, <span class="font-mono">activeButtonKlass</span>,
+      <span class="font-mono">inactiveButtonKlass</span>, <span class="font-mono">disabledButtonKlass</span>.
+    </p>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">groupKlass</h3>
+      <tng-tag label="group"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the <span class="font-mono">role="group"</span> container (button row).</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="groupKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-button-toggle formControlName="view" [options]="options" groupKlass="inline-flex rounded-lg border border-border overflow-hidden" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">activeButtonKlass & inactiveButtonKlass</h3>
+      <tng-tag label="buttons"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Style the selected vs unselected buttons.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="activeInactiveHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-button-toggle
+            formControlName="view"
+            [options]="options"
+            buttonKlass="px-4 py-2 text-sm font-medium transition"
+            activeButtonKlass="bg-primary text-on-primary"
+            inactiveButtonKlass="bg-bg text-fg hover:bg-on-primary/10"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

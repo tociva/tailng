@@ -1,1 +1,88 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic (single selection)</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Bind <span class="font-mono">options</span> and <span class="font-mono">formControlName</span>. Value is <span class="font-mono">T | null</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md space-y-2">
+          <tng-button-toggle formControlName="view" [options]="viewOptions" />
+          <p class="text-xs text-muted">Selected: {{ form.controls.view.value ?? '—' }}</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Multiple selection</h3>
+      <tng-tag label="multiple"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[multiple]="true"</span>. Form value is <span class="font-mono">T[]</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="multipleHtml()"
+      [tsContent]="multipleTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md space-y-2">
+          <tng-button-toggle formControlName="days" [options]="dayOptions" [multiple]="true" />
+          <p class="text-xs text-muted">Selected: {{ daysSelectedLabel }}</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Allow deselect</h3>
+      <tng-tag label="allowDeselect"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[allowDeselect]="true"</span> to let the user clear the selection by clicking the active option.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="allowDeselectHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md space-y-2">
+          <tng-button-toggle formControlName="view" [options]="viewOptions" [allowDeselect]="true" />
+          <p class="text-xs text-muted">Selected: {{ form.controls.view.value ?? '—' }}</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Disabled option</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Set <span class="font-mono">disabled: true</span> on individual options.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="disabledOptionHtml()"
+      [tsContent]="disabledOptionTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-button-toggle formControlName="view" [options]="viewOptionsWithDisabled" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

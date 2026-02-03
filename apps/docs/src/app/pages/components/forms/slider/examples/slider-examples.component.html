@@ -1,1 +1,66 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">formControlName</span> with optional <span class="font-mono">min</span>, <span class="font-mono">max</span>, <span class="font-mono">step</span>. Value is <span class="font-mono">number</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm space-y-2">
+          <tng-slider formControlName="volume" [min]="0" [max]="100" [step]="1" />
+          <p class="text-xs text-muted">Volume: {{ form.get('volume')?.value }}</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Custom range and step</h3>
+      <tng-tag label="min / max / step"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Set <span class="font-mono">[min]</span>, <span class="font-mono">[max]</span>, <span class="font-mono">[step]</span> for different scales (e.g. 0–10, step 0.5).</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="rangeHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm space-y-2">
+          <tng-slider formControlName="rating" [min]="0" [max]="10" [step]="0.5" />
+          <p class="text-xs text-muted">Rating: {{ form.get('rating')?.value }}</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Disabled state</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[disabled]="true"</span> or disable the form control.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="disabledHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm space-y-2">
+          <tng-slider formControlName="volume" [min]="0" [max]="100" [disabled]="true" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

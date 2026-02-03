@@ -1,1 +1,76 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic with label and hint</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Wrap any form control in <span class="font-mono">tng-form-field</span> with <span class="font-mono">label</span> and optional <span class="font-mono">hint</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md space-y-4">
+          <tng-form-field label="Username" hint="Choose a unique username.">
+            <tng-text-input formControlName="username" placeholder="johndoe" />
+          </tng-form-field>
+          <tng-form-field label="Bio" hint="Optional.">
+            <tng-textarea formControlName="bio" placeholder="Tell us about yourself" [rows]="3" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Required and error</h3>
+      <tng-tag label="required / error"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[required]="true"</span> for the asterisk. Error can come from NgControl or manual <span class="font-mono">error</span> input.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="requiredErrorHtml()"
+      [tsContent]="requiredErrorTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" [required]="true">
+            <tng-text-input formControlName="email" placeholder="you@example.com" />
+          </tng-form-field>
+          @if (form.controls.email.touched && form.controls.email.invalid) {
+            <p class="text-xs text-red-600 mt-1">Please enter a valid email.</p>
+          }
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Manual error override</h3>
+      <tng-tag label="error input"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Set <span class="font-mono">error</span> to show a custom message (overrides validator errors).</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="manualErrorHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Code" error="This code has already been used.">
+            <tng-text-input formControlName="code" placeholder="Enter code" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

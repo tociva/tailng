@@ -1,1 +1,73 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">formControlName</span>. Value is <span class="font-mono">File[] | null</span>. Built-in file list and clear.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" />
+          @if (form.controls.files.value?.length) {
+            <p class="text-xs text-muted mt-2">{{ form.controls.files.value.length }} file(s) selected.</p>
+          }
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Accept &amp; multiple</h3>
+      <tng-tag label="accept / multiple"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">accept</span> (e.g. "image/*") and <span class="font-mono">[multiple]="true"</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="acceptMultipleHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload
+            formControlName="files"
+            accept="image/*"
+            [multiple]="true"
+            title="Upload images"
+            subtitle="Images only, multiple allowed"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Disabled state</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">[disabled]="true"</span> or disable the form control.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="disabledHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [disabled]="true" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>
