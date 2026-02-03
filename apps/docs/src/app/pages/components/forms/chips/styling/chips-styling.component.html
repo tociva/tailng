@@ -1,1 +1,48 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-chips</span> exposes klass hooks for the root, container (chips + input),
+      chip wrapper, chip label, remove button, and input. Use them to match your theme.
+    </p>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">containerKlass</h3>
+      <tng-tag label="chips + input"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The main container holding chips and the text input. Default includes border, rounded, focus ring.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="containerKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+            containerKlass="w-full min-h-[42px] px-3 py-2 flex flex-wrap gap-2 border-2 border-blue-500 rounded-lg bg-blue-50/30"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
+    <h3 class="text-sm font-semibold text-primary">Klass hooks</h3>
+    <ul class="space-y-1 text-sm text-fg">
+      <li><span class="font-mono">rootKlass</span> — root wrapper</li>
+      <li><span class="font-mono">containerKlass</span> — chips + input container</li>
+      <li><span class="font-mono">chipKlass</span> — each chip</li>
+      <li><span class="font-mono">chipLabelKlass</span> — chip label text</li>
+      <li><span class="font-mono">removeButtonKlass</span> — remove (×) button</li>
+      <li><span class="font-mono">inputKlass</span> — text input</li>
+    </ul>
+  </div>
+</section>

@@ -1,1 +1,77 @@
-Overview content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <div id="overview" class="rounded-xl border bg-bg p-6 shadow-sm space-y-3 text-fg">
+      <h2 class="text-base font-semibold text-primary">Overview</h2>
+      <p class="text-sm leading-6 text-muted">
+        <span class="font-mono text-primary/20">tng-chips</span> is a multi-value input that implements
+        <span class="font-mono text-primary/20">ControlValueAccessor</span>. You can add items from an
+        <span class="font-mono text-primary/20">options</span> dropdown (with <span class="font-mono">(search)</span>)
+        and/or allow free-text entry. Value is <span class="font-mono text-primary/20">T[]</span>. Optional
+        <span class="font-mono">#chipTpl</span> and <span class="font-mono">#optionTpl</span> customize chip and dropdown display.
+      </p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <tng-tag label="CVA" color="default"></tng-tag>
+        <tng-tag label="options + search" color="default"></tng-tag>
+        <tng-tag label="allowFreeText" color="default"></tng-tag>
+        <tng-tag label="chipTpl / optionTpl" color="default"></tng-tag>
+        <tng-tag label="Standalone" color="default"></tng-tag>
+      </div>
+    </div>
+
+    <div id="QuickExample" class="relative rounded-xl border p-4 shadow-sm space-y-2 text-fg">
+      <div class="flex justify-end">
+        <tng-tag label="Reactive Forms" color="default"></tng-tag>
+      </div>
+      <h3 class="text-sm font-semibold text-primary">Quick example</h3>
+
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="basicHtml()"
+        [tsContent]="basicTs()"
+      >
+        <span tngExampleTitle>Basic (select from options)</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-chips
+              formControlName="countries"
+              [options]="options()"
+              placeholder="Add countries…"
+              [displayWith]="displayCountry"
+              [allowFreeText]="false"
+              (search)="onSearch($event)"
+            />
+          </form>
+          <p class="text-xs text-muted mt-2">Selected: {{ form.controls.countries.value?.length ?? 0 }} countries</p>
+        </div>
+      </docs-example-block>
+    </div>
+
+    <div id="features" class="rounded-xl border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Features</h3>
+      <div class="grid gap-3 sm:grid-cols-1">
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">options + displayWith</div>
+          <p class="text-xs leading-5 text-muted">Dropdown options; <span class="font-mono">displayWith</span> for chip and list text. Form value is <span class="font-mono">T[]</span>.</p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">allowFreeText + parse</div>
+          <p class="text-xs leading-5 text-muted">When <span class="font-mono">allowFreeText</span> is true, Enter adds the typed string (via <span class="font-mono">parse</span>).</p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">chipTpl / optionTpl</div>
+          <p class="text-xs leading-5 text-muted">Optional templates for chip display and dropdown option rows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden">
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">On this page</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li><a href="#overview" class="flex items-center gap-2 p-0 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Overview</a></li>
+      <li><a href="#QuickExample" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Quick example</a></li>
+      <li><a href="#features" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Features</a></li>
+    </ul>
+  </aside>
+</div>

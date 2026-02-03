@@ -1,1 +1,75 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic (options only)</h3>
+      <tng-tag label="options + search"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Select from <span class="font-mono">options</span>; filter via <span class="font-mono">(search)</span>. Set <span class="font-mono">[allowFreeText]="false"</span> to only allow selection from the list.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            placeholder="Add countries…"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+          />
+        </form>
+        <p class="text-xs text-muted mt-2">Count: {{ form.controls.countries.value?.length ?? 0 }}</p>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Custom chip and option templates</h3>
+      <tng-tag label="chipTpl / optionTpl"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">#chipTpl</span> and <span class="font-mono">#optionTpl</span> to customize chip and dropdown display.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="customTplHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countriesCustom"
+            [options]="optionsCustom()"
+            [displayWith]="displayCountry2"
+            [allowFreeText]="false"
+            (search)="onSearchCustom($event)"
+          >
+            <ng-template #chipTpl let-item>
+              <span class="flex items-center gap-2">
+                <span class="opacity-70 text-red-600">({{ item.code }})</span>
+                <span class="font-semibold">{{ item.name }}</span>
+              </span>
+            </ng-template>
+            <ng-template #optionTpl let-item>
+              <div class="flex items-center gap-2">
+                <span class="opacity-70">({{ item.code }})</span>
+                <span class="font-semibold text-red-600">{{ item.name }}</span>
+              </div>
+            </ng-template>
+          </tng-chips>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md">
+    <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+    Use <span class="font-mono">(chipAdded)</span> and <span class="font-mono">(chipRemoved)</span> for side effects. Backspace with empty input removes the last chip.
+  </div>
+</section>

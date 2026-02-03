@@ -1,1 +1,71 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-checkbox</span> exposes three klass hooks:
+      <span class="font-mono">rootKlass</span> (label wrapper),
+      <span class="font-mono">inputKlass</span> (checkbox input),
+      <span class="font-mono">labelKlass</span> (label text).
+    </p>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">rootKlass</h3>
+      <tng-tag label="wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the root <span class="font-mono">&lt;label&gt;</span>. Default: inline-flex, gap, cursor-pointer.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="rootKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-checkbox formControlName="opt" label="Custom root" rootKlass="inline-flex items-center gap-3 cursor-pointer p-2 rounded-lg border-2 border-blue-500" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">inputKlass</h3>
+      <tng-tag label="input"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the <span class="font-mono">&lt;input type="checkbox"&gt;</span>. Use for size and accent.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="inputKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-checkbox formControlName="opt" label="Custom input" inputKlass="h-5 w-5 rounded-full accent-green-600" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">labelKlass</h3>
+      <tng-tag label="label text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applies to the label <span class="font-mono">&lt;span&gt;</span>. Default: text-sm text-fg.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="labelKlassHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form">
+          <tng-checkbox formControlName="opt" label="Custom label" labelKlass="text-lg font-bold text-purple-600" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

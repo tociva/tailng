@@ -1,1 +1,70 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">formControlName</span> and optional <span class="font-mono">label</span>. Value is <span class="font-mono">boolean</span>.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="basicHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="flex flex-col gap-3">
+          <tng-checkbox formControlName="terms" label="I agree to the terms" />
+          <tng-checkbox formControlName="newsletter" label="Subscribe to newsletter" />
+          <tng-checkbox formControlName="notifications" label="Enable push notifications" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Validation (requiredTrue)</h3>
+      <tng-tag label="validators"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">Validators.requiredTrue</span> for “must be checked” and <span class="font-mono">[required]="true"</span> for the HTML attribute.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="validationHtml()"
+      [tsContent]="validationHtml()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="space-y-2">
+          <tng-checkbox formControlName="terms" label="I agree to the terms" [required]="true" />
+          @if (termsCtrl.touched && termsCtrl.invalid) {
+            <p class="text-xs text-red-600">You must agree to the terms.</p>
+          }
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">States</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Use <span class="font-mono">disabled</span> or disable the form control programmatically.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="statesHtml()"
+      [tsContent]="basicTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="flex flex-col gap-3">
+          <tng-checkbox formControlName="newsletter" label="Subscribe (enabled)" />
+          <tng-checkbox formControlName="notifications" label="Notifications (disabled)" [disabled]="true" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+</section>
