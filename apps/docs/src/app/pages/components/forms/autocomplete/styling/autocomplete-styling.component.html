@@ -1,1 +1,62 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      The <span class="font-mono">tng-autocomplete</span> component exposes a single
+      <span class="font-mono">inputKlass</span> input. Classes are merged with the default
+      input styles. Use it for borders, width, rounded corners, and focus styling.
+    </p>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">inputKlass</h3>
+      <tng-tag label="input element"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      <span class="font-mono">inputKlass</span> applies additional CSS classes to the
+      text input. Defaults include border, padding, focus ring, and disabled state.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="klassExampleHtml()"
+        [tsContent]="klassExampleTs()"
+        [styleContent]="klassExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+              inputKlass="border-2 border-blue-500 rounded-lg shadow-md"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+      Default classes include focus ring; when overriding, consider keeping focus states for accessibility.
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
+    <h3 class="text-sm font-semibold text-primary">Best practices</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li class="flex items-start gap-2">
+        <span class="text-foreground">•</span>
+        <span>Use <span class="font-mono text-foreground">inputKlass</span> for input appearance; overlay panel styling is controlled by overlay/option-list components.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-foreground">•</span>
+        <span>Keep or replicate focus styles for accessibility.</span>
+      </li>
+    </ul>
+  </div>
+</section>

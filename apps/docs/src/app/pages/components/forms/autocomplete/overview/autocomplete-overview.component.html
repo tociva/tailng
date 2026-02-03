@@ -1,1 +1,119 @@
-Overview content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <div id="overview" class="rounded-xl border bg-bg p-6 shadow-sm space-y-3 text-fg">
+      <h2 class="text-base font-semibold text-primary">Overview</h2>
+      <p class="text-sm leading-6 text-muted">
+        <span class="font-mono text-primary/20">tng-autocomplete</span> is a standalone
+        combobox that implements <span class="font-mono text-primary/20">ControlValueAccessor</span>
+        for Angular forms. You supply <span class="font-mono text-primary/20">options</span>,
+        a <span class="font-mono text-primary/20">displayWith</span> function, and handle
+        <span class="font-mono text-primary/20">(search)</span> to filter or fetch options. Optional
+        <span class="font-mono text-primary/20">#optionTpl</span> and
+        <span class="font-mono text-primary/20">#inputTpl</span> templates customize list and
+        selected display.
+      </p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <tng-tag label="CVA" color="default"></tng-tag>
+        <tng-tag label="search output" color="default"></tng-tag>
+        <tng-tag label="optionTpl / inputTpl" color="default"></tng-tag>
+        <tng-tag label="Overlay" color="default"></tng-tag>
+        <tng-tag label="Standalone" color="default"></tng-tag>
+      </div>
+    </div>
+
+    <div id="QuickExample" class="relative rounded-xl border p-4 shadow-sm space-y-2 text-fg">
+      <div class="flex justify-end">
+        <tng-tag label="Reactive Forms" color="default"></tng-tag>
+      </div>
+      <h3 class="text-sm font-semibold text-primary">Quick example</h3>
+
+      <div class="grid gap-4 sm:grid-cols-1">
+        <docs-example-block
+          [docLink]="'https://example.com/docs'"
+          [stackBlitzLink]="'https://stackblitz.com/example'"
+          [htmlContent]="basicHtml()"
+          [tsContent]="basicTs()"
+        >
+          <span tngExampleTitle>Basic (country search)</span>
+          <div tngExampleDemo>
+            <form [formGroup]="form" class="w-full max-w-md">
+              <tng-autocomplete
+                formControlName="country"
+                [options]="options()"
+                [displayWith]="displayCountry"
+                placeholder="Search country…"
+                (search)="onSearch($event)"
+              />
+            </form>
+            @if (form.controls.country.value) {
+              <p class="text-xs text-muted mt-2">
+                Selected: {{ displayCountry(form.controls.country.value) }}
+              </p>
+            }
+          </div>
+        </docs-example-block>
+      </div>
+    </div>
+
+    <div id="features" class="rounded-xl border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Features</h3>
+      <div class="grid gap-3 sm:grid-cols-1">
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">options + displayWith</div>
+          <p class="text-xs leading-5 text-muted">
+            Bind <span class="font-mono">options</span> (array) and <span class="font-mono">displayWith</span> (item → string) for input/list text. Form value is the selected object.
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">(search)</div>
+          <p class="text-xs leading-5 text-muted">
+            Emits the current input text so you can filter locally or call an API. Update <span class="font-mono">options</span> in response.
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">optionTpl / inputTpl</div>
+          <p class="text-xs leading-5 text-muted">
+            Optional <span class="font-mono">#optionTpl</span> (dropdown rows) and <span class="font-mono">#inputTpl</span> (selected value in input when closed).
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Forms-ready</div>
+          <p class="text-xs leading-5 text-muted">
+            Full <span class="font-mono">ControlValueAccessor</span>; use <span class="font-mono">formControlName</span> or <span class="font-mono">ngModel</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-md border-l-4 border-primary bg-primary/10 p-4 text-sm text-muted text-fg">
+      <span class="font-semibold text-primary">Tip:</span>
+      Typing clears the selection and opens the panel; <span class="font-mono">(search)</span> fires so you can filter or fetch. Select an option to set the form value.
+    </div>
+  </section>
+
+  <aside
+    class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden"
+  >
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">On this page</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li class="flex items-center gap-2">
+        <a href="#overview" class="flex items-center gap-2 p-0 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Overview
+        </a>
+      </li>
+      <li class="flex items-center gap-2">
+        <a href="#QuickExample" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Quick example
+        </a>
+      </li>
+      <li class="flex items-center gap-2">
+        <a href="#features" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Features
+        </a>
+      </li>
+    </ul>
+  </aside>
+</div>

@@ -1,1 +1,128 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Use <span class="font-mono text-foreground">tng-autocomplete</span> with
+      <span class="font-mono">options</span>, <span class="font-mono">displayWith</span>,
+      and <span class="font-mono">(search)</span>. Form value is the selected object
+      <span class="font-mono">T | null</span>.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="basicExampleHtml()"
+        [tsContent]="basicExampleTs()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+            />
+          </form>
+          @if (form.controls.country.value) {
+            <p class="text-xs text-muted mt-2">
+              Selected: {{ displayCountry(form.controls.country.value) }}
+            </p>
+          }
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Custom option and input templates</h3>
+      <tng-tag label="optionTpl / inputTpl"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Use <span class="font-mono">#optionTpl</span> to customize dropdown rows and
+      <span class="font-mono">#inputTpl</span> to show a rich selected value in the
+      input when the overlay is closed.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="customTplExampleHtml()"
+        [tsContent]="customTplExampleTs()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="countryCustom"
+              [options]="optionsCustom()"
+              [displayWith]="displayCountryText"
+              placeholder="Search country…"
+              (search)="onSearchCustom($event)"
+            >
+              <ng-template #optionTpl let-item>
+                <div class="flex items-center gap-2">
+                  <span class="opacity-70">({{ item.code }})</span>
+                  <span class="font-semibold text-red-600">{{ item.name }}</span>
+                </div>
+              </ng-template>
+              <ng-template #inputTpl let-item>
+                <div class="flex items-center gap-2">
+                  <span class="opacity-70">({{ item.code }})</span>
+                  <span class="font-semibold">{{ item.name }}</span>
+                </div>
+              </ng-template>
+            </tng-autocomplete>
+          </form>
+          @if (form.controls.countryCustom.value) {
+            <p class="text-xs text-muted mt-2">
+              Selected: {{ displayCountryText(form.controls.countryCustom.value) }}
+            </p>
+          }
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Disabled state</h3>
+      <tng-tag label="disabled"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Set <span class="font-mono">disabled</span> to prevent opening and selection.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="disabledExampleHtml()"
+        [tsContent]="basicExampleTs()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Disabled"
+              (search)="onSearch($event)"
+              [disabled]="true"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md">
+    <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+    Listen to <span class="font-mono">(closed)</span> for overlay close reasons (selection, escape, blur, outside click). Use <span class="font-mono">(search)</span> to filter locally or call an API and update <span class="font-mono">options</span>.
+  </div>
+</section>
