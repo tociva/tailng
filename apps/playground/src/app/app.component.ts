@@ -7,8 +7,8 @@ import {
   TngMenuItem,
   TngMenuTemplate,
 } from '@tociva/tailng-ui/navigation';
-import { TngTheme, ThemeService } from './shared/theme.service';
 import { TngSlideToggle } from '@tociva/tailng-ui/form-controls';
+import { DemoThemeService, TngTheme } from './shared/demo-theme.service';
 
 @Component({
   selector: 'playground-root',
@@ -26,15 +26,15 @@ import { TngSlideToggle } from '@tociva/tailng-ui/form-controls';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  readonly themeService = inject(ThemeService);
+  readonly demoThemeService = inject(DemoThemeService);
   year = new Date().getFullYear();
   categories = categories;
 
   changeTheme(theme: TngTheme): void {
-    this.themeService.setTheme(theme);
+    this.demoThemeService.setTheme(theme);
   }
 
   onModeToggle(checked: boolean): void {
-    this.themeService.setMode(checked ? 'dark' : 'light');
+    this.demoThemeService.setMode(checked ? 'dark' : 'light');
   }
 }

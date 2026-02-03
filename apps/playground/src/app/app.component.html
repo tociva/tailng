@@ -20,7 +20,7 @@
             <span class="text-xs">▼</span>
           </button>
           <ng-template tngMenuTemplate>
-            @for (theme of themeService.themeList; track theme.id) {
+            @for (theme of demoThemeService.themeList; track theme.id) {
               <button tngMenuItem type="button"
                 class="flex w-full items-center gap-2 rounded px-3 py-2 text-sm hover:bg-fg hover:text-bg"
                 (click)="changeTheme(theme.id)">
@@ -30,8 +30,8 @@
           </ng-template>
         </tng-menu>
         <tng-slide-toggle
-          [label]="themeService.modeLabel()"
-          [checked]="themeService.isDark()"
+          [label]="demoThemeService.modeLabel()"
+          [checked]="demoThemeService.isDark()"
           (checkedChange)="onModeToggle($event)"
         />
         <a routerLink="/"

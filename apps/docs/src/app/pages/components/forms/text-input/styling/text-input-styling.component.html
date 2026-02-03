@@ -1,28 +1,28 @@
-<section class="space-y-6">
+<section class="space-y-6 text-fg">
   <!-- Intro -->
-  <div class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-3">
-    <h2 class="text-sm font-semibold text-foreground">Styling</h2>
-    <p class="text-sm leading-6 text-muted">
-      The <span class="font-mono text-foreground">tng-text-input</span> component provides four
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      The <span class="font-mono">tng-text-input</span> component provides four
       klass hooks for customizing different parts of the input:
-      <span class="font-mono text-foreground">rootKlass</span>,
-      <span class="font-mono text-foreground">inputKlass</span>,
-      <span class="font-mono text-foreground">prefixKlass</span>, and
-      <span class="font-mono text-foreground">suffixKlass</span>. Each hook targets a specific
+      <span class="font-mono">rootKlass</span>,
+      <span class="font-mono">inputKlass</span>,
+      <span class="font-mono">prefixKlass</span>, and
+      <span class="font-mono">suffixKlass</span>. Each hook targets a specific
       element in the component structure.
     </p>
   </div>
 
   <!-- rootKlass -->
-  <div class="rounded-xl border border-border bg-bg p-4 shadow-sm space-y-2">
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-foreground">rootKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">rootKlass</h3>
       <tng-tag label="wrapper"></tng-tag>
     </div>
 
-    <p class="text-sm text-muted">
-      The <span class="font-mono text-foreground">rootKlass</span> input applies classes to the root
-      wrapper <span class="font-mono text-foreground">&lt;div&gt;</span> that contains the entire
+    <p class="text-sm text-fg">
+      The <span class="font-mono">rootKlass</span> input applies classes to the root
+      wrapper <span class="font-mono">&lt;div&gt;</span> that contains the entire
       input structure. Use this for styling the container: borders, background, rounded corners,
       shadows, and focus ring styles.
     </p>
@@ -30,9 +30,9 @@
       <docs-example-block
         [docLink]="'https://example.com/docs'"
         [stackBlitzLink]="'https://stackblitz.com/example'"
-        [htmlContent]="rootKlassExample()"
-        [tsContent]="prefixKlassExample()"
-        [styleContent]="suffixKlassExample()"
+        [htmlContent]="rootKlassExampleHtml()"
+        [tsContent]="rootKlassExampleTs()"
+        [styleContent]="rootKlassExampleCss()"
       >
         <span tngExampleTitle>Example</span>
 
@@ -45,9 +45,9 @@
       </docs-example-block>
     </div>
     <div
-      class="space-y-2 sm:col-span-2 border-l-4 border-blue-500 bg-alternate-background px-4 py-4 rounded-md"
+      class="space-y-2 sm:col-span-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg"
     >
-      <strong class="text-sm font-bold text-muted text-blue-500">Tip:</strong>
+      <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
       The default root classes include focus ring styling. When overriding
       <span class="font-mono text-foreground">rootKlass</span>, you may want to include your own
       focus states for consistency.
@@ -55,13 +55,13 @@
   </div>
 
   <!-- inputKlass -->
-  <div class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-foreground">inputKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">inputKlass</h3>
       <tng-tag label="input element"></tng-tag>
     </div>
 
-    <p class="text-sm text-muted">
+    <p class="text-sm text-fg">
       The <span class="font-mono text-foreground">inputKlass</span> input applies classes directly
       to the <span class="font-mono text-foreground">&lt;input&gt;</span> element. Use this for text
       styling, padding adjustments, placeholder styling, and other input-specific customizations.
@@ -71,9 +71,9 @@
       <docs-example-block
         [docLink]="'https://example.com/docs'"
         [stackBlitzLink]="'https://stackblitz.com/example'"
-        [htmlContent]="rootKlassExample()"
-        [tsContent]="prefixKlassExample()"
-        [styleContent]="suffixKlassExample()"
+        [htmlContent]="inputKlassExampleHtml()"
+        [tsContent]="rootKlassExampleTs()"
+        [styleContent]="inputKlassExampleCss()"
       >
         <span tngExampleTitle>Example</span>
         <div tngExampleDemo>
@@ -85,9 +85,9 @@
       </docs-example-block>
     </div>
     <div
-      class="space-y-2 sm:col-span-2 border-l-4 border-blue-500 bg-alternate-background px-4 py-4 rounded-md"
+      class="space-y-2 sm:col-span-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md  text-fg"
     >
-      <strong class="text-sm font-bold text-muted text-blue-500">Note:</strong>
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
       The default input classes include
       <span class="font-mono text-foreground">px-3</span>for horizontal padding. Adjust this if you
       need different spacing.
@@ -95,13 +95,13 @@
   </div>
 
   <!-- prefixKlass -->
-  <div class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-foreground">prefixKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">prefixKlass</h3>
       <tng-tag label="prefix wrapper"></tng-tag>
     </div>
 
-    <p class="text-sm text-muted">
+    <p class="text-sm text-fg">
       The <span class="font-mono text-foreground">prefixKlass</span> input applies classes to the
       wrapper <span class="font-mono text-foreground">&lt;span&gt;</span> that contains projected
       prefix content. Use this for styling the prefix area: background colors, borders, or other
@@ -113,9 +113,9 @@
         <docs-example-block
           [docLink]="'https://example.com/docs'"
           [stackBlitzLink]="'https://stackblitz.com/example'"
-          [htmlContent]="rootKlassExample()"
-          [tsContent]="prefixKlassExample()"
-          [styleContent]="suffixKlassExample()"
+          [htmlContent]="prefixKlassExampleHtml()"
+          [tsContent]="preffixKlassExampleTs()"
+          [styleContent]="preffixKlassExampleCss()"
         >
           <span tngExampleTitle>Default</span>
           <div tngExampleDemo>
@@ -130,9 +130,9 @@
           <docs-example-block
             [docLink]="'https://example.com/docs'"
             [stackBlitzLink]="'https://stackblitz.com/example'"
-            [htmlContent]="rootKlassExample()"
-            [tsContent]="prefixKlassExample()"
-            [styleContent]="suffixKlassExample()"
+            [htmlContent]="prefixKlassSearchExampleHtml()"
+            [tsContent]="preffixKlassExampleTs()"
+            [styleContent]="preffixKlassCustomCss()"
           >
             <span tngExampleTitle>With custom prefixKlass</span>
 
@@ -156,9 +156,9 @@
       </div> -->
     </div>
     <div
-      class="space-y-2 sm:col-span-2 border-l-4 border-blue-500 bg-alternate-background px-4 py-4 rounded-md"
+      class="space-y-2 sm:col-span-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg"
     >
-      <strong class="text-sm font-bold text-muted text-blue-500">Important:</strong>
+      <strong class="text-sm font-bold text-muted text-primary">Important:</strong>
       Spacing for prefix content (like
       <span class="font-mono text-foreground">ml-3</span>) should be applied to the projected
       element itself, not the prefix wrapper.
@@ -166,13 +166,13 @@
   </div>
 
   <!-- suffixKlass -->
-  <div class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-foreground">suffixKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">suffixKlass</h3>
       <tng-tag label="suffix wrapper"></tng-tag>
     </div>
 
-    <p class="text-sm text-muted">
+    <p class="text-sm text-fg">
       The <span class="font-mono text-foreground">suffixKlass</span> input applies classes to the
       wrapper <span class="font-mono text-foreground">&lt;span&gt;</span> that contains projected
       suffix content. Use this for styling the suffix area: background colors, borders, or other
@@ -184,9 +184,9 @@
         <docs-example-block
           [docLink]="'https://example.com/docs'"
           [stackBlitzLink]="'https://stackblitz.com/example'"
-          [htmlContent]="rootKlassExample()"
-          [tsContent]="prefixKlassExample()"
-          [styleContent]="suffixKlassExample()"
+          [htmlContent]="suffixKlassExampleHtml()"
+          [tsContent]="preffixKlassExampleTs()"
+          [styleContent]="suffixKlassExampleCss()"
         >
           <span tngExampleTitle>Default</span>
 
@@ -202,9 +202,9 @@
           <docs-example-block
             [docLink]="'https://example.com/docs'"
             [stackBlitzLink]="'https://stackblitz.com/example'"
-            [htmlContent]="rootKlassExample()"
-            [tsContent]="prefixKlassExample()"
-            [styleContent]="suffixKlassExample()"
+            [htmlContent]="suffixKlassExampleCustomHtml()"
+            [tsContent]="preffixKlassExampleTs()"
+            [styleContent]="suffixKlassCustomCss()"
           >
             <span tngExampleTitle>With custom suffixKlass</span>
 
@@ -219,9 +219,9 @@
       </div>
     </div>
     <div
-      class="space-y-2 sm:col-span-2 border-l-4 border-blue-500 bg-alternate-background px-4 py-4 rounded-md"
+      class="space-y-2 sm:col-span-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md"
     >
-      <strong class="text-sm font-bold text-muted text-blue-500">Important:</strong>
+      <strong class="text-sm font-bold text-muted text-primary">Important:</strong>
       Spacing for suffix content (like
       <span class="font-mono text-foreground">mr-3</span>)should be applied to the projected element
       itself, not the suffix wrapper.
@@ -229,13 +229,13 @@
   </div>
 
   <!-- Combined Example -->
-  <div class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-foreground">Combined Example</h3>
+      <h3 class="text-sm font-semibold text-primary">Full Working Example</h3>
       <tng-tag label="all klass hooks"></tng-tag>
     </div>
 
-    <p class="text-sm text-muted">
+    <p class="text-sm text-fg">
       You can combine all klass hooks together to create fully customized inputs. Here's an example
       using all four hooks:
     </p>
@@ -245,9 +245,8 @@
         <docs-example-block
           [docLink]="'https://example.com/docs'"
           [stackBlitzLink]="'https://stackblitz.com/example'"
-          [htmlContent]="rootKlassExample()"
-          [tsContent]="prefixKlassExample()"
-          [styleContent]="suffixKlassExample()"
+          [htmlContent]="combinedExampleHtml()"
+          [tsContent]="combinedExampleTs()"
         >
           <span tngExampleTitle>Fully Customized Input</span>
 
@@ -275,10 +274,10 @@
   </div>
 
   <!-- Best Practices -->
-  <div class="rounded-xl border border-border bg-alternate-background p-6 space-y-3">
-    <h3 class="text-sm font-semibold text-foreground">Best Practices</h3>
+  <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
+    <h3 class="text-sm font-semibold text-primary">Best Practices</h3>
 
-    <ul class="space-y-2 text-sm text-muted">
+    <ul class="space-y-2 text-sm text-fg">
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>
         <span>
