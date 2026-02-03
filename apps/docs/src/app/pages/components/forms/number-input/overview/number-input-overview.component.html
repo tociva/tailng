@@ -1,1 +1,143 @@
-Overview content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <div id="overview" class="rounded-xl border bg-bg p-6 shadow-sm space-y-3 text-fg">
+      <h2 class="text-base font-semibold text-primary">Overview</h2>
+      <p class="text-sm leading-6 text-muted">
+        <span class="font-mono text-primary/20">tng-number-input</span> is a standalone number
+        input that implements <span class="font-mono text-primary/20">ControlValueAccessor</span>
+        for Angular forms. It supports <span class="font-mono text-primary/20">min</span>,
+        <span class="font-mono text-primary/20">max</span>, <span class="font-mono text-primary/20">step</span>,
+        optional clamping on blur, and Tailng’s klass-based theming.
+      </p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <tng-tag label="CVA" color="default"></tng-tag>
+        <tng-tag label="min / max / step" color="default"></tng-tag>
+        <tng-tag label="Clamp on blur" color="default"></tng-tag>
+        <tng-tag label="Klass hooks" color="default"></tng-tag>
+        <tng-tag label="Standalone" color="default"></tng-tag>
+      </div>
+    </div>
+
+    <div id="QuickExample" class="relative rounded-xl border p-4 shadow-sm space-y-2 text-fg">
+      <div class="flex justify-end">
+        <tng-tag label="Reactive Forms" color="default"></tng-tag>
+      </div>
+      <h3 class="text-sm font-semibold text-primary">Quick example</h3>
+
+      <div class="grid gap-4 sm:grid-cols-1">
+        <docs-example-block
+          title="Basic with min/max/step"
+          [docLink]="'https://example.com/docs'"
+          [stackBlitzLink]="'https://stackblitz.com/example'"
+          [htmlContent]="basicHtml()"
+          [tsContent]="basicTs()"
+        >
+          <span tngExampleTitle>Basic</span>
+          <div tngExampleDemo>
+            <form [formGroup]="form">
+              <tng-number-input
+                formControlName="quantity"
+                placeholder="Quantity"
+                [min]="0"
+                [max]="100"
+                [step]="1"
+                klass="border border-border rounded-md px-3 w-48"
+              />
+            </form>
+            <p class="text-xs text-muted mt-2">
+              Works with <span class="font-mono text-primary/20">formControlName</span>;
+              value is <span class="font-mono text-primary/20">number | null</span>.
+            </p>
+          </div>
+        </docs-example-block>
+
+        <docs-example-block
+          [docLink]="'https://example.com/docs'"
+          [stackBlitzLink]="'https://stackblitz.com/example'"
+          [htmlContent]="minMaxStepHtml()"
+          [tsContent]="minMaxStepTs()"
+        >
+          <span tngExampleTitle>Decimal step</span>
+          <div tngExampleDemo>
+            <form [formGroup]="form">
+              <tng-number-input
+                formControlName="amount"
+                placeholder="Amount (0–1000, step 0.01)"
+                [min]="0"
+                [max]="1000"
+                [step]="0.01"
+                klass="border border-border rounded-md px-3 w-56"
+              />
+            </form>
+            <p class="text-xs text-muted mt-2">
+              Use <span class="font-mono text-primary/20">[step]="0.01"</span> for decimals;
+              value is clamped to min/max on blur.
+            </p>
+          </div>
+        </docs-example-block>
+      </div>
+    </div>
+
+    <div id="features" class="rounded-xl border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Features</h3>
+      <div class="grid gap-3 sm:grid-cols-1">
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">min / max / step</div>
+          <p class="text-xs leading-5 text-muted">
+            Native HTML attributes for validation and browser stepper. Optional clamping to min/max on blur.
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Value: number | null</div>
+          <p class="text-xs leading-5 text-muted">
+            Empty input yields <span class="font-mono text-foreground">null</span>; otherwise a number. NaN is converted to null.
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Klass theming</div>
+          <p class="text-xs leading-5 text-muted">
+            Customize the input via <span class="font-mono text-foreground">klass</span> input.
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Forms-ready</div>
+          <p class="text-xs leading-5 text-muted">
+            Full <span class="font-mono text-foreground">ControlValueAccessor</span> integration for reactive and template-driven forms.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-md border-l-4 border-primary bg-primary/10 p-4 text-sm text-muted text-fg">
+      <span class="font-semibold text-primary">Tip:</span>
+      Use <span class="font-mono text-foreground">inputmode="numeric"</span> or
+      <span class="font-mono text-foreground">inputmode="decimal"</span> for better mobile keypad behavior.
+    </div>
+  </section>
+
+  <aside
+    class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden"
+  >
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">On this page</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li class="flex items-center gap-2">
+        <a href="#overview" class="flex items-center gap-2 p-0 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Overview
+        </a>
+      </li>
+      <li class="flex items-center gap-2">
+        <a href="#QuickExample" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Quick example
+        </a>
+      </li>
+      <li class="flex items-center gap-2">
+        <a href="#features" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Features
+        </a>
+      </li>
+    </ul>
+  </aside>
+</div>

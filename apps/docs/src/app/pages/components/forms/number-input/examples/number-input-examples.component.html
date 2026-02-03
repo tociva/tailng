@@ -1,1 +1,192 @@
-Examples content.
+<section class="grid gap-4 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Basic usage</h3>
+      <tng-tag label="standalone"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Use <span class="font-mono text-foreground">tng-number-input</span> with a form control.
+      Value is <span class="font-mono">number | null</span> (empty yields null).
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="basicExampleHtml()"
+        [tsContent]="basicExampleTs()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form">
+            <tng-number-input formControlName="quantity" placeholder="Quantity" />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Reactive forms with min / max / step</h3>
+      <tng-tag label="reactive forms"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The component implements <span class="font-mono text-foreground">ControlValueAccessor</span>.
+      Use <span class="font-mono">formControlName</span> and set
+      <span class="font-mono">min</span>, <span class="font-mono">max</span>, and
+      <span class="font-mono">step</span> for validation and optional clamping on blur.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="reactiveFormsExampleHtml()"
+        [tsContent]="reactiveFormsExampleTs()"
+      >
+        <span tngExampleTitle>Examples</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="space-y-4 flex flex-col">
+            <div class="space-y-2">
+              <label class="text-xs font-semibold text-muted">Quantity (0–100, step 1)</label>
+              <tng-number-input
+                formControlName="quantity"
+                placeholder="Quantity"
+                [min]="0"
+                [max]="100"
+                [step]="1"
+              />
+            </div>
+            <div class="space-y-2">
+              <label class="text-xs font-semibold text-muted">Amount (0–1000, step 0.01)</label>
+              <tng-number-input
+                formControlName="amount"
+                placeholder="Amount"
+                [min]="0"
+                [max]="1000"
+                [step]="0.01"
+              />
+            </div>
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Input states</h3>
+      <tng-tag label="disabled / readonly"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Use <span class="font-mono text-foreground">disabled</span> and
+      <span class="font-mono text-foreground">readonly</span> to control state.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="statesExample()"
+        [tsContent]="statesExample()"
+      >
+        <span tngExampleTitle>Examples</span>
+        <div tngExampleDemo>
+          <div class="flex flex-col gap-3">
+            <tng-number-input placeholder="Disabled" [disabled]="true" />
+            <form [formGroup]="form" class="flex flex-col gap-3">
+              <tng-number-input
+                formControlName="readonlyValue"
+                placeholder="Readonly"
+                [readonly]="true"
+              />
+              <tng-number-input formControlName="prefilledValue" placeholder="Pre-filled" />
+            </form>
+          </div>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Form validation</h3>
+      <tng-tag label="validators"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Use Angular validators such as <span class="font-mono">Validators.required</span>,
+      <span class="font-mono">Validators.min</span>, and <span class="font-mono">Validators.max</span>
+      together with <span class="font-mono">min</span> / <span class="font-mono">max</span> on the
+      component.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="validationExample()"
+        [tsContent]="validationExample()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="space-y-4">
+            <div class="space-y-2">
+              <label class="text-xs font-semibold text-muted">Age (0–120)</label>
+              <tng-number-input
+                formControlName="age"
+                placeholder="Age"
+                [min]="0"
+                [max]="120"
+                [step]="1"
+              />
+              @if (ageCtrl.touched && ageCtrl.invalid) {
+                <div class="text-xs text-red-600 mt-1">
+                  @if (ageCtrl.hasError('required')) {
+                    Age is required
+                  } @else if (ageCtrl.hasError('min')) {
+                    Age must be at least 0
+                  } @else if (ageCtrl.hasError('max')) {
+                    Age must be no more than 120
+                  }
+                </div>
+              }
+            </div>
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Custom styling</h3>
+      <tng-tag label="klass"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Customize appearance with the <span class="font-mono">klass</span> input.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="customStylingExample()"
+        [tsContent]="customStylingExample()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form">
+            <tng-number-input
+              formControlName="quantity"
+              placeholder="Custom styled"
+              klass="border-2 border-purple-500 rounded-xl shadow-lg w-48 text-purple-700"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <div class="space-y-2 sm:col-span-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md">
+    <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+    Values are clamped to <span class="font-mono">min</span> / <span class="font-mono">max</span> on
+    blur. Use <span class="font-mono">inputmode="numeric"</span> or
+    <span class="font-mono">inputmode="decimal"</span> for better mobile keypads.
+  </div>
+</section>

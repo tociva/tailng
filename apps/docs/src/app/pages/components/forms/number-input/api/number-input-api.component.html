@@ -1,1 +1,188 @@
-Api content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <h3 class="text-2xl font-semibold text-primary">API reference for number input</h3>
+
+    <div class="border border-border bg-bg">
+      <tng-code-block
+        [content]="inputKlassExample()"
+        [highlighter]="highlighter"
+        language="typescript"
+        preKlass="bg-bg h-15"
+        rootKlass=" border-0 bg-bg h-20 overflow-y-hidden"
+      >
+      </tng-code-block>
+    </div>
+
+    <header class="flex flex-col gap-1">
+      <h3 class="text-2xl font-semibold text-primary">Inputs</h3>
+      <p class="text-sm text-fg">
+        This table lists all inputs for <span class="font-mono">tng-number-input</span>:
+        identity, state, numeric constraints, browser hints, and theming. Value type is
+        <span class="font-mono">number | null</span> (empty yields null).
+      </p>
+    </header>
+
+    <section id="identity" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Identity & Basics</h3>
+        <p class="text-sm text-fg">
+          Standard input attributes for id, name, and placeholder.
+        </p>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="basicRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="state" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">State</h3>
+        <p class="text-sm text-fg">Properties related to input state.</p>
+      </header>
+      <div class="rounded-md border">
+        <tng-table [rows]="stateRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="numeric" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Numeric constraints</h3>
+        <p class="text-sm text-fg">
+          <span class="font-mono">min</span> and <span class="font-mono">max</span> are used for
+          validation and optional clamping on blur. <span class="font-mono">step</span> affects the
+          browser stepper and validation.
+        </p>
+      </header>
+      <div class="rounded-md border">
+        <tng-table [rows]="numericRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="browserHints" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Browser Hints</h3>
+        <p class="text-sm text-fg">Hints for mobile keypad and autocomplete.</p>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="browserHintsRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="klass-hooks" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Klass hook (theming)</h3>
+        <p class="text-sm text-fg">
+          <span class="font-mono">tng-number-input</span> exposes a single <span class="font-mono">klass</span>
+          input; classes are merged with the default input styles.
+        </p>
+      </header>
+      <div class="rounded-md border">
+        <tng-table [rows]="klassRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+      <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+        <div class="flex items-center justify-between text-fg">
+          <h3 class="text-sm font-semibold text-primary">Klass (theming)</h3>
+          <tng-tag label="tailng"></tng-tag>
+        </div>
+        <p class="text-sm text-fg">
+          <span class="font-mono">klass</span> — applied to the single input element (wrapper + input
+          are the same). Use for borders, padding, text size, or focus overrides.
+        </p>
+        <div class="rounded-md border-l-4 border-primary bg-alternate-background p-4 text-sm text-muted text-fg">
+          <span class="font-semibold text-primary">Tip:</span>
+          Default classes include focus ring, disabled, and readonly styles. Override with
+          <span class="font-mono text-foreground">klass</span> as needed.
+        </div>
+      </div>
+    </section>
+
+    <div id="form-integration" class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Forms integration</h3>
+      <p class="text-sm leading-6 text-muted">
+        Implements <span class="font-mono text-foreground">ControlValueAccessor</span> and works with
+        both reactive and template-driven forms. Value is <span class="font-mono">number | null</span>;
+        empty input or invalid number yields <span class="font-mono">null</span>.
+      </p>
+      <ul class="space-y-1 text-sm text-muted list-disc pl-4">
+        <li>Supports <span class="font-mono text-foreground">formControlName</span> and <span class="font-mono text-foreground">ngModel</span></li>
+        <li>Values are clamped to min/max on blur when set</li>
+      </ul>
+    </div>
+  </section>
+
+  <aside
+    class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden"
+  >
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">API Overview</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li class="flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Inputs
+        </div>
+        <ul class="ml-6 space-y-1 text-fg">
+          <li class="flex items-center gap-2">
+            <a href="#identity" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+              <span class="h-1 w-1 rounded-full bg-primary"></span>
+              Identity & Basics
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <a href="#state" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+              <span class="h-1 w-1 rounded-full bg-primary"></span>
+              State
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <a href="#numeric" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+              <span class="h-1 w-1 rounded-full bg-primary"></span>
+              Numeric constraints
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <a href="#browserHints" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+              <span class="h-1 w-1 rounded-full bg-primary"></span>
+              Browser Hints
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <a href="#klass-hooks" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+              <span class="h-1 w-1 rounded-full bg-primary"></span>
+              Klass hook
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="flex items-center gap-2">
+        <a href="#form-integration" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Forms integration
+        </a>
+      </li>
+    </ul>
+  </aside>
+</div>
