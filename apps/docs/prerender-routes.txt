@@ -1,11 +1,11 @@
 /
- 
+
 # -------------------------
-# Installation / Guides
+# Getting Started
 # -------------------------
-/installation
-/installation/tailwind-setup
-/installation/quick-start
+/components/getting-started/installation
+/components/getting-started/tailwind-setup
+/components/getting-started/quick-start
 
 # -------------------------
 # Components Home
@@ -13,7 +13,7 @@
 /components
 
 # -------------------------
-# Form Controls
+# Form
 # -------------------------
 /components/forms/autocomplete
 /components/forms/checkbox
@@ -32,7 +32,7 @@
 /components/buttons/button-toggle
 
 # -------------------------
-# Buttons & Indicators
+# Primitives (buttons & indicators)
 # -------------------------
 /components/buttons/button
 /components/buttons/badge
@@ -44,7 +44,7 @@
 /components/buttons/skeleton
 
 # -------------------------
-# Layout Components
+# Layout
 # -------------------------
 /components/layout/card
 /components/layout/divider
@@ -53,7 +53,7 @@
 /components/layout/accordion
 
 # -------------------------
-# Navigation Components
+# Navigation
 # -------------------------
 /components/navigation/menu
 /components/navigation/sidenav
@@ -63,7 +63,7 @@
 /components/navigation/breadcrumbs
 
 # -------------------------
-# Popups & Overlays
+# Overlay
 # -------------------------
 /components/overlay/dialog
 /components/overlay/snackbar
@@ -71,13 +71,13 @@
 /components/overlay/popover
 
 # -------------------------
-# Overlay Primitives (internal)
+# Overlay Primitives
 # -------------------------
 /components/overlay-primitives/connected-overlay
 /components/overlay-primitives/option-list
 
 # -------------------------
-# Data Table & Structure
+# Table (data)
 # -------------------------
 /components/data/table
 /components/data/sort-header

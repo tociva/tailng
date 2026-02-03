@@ -1,5 +1,6 @@
 /
-# Form Controls
+
+# Form
 /forms/autocomplete
 /forms/checkbox
 /forms/chips
@@ -15,10 +16,11 @@
 /forms/textarea
 /forms/file-upload
 
-# Buttons & Indicators
+# Primitives (buttons & indicators)
 /buttons/button
 /buttons/button-toggle
 /buttons/badge
+/buttons/tag
 /buttons/icon
 /buttons/ripples
 /buttons/progress-bar
@@ -40,7 +42,7 @@
 /navigation/paginator
 /navigation/breadcrumbs
 
-# Popups & Overlays
+# Overlay
 /overlay/dialog
 /overlay/snackbar
 /overlay/tooltip
@@ -50,7 +52,7 @@
 /overlay-primitives/connected-overlay
 /overlay-primitives/option-list
 
-# Data Table & Structure
+# Table (data)
 /data/table
 /data/sort-header
 /data/filter-header

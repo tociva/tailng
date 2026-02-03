@@ -1,9 +1,9 @@
-name: Build and Deploy Docs to Development
+name: Build and Deploy (Docs + Playground) to Development
 
 on:
   push:
-    branches: [development]   # runs when a PR is merged into development
-  workflow_dispatch:          # allow manual runs too
+    branches: [development]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,10 +11,23 @@ permissions:
   pull-requests: read
 
 jobs:
-  build-and-deploy-docs-development:
+  build-and-deploy-development:
     if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: development
+
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - name: docs
+            build: docs:seo
+            dist: dist/apps/docs
+            project_secret: CF_DOCS_PROJECT_NAME
+          - name: playground
+            build: playground:seo
+            dist: dist/apps/playground
+            project_secret: CF_PLAYGROUND_PROJECT_NAME
 
     steps:
       - name: Checkout source
@@ -26,6 +39,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: yarn
 
       - name: Enable Corepack and use Yarn 4.12.0
         run: |
@@ -36,22 +50,22 @@ jobs:
       - name: Install dependencies with Yarn
         run: yarn install --frozen-lockfile
 
-      - name: Build + Prerender Docs (SEO)
-        run: yarn docs:seo
+      - name: Build + Prerender ${{ matrix.target.name }} (SEO)
+        run: yarn ${{ matrix.target.build }}
 
       - name: Write deployment info (optional)
         run: |
-          mkdir -p dist/apps/docs
+          mkdir -p ${{ matrix.target.dist }}
           BRANCH_NAME="${GITHUB_REF_NAME:-development}"
           SHORT_SHA="$(git rev-parse --short HEAD)"
-          echo "branch : ${BRANCH_NAME}" > dist/apps/docs/info.txt
-          echo "commit : ${SHORT_SHA}" >> dist/apps/docs/info.txt
-          echo "time : $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> dist/apps/docs/info.txt
+          echo "branch : ${BRANCH_NAME}" > ${{ matrix.target.dist }}/info.txt
+          echo "commit : ${SHORT_SHA}" >> ${{ matrix.target.dist }}/info.txt
+          echo "time : $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> ${{ matrix.target.dist }}/info.txt
 
       - name: Deploy to Cloudflare Pages with Wrangler
         run: |
-          yarn dlx wrangler pages deploy dist/apps/docs \
-            --project-name "${{ secrets.CF_DOCS_PROJECT_NAME }}" \
+          yarn dlx wrangler pages deploy ${{ matrix.target.dist }} \
+            --project-name "${{ secrets[matrix.target.project_secret] }}" \
             --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
