@@ -1,1 +1,26 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling (KlassFinal)</h2>
+    <p class="text-sm leading-6 text-fg">
+      <span class="font-mono">tng-copy-button</span> exposes <span class="font-mono">rootKlass</span> and <span class="font-mono">contentWrapKlass</span>. Values are merged with defaults; the template binds <span class="font-mono">finalRootKlass</span> and <span class="font-mono">finalContentWrapKlass</span> only—no hardcoded <span class="font-mono">class</span> in HTML.
+    </p>
+  </div>
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <h3 class="text-sm font-semibold text-primary">Custom root and content wrap</h3>
+    <p class="text-sm text-fg">Override <span class="font-mono">rootKlass</span> and <span class="font-mono">contentWrapKlass</span> to theme the button and inner span.</p>
+    <docs-example-block [docLink]="'#'" [stackBlitzLink]="'#'" [htmlContent]="themedHtml()">
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <tng-copy-button
+          [text]="snippet()"
+          variant="outline"
+          rootKlass="rounded-lg border-2 border-primary/50"
+          contentWrapKlass="inline-flex items-center gap-2 text-primary"
+        >
+          <span>Copy</span>
+          <span tngCopied>Copied</span>
+        </tng-copy-button>
+      </div>
+    </docs-example-block>
+  </div>
+</section>

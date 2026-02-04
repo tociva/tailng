@@ -36,3 +36,20 @@
 
   <span class="text-sm text-slate-600">Solid variant</span>
 </div>
+
+<div class="mt-6 space-y-2">
+  <div class="text-sm font-semibold text-foreground">Klass hooks (rootKlass / contentWrapKlass)</div>
+  <div class="flex items-center gap-4">
+    <tng-copy-button
+      [text]="code()"
+      variant="outline"
+      rootKlass="rounded-lg border-2 border-primary/50"
+      contentWrapKlass="inline-flex items-center gap-2 text-primary"
+    >
+      <tng-icon name="bootstrapClipboard"></tng-icon>
+      <span>Copy</span>
+      <span tngCopied><tng-icon name="bootstrapCheck2Circle"></tng-icon> <span>Copied</span></span>
+    </tng-copy-button>
+    <span class="text-sm text-slate-600">Custom root + content wrap classes</span>
+  </div>
+</div>

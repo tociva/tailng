@@ -17,8 +17,54 @@ export class TngCopyButton {
   /** how long to show "copied" state */
   resetAfterMs = input<number>(1500);
 
+  /* =====================
+   * Klass hooks
+   * ===================== */
+
+  rootKlass = input<string>('');
+  contentWrapKlass = input<string>('');
+
+  /* =====================
+   * State
+   * ===================== */
+
   copied = signal(false);
   private resetTimer: number | null = null;
+
+  /* =====================
+   * Defaults (internal)
+   * ===================== */
+
+  private readonly base = 'inline-flex items-center gap-1.5 font-medium transition select-none';
+  private readonly sizes: Record<CopyButtonSize, string> = {
+    sm: 'px-2 py-1 text-xs',
+    md: 'px-3 py-1.5 text-sm',
+  };
+  private readonly variants: Record<CopyButtonVariant, string> = {
+    ghost: 'text-slate-600 hover:bg-slate-100',
+    outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50',
+    solid: 'bg-primary text-white hover:opacity-90',
+  };
+
+  /* =====================
+   * Final Klass (defaults + user overrides)
+   * ===================== */
+
+  private readonly defaultRootKlass = computed(() =>
+    [this.base, this.sizes[this.size()], this.variants[this.variant()]].join(' ')
+  );
+
+  readonly finalRootKlass = computed(() =>
+    this.join(this.defaultRootKlass(), this.rootKlass())
+  );
+
+  readonly finalContentWrapKlass = computed(() =>
+    this.join('inline-flex items-center gap-1.5', this.contentWrapKlass())
+  );
+
+  /* =====================
+   * Actions
+   * ===================== */
 
   async copy(): Promise<void> {
     try {
@@ -35,16 +81,10 @@ export class TngCopyButton {
     }
   }
 
-  private base = 'inline-flex items-center gap-1.5 font-medium transition select-none';
-  private sizes: Record<CopyButtonSize, string> = {
-    sm: 'px-2 py-1 text-xs',
-    md: 'px-3 py-1.5 text-sm',
-  };
-  private variants: Record<CopyButtonVariant, string> = {
-    ghost: 'text-slate-600 hover:bg-slate-100',
-    outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50',
-    solid: 'bg-primary text-white hover:opacity-90',
-  };
-
-  klass = computed(() => [this.base, this.sizes[this.size()], this.variants[this.variant()]].join(' '));
+  private join(...parts: Array<string | null | undefined>): string {
+    return parts
+      .map((p) => (p ?? '').trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 }

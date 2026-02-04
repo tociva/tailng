@@ -1,12 +1,12 @@
-<button type="button" (click)="copy()" [class]="klass()">
+<button type="button" (click)="copy()" [class]="finalRootKlass()">
   @if (!copied()) {
-    <span class="inline-flex items-center gap-1.5">
+    <span [class]="finalContentWrapKlass()">
       <ng-content />
     </span>
   }
 
   @if (copied()) {
-    <span class="inline-flex items-center gap-1.5">
+    <span [class]="finalContentWrapKlass()">
       <ng-content select="[tngCopied]" />
     </span>
   }
