@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { TngIcon } from '@tociva/tailng-icons/icon';
 import { TngBadge, TngButton } from '@tociva/tailng-ui/primitives';
 import {
-  TngCodeBlock
+  TngCodeBlock, TngCodeBlockCopiedSlot, TngCodeBlockCopySlot
 } from '@tociva/tailng-ui/utilities';
 import { DemoShikiHighlighterService } from '../../../shared/demo-shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
@@ -17,6 +17,8 @@ import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
     TngBadge,
     TngButton,
     TngIcon,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
   ],
   templateUrl: './code-block-demo.component.html',
 })

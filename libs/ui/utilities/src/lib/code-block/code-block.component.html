@@ -18,7 +18,7 @@
         >
           <!-- DEFAULT state -->
           @if (hasCustomCopy()) {
-            <ng-content select="[tngCopy]"></ng-content>
+            <ng-content select="[tngCodeBlockCopy]"></ng-content>
           } @else {
             Copy
           }
@@ -26,7 +26,7 @@
           <!-- COPIED state -->
           <span tngCopied>
             @if (hasCustomCopied()) {
-              <ng-content select="[tngCopied]"></ng-content>
+              <ng-content select="[tngCodeBlockCopied]"></ng-content>
             } @else {
               Copied
             }

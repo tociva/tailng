@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TngCodeHighlighter, TngCodeLanguage } from './code-highlighter.type';
 import { TngCopyButton } from '../copy-button/copy-button.component';
 import { contentChild } from '@angular/core';
+import { TngCodeBlockCopySlot, TngCodeBlockCopiedSlot } from './code-block.directive';
 
 type CopyButtonVariant = 'ghost' | 'outline' | 'solid';
 type CopyButtonSize = 'sm' | 'md';
@@ -16,11 +17,11 @@ type CopyButtonSize = 'sm' | 'md';
 export class TngCodeBlock implements OnDestroy {
   private sanitizer = inject(DomSanitizer);
 
-  private copySlot = contentChild('[tngCopy]', { read: ElementRef });
-  private copiedSlot = contentChild('[tngCopied]', { read: ElementRef });
+  private copySlot = contentChild(TngCodeBlockCopySlot);
+  private copiedSlot = contentChild(TngCodeBlockCopiedSlot);
 
-  readonly hasCustomCopy = computed(() => !!this.copySlot());
-  readonly hasCustomCopied = computed(() => !!this.copiedSlot());
+  readonly hasCustomCopy = computed(() => Boolean(this.copySlot()));
+  readonly hasCustomCopied = computed(() => Boolean(this.copiedSlot()));
 
   content = input<string | null>(null);
   language = input<TngCodeLanguage>('text');
