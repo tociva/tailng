@@ -2,29 +2,25 @@ import { Component, computed } from '@angular/core';
 import { TngIcon } from '@tociva/tailng-icons/icon';
 import { TngTag } from '@tociva/tailng-ui/primitives';
 import { TngTextInput } from '@tociva/tailng-ui/form';
-import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
+import {
+  ExampleBlockComponent,
+  TngExampleDemo,
+} from '../../../../../shared/example-block/example-block.component';
 
 @Component({
   standalone: true,
   selector: 'docs-text-input-overview',
   templateUrl: './text-input-overview.component.html',
-  imports: [
-    TngIcon,
-    TngTextInput,
-    TngTag,
-    ExampleBlockComponent,
-    TngExampleDemo
-
-],
+  imports: [TngIcon, TngTextInput, TngTag, ExampleBlockComponent, TngExampleDemo],
 })
 export class TextInputOverviewComponent {
   readonly textInputBasicHtml = computed(
     () => `
-<form [formGroup]="form">
+<form [formGroup]="login">
   <tng-text-input
-    formControlName="username"
+    formControlName="userName"
     placeholder="Enter username"
-    rootKlass="border-2 border-blue-500 rounded-lg shadow-md"
+    rootKlass="border-2 border-blue-900 rounded-md shadow-md focus-within:ring-blue-900"
   />
 </form>
 `,
@@ -34,16 +30,16 @@ export class TextInputOverviewComponent {
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TailngTextInputComponent } from '@tociva/tailng-ui';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent],
+  imports: [ReactiveFormsModule, TngTextInput],
   templateUrl: './text-input.component.html',
 })
 export class TextInputDemoComponent {
-  form = new FormGroup({
-    username: new FormControl('', { nonNullable: true })
+  login = new FormGroup({
+    userName: new FormControl('', { nonNullable: true })
 });
 
 `,
@@ -51,9 +47,12 @@ export class TextInputDemoComponent {
 
   readonly textInputBasicCss = computed(
     () => `
-rootClass = flex h-10 w-full items-center rounded-md border border-border bg-bg text-foreground
-  focus-within:border-transparent focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-1 
-  focus-within:ring-offset-background
+rootClass = flex h-10 w-full items-center rounded-md 
+            border border-border bg-bg text-foreground
+            focus-within:border-transparent 
+            focus-within:ring-2 focus-within:ring-primary 
+            focus-within:ring-offset-1 
+            focus-within:ring-offset-background
 
 `,
   );
@@ -79,11 +78,12 @@ rootClass = flex h-10 w-full items-center rounded-md border border-border bg-bg 
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  imports: [ReactiveFormsModule, TngTextInput,TngIcon],
   templateUrl: './text-input.component.html',
 })
 export class TextInputDemoComponent {
@@ -91,12 +91,13 @@ export class TextInputDemoComponent {
     search: new FormControl('', { nonNullable: true })
 });
 
-`
+`,
   );
   readonly textInputSearchCss = computed(
     () => `
-inputKlass = h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted
-tngPrefix = ml-3
+inputKlass =  h-full min-w-0 flex-1 bg-transparent 
+              px-3 text-sm outline-none placeholder:text-muted
+tngPrefix  =  ml-3
 `,
   );
 }

@@ -1,20 +1,43 @@
 import { Component, inject } from '@angular/core';
-import { TngTab, TngTabPanel, TngTabs, TngCard } from '@tociva/tailng-ui/layout';
+import { TngCard } from '@tociva/tailng-ui/layout';
 import { TngCodeBlock } from '@tociva/tailng-ui/utilities';
 import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
+import { TngButtonToggle, TngButtonToggleOption } from '@tociva/tailng-ui/form';
 
 @Component({
   standalone: true,
   selector: 'docs-installation',
   templateUrl: './installation.component.html',
-  imports: [TngCard, TngTabs, TngTab, TngTabPanel, TngCodeBlock],
+  imports: [TngCard, TngCodeBlock, TngButtonToggle],
 })
 export class InstallationComponent {
-
   private shiki = inject(ShikiHighlighterService);
   readonly highlighter = new TngShikiAdapter(this.shiki);
+  cdkStatus: 'yarn' | 'npm' = 'yarn';
+  packageStatus: 'yarn' | 'npm' = 'yarn';
+  tailwindStatus: 'yarn' | 'npm' = 'yarn';
+  runStatus: 'yarn' | 'npm' = 'yarn';
 
+  titleOptions: TngButtonToggleOption<string>[] = [
+    { value: 'yarn', label: 'Yarn' },
+    { value: 'npm', label: 'npm' },
+  ];
+
+  get cdkCommand(): string {
+    return this.cdkStatus === 'yarn' ? this.yarnCdk : this.npmCdk;
+  }
+  get tailngPackage(): string {
+    return this.packageStatus === 'yarn' ? this.yarnTailng : this.npmTailng;
+  }
+
+  get tailngTailwind(): string {
+    return this.tailwindStatus === 'yarn' ? this.yarnTailwind : this.npmTailwind;
+  }
+
+  get tailngRun(): string {
+    return this.runStatus === 'yarn' ? this.yarnStart : this.npmStart;
+  }
 
   // Angular app creation
   readonly createApp = `npx -p @angular/cli@21 ng new tailng-starter --standalone --routing --style=css
@@ -72,5 +95,4 @@ module.exports = {
 
   // Theme example
   readonly themeExample = `<body class="mode-dark theme-emerald">`;
-  
 }

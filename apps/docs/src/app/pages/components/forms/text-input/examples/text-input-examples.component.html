@@ -17,6 +17,7 @@
         [stackBlitzLink]="'https://stackblitz.com/example'"
         [htmlContent]="basicExampleHtml()"
         [tsContent]="basicExampleTs()"
+        [styleContent]="basicExampleCss()"
       >
         <span tngExampleTitle>Fully Customized Input</span>
 
@@ -54,9 +55,8 @@
           [stackBlitzLink]="'https://stackblitz.com/example'"
           [htmlContent]="reactiveFormsExampleHtml()"
           [tsContent]="reactiveFormsExampleTs()"
+          [styleContent]="reactiveFormsExampleCss()"
         >
-                  <!-- [styleContent]="reactiveFormsExampleTs()" -->
-
           <span tngExampleTitle>Examples</span>
 
           <div tngExampleDemo>
@@ -138,9 +138,8 @@
           [stackBlitzLink]="'https://stackblitz.com/example'"
           [htmlContent]="prefixSuffixExampleHtml()"
           [tsContent]="prefixSuffixExampleTs()"
+          [styleContent]="prefixSuffixExampleCss()"
         >
-                  <!-- [styleContent]="prefixSuffixExample()" -->
-
           <span tngExampleTitle>Examples</span>
 
           <div tngExampleDemo>
@@ -198,8 +197,8 @@
         [stackBlitzLink]="'https://stackblitz.com/example'"
         [htmlContent]="inputTypesExampleHtml()"
         [tsContent]="inputTypesExampleTs()"
+        [styleContent]="basicExampleCss()"
       >
-              <!-- [styleContent]="inputTypesExample()" -->
         <span tngExampleTitle>Examples</span>
 
         <div tngExampleDemo>
@@ -237,9 +236,9 @@
       <docs-example-block
         [docLink]="'https://example.com/docs'"
         [stackBlitzLink]="'https://stackblitz.com/example'"
-        [htmlContent]="statesExample()"
-        [tsContent]="statesExample()"
-        [styleContent]="statesExample()"
+        [htmlContent]="statesExampleHtml()"
+        [tsContent]="statesExampleTs()"
+        [styleContent]="basicExampleCss()"
       >
         <span tngExampleTitle>Examples</span>
 
@@ -255,6 +254,10 @@
               [readonly]="true"
             />
             <tng-text-input formControlName="prefilledValue" placeholder="Enter text" />
+            <!-- <tng-text-input
+    [(ngModel)]="myValue"
+    placeholder="Enter text"
+  /> -->
           </form>
         </div>
         </div>
@@ -286,9 +289,9 @@
       <docs-example-block
         [docLink]="'https://example.com/docs'"
         [stackBlitzLink]="'https://stackblitz.com/example'"
-        [htmlContent]="validationExample()"
-        [tsContent]="validationExample()"
-        [styleContent]="validationExample()"
+        [htmlContent]="validationExampleHtml()"
+        [tsContent]="validationExampleTs()"
+        [styleContent]="basicExampleCss()"
       >
         <span tngExampleTitle>Examples</span>
 
@@ -352,9 +355,9 @@
       <docs-example-block
         [docLink]="'https://example.com/docs'"
         [stackBlitzLink]="'https://stackblitz.com/example'"
-        [htmlContent]="customStylingExample()"
-        [tsContent]="customStylingExample()"
-        [styleContent]="customStylingExample()"
+        [htmlContent]="customStylingExampleHtml()"
+        [tsContent]="customStylingExampleTs()"
+        [styleContent]="customStylingExampleCss()"
       >
         <span tngExampleTitle>Examples</span>
 

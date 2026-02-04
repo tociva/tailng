@@ -2,30 +2,29 @@ import { Component, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TngIcon } from '@tociva/tailng-icons/icon';
-import {
-  TngTextInput
-} from '@tociva/tailng-ui/form';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 import { TngTag } from '@tociva/tailng-ui/primitives';
 
-import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
+import {
+  ExampleBlockComponent,
+  TngExampleDemo,
+} from '../../../../../shared/example-block/example-block.component';
 
 @Component({
   standalone: true,
   selector: 'docs-text-input-examples',
   templateUrl: './text-input-examples.component.html',
   imports: [
-     TngTextInput,
+    TngTextInput,
     TngIcon,
     ReactiveFormsModule,
     ExampleBlockComponent,
     TngExampleDemo,
-    TngTag
-
+    TngTag,
   ],
 })
 export class TextInputExamplesComponent {
-
-   // Form for reactive forms example
+  // Form for reactive forms example
   form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -48,7 +47,7 @@ export class TextInputExamplesComponent {
     readonlyValue: new FormControl('This value cannot be edited', { nonNullable: true }),
     prefilledValue: new FormControl('Pre-filled value', { nonNullable: true }),
   });
-
+  // myValue=''; 
   get emailCtrl() {
     return this.form.controls.email;
   }
@@ -77,9 +76,9 @@ export class TextInputExamplesComponent {
   // Code examples
   readonly basicExampleHtml = computed(
     () => `
-  <form [formGroup]="form">
+  <form [formGroup]="login">
     <tng-text-input
-      formControlName=username
+      formControlName=userName
       placeholder="Enter Username"
     />
   </form>
@@ -90,23 +89,31 @@ export class TextInputExamplesComponent {
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TailngTextInputComponent } from '@tociva/tailng-ui';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent],
+  imports: [ReactiveFormsModule, TngTextInput],
   templateUrl: './text-input.component.html',
 })
 export class TextInputDemoComponent {
-  form = new FormGroup({
-    username: new FormControl('', { nonNullable: true })
+  login = new FormGroup({
+    userName: new FormControl('', { nonNullable: true })
 });
+`,
+  );
+  readonly basicExampleCss = computed(
+    () => `
+// Default inputKlass CSS
+inputKlass  = h-full min-w-0 flex-1 bg-transparent 
+              px-3 text-sm outline-none 
+              placeholder:text-muted
 `,
   );
 
   readonly reactiveFormsExampleHtml = computed(
     () => `
-<form [formGroup]="form">
+<form [formGroup]="login">
   <tng-text-input
     formControlName="email"
     placeholder="Enter email"
@@ -134,44 +141,58 @@ export class TextInputDemoComponent {
 
   readonly reactiveFormsExampleTs = computed(
     () => `
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { computed } from '@angular/core';
-import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 
 @Component({
  selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  imports: [ReactiveFormsModule, TngTextInput,TngIcon],
   templateUrl: './text-input.component.html',
 })
-export class MyComponent {
-  form = new FormGroup({
+export class TextInputDemoComponent {
+  login = new FormGroup({
     email: new FormControl('', { nonNullable: true }),
     password: new FormControl('', { nonNullable: true })
     search: new FormControl('', { nonNullable: true }),
   });
 }
-`
+`,
+  );
+  readonly reactiveFormsExampleCss = computed(
+    () => `
+// Default CSS
+inputKlass = h-full min-w-0 flex-1 bg-transparent 
+              px-3 text-sm outline-none 
+              placeholder:text-muted
+tngPrefix = ml-3
+`,
   );
 
   readonly prefixSuffixExampleHtml = computed(
     () => `
-<form [formGroup]="form">    
-<tng-text-input placeholder="Search...">
+<form [formGroup]="login">    
+<tng-text-input placeholder="Search..." 
+  formControlName="search"
+  >
   <tng-icon
     tngPrefix
     name="bootstrapSearch"
     class="ml-3 text-muted"
   />
 </tng-text-input>
-  <tng-text-input placeholder="Enter email">
+  <tng-text-input placeholder="Enter email"
+    formControlName="email">
     <tng-icon
       tngSuffix
       name="bootstrapCheck"
       class="mr-3 text-green-600"
     />
   </tng-text-input>
-  <tng-text-input placeholder="Search users...">
+  <tng-text-input placeholder="Search users..."
+    formControlName="searchUser">
     <tng-icon
       tngPrefix
       name="bootstrapSearch"
@@ -189,23 +210,35 @@ export class MyComponent {
 
   readonly prefixSuffixExampleTs = computed(
     () => `
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { computed } from '@angular/core';
-import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 
 @Component({
  selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  imports: [ReactiveFormsModule, TngIcon,TngTextInput],
   templateUrl: './text-input.component.html',
 })
-export class MyComponent {
-  form = new FormGroup({
-    email: new FormControl('', { nonNullable: true }),
+export class TextInputDemoComponent {
+  login = new FormGroup({
     search: new FormControl('', { nonNullable: true }),
+    email: new FormControl('', { nonNullable: true }),
+    searchUser: new FormControl('', { nonNullable: true }),
   });
 }
-`
+`,
+  );
+  readonly prefixSuffixExampleCss = computed(
+    () => `
+// Default CSS
+inputKlass = h-full min-w-0 flex-1 bg-transparent 
+              px-3 text-sm outline-none 
+              placeholder:text-muted
+tngPrefix = ml-3
+tngSuffix = mr-3
+`,
   );
 
   readonly inputTypesExampleHtml = computed(
@@ -251,17 +284,17 @@ export class MyComponent {
   );
   readonly inputTypesExampleTs = computed(
     () => `
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { computed } from '@angular/core';
-import { TailngTextInputComponent } from '@tociva/tailng-ui';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 
 @Component({
  selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent],
+  imports: [ReactiveFormsModule, TngTextInput],
   templateUrl: './text-input.component.html',
 })
-export class MyComponent {
+export class TextInputDemoComponent {
   form = new FormGroup({
     name: new FormControl('', { nonNullable: true }),
     email: new FormControl('', { nonNullable: true }),
@@ -271,9 +304,9 @@ export class MyComponent {
     tel: new FormControl('', { nonNullable: true }),
   });
 }
-`
+`,
   );
-  readonly statesExample = computed(
+  readonly statesExampleHtml = computed(
     () => `
 <form [formGroup]="form">  
   <tng-text-input
@@ -301,10 +334,62 @@ export class MyComponent {
 </form>
 `,
   );
+   readonly statesExampleTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 
-  readonly validationExample = computed(
-    () => `import { Validators } from '@angular/forms';
+@Component({
+ selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngTextInput],
+  templateUrl: './text-input.component.html',
+})
+export class TextInputDemoComponent {
+  form = new FormGroup({
+    readonlyValue: new FormControl('This value cannot be edited', { nonNullable: true }),
+    prefilledValue: new FormControl('Pre-filled value', { nonNullable: true }),
+  });
+}
+`,
+  );
+  readonly validationExampleHtml = computed(
+    () => `
+<form [formGroup]="form">  
+  <tng-text-input
+    formControlName="username"
+    placeholder="Username"
+    [minlength]="3"
+    [maxlength]="20"
+    pattern="^[a-zA-Z0-9_]+$"
+  />
+  @if (form.controls.username.touched && form.controls.username.invalid) {
+    @if (form.controls.username.hasError('required')) {
+      Username is required
+    } @else if (form.controls.username.hasError('minlength')) {
+      Username must be at least 3 characters
+  @else if (form.controls.username.hasError('maxlength')) {
+    Username must be no more than 20 characters
+    } @else if (form.controls.username.hasError('pattern')) {
+    Username can only contain letters, numbers, and underscores
+  }
+</form>
+`,
+  );
+  readonly validationExampleTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 
+@Component({
+ selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngTextInput],
+  templateUrl: './text-input.component.html',
+})
+export class TextInputDemoComponent {   
 form = new FormGroup({
   username: new FormControl('', {
     validators: [
@@ -315,35 +400,14 @@ form = new FormGroup({
     ],
   }),
 });
-
-<tng-text-input
-  formControlName="username"
-  placeholder="Username"
-  [minlength]="3"
-  [maxlength]="20"
-  pattern="^[a-zA-Z0-9_]+$"
-/>
-
-@if (usernameCtrl.touched && usernameCtrl.invalid) {
-  <div class="text-sm text-red-600 mt-1">
-    @if (usernameCtrl.hasError('required')) {
-      Username is required
-    } @else if (usernameCtrl.hasError('minlength')) {
-      Username must be at least 3 characters
-    } @else if (usernameCtrl.hasError('maxlength')) {
-      Username must be no more than 20 characters
-    } @else if (usernameCtrl.hasError('pattern')) {
-      Username can only contain letters, numbers, and underscores
-    }
-  </div>
-}
 `,
   );
 
-  readonly customStylingExample = computed(
+  readonly customStylingExampleHtml = computed(
     () => `
 <form [formGroup]="form">  
   <tng-text-input
+    formControlName=search
     placeholder="Custom styled input"
     rootKlass="border-2 border-purple-500 rounded-xl shadow-lg"
     inputKlass="text-purple-700 placeholder:text-purple-300"
@@ -357,5 +421,35 @@ form = new FormGroup({
 </form>
 `,
   );
-}
 
+  readonly customStylingExampleTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
+@Component({
+  selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngTextInput,TngIcon],
+  templateUrl: './text-input.component.html',
+})
+export class TextInputDemoComponent {
+  form = new FormGroup({
+    search: new FormControl('', { nonNullable: true })
+});
+`);
+readonly customStylingExampleCss = computed(()=>
+// Default CSS
+`rootClass = flex h-10 w-full items-center rounded-md 
+            border border-border bg-bg text-foreground
+            focus-within:border-transparent 
+            focus-within:ring-2 focus-within:ring-primary 
+            focus-within:ring-offset-1 
+            focus-within:ring-offset-background
+inputKlass = h-full min-w-0 flex-1 bg-transparent 
+              px-3 text-sm outline-none 
+              placeholder:text-muted
+tngPrefix = ml-3
+`);
+}

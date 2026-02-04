@@ -39,7 +39,7 @@
         <div tngExampleDemo>
           <tng-text-input
             placeholder="Custom root styling"
-            rootKlass="border-2 border-blue-500 rounded-lg shadow-md w-[300px]"
+            rootKlass="border-2 border-blue-900 rounded-md shadow-md focus-within:ring-blue-900 max-w-2xl"
           />
         </div>
       </docs-example-block>
@@ -185,7 +185,7 @@
           [docLink]="'https://example.com/docs'"
           [stackBlitzLink]="'https://stackblitz.com/example'"
           [htmlContent]="suffixKlassExampleHtml()"
-          [tsContent]="preffixKlassExampleTs()"
+          [tsContent]="suffixKlassCustomTs()"
           [styleContent]="suffixKlassExampleCss()"
         >
           <span tngExampleTitle>Default</span>
@@ -203,7 +203,7 @@
             [docLink]="'https://example.com/docs'"
             [stackBlitzLink]="'https://stackblitz.com/example'"
             [htmlContent]="suffixKlassExampleCustomHtml()"
-            [tsContent]="preffixKlassExampleTs()"
+            [tsContent]="suffixKlassCustomTs()"
             [styleContent]="suffixKlassCustomCss()"
           >
             <span tngExampleTitle>With custom suffixKlass</span>
@@ -247,6 +247,7 @@
           [stackBlitzLink]="'https://stackblitz.com/example'"
           [htmlContent]="combinedExampleHtml()"
           [tsContent]="combinedExampleTs()"
+          [styleContent]="combinedExampleCss()"
         >
           <span tngExampleTitle>Fully Customized Input</span>
 

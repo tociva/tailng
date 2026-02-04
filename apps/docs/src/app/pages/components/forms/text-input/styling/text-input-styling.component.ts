@@ -1,8 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { TngIcon } from '@tociva/tailng-icons/icon';
-import {
-  TngTextInput
-} from '@tociva/tailng-ui/form';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 import { TngTag } from '@tociva/tailng-ui/primitives';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
@@ -26,7 +24,7 @@ export class TextInputStylingComponent {
   <tng-text-input
     formControlName="text"
     placeholder="Custom root styling"
-    rootKlass="border-2 border-blue-500 rounded-lg shadow-md"
+    rootKlass="border-2 border-blue-900 rounded-md shadow-md focus-within:ring-blue-900 max-w-2xl"
   />
 </form>
 `,
@@ -35,11 +33,11 @@ export class TextInputStylingComponent {
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  imports: [ReactiveFormsModule, TngTextInput],
   templateUrl: './text-input.component.html',
 })
 export class TextInputDemoComponent {
@@ -70,23 +68,6 @@ rootClass = flex h-10 w-full items-center rounded-md border border-border bg-bg 
 </form>
 `,
   );
-  // readonly inputKlassExampleTs = computed(
-  //     () => `
-  // import { Component } from '@angular/core';
-  // import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-  // import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
-  // @Component({
-  //   selector: 'text-input-demo',
-  //   standalone: true,
-  //   imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
-  //   templateUrl: './text-input.component.html',
-  // })
-  // export class TextInputDemoComponent {
-  //   form = new FormGroup({
-  //     search: new FormControl('', { nonNullable: true })
-  // });
-  // `
-  //   );
 
   readonly inputKlassExampleCss = computed(
     () => `
@@ -130,11 +111,12 @@ inputKlass = h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none plac
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  imports: [ReactiveFormsModule, TngTextInput,TngIcon],
   templateUrl: './text-input.component.html',
 })
 export class TextInputDemoComponent {
@@ -158,7 +140,7 @@ prefixKlass="bg-blue-50 rounded-l-md
 
   readonly suffixKlassExampleHtml = computed(
     () => `
-<form [formGroup]="form">
+<form [formGroup]="login">
   <tng-text-input placeholder="Enter email" formControlName="email">
     <tng-icon
       tngSuffix
@@ -172,7 +154,7 @@ prefixKlass="bg-blue-50 rounded-l-md
 
   readonly suffixKlassExampleCustomHtml = computed(
     () => `
-<form [formGroup]="form">
+<form [formGroup]="login">
   <tng-text-input
     formControlName="email"
     placeholder="Enter email"
@@ -196,6 +178,25 @@ tngSuffix = mr-3`,
     () => `
 tngSuffix = mr-3
 suffixKlass="bg-green-50 rounded-r-md
+`,
+  );
+readonly suffixKlassCustomTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
+@Component({
+  selector: 'text-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngTextInput,TngIcon],
+  templateUrl: './text-input.component.html',
+})
+export class TextInputDemoComponent {
+  login = new FormGroup({
+    email: new FormControl('', { nonNullable: true })
+});
+
 `,
   );
 
@@ -228,11 +229,12 @@ suffixKlass="bg-green-50 rounded-r-md
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TailngTextInputComponent,TailngIconComponent } from '@tociva/tailng-ui';
+import { TngIcon } from '@tociva/tailng-icons/icon';
+import { TngTextInput } from '@tociva/tailng-ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TailngTextInputComponent,TailngIconComponent],
+  imports: [ReactiveFormsModule, TngTextInput,TngIcon],
   templateUrl: './text-input.component.html',
 })
 export class TextInputDemoComponent {
@@ -241,7 +243,12 @@ export class TextInputDemoComponent {
 });
 `,
   );
-
+readonly combinedExampleCss = computed(()=>
+  `rootKlass= border-2 border-purple-500 rounded-xl
+    inputKlass= text-purple-700
+    prefixKlass= bg-purple-50
+    suffixKlass= bg-purple-50`
+);
   readonly isCodePanelOpen = signal(false);
   toggleCodePanel(): void {
     this.isCodePanelOpen.set(!this.isCodePanelOpen());

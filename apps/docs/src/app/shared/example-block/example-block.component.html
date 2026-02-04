@@ -59,63 +59,41 @@
       >
       <tng-tab-panel value="html">
         @if (htmlSource()) {
-          <div class="relative">
-            <tng-code-block [content]="htmlSource()" [highlighter]="highlighter" language="html" />
-            <div class="absolute top-2 right-2">
-              <tng-copy-button [text]="htmlSource()" (copied)="copied.set(true)">
-                @if (!copied()) {
-                  <tng-icon name="bootstrapCopy"></tng-icon>
-                } @else {
-                  <span>
-                    <i class="bi bi-check2"></i>
-                    Copied successfully!
-                  </span>
-                }
-              </tng-copy-button>
-            </div>
-          </div>
+          <tng-code-block
+            [content]="htmlSource()"
+            [highlighter]="highlighter"
+            language="html"
+            [copyResetMs]="5000"
+          >
+            <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+            <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+          </tng-code-block>
         }
       </tng-tab-panel>
       <tng-tab-panel value="ts">
         @if (tsSource()) {
-          <div class="relative">
-            <tng-code-block
-              [content]="tsSource()"
-              [highlighter]="highlighter"
-              language="typescript"
-            />
-            <div class="absolute top-2 right-2">
-              <tng-copy-button [text]="tsSource()" (copied)="copied.set(true)">
-                @if (!copied()) {
-                  <tng-icon name="bootstrapCopy"></tng-icon>
-                } @else {
-                  <span>
-                    <i class="bi bi-check2"></i>
-                    Copied successfully!
-                  </span>
-                }
-              </tng-copy-button>
-            </div>
-          </div>
+           <tng-code-block
+            [content]="tsSource()"
+            [highlighter]="highlighter"
+            language="typescript"
+            [copyResetMs]="5000"
+          >
+            <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+            <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+          </tng-code-block>
         }
       </tng-tab-panel>
       <tng-tab-panel value="css">
         @if (cssSource()) {
-          <div class="relative">
-            <tng-code-block [content]="cssSource()" [highlighter]="highlighter" language="css" />
-            <div class="absolute top-2 right-2">
-              <tng-copy-button [text]="cssSource()" (copied)="copied.set(true)">
-                @if (!copied()) {
-                  <tng-icon name="bootstrapCopy"></tng-icon>
-                } @else {
-                  <span>
-                    <i class="bi bi-check2"></i>
-                    Copied successfully!
-                  </span>
-                }
-              </tng-copy-button>
-            </div>
-          </div>
+           <tng-code-block
+            [content]="cssSource()"
+            [highlighter]="highlighter"
+            language="css"
+            [copyResetMs]="5000"
+          >
+            <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+            <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+          </tng-code-block>
         }
       </tng-tab-panel>
     </tng-tabs>

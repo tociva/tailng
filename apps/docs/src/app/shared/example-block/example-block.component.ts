@@ -1,7 +1,11 @@
 import { Component, computed, Directive, inject, input, signal } from '@angular/core';
 import { TngIcon } from '@tociva/tailng-icons/icon';
 import { TngExpansionPanel, TngTab, TngTabPanel, TngTabs } from '@tociva/tailng-ui/layout';
-import { TngCodeBlock } from '@tociva/tailng-ui/utilities';
+import {
+  TngCodeBlock,
+  TngCodeBlockCopiedSlot,
+  TngCodeBlockCopySlot,
+} from '@tociva/tailng-ui/utilities';
 import { ShikiHighlighterService } from '../shiki-highlighter.service';
 import { TngShikiAdapter } from '../tng-shiki.adapter';
 
@@ -34,6 +38,8 @@ export class TngExampleDemo {}
     TngTab,
     TngTabPanel,
     TngTabs,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
   ],
 })
 export class ExampleBlockComponent {
@@ -41,11 +47,8 @@ export class ExampleBlockComponent {
   readonly highlighter = new TngShikiAdapter(this.shiki);
 
   htmlSource = computed(() => this.htmlContent());
-tsSource   = computed(() => this.tsContent());
-cssSource  = computed(() => this.styleContent());
-
-
-copied = signal(false);
+  tsSource = computed(() => this.tsContent());
+  cssSource = computed(() => this.styleContent());
 
   // Inputs
   readonly docLink = input<string>('');
@@ -59,7 +62,9 @@ copied = signal(false);
   readonly isCodePanelOpen = signal(false);
 
   readonly finalKlass = computed(() => {
-    return ['rounded-xl border border-border bg-bg p-4 shadow-sm space-y-2', this.klass()].join(' ');
+    return ['rounded-xl border border-border bg-bg p-4 shadow-sm space-y-2', this.klass()].join(
+      ' ',
+    );
   });
 
   toggleCodePanel(): void {
@@ -69,7 +74,7 @@ copied = signal(false);
   async copyDocLink(): Promise<void> {
     const link = this.docLink();
     if (!link) return;
-    
+
     try {
       await navigator.clipboard.writeText(link);
     } catch {
@@ -83,7 +88,4 @@ copied = signal(false);
       window.open(link, '_blank');
     }
   }
-
-
-
 }

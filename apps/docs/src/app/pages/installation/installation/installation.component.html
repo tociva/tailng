@@ -1,148 +1,140 @@
-<tng-card class="max-w-4xl mx-auto py-8 px-4">
+<tng-card rootKlass="max-w-auto mx-6 py-4 px-4 space-y-6 mt-6">
   <div class="space-y-6">
     <div>
       <h1 class="text-4xl font-bold text-primary mb-2">Installation</h1>
-      <p class="text-lg text-slate-600">
-        Install tailng and get started quickly.
-      </p>
+      <p class="text-lg text-slate-600">Install tailng and get started quickly.</p>
     </div>
+    <div class="space-y-6 py-4">
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">1) Create a fresh Angular 21 app</h2>
 
-    <tng-tabs defaultValue="yarn">
-      <tng-tab value="yarn">Yarn</tng-tab>
-      <tng-tab value="npm">npm</tng-tab>
+        <p class="text-xs text-primary mt-0">
+          
+          <tng-code-block
+            [content]="createApp"
+            language="bash"
+            [highlighter]="highlighter"
+            rootKlass="w-full"
+          ></tng-code-block>  
+        </p>
+      </div>
 
-      <tng-tab-panel value="yarn">
-        <div class="space-y-6 py-4">
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              1) Create a fresh Angular 21 app
-            </h2>
-            <tng-code-block [content]="createApp" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">2) Install Angular CDK</h2>
+        <tng-button-toggle
+          [options]="titleOptions"
+          [value]="cdkStatus"
+          (valueChange)="cdkStatus = $event"
+            groupKlass="!w-1/5"
+            buttonKlass="font-normal h-7 py-[0]"
+        />
+        
+        <tng-code-block
+          [content]="cdkCommand"
+          language="bash"
+          [highlighter]="highlighter"
+        >
+      </tng-code-block>
+      </div>
 
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              2) Install Angular CDK
-            </h2>
-            <tng-code-block [content]="yarnCdk" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">3) Install Tailng packages</h2>
+         <tng-button-toggle
+          [options]="titleOptions"
+          [value]="packageStatus"
+          (valueChange)="packageStatus = $event"
+            groupKlass="!w-1/5"
+            buttonKlass="font-normal h-7 py-[0]"
+        />
+        
+        <tng-code-block
+          [content]="tailngPackage"
+          language="bash"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
 
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              3) Install Tailng packages
-            </h2>
-            <tng-code-block [content]="yarnTailng" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
+        <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">4) Install Tailwind CSS</h2>
+        <tng-button-toggle
+          [options]="titleOptions"
+          [value]="tailwindStatus"
+          (valueChange)="tailwindStatus = $event"
+            groupKlass="!w-1/5"
+            buttonKlass="font-normal h-7 py-[0]"
+          />
+          
+        <tng-code-block
+          [content]="tailngTailwind"
+          language="bash"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
 
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              4) Install Tailwind CSS
-            </h2>
-            <tng-code-block [content]="yarnTailwind" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
+        <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">5) Add PostCSS config</h2>
+        
+        <tng-code-block
+          [content]="postcssConfig"
+          language="js"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
 
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              5) Add PostCSS config
-            </h2>
-            <tng-code-block [content]="postcssConfig" language="js" [highlighter]="highlighter"></tng-code-block>
-          </div>
+        <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">6) Configure Tailwind for Tailng</h2>
+        
+        <tng-code-block
+          [content]="tailwindConfig"
+          language="js"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
 
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              6) Configure Tailwind for Tailng
-            </h2>
-            <tng-code-block [content]="tailwindConfig" language="js" [highlighter]="highlighter"></tng-code-block>
-          </div>
+        <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">7) Global styles</h2>
+        
+        <tng-code-block
+          [content]="globalStyles"
+          language="css"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
 
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              7) Global styles
-            </h2>
-            <tng-code-block [content]="globalStyles" language="css" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              8) Run the app
-            </h2>
-            <tng-code-block [content]="yarnStart" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
-        </div>
-      </tng-tab-panel>
-
-      <tng-tab-panel value="npm">
-        <div class="space-y-6 py-4">
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              1) Create a fresh Angular 21 app
-            </h2>
-            <tng-code-block [content]="createApp" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              2) Install Angular CDK
-            </h2>
-            <tng-code-block [content]="npmCdk" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              3) Install Tailng packages
-            </h2>
-            <tng-code-block [content]="npmTailng" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              4) Install Tailwind CSS
-            </h2>
-            <tng-code-block [content]="npmTailwind" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              5) Add PostCSS config
-            </h2>
-            <tng-code-block [content]="postcssConfig" language="js" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              6) Configure Tailwind for Tailng
-            </h2>
-            <tng-code-block [content]="tailwindConfig" language="js" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              7) Global styles
-            </h2>
-            <tng-code-block [content]="globalStyles" language="css" [highlighter]="highlighter"></tng-code-block>
-          </div>
-
-          <div>
-            <h2 class="text-xl font-semibold text-primary mb-2">
-              8) Run the app
-            </h2>
-            <tng-code-block [content]="npmStart" language="bash" [highlighter]="highlighter"></tng-code-block>
-          </div>
-        </div>
-      </tng-tab-panel>
-    </tng-tabs>
+        <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-primary mb-2">8) Run the app</h2>
+        <tng-button-toggle
+          [options]="titleOptions"
+          [value]="runStatus"
+          (valueChange)="runStatus = $event"
+            groupKlass="!w-1/5"
+            buttonKlass="font-normal h-7 py-[0]"
+        />
+        <tng-code-block
+          [content]="tailngRun"
+          language="bash"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+    </div>
 
     <div class="pt-4">
       <h2 class="text-xl font-semibold text-primary mb-2">Theme modes</h2>
       <p class="text-slate-600 mb-3">
         Set mode + theme class on <span class="font-mono">body</span>.
       </p>
-      <tng-code-block [content]="themeExample" language="html" [highlighter]="highlighter"></tng-code-block>
+      <tng-code-block
+        [content]="themeExample"
+        language="html"
+        [highlighter]="highlighter"
+      ></tng-code-block>
 
       <p class="text-sm text-slate-600 mt-3">
-        Modes: <span class="font-mono">mode-light</span>, <span class="font-mono">mode-dark</span><br />
-        Themes: <span class="font-mono">theme-default</span>, <span class="font-mono">theme-slate</span>,
-        <span class="font-mono">theme-emerald</span>, <span class="font-mono">theme-rose</span>
+        Modes: <span class="font-mono">mode-light</span>, <span class="font-mono">mode-dark</span
+        ><br />
+        Themes: <span class="font-mono">theme-default</span>,
+        <span class="font-mono">theme-slate</span>, <span class="font-mono">theme-emerald</span>,
+        <span class="font-mono">theme-rose</span>
       </p>
     </div>
   </div>
