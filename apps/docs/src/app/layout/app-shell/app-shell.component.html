@@ -117,10 +117,14 @@
           </ng-template>
         </tng-menu>
         <tng-slide-toggle
-          [label]="docsThemeService.modeLabel()"
           [checked]="docsThemeService.isDark()"
-          (checkedChange)="onModeToggle($event)"
-        />
+          (checkedChange)="onModeToggle($event)" 
+          thumbOffKlass="bg-fg text-bg" 
+          thumbOnKlass="bg-bg text-fg"
+        >
+          <tng-icon name="bootstrapMoonFill" tngSlideToggleOn></tng-icon>
+          <tng-icon name="bootstrapSunFill" tngSlideToggleOff></tng-icon>
+        </tng-slide-toggle>
         <tng-menu
           placement="bottom-end"
           panelKlass="p-1 min-w-44"

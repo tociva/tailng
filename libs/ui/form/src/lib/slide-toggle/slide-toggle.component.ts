@@ -38,21 +38,21 @@ export class TngSlideToggle implements ControlValueAccessor {
   readonly checkedChange = output<boolean>();
 
   // -------------------------
-  // class hooks
+  // class hooks (consumer overrides, additive)
   // -------------------------
-  readonly rootKlass = input<string>('inline-flex items-center gap-2 select-none');
-  readonly labelKlass = input<string>('text-sm text-fg');
-  readonly inputKlass = input<string>('sr-only');
+  readonly rootKlass = input<string>('');
+  readonly labelKlass = input<string>('');
+  readonly inputKlass = input<string>('');
 
   /** base (applies in both states) */
   readonly trackKlass = input<string>('');
   readonly thumbKlass = input<string>('');
 
   /** per-state overrides */
-  readonly trackOnKlass = input<string>('');  // e.g. 'bg-primary border-primary'
-  readonly trackOffKlass = input<string>(''); // e.g. 'bg-on-primary border-primary'
-  readonly thumbOnKlass = input<string>('');  // e.g. 'bg-on-primary'
-  readonly thumbOffKlass = input<string>(''); // e.g. 'bg-primary'
+  readonly trackOnKlass = input<string>('');
+  readonly trackOffKlass = input<string>('');
+  readonly thumbOnKlass = input<string>('');
+  readonly thumbOffKlass = input<string>('');
 
   // slot presence (consumer-provided)
   private readonly onSlot = contentChild(TngSlideToggleOnSlot, { descendants: false });
@@ -85,13 +85,28 @@ export class TngSlideToggle implements ControlValueAccessor {
   }
 
   // -------------------------
-  // computed classes
+  // KlassFinal: defaults + overrides via join()
   // -------------------------
   private join(...parts: Array<string | null | undefined>): string {
     return parts.map((p) => (p ?? '').trim()).filter(Boolean).join(' ');
   }
 
-  readonly trackClasses = computed(() => {
+  private static readonly defaultRootKlass =
+    'inline-flex items-center gap-2 select-none';
+  private static readonly defaultLabelKlass = 'text-sm text-fg';
+  private static readonly defaultInputKlass = 'sr-only';
+
+  readonly finalRootKlass = computed(() =>
+    this.join(TngSlideToggle.defaultRootKlass, this.rootKlass())
+  );
+  readonly finalLabelKlass = computed(() =>
+    this.join(TngSlideToggle.defaultLabelKlass, this.labelKlass())
+  );
+  readonly finalInputKlass = computed(() =>
+    this.join(TngSlideToggle.defaultInputKlass, this.inputKlass())
+  );
+
+  readonly finalTrackKlass = computed(() => {
     const base =
       'relative inline-flex h-6 w-11 items-center rounded-full border transition-colors duration-200 ' +
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ' +
@@ -100,14 +115,13 @@ export class TngSlideToggle implements ControlValueAccessor {
     const disabled = this.isDisabled() ? 'opacity-60 pointer-events-none' : '';
 
     const state = this.value()
-      ? this.join('bg-primary border-primary', this.trackOnKlass())
-      : this.join('bg-on-primary border-primary', this.trackOffKlass());
+      ? this.join('bg-fg border-primary', this.trackOnKlass())
+      : this.join('bg-bg border-primary', this.trackOffKlass());
 
     return this.join(base, state, disabled, this.trackKlass());
   });
 
-  readonly thumbClasses = computed(() => {
-    // use inline-flex so icons inside are centered
+  readonly finalThumbKlass = computed(() => {
     const base =
       'inline-flex h-5 w-5 items-center justify-center rounded-full shadow ' +
       'transition-transform duration-200';
@@ -115,8 +129,8 @@ export class TngSlideToggle implements ControlValueAccessor {
     const pos = this.value() ? 'translate-x-5' : 'translate-x-1';
 
     const state = this.value()
-      ? this.join('bg-on-primary', this.thumbOnKlass())
-      : this.join('bg-primary', this.thumbOffKlass());
+      ? this.join('bg-bg', this.thumbOnKlass())
+      : this.join('bg-fg', this.thumbOffKlass());
 
     return this.join(base, pos, state, this.thumbKlass());
   });

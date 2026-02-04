@@ -1,8 +1,24 @@
+import { inject, provideAppInitializer } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import {
+  bootstrapArrowLeft, bootstrapArrowRight,
+  bootstrapCheck,
+  bootstrapCode,
+  bootstrapCodeSlash,
+  bootstrapCopy,
+  bootstrapGithub,
+  bootstrapLink45deg,
+  bootstrapList,
+  bootstrapListUl,
+  bootstrapMoonFill,
+  bootstrapPalette,
+  bootstrapSearch,
+  bootstrapShare,
+  bootstrapSunFill,
+  bootstrapX
+} from '@ng-icons/bootstrap-icons';
 import { provideIcons } from '@ng-icons/core';
-import { provideAppInitializer, inject } from '@angular/core';
-import { bootstrapList, bootstrapSearch, bootstrapGithub, bootstrapCheck, bootstrapX, bootstrapCodeSlash, bootstrapLink45deg, bootstrapShare, bootstrapCode, bootstrapCopy, bootstrapPalette, bootstrapListUl, bootstrapArrowLeft, bootstrapArrowRight } from '@ng-icons/bootstrap-icons';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
@@ -25,7 +41,9 @@ bootstrapApplication(AppComponent, {
       bootstrapPalette,
       bootstrapListUl,
       bootstrapArrowLeft,
-      bootstrapArrowRight      
+      bootstrapArrowRight,
+      bootstrapMoonFill,
+      bootstrapSunFill
     }),
 
     provideAppInitializer(() => {
