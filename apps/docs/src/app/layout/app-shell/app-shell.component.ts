@@ -8,7 +8,7 @@ import {
 import { TngIcon } from '@tociva/tailng-icons/icon';
 import { docsNav } from '../../data/nav';
 import { DocsThemeService, TngTheme } from '../../shared/docs-theme.service';
-import { TngSlideToggle } from '@tociva/tailng-ui/form';
+import { TngSlideToggle, TngSlideToggleOffSlot, TngSlideToggleOnSlot } from '@tociva/tailng-ui/form';
 
 @Component({
   standalone: true,
@@ -21,7 +21,8 @@ import { TngSlideToggle } from '@tociva/tailng-ui/form';
     TngMenuItem,
     TngMenuTemplate,
     TngIcon,
-    TngSlideToggle
+    TngSlideToggle,
+    TngSlideToggleOnSlot, TngSlideToggleOffSlot
   ],
   templateUrl: './app-shell.component.html',
 })
