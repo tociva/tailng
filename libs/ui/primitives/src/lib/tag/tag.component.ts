@@ -16,7 +16,7 @@ export class TngTag {
   containerKlass = computed(() => {
     const base = 'flex items-center rounded-md px-3 py-1 text-xs font-bold';
 
-    const disabledClass = this.disabled() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+    const disabledClass = this.disabled() ? 'opacity-50 cursor-not-allowed' : 'cursor-default';
 
     const colorMap: Record<TagColor, string> = {
       default: 'bg-gray-100 text-gray-800 hover:bg-gray-200',

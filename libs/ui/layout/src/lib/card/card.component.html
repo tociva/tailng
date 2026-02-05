@@ -1,16 +1,16 @@
-<div [class]="rootClasses()">
+<div [class]="rootKlassFinal()">
   @if (hasHeader()) {
-    <div [class]="headerClasses()">
+    <div [class]="headerKlassFinal()">
       <ng-content select="[tngCardHeader]" />
     </div>
   }
 
-  <div [class]="contentClasses()">
+  <div [class]="contentKlassFinal()">
     <ng-content />
   </div>
 
   @if (hasFooter()) {
-    <div [class]="footerClasses()">
+    <div [class]="footerKlassFinal()">
       <ng-content select="[tngCardFooter]" />
     </div>
   }

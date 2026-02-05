@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createHighlighter, type Highlighter } from 'shiki';
+import { DocsThemeService } from './docs-theme.service';
 
 @Injectable({ providedIn: 'root' })
 export class ShikiHighlighterService {
   private highlighter: Highlighter | null = null;
+  private docsThemeService = inject(DocsThemeService);
 
   async init(): Promise<void> {
     if (this.highlighter) return;
@@ -14,11 +16,13 @@ export class ShikiHighlighterService {
     });
   }
 
-  toHtml(code: string, lang: string, theme: 'github-dark' | 'github-light' = 'github-dark'): string {
+  toHtml(code: string, lang: string): string {
     if (!this.highlighter) {
       // fallback: no highlight yet
       return this.escapeHtml(code);
     }
+
+    const theme = this.docsThemeService.isDark() ? 'github-dark' : 'github-light';
 
     return this.highlighter.codeToHtml(code, {
       lang,

@@ -15,7 +15,7 @@ export class TngShikiAdapter implements TngCodeHighlighter {
   constructor(private readonly shiki: ShikiHighlighterService) {}
 
   highlight(code: string, language: TngCodeLanguage): string {
-    const html = this.shiki.toHtml(code, langMap[language], 'github-light');
+    const html = this.shiki.toHtml(code, langMap[language]);
     return extractInnerCodeHtml(html);
   }
 }

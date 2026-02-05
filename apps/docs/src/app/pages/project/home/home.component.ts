@@ -1,40 +1,78 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TngBadge, TngButton } from '@tailng-ui/ui/primitives';
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngCard, TngCardFooter, TngCardHeader } from '@tailng-ui/ui/layout';
+import { TngButton, TngTag } from '@tailng-ui/ui/primitives';
+import {
+  TngCodeBlock,
+  TngCodeBlockCopiedSlot,
+  TngCodeBlockCopySlot,
+} from '@tailng-ui/ui/utilities';
+import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
+import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
 
 @Component({
   standalone: true,
   selector: 'tng-project-home',
   host: { class: 'block flex-1 min-h-0 overflow-auto' },
-  imports: [RouterLink, TngButton, TngBadge],
+  imports: [
+    RouterLink,
+    TngButton,
+    TngTag,
+    TngCard,
+    TngCardHeader,
+    TngCardFooter,
+    TngCodeBlock,
+    TngIcon,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
+  ],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  private shiki = inject(ShikiHighlighterService);
+  readonly highlighter = new TngShikiAdapter(this.shiki);
+
   links = {
     github: 'https://github.com/tailng/tailng-ui',
     npm: 'https://www.npmjs.com/package/@tailng-ui/ui',
     demo: 'https://tailng.dev',
-    tociva: 'https://tociva.com',
   } as const;
 
   year = computed(() => new Date().getFullYear());
 
-  // IMPORTANT: keep these as strings and bind with {{ ... }} in <code>.
-  // Do NOT paste raw braces directly into the HTML template.
-  themeSnippet = computed(
-    () => `:root {
-  --primary: #12284b;
-  --radius: 6px;
-  --surface: #ffffff;
-  --surface-2: #f8fafc;
-}
+  installSnippet = computed(() => `npm i @tailng-ui/cdk @tailng-ui/theme @tailng-ui/ui`);
 
-/* Example usage */
-.button-primary {
-  background: var(--primary);
-  border-radius: var(--radius);
-}`,
-  );
+tailwindConfigSnippet = computed(() => `
+const tailngPreset = require("@tailng-ui/theme/tailwind/tailng.preset.cjs");
+
+module.exports = {
+  presets: [tailngPreset],
+  content: [
+    "./src/**/*.{html,ts}",
+    "./node_modules/@tailng-ui/ui/**/*.{mjs,js}",
+    "./node_modules/@tailng-ui/icons/**/*.{mjs,js}",
+  ],
+};`);
+stylesCssSnippet = computed(() => `
+@import "@tailng-ui/theme/tokens/index.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+`);
+
+importSnippetTs = computed(() => `
+import { Component } from '@angular/core';
+import { TngButton } from '@tailng-ui/ui/primitives';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: \`<tng-button>Click me</tng-button>\`,
+  imports: [TngButton],
+})
+export class AppComponent {}
+`);
 
   klassSignalSnippet = computed(
     () => `import { Component, computed, input } from '@angular/core';
@@ -77,7 +115,7 @@ export class ExampleButtonComponent {
     try {
       await navigator.clipboard.writeText(text);
     } catch {
-      // ignore (clipboard might not be available)
+      // ignore
     }
   }
 }

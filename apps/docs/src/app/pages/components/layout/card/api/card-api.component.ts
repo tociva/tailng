@@ -27,7 +27,6 @@ export class CardApiComponent implements AfterViewInit {
     { property: 'headerKlass', type: 'string', default: "''", description: 'Header section' },
     { property: 'contentKlass', type: 'string', default: "''", description: 'Body section' },
     { property: 'footerKlass', type: 'string', default: "''", description: 'Footer section' },
-    { property: 'klass', type: 'string', default: "''", description: 'Extra classes merged on root' },
   ];
 
   readonly klassRows = signal<DisplayDetails[]>(this.seed);

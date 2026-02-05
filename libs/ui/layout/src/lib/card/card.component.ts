@@ -14,7 +14,6 @@ export class TngCard {
   headerKlass = input<string>('');
   contentKlass = input<string>('');
   footerKlass = input<string>('');
-  klass = input<string>('');
 
   private headerMarker = contentChild(TngCardHeader);
   private footerMarker = contentChild(TngCardFooter);
@@ -22,24 +21,29 @@ export class TngCard {
   readonly hasHeader = computed(() => !!this.headerMarker());
   readonly hasFooter = computed(() => !!this.footerMarker());
 
-  readonly rootClasses = computed(() =>
-    (
-      'block rounded-lg border border-border bg-bg text-fg shadow-sm ' +
-      this.rootKlass() +
-      ' ' +
-      this.klass()
-    ).trim()
-  );
+  /* -------------------------
+   * KlassFinal: defaults + overrides via join()
+   * ------------------------- */
+  private join(...parts: Array<string | null | undefined>): string {
+    return parts.map((p) => (p ?? '').trim()).filter(Boolean).join(' ');
+  }
 
-  readonly headerClasses = computed(() =>
-    ('border-b border-border px-4 py-3 ' + this.headerKlass()).trim()
-  );
+  private static readonly defaultRootKlass =
+    'block rounded-lg border border-border bg-bg text-fg shadow-sm';
+  private static readonly defaultHeaderKlass = 'border-b border-border px-4 py-3';
+  private static readonly defaultContentKlass = 'px-4 py-4';
+  private static readonly defaultFooterKlass = 'border-t border-border px-4 py-3';
 
-  readonly contentClasses = computed(() =>
-    ('px-4 py-4 ' + this.contentKlass()).trim()
+  readonly rootKlassFinal = computed(() =>
+    this.join(TngCard.defaultRootKlass, this.rootKlass())
   );
-
-  readonly footerClasses = computed(() =>
-    ('border-t border-border px-4 py-3 ' + this.footerKlass()).trim()
+  readonly headerKlassFinal = computed(() =>
+    this.join(TngCard.defaultHeaderKlass, this.headerKlass())
+  );
+  readonly contentKlassFinal = computed(() =>
+    this.join(TngCard.defaultContentKlass, this.contentKlass())
+  );
+  readonly footerKlassFinal = computed(() =>
+    this.join(TngCard.defaultFooterKlass, this.footerKlass())
   );
 }
