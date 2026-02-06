@@ -1,9 +1,140 @@
-<div class="max-w-4xl mx-auto py-12 px-4">
-  <h1 class="text-4xl font-bold mb-4">Quick Start</h1>
-  <p class="text-lg text-slate-600 mb-8">
-    Use tailng components in minutes.
-  </p>
-  <p class="text-slate-700">
-    Documentation coming soon...
-  </p>
-</div>
+<tng-card rootKlass="max-w-auto mx-6 py-4 px-4 space-y-6 mt-6">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-4xl font-bold text-fg mb-2">Quick Start</h1>
+      <p class="text-lg text-fg">
+        Start using tailng components in minutes.
+      </p>
+    </div>
+
+    <div class="space-y-6 py-4">
+      <!-- Prerequisite -->
+      <div class="rounded-md border border-border bg-bg p-4 text-sm text-fg">
+        <div class="font-semibold text-fg mb-1">Prerequisite</div>
+        Tailwind CSS must be installed and configured.
+        See <span class="font-mono">Tailwind Setup</span> if you haven’t done this yet.
+      </div>
+
+      <!-- 1) Install -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          1) Install tailng packages
+        </h2>
+
+        <tng-button-toggle
+          [options]="titleOptions"
+          [value]="installStatus"
+          (valueChange)="installStatus = $event"
+          groupKlass="!w-1/5"
+          buttonKlass="font-normal h-7 py-[0]"
+        />
+
+        <tng-code-block
+          [content]="installPackages"
+          language="bash"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+
+      <!-- 2) Styles -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          2) Ensure global styles are loaded
+        </h2>
+        <p class="text-sm text-fg mb-3">
+          tailng styles and tokens must be included once globally.
+        </p>
+
+        <tng-code-block
+          [content]="styleReminder"
+          language="css"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+
+      <!-- 3) Buttons -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          3) Use your first component
+        </h2>
+        <p class="text-sm text-fg mb-3">
+          tailng components work directly in templates.
+        </p>
+
+        <tng-code-block
+          [content]="buttonExample"
+          language="html"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+
+      <!-- 4) Card -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          4) Compose layouts with primitives
+        </h2>
+        <p class="text-sm text-fg mb-3">
+          Cards, stacks, and layout helpers are unopinionated and Tailwind-first.
+        </p>
+
+        <tng-code-block
+          [content]="cardExample"
+          language="html"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+
+      <!-- 5) Inputs -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          5) Forms just work
+        </h2>
+
+        <tng-code-block
+          [content]="inputExample"
+          language="html"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+
+      <!-- 6) Themes -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          6) Switch themes & modes
+        </h2>
+        <p class="text-sm text-fg mb-3">
+          Themes are controlled via classes on <span class="font-mono">body</span>.
+        </p>
+
+        <tng-code-block
+          [content]="themeExample"
+          language="html"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+
+        <p class="text-sm text-fg mt-3">
+          Modes: <span class="font-mono">mode-light</span>, <span class="font-mono">mode-dark</span><br />
+          Themes:
+          <span class="font-mono">theme-default</span>,
+          <span class="font-mono">theme-slate</span>,
+          <span class="font-mono">theme-indigo</span>,
+          <span class="font-mono">theme-emerald</span>,
+          <span class="font-mono">theme-rose</span>
+        </p>
+      </div>
+
+      <!-- 7) Next -->
+      <div class="border rounded-lg p-4">
+        <h2 class="text-xl font-semibold text-fg mb-2">
+          What’s next?
+        </h2>
+
+        <tng-code-block
+          [content]="nextSteps"
+          language="text"
+          [highlighter]="highlighter"
+        ></tng-code-block>
+      </div>
+    </div>
+  </div>
+</tng-card>
