@@ -1,15 +1,14 @@
 import { Component, inject } from '@angular/core';
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngButtonToggle, TngButtonToggleOption } from '@tailng-ui/ui/form';
 import { TngCard } from '@tailng-ui/ui/layout';
-import { RouterLink } from '@angular/router';
-import { ShikiHighlighterService } from '../../shared/shiki-highlighter.service';
-import { TngShikiAdapter } from '../../shared/tng-shiki.adapter';
 import {
   TngCodeBlock,
   TngCodeBlockCopiedSlot,
   TngCodeBlockCopySlot,
 } from '@tailng-ui/ui/utilities';
-import { TngIcon } from '@tailng-ui/icons/icon';
-import { TngButtonToggle, TngButtonToggleOption } from '@tailng-ui/ui/form';
+import { ShikiHighlighterService } from '../../shared/shiki-highlighter.service';
+import { TngShikiAdapter } from '../../shared/tng-shiki.adapter';
 
 @Component({
   standalone: true,
@@ -18,7 +17,6 @@ import { TngButtonToggle, TngButtonToggleOption } from '@tailng-ui/ui/form';
   templateUrl: './icons.component.html',
   imports: [
     TngCard,
-    RouterLink,
     TngCodeBlock,
     TngCodeBlockCopySlot,
     TngCodeBlockCopiedSlot,
