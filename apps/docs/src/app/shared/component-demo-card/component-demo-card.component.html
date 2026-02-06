@@ -1,0 +1,16 @@
+<tng-card
+  [routerLink]="routerLink()"
+  contentKlass="!px-0 !py-0"
+  rootKlass="h-[300px] cursor-pointer overflow-hidden"
+>
+  <img
+        [src]="imageUrl()"
+        class="h-55"
+        loading="lazy"
+        [alt]="title()"
+      />
+  <div tngCardFooter class="text-xs text-muted flex flex-col gap-1">
+    <span class="font-bold text-lg text-fg">{{ title() }}</span>
+    <span class="text-muted text-sm">{{ description() }}</span>
+  </div>
+</tng-card>
