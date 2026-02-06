@@ -1,15 +1,27 @@
 import { Component, inject } from '@angular/core';
 import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
 import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
-import { TngCodeBlock } from '@tailng-ui/ui/utilities';
+import {
+  TngCodeBlock,
+  TngCodeBlockCopiedSlot,
+  TngCodeBlockCopySlot,
+} from '@tailng-ui/ui/utilities';
 import { TngCard } from '@tailng-ui/ui/layout';
 import { TngButtonToggle, TngButtonToggleOption } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
 
 @Component({
   standalone: true,
   selector: 'docs-tailwind-setup',
   templateUrl: './tailwind-setup.component.html',
-  imports: [TngCodeBlock, TngCard, TngButtonToggle],
+  imports: [
+    TngCodeBlock,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
+    TngCard,
+    TngButtonToggle,
+    TngIcon,
+  ],
 })
 export class TailwindSetupComponent {
   private shiki = inject(ShikiHighlighterService);
@@ -112,7 +124,7 @@ export default {
 
   // 7) Verify setup
   verifyHtml = `<div class="p-4 rounded-md bg-primary text-white">
-  Tailwind + tailng is working ✅
+  Tailwind + tailng is working
 </div>
 `;
 

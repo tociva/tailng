@@ -30,7 +30,11 @@ Avoid hard-coded Tailwind colors like bg-slate-* or text-slate-* because they br
         [content]="applyClasses"
         language="html"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
     </div>
 
     <!-- Install theme package -->
@@ -50,7 +54,11 @@ Avoid hard-coded Tailwind colors like bg-slate-* or text-slate-* because they br
         [content]="installTheme"
         language="bash"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
     </div>
 
     <!-- Map -->
@@ -85,7 +93,11 @@ theme-&lt;name&gt;  e.g. theme-mybrand, theme-acme, theme-foo</pre>
         [content]="appThemeCss"
         language="css"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
     </div>
 
     <!-- Step 2 -->
@@ -103,7 +115,11 @@ Order matters:
         [content]="appStylesCss"
         language="css"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
     </div>
 
     <!-- Step 3 -->
@@ -121,7 +137,11 @@ You must apply:
         [content]="activateThemeHtml"
         language="html"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
     </div>
 
     <!-- Step 4 -->
@@ -146,7 +166,11 @@ You must apply:
         [content]="usageGood"
         language="html"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
 
       <div class="h-4"></div>
 
@@ -154,7 +178,11 @@ You must apply:
         [content]="usageBad"
         language="html"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
     </div>
 
     <!-- Step 5 -->

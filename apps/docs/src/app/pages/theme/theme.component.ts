@@ -1,5 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { TngCodeBlock } from '@tailng-ui/ui/utilities';
+import {
+  TngCodeBlock,
+  TngCodeBlockCopiedSlot,
+  TngCodeBlockCopySlot,
+} from '@tailng-ui/ui/utilities';
 import { ShikiHighlighterService } from '../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../shared/tng-shiki.adapter';
 import { TngCard } from '@tailng-ui/ui/layout';
@@ -11,7 +15,14 @@ import { TngIcon } from '@tailng-ui/icons/icon';
   selector: 'docs-theme',
   host: { class: 'block flex-1 min-h-0 overflow-auto' },
   templateUrl: './theme.component.html',
-  imports: [TngCard, TngCodeBlock, TngButtonToggle, TngIcon],
+  imports: [
+    TngCard,
+    TngCodeBlock,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
+    TngButtonToggle,
+    TngIcon,
+  ],
 })
 export class ThemeComponent {
   private shiki = inject(ShikiHighlighterService);

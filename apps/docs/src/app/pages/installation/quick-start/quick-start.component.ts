@@ -1,15 +1,27 @@
 import { Component, inject } from '@angular/core';
 import { TngCard } from '@tailng-ui/ui/layout';
-import { TngCodeBlock } from '@tailng-ui/ui/utilities';
+import {
+  TngCodeBlock,
+  TngCodeBlockCopiedSlot,
+  TngCodeBlockCopySlot,
+} from '@tailng-ui/ui/utilities';
 import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
 import { TngButtonToggle, TngButtonToggleOption } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
 
 @Component({
   standalone: true,
   selector: 'docs-quick-start',
   templateUrl: './quick-start.component.html',
-  imports: [TngCard, TngCodeBlock, TngButtonToggle],
+  imports: [
+    TngCard,
+    TngCodeBlock,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
+    TngButtonToggle,
+    TngIcon,
+  ],
 })
 export class QuickStartComponent {
   private shiki = inject(ShikiHighlighterService);
@@ -79,9 +91,4 @@ export class QuickStartComponent {
 </body>
 `;
 
-  // 7) Next steps
-  nextSteps = `• Explore components
-• Customize theme tokens
-• Build layouts using Tailwind utilities + tailng primitives
-`;
 }

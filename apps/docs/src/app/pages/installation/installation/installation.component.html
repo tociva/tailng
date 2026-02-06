@@ -15,7 +15,11 @@
             language="bash"
             [highlighter]="highlighter"
             rootKlass="w-full"
-          ></tng-code-block>  
+            [copyResetMs]="5000"
+          >
+            <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+            <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+          </tng-code-block>  
         </p>
       </div>
 
@@ -33,8 +37,11 @@
           [content]="cdkCommand"
           language="bash"
           [highlighter]="highlighter"
+          [copyResetMs]="5000"
         >
-      </tng-code-block>
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <div class="border rounded-lg p-4">
@@ -51,7 +58,11 @@
           [content]="tailngPackage"
           language="bash"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
         <div class="border rounded-lg p-4">
@@ -68,7 +79,11 @@
           [content]="tailngTailwind"
           language="bash"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
         <div class="border rounded-lg p-4">
@@ -78,7 +93,11 @@
           [content]="postcssConfig"
           language="typescript"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
         <div class="border rounded-lg p-4">
@@ -88,7 +107,11 @@
           [content]="tailwindConfig"
           language="typescript"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
         <div class="border rounded-lg p-4">
@@ -98,7 +121,11 @@
           [content]="globalStyles"
           language="css"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
         <div class="border rounded-lg p-4">
@@ -114,11 +141,15 @@
           [content]="tailngRun"
           language="bash"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
     </div>
 
-    <div class="pt-4">
+    <div class="border rounded-lg p-4">
       <h2 class="text-xl font-semibold text-fg mb-2">Theme modes</h2>
       <p class="text-fg mb-3">
         Set mode + theme class on <span class="font-mono">body</span>.
@@ -127,7 +158,11 @@
         [content]="themeExample"
         language="html"
         [highlighter]="highlighter"
-      ></tng-code-block>
+        [copyResetMs]="5000"
+      >
+        <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+        <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+      </tng-code-block>
 
       <p class="text-sm text-fg mt-3">
         Modes: <span class="font-mono">mode-light</span>, <span class="font-mono">mode-dark</span

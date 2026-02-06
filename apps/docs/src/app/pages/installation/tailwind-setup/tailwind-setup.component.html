@@ -32,7 +32,11 @@
           [content]="installTailwind"
           language="bash"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 2) PostCSS -->
@@ -46,7 +50,11 @@
           [content]="postcssConfig"
           language="typescript"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 3) Tailwind config -->
@@ -60,7 +68,11 @@
           [content]="tailwindConfig"
           language="typescript"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
 
         <div class="mt-3 rounded-md border border-border bg-bg p-3 text-sm text-fg">
           <div class="font-semibold text-fg">Tip</div>
@@ -81,7 +93,11 @@
           [content]="globalStyles"
           language="css"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 5) Angular build includes styles -->
@@ -95,7 +111,11 @@
           [content]="angularStylesConfig"
           language="json"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 6) Theme modes -->
@@ -109,7 +129,11 @@
           [content]="themeExample"
           language="html"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
 
         <p class="text-sm text-fg mt-3">
           Modes: <span class="font-mono">mode-light</span>, <span class="font-mono">mode-dark</span><br />
@@ -133,7 +157,11 @@
           [content]="verifyHtml"
           language="html"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
 
         <tng-button-toggle
           [options]="titleOptions"
@@ -147,7 +175,11 @@
           [content]="runCmd"
           language="bash"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
     </div>
   </div>

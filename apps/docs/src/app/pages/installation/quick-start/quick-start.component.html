@@ -33,7 +33,11 @@
           [content]="installPackages"
           language="bash"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 2) Styles -->
@@ -49,7 +53,11 @@
           [content]="styleReminder"
           language="css"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 3) Buttons -->
@@ -65,7 +73,11 @@
           [content]="buttonExample"
           language="html"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 4) Card -->
@@ -81,7 +93,11 @@
           [content]="cardExample"
           language="html"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 5) Inputs -->
@@ -94,7 +110,11 @@
           [content]="inputExample"
           language="html"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
       </div>
 
       <!-- 6) Themes -->
@@ -110,7 +130,11 @@
           [content]="themeExample"
           language="html"
           [highlighter]="highlighter"
-        ></tng-code-block>
+          [copyResetMs]="5000"
+        >
+          <tng-icon name="bootstrapCopy" tngCodeBlockCopy>Copy</tng-icon>
+          <tng-icon name="bootstrapCheck2Circle" size="1rem" tngCodeBlockCopied></tng-icon>
+        </tng-code-block>
 
         <p class="text-sm text-fg mt-3">
           Modes: <span class="font-mono">mode-light</span>, <span class="font-mono">mode-dark</span><br />
@@ -124,16 +148,17 @@
       </div>
 
       <!-- 7) Next -->
-      <div class="border rounded-lg p-4">
+      <div>
         <h2 class="text-xl font-semibold text-fg mb-2">
           What’s next?
         </h2>
-
-        <tng-code-block
-          [content]="nextSteps"
-          language="text"
-          [highlighter]="highlighter"
-        ></tng-code-block>
+        <tng-card rootKlass="rounded-lg border border-border bg-bg" contentKlass="p-4">
+          <ul class="text-sm text-fg m-0 list-disc list-inside space-y-1">
+            <li>Explore components</li>
+            <li>Customize theme tokens</li>
+            <li>Build layouts using Tailwind utilities + tailng primitives</li>
+          </ul>
+        </tng-card>
       </div>
     </div>
   </div>
