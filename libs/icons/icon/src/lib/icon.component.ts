@@ -22,7 +22,7 @@ export class TngIcon {
   size = input<TngIconSize>('1em');
 
   /** Additional classes for host element */
-  klass = input<string>('');
+  iconKlass = input<string>('');
 
   /**
    * Accessibility:
@@ -37,8 +37,8 @@ export class TngIcon {
     return typeof s === 'number' ? `${s}px` : s;
   });
 
-  readonly classes = computed(() => {
-    const extra = this.klass().trim();
+  readonly iconKlassFinal = computed(() => {
+    const extra = this.iconKlass().trim();
     return ['inline-flex', 'align-middle', extra].filter(Boolean).join(' ');
   });
 

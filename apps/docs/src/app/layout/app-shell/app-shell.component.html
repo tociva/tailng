@@ -76,8 +76,8 @@
         <tng-slide-toggle
           [checked]="docsThemeService.isDark()"
           (checkedChange)="onModeToggle($event)" 
-          thumbOffKlass="bg-fg text-bg" 
-          thumbOnKlass="bg-bg text-fg"
+          thumbOffKlass="bg-fg text-bg pt-1" 
+          thumbOnKlass="bg-bg text-fg pl-1 pt-1"
         >
           <tng-icon name="bootstrapMoonFill" tngSlideToggleOn></tng-icon>
           <tng-icon name="bootstrapSunFill" tngSlideToggleOff></tng-icon>
@@ -128,7 +128,7 @@
           </ng-template>
         </tng-menu>
         <a class="text-sm text-fg hover:text-fg-100" href="https://github.com/tailng/tailng-ui" target="_blank">
-          <tng-icon name="bootstrapGithub" klass="me-1"></tng-icon>GitHub
+          <tng-icon name="bootstrapGithub" iconKlass="me-1"></tng-icon>GitHub
         </a>
       </div>
     </div>

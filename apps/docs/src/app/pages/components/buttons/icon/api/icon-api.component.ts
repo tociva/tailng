@@ -25,7 +25,7 @@ export class IconApiComponent implements AfterViewInit {
   private readonly seed: DisplayDetails[] = [
     { property: 'name', type: 'string', default: '—', description: 'Icon name from @ng-icons registry (required)' },
     { property: 'size', type: 'number | string', default: "'1em'", description: 'Number => px; string => as-is (e.g. 1em, 20px)' },
-    { property: 'klass', type: 'string', default: "''", description: 'Additional classes for the host' },
+    { property: 'iconKlass', type: 'string', default: "''", description: 'Additional classes for the host' },
     { property: 'decorative', type: 'boolean', default: 'true', description: 'true => aria-hidden; false => use ariaLabel' },
     { property: 'ariaLabel', type: 'string', default: "''", description: 'Accessible label when decorative=false' },
   ];
