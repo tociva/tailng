@@ -21,6 +21,11 @@ export class CheckboxDemoComponent {
     notifications: new FormControl(true, { nonNullable: true }),
   });
 
+  triStateForm = new FormGroup({
+    mixedFirst: new FormControl<boolean | null>(null, { nonNullable: false }),
+    uncheckedFirst: new FormControl<boolean | null>(false, { nonNullable: false }),
+  });
+
   get termsCtrl() {
     return this.form.controls.terms;
   }
@@ -29,6 +34,14 @@ export class CheckboxDemoComponent {
   }
   get notificationsCtrl() {
     return this.form.controls.notifications;
+  }
+
+  get mixedFirstCtrl() {
+    return this.triStateForm.controls.mixedFirst;
+  }
+
+  get uncheckedFirstCtrl() {
+    return this.triStateForm.controls.uncheckedFirst;
   }
 
   disableNewsletter() {

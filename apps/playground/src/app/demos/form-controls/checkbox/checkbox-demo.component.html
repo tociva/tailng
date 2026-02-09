@@ -53,6 +53,38 @@
       ></tng-checkbox>
     </section>
 
+    <!-- Tri-state -->
+    <section class="border-t pt-6">
+      <h2 class="text-lg font-semibold mb-4">Tri-state Checkboxes</h2>
+      <div class="space-y-4">
+        <form [formGroup]="triStateForm">
+          <div>
+            <tng-checkbox
+              formControlName="mixedFirst"
+              label="Mixed-first cycle (null → true → false → null)"
+              [tristate]="true"
+              cycle="mixed-first"
+            ></tng-checkbox>
+            <p class="text-sm mt-2 text-gray-600">
+              Current value: <span class="font-semibold">{{ mixedFirstCtrl.value }}</span>
+            </p>
+          </div>
+
+          <div>
+            <tng-checkbox
+              formControlName="uncheckedFirst"
+              label="Unchecked-first cycle (false → null → true → false)"
+              [tristate]="true"
+              cycle="unchecked-first"
+            ></tng-checkbox>
+            <p class="text-sm mt-2 text-gray-600">
+              Current value: <span class="font-semibold">{{ uncheckedFirstCtrl.value }}</span>
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <!-- Actions -->
     <div class="flex items-center gap-3">
       <button
@@ -65,17 +97,21 @@
       <button
         type="button"
         class="h-10 px-4 border rounded"
-        (click)="form.reset({ terms: false, newsletter: false, notifications: true })"
+        (click)="form.reset({ terms: false, newsletter: false, notifications: true }); triStateForm.reset({ mixedFirst: null, uncheckedFirst: false })"
       >
         Reset
       </button>
     </div>
 
     <pre class="text-xs bg-gray-50 border rounded p-3 overflow-auto">
+Main Form:
 Touched: {{ form.touched }}
 Valid: {{ form.valid }}
 Value: {{ form.value | json }}
 RawValue: {{ form.getRawValue() | json }}
+
+Tri-state Form:
+Value: {{ triStateForm.value | json }}
 </pre>
   </form>
 </div>

@@ -23,8 +23,21 @@ export class CheckboxExamplesComponent {
     notifications: new FormControl(true, { nonNullable: true }),
   });
 
+  triStateForm = new FormGroup({
+    mixedFirst: new FormControl<boolean | null>(null, { nonNullable: false }),
+    uncheckedFirst: new FormControl<boolean | null>(false, { nonNullable: false }),
+  });
+
   get termsCtrl() {
     return this.form.controls.terms;
+  }
+
+  get mixedFirstCtrl() {
+    return this.triStateForm.controls.mixedFirst;
+  }
+
+  get uncheckedFirstCtrl() {
+    return this.triStateForm.controls.uncheckedFirst;
   }
 
   readonly basicHtml = computed(
@@ -66,6 +79,46 @@ form = new FormGroup({
     () => `
 <tng-checkbox formControlName="newsletter" label="Subscribe" />
 <tng-checkbox formControlName="notifications" label="Notifications" [disabled]="true" />
+`,
+  );
+
+  readonly triStateHtml = computed(
+    () => `
+<form [formGroup]="triStateForm">
+  <tng-checkbox
+    formControlName="mixedFirst"
+    label="Mixed-first cycle"
+    [tristate]="true"
+    cycle="mixed-first"
+  />
+  <p class="text-xs text-fg mt-1">
+    Value: {{ mixedFirstCtrl.value }} (null → true → false → null)
+  </p>
+
+  <tng-checkbox
+    formControlName="uncheckedFirst"
+    label="Unchecked-first cycle"
+    [tristate]="true"
+    cycle="unchecked-first"
+  />
+  <p class="text-xs text-fg mt-1">
+    Value: {{ uncheckedFirstCtrl.value }} (false → null → true → false)
+  </p>
+</form>
+`,
+  );
+
+  readonly triStateTs = computed(
+    () => `
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngCheckbox } from '@tailng-ui/ui/form';
+
+export class MyComponent {
+  triStateForm = new FormGroup({
+    mixedFirst: new FormControl<boolean | null>(null, { nonNullable: false }),
+    uncheckedFirst: new FormControl<boolean | null>(false, { nonNullable: false }),
+  });
+}
 `,
   );
 }

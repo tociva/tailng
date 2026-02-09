@@ -67,4 +67,53 @@
       </div>
     </docs-example-block>
   </div>
+
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Tri-state</h3>
+      <tng-tag label="indeterminate"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      Enable tri-state mode with <span class="font-mono">[tristate]="true"</span>. The value can be
+      <span class="font-mono">true</span>, <span class="font-mono">false</span>, or <span class="font-mono">null</span> (indeterminate/mixed).
+      Use <span class="font-mono">cycle</span> to control the toggle order:
+      <span class="font-mono">'mixed-first'</span> (null → true → false → null) or
+      <span class="font-mono">'unchecked-first'</span> (false → null → true → false).
+    </p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="triStateHtml()"
+      [tsContent]="triStateTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="triStateForm" class="space-y-4">
+          <div>
+            <tng-checkbox
+              formControlName="mixedFirst"
+              label="Mixed-first cycle"
+              [tristate]="true"
+              cycle="mixed-first"
+            />
+            <p class="text-xs text-fg mt-1">
+              Value: <span class="font-mono">{{ mixedFirstCtrl.value }}</span> (null → true → false → null)
+            </p>
+          </div>
+
+          <div>
+            <tng-checkbox
+              formControlName="uncheckedFirst"
+              label="Unchecked-first cycle"
+              [tristate]="true"
+              cycle="unchecked-first"
+            />
+            <p class="text-xs text-fg mt-1">
+              Value: <span class="font-mono">{{ uncheckedFirstCtrl.value }}</span> (false → null → true → false)
+            </p>
+          </div>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
 </section>
