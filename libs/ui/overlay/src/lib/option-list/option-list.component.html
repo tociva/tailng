@@ -4,7 +4,7 @@
 @if (modal()) {
   <tng-overlay-panel
     [modal]="true"
-    [klass]="panelKlass()"
+    [slot]="{ panel: panelKlass() }"
     [restoreFocus]="restoreFocus()"
     [autoCapture]="autoCapture()"
     [deferCaptureElements]="deferCaptureElements()"

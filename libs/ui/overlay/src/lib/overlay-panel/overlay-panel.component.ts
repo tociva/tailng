@@ -1,6 +1,9 @@
 import { Component, computed, input } from '@angular/core';
 import { TngFocusTrap } from '@tailng-ui/cdk/a11y';
 
+import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngOverlayPanelSlot } from './overlay-panel.slots';
+
 @Component({
   selector: 'tng-overlay-panel',
   standalone: true,
@@ -8,9 +11,6 @@ import { TngFocusTrap } from '@tailng-ui/cdk/a11y';
   templateUrl: './overlay-panel.component.html',
 })
 export class TngOverlayPanel {
-  /** Consumer-provided class overrides / extensions */
-  readonly klass = input<string>('');
-
   /**
    * When true, treat panel as modal surface:
    * - trap focus
@@ -30,13 +30,36 @@ export class TngOverlayPanel {
   readonly autoCapture = input<boolean>(true);
   readonly deferCaptureElements = input<boolean>(false);
 
-  /** Base themed Tailwind classes */
-  private readonly baseClasses =
-    'bg-bg text-fg border border-border rounded-md shadow-lg max-h-60 overflow-auto outline-none';
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngOverlayPanelSlot>>({});
 
-  /** Final merged class string */
-  readonly classes = computed(() => `${this.baseClasses} ${this.klass()}`.trim());
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly panelClassFinal = computed(() =>
+    this.cx(
+      'bg-bg text-fg border border-border rounded-md shadow-lg max-h-60 overflow-auto outline-none',
+      this.slotClass('panel'),
+    ),
+  );
 
   /** For ARIA: only true when modal */
   readonly ariaModal = computed(() => (this.modal() ? 'true' : null));
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngOverlayPanelSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 }

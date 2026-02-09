@@ -12,7 +12,7 @@
     <h2 class="text-lg font-semibold">Basic Usage</h2>
 
     <div class="max-w-xs">
-      <tng-overlay-panel>
+      <tng-overlay-panel [slot]="customPanelSlot">
         <tng-option-list
           [items]="options()"
           [activeIndex]="activeIndex()"
@@ -24,6 +24,7 @@
 
       <p class="text-xs text-gray-500 mt-2">
         Tip: click inside the list (or Tab into it) and use ↑/↓, Home/End, PageUp/PageDown.
+        This example uses custom slot styling.
       </p>
     </div>
   </section>

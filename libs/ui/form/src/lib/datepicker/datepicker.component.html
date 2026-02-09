@@ -59,7 +59,7 @@
       [closeOnInsideClick]="false"
       (closed)="overlayRef.close($event)"
     >
-      <tng-overlay-panel [klass]="panelKlassFinal()">
+      <tng-overlay-panel [slot]="{ panel: panelKlassFinal() }">
         <!-- Popup frame -->
         <div [class]="panelFrameKlassFinal()">
           <!-- =====================

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { TngOptionList, TngOverlayPanel } from '@tailng-ui/ui/overlay';
+import { TngOptionList, TngOverlayPanel, TngSlotMap, TngOverlayPanelSlot } from '@tailng-ui/ui/overlay';
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 
 interface Person {
@@ -108,4 +108,11 @@ export class OptionListDemoComponent {
     this.onSelectLarge({ item: items[i], index: i });
     this.closeModalListLarge();
   }
+
+  /* ─────────────────────────
+   * Demo: slot overrides (keep in TS)
+   * ───────────────────────── */
+  readonly customPanelSlot: TngSlotMap<TngOverlayPanelSlot> = {
+    panel: 'border-2 border-purple-500 bg-purple-50',
+  };
 }
