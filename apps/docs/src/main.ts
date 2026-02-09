@@ -17,7 +17,9 @@ import {
   bootstrapShare,
   bootstrapSunFill,
   bootstrapX,
-  bootstrapCheck2Circle
+  bootstrapCheck2Circle,
+  bootstrapCurrencyDollar,
+  bootstrapCheck2
 } from '@ng-icons/bootstrap-icons';
 import { provideIcons } from '@ng-icons/core';
 
@@ -45,7 +47,9 @@ bootstrapApplication(AppComponent, {
       bootstrapArrowLeft,
       bootstrapArrowRight,
       bootstrapMoonFill,
-      bootstrapSunFill
+      bootstrapSunFill,
+      bootstrapCurrencyDollar,
+      bootstrapCheck2
     }),
 
     provideAppInitializer(() => {

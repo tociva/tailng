@@ -25,3 +25,17 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+@layer utilities {
+  /* Chrome, Safari, Edge, Opera */
+  .no-number-spin::-webkit-outer-spin-button,
+  .no-number-spin::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  .no-number-spin {
+    -moz-appearance: textfield;
+  }
+}

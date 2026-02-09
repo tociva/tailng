@@ -4,6 +4,7 @@ import { TngTable, TngCol } from '@tailng-ui/ui/table';
 import { TngTag } from '@tailng-ui/ui/primitives';
 import { ShikiHighlighterService } from '../../../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../../../shared/tng-shiki.adapter';
+import type { TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
 
 type displayDetails = {
   property: string;
@@ -48,8 +49,9 @@ export class NumberInputApiComponent implements AfterViewInit {
     { property: 'autocomplete', type: 'string', default: 'off', description: "Browser hints: 'on' | 'off'" },
     { property: 'inputmode', type: '\'numeric\' | \'decimal\'', default: '\'decimal\'', description: 'Mobile keypad hint' },
 
-    // theming
-    { property: 'klass', type: 'string', default: '', description: 'Additional CSS classes applied to the input element' },
+    // Styling
+    { property: 'slot', type: 'TngSlotMap<TngNumberInputSlot>', default: '{}', description: 'Slot-based micro styling for frame, input, prefix, and suffix' },
+    { property: 'prefixClickable', type: 'boolean', default: 'false', description: 'When false, prefix is non-clickable (safer UX); when true, use a <button tngPrefix>' },
   ];
 
   readonly basicRows = signal<displayDetails[]>(
@@ -68,9 +70,19 @@ export class NumberInputApiComponent implements AfterViewInit {
     this.seed.filter((p) => ['autocomplete', 'inputmode'].includes(p.property)),
   );
 
-  readonly klassRows = signal<displayDetails[]>(
-    this.seed.filter((p) => ['klass'].includes(p.property)),
+  readonly stylingRows = signal<displayDetails[]>(
+    this.seed.filter((p) => ['slot', 'prefixClickable'].includes(p.property)),
   );
+
+  readonly slotExampleCode = computed(() => `readonly customSlot: TngSlotMap<TngNumberInputSlot> = {
+  frame: ['rounded-full', 'border-slate-300', 'bg-white'],
+  input: ['text-sm', 'placeholder:text-slate-400'],
+  prefix: ['text-slate-400'],
+};
+
+<tng-number-input [slot]="customSlot">
+  <tng-icon tngPrefix name="bootstrapCurrencyDollar" class="ml-3" />
+</tng-number-input>`);
 
   readonly property = (r: displayDetails) => r.property;
   readonly type = (r: displayDetails) => r.type;

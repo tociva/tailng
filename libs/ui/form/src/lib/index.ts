@@ -9,6 +9,7 @@ export * from './file-upload/file-upload.component';
 export * from './file-upload/file-dropzone.directive';
 export * from './form-field/form-field.component';
 export * from './number-input/number-input.component';
+export * from './number-input/number-input.slots';
 export * from './radio-button/radio-button.component';
 export * from './select/select.component';
 export * from './slider/slider.component';

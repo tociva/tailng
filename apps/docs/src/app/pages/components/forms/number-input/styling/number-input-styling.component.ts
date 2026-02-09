@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TngNumberInput } from '@tailng-ui/ui/form';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
 import { TngTag } from '@tailng-ui/ui/primitives';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
@@ -10,6 +11,7 @@ import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/exa
   templateUrl: './number-input-styling.component.html',
   imports: [
     TngNumberInput,
+    TngIcon,
     ReactiveFormsModule,
     TngTag,
     ExampleBlockComponent,
@@ -22,13 +24,17 @@ export class NumberInputStylingComponent {
     amount: new FormControl<number | null>(null, { nonNullable: false }),
   });
 
+  readonly frameSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-blue-500', 'rounded-lg', 'shadow-md', 'w-48'],
+  };
+
   readonly klassExampleHtml = computed(
     () => `
 <form [formGroup]="form">
   <tng-number-input
     formControlName="quantity"
     placeholder="Quantity"
-    klass="border-2 border-blue-500 rounded-lg shadow-md w-48"
+    [slot]="frameSlot"
   />
 </form>
 `,
@@ -38,7 +44,7 @@ export class NumberInputStylingComponent {
     () => `
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TngNumberInput } from '@tailng-ui/ui/form';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
 
 @Component({
   selector: 'number-input-demo',
@@ -50,19 +56,27 @@ export class NumberInputDemoComponent {
   form = new FormGroup({
     quantity: new FormControl<number | null>(42, { nonNullable: false }),
   });
+
+  readonly frameSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-blue-500', 'rounded-lg', 'shadow-md', 'w-48'],
+  };
 }
 `,
   );
 
   readonly klassExampleCss = computed(
     () => `
-// Default classes (merged with your klass)
-// h-10 w-full rounded-md px-3 text-sm
-// border border-border bg-bg text-foreground placeholder:text-muted
-// focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
-// disabled:opacity-50 disabled:pointer-events-none read-only:bg-muted/30
+// Default classes (merged with your slot)
+// frame = flex h-10 w-full items-center rounded-md border border-border bg-bg text-foreground
+//         focus-within:border-transparent focus-within:ring-2 focus-within:ring-primary
+//         focus-within:ring-offset-1 focus-within:ring-offset-background
+// input = h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted
 `,
   );
+
+  readonly textSlot: TngSlotMap<TngNumberInputSlot> = {
+    input: ['text-lg', 'font-semibold', 'text-blue-600', 'w-48'],
+  };
 
   readonly inputKlassExampleHtml = computed(
     () => `
@@ -70,18 +84,91 @@ export class NumberInputDemoComponent {
   <tng-number-input
     formControlName="quantity"
     placeholder="Custom text styling"
-    klass="text-lg font-semibold text-blue-600 w-48"
+    [slot]="textSlot"
   />
 </form>
 `,
   );
 
-  readonly inputKlassExampleCss = computed(
+  readonly inputKlassExampleTs = computed(
     () => `
-// Use klass for text size, color, font weight, etc.
-klass="text-lg font-semibold text-blue-600"
+readonly textSlot: TngSlotMap<TngNumberInputSlot> = {
+  input: ['text-lg', 'font-semibold', 'text-blue-600', 'w-48'],
+};
 `,
   );
+
+  readonly inputKlassExampleCss = computed(
+    () => `
+// Use input slot for text size, color, font weight, etc.
+input = text-lg font-semibold text-blue-600
+`,
+  );
+
+  readonly prefixSlot: TngSlotMap<TngNumberInputSlot> = {
+    prefix: ['bg-blue-50', 'rounded-l-md'],
+  };
+
+  readonly prefixExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-number-input placeholder="Amount" [slot]="prefixSlot">
+    <tng-icon
+      tngPrefix
+      name="bootstrapCurrencyDollar"
+      class="ml-3 text-blue-600"
+    />
+  </tng-number-input>
+</form>
+`,
+  );
+
+  readonly prefixExampleTs = computed(
+    () => `
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+
+readonly prefixSlot: TngSlotMap<TngNumberInputSlot> = {
+  prefix: ['bg-blue-50', 'rounded-l-md'],
+};
+`,
+  );
+
+  readonly suffixSlot: TngSlotMap<TngNumberInputSlot> = {
+    suffix: ['bg-green-50', 'rounded-r-md'],
+  };
+
+  readonly suffixExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-number-input placeholder="Quantity" [slot]="suffixSlot">
+    <tng-icon
+      tngSuffix
+      name="bootstrapCheck"
+      class="mr-3 text-green-600"
+    />
+  </tng-number-input>
+</form>
+`,
+  );
+
+  readonly suffixExampleTs = computed(
+    () => `
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+
+readonly suffixSlot: TngSlotMap<TngNumberInputSlot> = {
+  suffix: ['bg-green-50', 'rounded-r-md'],
+};
+`,
+  );
+
+  readonly combinedSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-purple-500', 'rounded-xl'],
+    input: ['text-purple-700', 'placeholder:text-purple-300'],
+    prefix: ['bg-purple-50'],
+    suffix: ['bg-purple-50'],
+  };
 
   readonly combinedExampleHtml = computed(
     () => `
@@ -92,8 +179,19 @@ klass="text-lg font-semibold text-blue-600"
     [min]="0"
     [max]="1000"
     [step]="0.01"
-    klass="border-2 border-purple-500 rounded-xl text-purple-700 placeholder:text-purple-300 w-56"
-  />
+    [slot]="combinedSlot"
+  >
+    <tng-icon
+      tngPrefix
+      name="bootstrapCurrencyDollar"
+      class="ml-3 text-purple-600"
+    />
+    <tng-icon
+      tngSuffix
+      name="bootstrapCheck"
+      class="mr-3 text-purple-600"
+    />
+  </tng-number-input>
 </form>
 `,
   );
@@ -101,22 +199,33 @@ klass="text-lg font-semibold text-blue-600"
   readonly combinedExampleTs = computed(
     () => `
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TngNumberInput } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
 
 @Component({
   selector: 'number-input-demo',
   standalone: true,
-  imports: [ReactiveFormsModule, TngNumberInput],
+  imports: [ReactiveFormsModule, TngNumberInput, TngIcon],
   template: \`<form [formGroup]="form">
     <tng-number-input formControlName="amount" placeholder="Amount"
       [min]="0" [max]="1000" [step]="0.01"
-      klass="border-2 border-purple-500 rounded-xl text-purple-700" />
+      [slot]="combinedSlot">
+      <tng-icon tngPrefix name="bootstrapCurrencyDollar" class="ml-3 text-purple-600" />
+      <tng-icon tngSuffix name="bootstrapCheck" class="mr-3 text-purple-600" />
+    </tng-number-input>
   </form>\`,
 })
 export class NumberInputDemoComponent {
   form = new FormGroup({
     amount: new FormControl<number | null>(null, { nonNullable: false }),
   });
+
+  readonly combinedSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-purple-500', 'rounded-xl'],
+    input: ['text-purple-700', 'placeholder:text-purple-300'],
+    prefix: ['bg-purple-50'],
+    suffix: ['bg-purple-50'],
+  };
 }
 `,
   );

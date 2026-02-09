@@ -1,17 +1,27 @@
-<input
-  type="number"
-  [id]="id() || null"
-  [name]="name() || null"
-  [disabled]="isDisabled()"
-  [readOnly]="readonly()"
-  [class]="classes()"
-  [value]="value() ?? ''"
-  [attr.placeholder]="placeholder() || null"
-  [attr.autocomplete]="autocomplete() || null"
-  [attr.inputmode]="inputmode() || null"
-  [attr.min]="min() ?? null"
-  [attr.max]="max() ?? null"
-  [attr.step]="step() ?? null"
-  (input)="onInput($event)"
-  (blur)="onBlur()"
-/>
+<div [class]="frameClassFinal()">
+  <span [class]="prefixClassFinal()">
+    <ng-content select="[tngPrefix]"></ng-content>
+  </span>
+
+  <input
+    type="number"
+    [id]="id() || null"
+    [name]="name() || null"
+    [disabled]="isDisabled()"
+    [readOnly]="readonly()"
+    [class]="inputClassFinal()"
+    [value]="value() ?? ''"
+    [attr.placeholder]="placeholder() || null"
+    [attr.autocomplete]="autocomplete() || null"
+    [attr.inputmode]="inputmode() || null"
+    [attr.min]="min() ?? null"
+    [attr.max]="max() ?? null"
+    [attr.step]="step() ?? null"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  />
+
+  <span [class]="suffixClassFinal()">
+    <ng-content select="[tngSuffix]"></ng-content>
+  </span>
+</div>

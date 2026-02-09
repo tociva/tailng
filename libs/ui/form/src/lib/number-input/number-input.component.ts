@@ -7,6 +7,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngNumberInputSlot } from './number-input.slots';
+
 @Component({
   selector: 'tng-number-input',
   standalone: true,
@@ -24,10 +27,16 @@ export class TngNumberInput implements ControlValueAccessor {
   name = input<string>('');
 
   placeholder = input<string>('');
-  klass = input<string>('');
 
   disabled = input(false);
   readonly = input(false);
+
+  prefixClickable = input<boolean>(false);
+
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngNumberInputSlot>>({});
 
   // For mobile keypad experience
   inputmode = input<'numeric' | 'decimal'>('decimal');
@@ -63,19 +72,55 @@ export class TngNumberInput implements ControlValueAccessor {
     this._formDisabled.set(isDisabled);
   }
 
-  classes = computed(() =>
-    (
-      `h-10 w-full rounded-md px-3 text-sm ` +
-      `border border-border bg-bg text-foreground ` +
-      `placeholder:text-muted ` +
-      `focus-visible:outline-none ` +
-      `focus-visible:ring-2 focus-visible:ring-primary ` +
-      `focus-visible:ring-offset-2 focus-visible:ring-offset-background ` +
-      `disabled:opacity-50 disabled:pointer-events-none ` +
-      `read-only:bg-muted/30 read-only:text-muted ` +
-      this.klass()
-    ).trim(),
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly frameClassFinal = computed(() =>
+    this.cx(
+      'flex h-10 w-full items-center rounded-md border border-border bg-bg text-foreground',
+      'focus-within:border-transparent',
+      'focus-within:ring-2 focus-within:ring-primary',
+      'focus-within:ring-offset-1 focus-within:ring-offset-background',
+      this.isDisabled() ? 'pointer-events-none opacity-50' : '',
+      this.readonly() ? 'bg-muted/30 text-muted' : '',
+      this.slotClass('frame'),
+    ),
   );
+
+  readonly inputClassFinal = computed(() =>
+    this.cx(
+      'h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted',
+      this.slotClass('input'),
+    ),
+  );
+
+  readonly prefixClassFinal = computed(() =>
+    this.cx(
+      this.prefixClickable() ? '' : 'pointer-events-none',
+      this.slotClass('prefix'),
+    ),
+  );
+
+  readonly suffixClassFinal = computed(() =>
+    this.cx(
+      this.slotClass('suffix'),
+    ),
+  );
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngNumberInputSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
   
 
   onInput(event: Event): void {

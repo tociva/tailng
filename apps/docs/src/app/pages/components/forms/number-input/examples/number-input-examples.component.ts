@@ -1,6 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TngNumberInput } from '@tailng-ui/ui/form';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
 import { TngTag } from '@tailng-ui/ui/primitives';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
@@ -10,6 +11,7 @@ import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/exa
   templateUrl: './number-input-examples.component.html',
   imports: [
     TngNumberInput,
+    TngIcon,
     ReactiveFormsModule,
     ExampleBlockComponent,
     TngExampleDemo,
@@ -165,15 +167,92 @@ form = new FormGroup({
 `,
   );
 
+  readonly prefixSuffixExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-number-input placeholder="Amount" formControlName="amount">
+    <tng-icon
+      tngPrefix
+      name="bootstrapCurrencyDollar"
+      class="ml-3 text-muted"
+    />
+  </tng-number-input>
+  <tng-number-input placeholder="Quantity" formControlName="quantity">
+    <tng-icon
+      tngSuffix
+      name="bootstrapCheck"
+      class="mr-3 text-green-600"
+    />
+  </tng-number-input>
+</form>
+`,
+  );
+
+  readonly prefixSuffixExampleTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngNumberInput } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'number-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngIcon, TngNumberInput],
+  templateUrl: './number-input.component.html',
+})
+export class NumberInputDemoComponent {
+  form = new FormGroup({
+    amount: new FormControl<number | null>(null, { nonNullable: false }),
+    quantity: new FormControl<number | null>(10, { nonNullable: false }),
+  });
+}
+`,
+  );
+
+  readonly customStylingSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-purple-500', 'rounded-xl', 'shadow-lg'],
+    input: ['text-purple-700'],
+  };
+
+  readonly hideSpinnerSlot: TngSlotMap<TngNumberInputSlot> = {
+    input: ['no-number-spin'],
+  };
+
   readonly customStylingExample = computed(
     () => `
 <form [formGroup]="form">
   <tng-number-input
     formControlName="quantity"
     placeholder="Custom styled"
-    klass="border-2 border-purple-500 rounded-xl shadow-lg w-48 text-purple-700"
+    [slot]="customStylingSlot"
   />
 </form>
+`,
+  );
+
+  readonly customStylingExampleTs = computed(
+    () => `
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'number-input-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngNumberInput],
+  templateUrl: './number-input.component.html',
+})
+export class NumberInputDemoComponent {
+  form = new FormGroup({
+    quantity: new FormControl<number | null>(10, { nonNullable: false }),
+  });
+
+  readonly customStylingSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-purple-500', 'rounded-xl', 'shadow-lg'],
+    input: ['text-purple-700'],
+  };
+}
 `,
   );
 }
