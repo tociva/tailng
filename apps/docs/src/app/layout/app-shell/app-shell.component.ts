@@ -24,13 +24,13 @@ import { TngLogoComponent } from '../../shared/tng-logo/tng-logo.component';
     TngIcon,
     TngSlideToggle,
     TngSlideToggleOnSlot, TngSlideToggleOffSlot,
-    TngLogoComponent
-  ],
+    TngLogoComponent,
+],
   templateUrl: './app-shell.component.html',
 })
 export class AppShellComponent {
   readonly docsThemeService = inject(DocsThemeService)
-  mobileOpen = signal(false);
+  mobileOpen = signal(true);
 
   readonly nav = docsNav;
   changeTheme(theme: TngTheme): void {
@@ -40,4 +40,6 @@ export class AppShellComponent {
   onModeToggle(checked: boolean): void {
     this.docsThemeService.setMode(checked ? 'dark' : 'light');
   }
+  
+  
 }

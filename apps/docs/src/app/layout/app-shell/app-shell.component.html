@@ -1,16 +1,47 @@
 <div class="h-screen overflow-hidden bg-bg text-fg flex flex-col">
   <!-- Single header for entire app -->
-  <header class="relative top-0 z-50 h-14 border-b border-border bg-bg flex-shrink-0">
-    <div class="flex w-full items-center justify-between px-4 h-full">
-      <div class="flex items-center gap-3 md:gap-4">
-        @if (!mobileOpen()) {
+  <header
+    class="relative top-0 z-50 h-14 px-2 md:px-4 border-b border-border bg-bg flex-shrink-0 flex"
+  >
+    <div class="flex w-full justify-between px-0 md:px-4 h-full">
+      <div class="flex items-center gap-2 md:gap-4 p-0">
+        @if (mobileOpen()) {
           <tng-menu
-            placement="bottom-end"
+            placement="bottom-start"
             rootKlass="md:hidden"
-            panelKlass="fixed inset-y-10 left-0 z-30 h-screen w-80 bg-white p-4 overflow-y-auto border-primary"
+            panelKlass="fixed left-0 z-30 max-h-screen w-80 bg-bg p-2 overflow-y-auto border-r"
+            klass="h-full"
           >
-            <tng-icon tngMenuTrigger name="bootstrapList" class="text-2xl"></tng-icon>
+            <tng-icon tngMenuTrigger name="bootstrapList" iconKlass="text-2xl"></tng-icon>
+
             <ng-template tngMenuTemplate>
+              <div class="mb-2 text-xs w-full font-semibold uppercase tracking-wide text-primary">
+                Main menu
+              </div>
+              <nav class="flex flex-col gap-3 px-4">
+                <a
+                  routerLink="/components"
+                  routerLinkActive="text-fg"
+                  class="text-sm text-fg hover:text-fg hover:bg-red-900"
+                >
+                  Components
+                </a>
+                <a
+                  routerLink="/theme"
+                  routerLinkActive="text-fg"
+                  class="text-sm text-fg hover:text-fg"
+                >
+                  Theme
+                </a>
+                <a
+                  routerLink="/icons"
+                  routerLinkActive="text-fg"
+                  class="text-sm text-fg hover:text-fg"
+                >
+                  Icons
+                </a>
+              </nav>
+              <hr class="py-2 border-0" />
               @for (section of nav; track section.title) {
                 <div>
                   <div
@@ -36,36 +67,36 @@
           </tng-menu>
         }
         <a routerLink="/" class="flex items-center gap-2 font-semibold tracking-tight">
-          <tng-logo size="12"/>
-            
+          <tng-logo size="12" />
+
           tailng
         </a>
-        <nav class="flex items-center gap-4">
+        <nav class="hidden md:flex items-center gap-1">
           <a
             routerLink="/components"
-            routerLinkActive="text-fg"
-            class="text-sm text-fg hover:text-fg"
+            routerLinkActive="text-primary"
+            class="text-sm text-fg hover:text-fg hover:bg-slate-50 rounded px-3 py-2"
           >
             Components
           </a>
           <a
             routerLink="/theme"
-            routerLinkActive="text-fg"
-            class="text-sm text-fg hover:text-fg"
+            routerLinkActive="text-primary"
+            class="text-sm text-fg hover:text-fg hover:bg-slate-50 rounded px-3 py-2"
           >
             Theme
           </a>
           <a
             routerLink="/icons"
-            routerLinkActive="text-fg"
-            class="text-sm text-fg hover:text-fg"
+            routerLinkActive="text-primary"
+            class="text-sm text-fg hover:text-fg hover:bg-slate-50 rounded px-3 py-2"
           >
             Icons
           </a>
         </nav>
       </div>
-      <div class="flex items-center gap-4">
-        <tng-menu placement="bottom-end" panelKlass="p-1 min-w-48">
+      <div class="flex items-center gap-2 md:gap-4">
+        <tng-menu placement="bottom-end" panelKlass="p-1 min-w-48" rootKlass="md:me-1 text-xl">
           <tng-icon tngMenuTrigger name="bootstrapPalette"></tng-icon>
           <ng-template tngMenuTemplate>
             @for (theme of docsThemeService.themeList; track theme.id) {
@@ -82,8 +113,8 @@
         </tng-menu>
         <tng-slide-toggle
           [checked]="docsThemeService.isDark()"
-          (checkedChange)="onModeToggle($event)" 
-          thumbOffKlass="bg-fg text-bg pt-1" 
+          (checkedChange)="onModeToggle($event)"
+          thumbOffKlass="bg-fg text-bg pt-1"
           thumbOnKlass="bg-bg text-fg pl-1 pt-1"
         >
           <tng-icon name="bootstrapMoonFill" tngSlideToggleOn></tng-icon>
@@ -91,10 +122,22 @@
         </tng-slide-toggle>
         <tng-menu
           placement="bottom-end"
-          panelKlass="p-1 min-w-44"
+          panelKlass="fixed right-0 z-30 w-30 bg-bg p-2 overflow-y-auto border-r"
           triggerKlass="text-sm sm text-fg hover:text-fg  inline-flex items-center gap-1"
         >
-          <span tngMenuTrigger>npm <span class="text-xs">▼</span></span>
+          <span tngMenuTrigger class="rounded-xl cursor-pointer">
+            <svg
+              width="25"
+              height="20"
+              viewBox="0 0 256 256"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <rect x="0" y="0" width="256" height="256" fill="#CB3837" />
+              <path d="M48 48h160v160h-32V80h-48v128H48V48zm32 128h32V80H80v96z" fill="#ffffff" />
+            </svg>
+          </span>
+
           <ng-template tngMenuTemplate>
             <a
               tngMenuItem
@@ -134,8 +177,12 @@
             </a>
           </ng-template>
         </tng-menu>
-        <a class="text-sm text-fg hover:text-fg-100" href="https://github.com/tailng/tailng-ui" target="_blank">
-          <tng-icon name="bootstrapGithub" iconKlass="me-1"></tng-icon>GitHub
+        <a
+          href="https://github.com/tailng/tailng-ui"
+          target="_blank"
+          class="text-sm text-fg hover:text-fg-100 flex items-center gap-1"
+        >
+          <tng-icon name="bootstrapGithub" iconKlass="me-1 text-xl"></tng-icon>
         </a>
       </div>
     </div>
@@ -145,5 +192,4 @@
   <main class="flex flex-1 flex-col overflow-hidden min-h-0">
     <router-outlet />
   </main>
-
 </div>
