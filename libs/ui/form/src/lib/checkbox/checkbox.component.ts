@@ -96,7 +96,8 @@ export class TngCheckbox implements ControlValueAccessor {
 
   writeValue(value: TriState): void {
     // Accept undefined as null-ish safety if ever passed
-    this._value.set(value ?? false);
+    // Preserve null for tri-state mode, only convert undefined to false
+    this._value.set(value === undefined ? false : value);
   }
 
   registerOnChange(fn: (value: TriState) => void): void {
