@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import { TngNumberInputSlot } from './number-input.slots';
 
 @Component({

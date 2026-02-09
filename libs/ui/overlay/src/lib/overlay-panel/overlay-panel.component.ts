@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { TngFocusTrap } from '@tailng-ui/cdk/a11y';
 
-import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import { TngOverlayPanelSlot } from './overlay-panel.slots';
 
 @Component({

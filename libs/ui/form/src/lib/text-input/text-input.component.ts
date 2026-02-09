@@ -1,7 +1,7 @@
 import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import { TngTextInputSlot } from './text-input.slots';
 
 @Component({

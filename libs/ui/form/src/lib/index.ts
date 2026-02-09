@@ -20,4 +20,4 @@ export * from './textarea/textarea.component';
 export * from './text-input/text-input.component';
 export * from './text-input/text-input.slots';
 export * from './timepicker/timepicker.component';
-export * from './core/slot.types';
+export { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';

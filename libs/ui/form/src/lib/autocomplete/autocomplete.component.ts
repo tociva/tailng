@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { OptionTplContext } from '@tailng-ui/cdk/util';
 
-import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import {
   TngConnectedOverlay,
   TngOptionList,
