@@ -5,6 +5,13 @@ import { TngAutocomplete } from '@tailng-ui/ui/form';
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 import { toFlagEmoji } from '../../util/common.util';
 
+const countryCodeToFlag = (code: string): string =>
+  code
+    .toUpperCase()
+    .replace(/./g, char =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
+
 @Component({
   selector: 'playground-autocomplete-demo',
   standalone: true,
@@ -60,7 +67,8 @@ export class AutocompleteDemoComponent {
     this.options2.set(filtered);
   }
 
-  displayCountryText = (c: Country) => `(${c.code}) ${c.name}`;
+  displayCountryText = (c: Country) =>
+  `${countryCodeToFlag(c.code)} ${c.name}`;
 
   
   onClosed(reason: string) {
