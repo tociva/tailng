@@ -324,4 +324,5 @@ cd ../ui           && npm publish --access public
 ### Test Automation ###
 ```sh
 yarn nx test ui
+yarn nx test ui --testPathPattern=libs/ui/form/src/lib/autocomplete/autocomplete.component.spec.ts
 ```

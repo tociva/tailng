@@ -15,8 +15,8 @@
 
   <div
     [class]="inputWrapperClassFinal()"
-    [class.opacity-60]="isDisabledComputed()"
-    [class.pointer-events-none]="isDisabledComputed()"
+    [class.opacity-60]="disabledFinal()"
+    [class.pointer-events-none]="disabledFinal()"
   >
     <input
       #inputEl

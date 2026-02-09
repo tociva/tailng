@@ -103,9 +103,6 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   readonly isOpen = signal(false);
   readonly focusedIndex = signal(-1);
 
-  /** eslint-safe + template-safe internal disabled state */
-  protected readonly isDisabled = signal(false);
-
   /** Selected item (for inputTpl rendering) */
   readonly selectedValue = signal<T | null>(null);
 
@@ -134,8 +131,6 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
     const form = this._formDisabled();
     return form === null ? this.disabled() : form;
   });
-
-  readonly isDisabledComputed = computed(() => this.disabledFinal());
 
   /* ─────────────────────────
    * Slot finals (defaults + overrides)
@@ -209,10 +204,11 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   constructor() {
-    // Sync external [disabled] -> internal state
+    // Close overlay when disabled state changes to true
     effect(() => {
-      this.isDisabled.set(this.disabledFinal());
-      if (this.isDisabledComputed()) this.close('programmatic');
+      if (this.disabledFinal()) {
+        this.close('programmatic');
+      }
     });
   }
 
@@ -273,7 +269,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * State Transitions
    * ===================== */
   open(_reason: AutocompleteCloseReason) {
-    if (this.isDisabledComputed()) return;
+    if (this.disabledFinal()) return;
 
     this.isOpen.set(true);
 
@@ -298,7 +294,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   }
 
   onOverlayOpenChange(open: boolean) {
-    if (this.isDisabledComputed()) {
+    if (this.disabledFinal()) {
       this.isOpen.set(false);
       return;
     }
@@ -311,7 +307,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * UI Events
    * ===================== */
   onInput(ev: Event) {
-    if (this.isDisabledComputed()) return;
+    if (this.disabledFinal()) return;
 
     const text = (ev.target as HTMLInputElement).value ?? '';
     this.inputValue.set(text);
@@ -341,7 +337,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * - Printable keys are NOT delegated (input typing controls filtering)
    */
   onKeydown(ev: KeyboardEvent) {
-    if (this.isDisabledComputed()) return;
+    if (this.disabledFinal()) return;
   
     // Close on escape
     if (ev.key === 'Escape' && this.isOpen()) {
@@ -405,7 +401,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * Selection
    * ===================== */
   select(item: T) {
-    if (this.isDisabledComputed()) return;
+    if (this.disabledFinal()) return;
 
     this.value = item;
     this.selectedValue.set(item);
