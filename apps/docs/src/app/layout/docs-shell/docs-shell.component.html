@@ -7,9 +7,9 @@
       <div class="sticky top-0 z-30 bg-bg p-0 border-b border-primary">
         <form [formGroup]="form">
           <tng-text-input
-            frameKlass="focus-within:!ring-0 focus-within:!ring-offset-0 border-0 focus-within:border-b-2 focus-within:!border-primary rounded-none"
             formControlName="text"
             placeholder="Search…"
+            [slot]="frameSlot"
           >
             <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-fg"></tng-icon>
           </tng-text-input>

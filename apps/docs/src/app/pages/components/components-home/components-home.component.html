@@ -1,9 +1,19 @@
-<div class="max-w-7xl mx-auto py-12 px-4">
+<div class="max-w-7xl mx-auto py-8 px-4">
   <h1 class="text-4xl font-bold mb-8">Components</h1>
 
-  <tng-accordion [multiple]="true" rootKlass="space-y-6">
-    @for (section of sections; track section.sectionTitle) {
-      <tng-expansion-panel [open]="true" rootKlass="border-0">
+  <form [formGroup]="form" class="py-2 px-4 rounded">
+    <tng-text-input
+      formControlName="text"
+      placeholder="Search Component"
+      [slot]="frameSlot"
+    >
+      <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-fg"></tng-icon>
+    </tng-text-input>
+  </form>
+
+  <tng-accordion rootKlass="space-y-6 py-2">
+    @for (section of filteredNav(); track section.sectionTitle) {
+      <tng-expansion-panel [open]="!isMobile() || sectionMatchesQuery(section)" rootKlass="border-0">
         <div tngExpansionTitle>{{ section.sectionTitle }}</div>
         <div tngExpansionContent class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           @for (item of section.components; track item.routerLink) {
