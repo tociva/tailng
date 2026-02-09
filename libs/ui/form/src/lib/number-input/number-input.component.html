@@ -7,7 +7,7 @@
     type="number"
     [id]="id() || null"
     [name]="name() || null"
-    [disabled]="isDisabled()"
+    [disabled]="disabledFinal()"
     [readOnly]="readonly()"
     [class]="inputClassFinal()"
     [value]="value() ?? ''"

@@ -53,8 +53,22 @@ export class TngNumberInput implements ControlValueAccessor {
   private onChange: (value: number | null) => void = () => {};
   private onTouched: () => void = () => {};
 
-  private readonly _formDisabled = signal(false);
-  readonly isDisabled = computed(() => this.disabled() || this._formDisabled());
+  /* ─────────────────────────
+   * Disabled state (forms + input)
+   * ───────────────────────── */
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
+
+  readonly isDisabled = computed(() => this.disabledFinal());
 
   writeValue(value: number | null): void {
     this._value.set(value ?? null);
@@ -71,6 +85,10 @@ export class TngNumberInput implements ControlValueAccessor {
   setDisabledState(isDisabled: boolean): void {
     this._formDisabled.set(isDisabled);
   }
+
+  /* ─────────────────────────
+   * ControlValueAccessor
+   * ───────────────────────── */
 
   /* ─────────────────────────
    * Slot finals (defaults + overrides)
