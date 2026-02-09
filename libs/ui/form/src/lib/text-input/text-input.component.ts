@@ -55,8 +55,17 @@ export class TngTextInput implements ControlValueAccessor {
   /* ─────────────────────────
    * Disabled state (forms + input)
    * ───────────────────────── */
-  private readonly _formDisabled = signal(false);
-  readonly isDisabled = computed(() => this.disabled() || this._formDisabled());
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
 
   setDisabledState(isDisabled: boolean): void {
     this._formDisabled.set(isDisabled);
@@ -86,7 +95,7 @@ export class TngTextInput implements ControlValueAccessor {
       'focus-within:border-transparent',
       'focus-within:ring-2 focus-within:ring-primary',
       'focus-within:ring-offset-1 focus-within:ring-offset-background',
-      this.isDisabled() ? 'pointer-events-none opacity-50' : '',
+      this.disabledFinal() ? 'pointer-events-none opacity-50' : '',
       this.readonly() ? 'bg-muted/30 text-muted' : '',
       this.slotClass('frame'),
     ),

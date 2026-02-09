@@ -320,3 +320,8 @@ cd ../theme        && npm publish --access public
 cd ../icons        && npm publish --access public
 cd ../ui           && npm publish --access public
 ```
+
+### Test Automation ###
+```sh
+yarn nx test ui
+```
