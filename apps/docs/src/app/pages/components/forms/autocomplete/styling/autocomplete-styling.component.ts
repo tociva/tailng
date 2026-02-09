@@ -31,7 +31,24 @@ export class AutocompleteStylingComponent {
     this.options.set(v ? COUNTRY_LIST.filter((c) => c.name.toLowerCase().includes(v) || c.iso.toLowerCase().includes(v)) : []);
   }
 
-  readonly klassExampleHtml = computed(
+  containerSlot = { container: 'border-2 border-blue-200' };
+  inputWrapperSlot = { inputWrapper: 'bg-red-500 rounded-md p-1' };
+  inputSlot = { input: 'border-2 border-blue-500 rounded-lg shadow-md' };
+  selectedTplSlot = { selectedTpl: 'bg-blue-50 rounded-md' };
+
+  // Form and options for selectedTpl demo
+  formWithTemplate = new FormGroup({
+    country: new FormControl<Country | null>(null),
+  });
+
+  optionsWithTemplate = signal<Country[]>([]);
+
+  onSearchWithTemplate(term: string) {
+    const v = term.toLowerCase().trim();
+    this.optionsWithTemplate.set(v ? COUNTRY_LIST.filter((c) => c.name.toLowerCase().includes(v) || c.iso.toLowerCase().includes(v)) : []);
+  }
+
+  readonly containerSlotExampleHtml = computed(
     () => `
 <form [formGroup]="form">
   <tng-autocomplete
@@ -40,13 +57,13 @@ export class AutocompleteStylingComponent {
     [displayWith]="displayCountry"
     placeholder="Search country…"
     (search)="onSearch($event)"
-    inputKlass="border-2 border-blue-500 rounded-lg shadow-md w-full max-w-md"
+    [slot]="{ container: 'border-2 border-blue-200' }"
   />
 </form>
 `,
   );
 
-  readonly klassExampleTs = computed(
+  readonly containerSlotExampleTs = computed(
     () => `
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -67,11 +84,149 @@ export class AutocompleteDemoComponent {
 `,
   );
 
-  readonly klassExampleCss = computed(
+  readonly containerSlotExampleCss = computed(
     () => `
-// Default input classes are merged with inputKlass:
+// Default container class: relative
+// Slot classes are merged with defaults
+`,
+  );
+
+  readonly inputWrapperSlotExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-autocomplete
+    formControlName="country"
+    [options]="options()"
+    [displayWith]="displayCountry"
+    placeholder="Search country…"
+    (search)="onSearch($event)"
+    [slot]="{ inputWrapper: 'bg-gray-50 rounded-md p-1' }"
+  />
+</form>
+`,
+  );
+
+  readonly inputWrapperSlotExampleTs = computed(
+    () => `
+import { Component, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngAutocomplete } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'autocomplete-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngAutocomplete],
+  templateUrl: './autocomplete.component.html',
+})
+export class AutocompleteDemoComponent {
+  form = new FormGroup({ country: new FormControl<Country | null>(null) });
+  options = signal<Country[]>([]);
+  displayCountry = (c: Country) => c.name;
+  onSearch(term: string) { /* filter options */ }
+}
+`,
+  );
+
+  readonly inputWrapperSlotExampleCss = computed(
+    () => `
+// Default inputWrapper classes: none (empty by default)
+// Slot classes are merged with disabled state classes (opacity-60, pointer-events-none)
+// when the component is disabled
+`,
+  );
+
+  readonly inputSlotExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-autocomplete
+    formControlName="country"
+    [options]="options()"
+    [displayWith]="displayCountry"
+    placeholder="Search country…"
+    (search)="onSearch($event)"
+    [slot]="{ input: 'border-2 border-blue-500 rounded-lg shadow-md' }"
+  />
+</form>
+`,
+  );
+
+  readonly inputSlotExampleTs = computed(
+    () => `
+import { Component, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngAutocomplete } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'autocomplete-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngAutocomplete],
+  templateUrl: './autocomplete.component.html',
+})
+export class AutocompleteDemoComponent {
+  form = new FormGroup({ country: new FormControl<Country | null>(null) });
+  options = signal<Country[]>([]);
+  displayCountry = (c: Country) => c.name;
+  onSearch(term: string) { /* filter options */ }
+}
+`,
+  );
+
+  readonly inputSlotExampleCss = computed(
+    () => `
+// Default input classes are merged with slot input:
 // relative z-0 w-full border rounded-md px-3 py-2 text-sm
 // focus:outline-none focus:ring-2 focus:ring-primary bg-bg text-fg
+`,
+  );
+
+  readonly selectedTplSlotExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-autocomplete
+    formControlName="country"
+    [options]="options()"
+    [displayWith]="displayCountry"
+    placeholder="Search country…"
+    (search)="onSearch($event)"
+    [slot]="{ selectedTpl: 'bg-blue-50 rounded-md' }"
+  >
+    <ng-template #inputTpl let-item>
+      <div class="flex items-center gap-2">
+        <span class="opacity-70">({{ item.code }})</span>
+        <span class="font-semibold">{{ item.name }}</span>
+      </div>
+    </ng-template>
+  </tng-autocomplete>
+</form>
+`,
+  );
+
+  readonly selectedTplSlotExampleTs = computed(
+    () => `
+import { Component, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngAutocomplete } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'autocomplete-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngAutocomplete],
+  templateUrl: './autocomplete.component.html',
+})
+export class AutocompleteDemoComponent {
+  form = new FormGroup({ country: new FormControl<Country | null>(null) });
+  options = signal<Country[]>([]);
+  displayCountry = (c: Country) => c.name;
+  onSearch(term: string) { /* filter options */ }
+}
+`,
+  );
+
+  readonly selectedTplSlotExampleCss = computed(
+    () => `
+// Default selectedTpl classes are merged with slot selectedTpl:
+// pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center px-3
+// Slot classes allow customization of background, borders, rounded corners, etc.
 `,
   );
 }

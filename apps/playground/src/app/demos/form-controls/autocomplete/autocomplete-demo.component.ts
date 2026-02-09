@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { TngAutocomplete } from '@tailng-ui/ui/form';
+import { TngAutocomplete, TngSlotMap, TngAutocompleteSlot } from '@tailng-ui/ui/form';
 
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 import { toFlagEmoji } from '../../util/common.util';
@@ -70,6 +70,15 @@ export class AutocompleteDemoComponent {
   displayCountryText = (c: Country) =>
   `${countryCodeToFlag(c.code)} ${c.name}`;
 
+  /* ─────────────────────────
+   * Demo: slot overrides (keep in TS)
+   * ───────────────────────── */
+  readonly customSlot: TngSlotMap<TngAutocompleteSlot> = {
+    container: 'border-2 border-blue-200',
+    inputWrapper: 'bg-gray-50 rounded-md',
+    input: 'border-2 border-blue-500 rounded-lg shadow-md',
+    selectedTpl: 'bg-blue-50 rounded-md',
+  };
   
   onClosed(reason: string) {
     console.log('Autocomplete closed:', reason);

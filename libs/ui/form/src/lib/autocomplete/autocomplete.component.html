@@ -1,9 +1,9 @@
 <!-- autocomplete.component.html -->
-<div class="relative">
+<div [class]="containerClassFinal()">
   <!-- Selected-value rich display overlay (inside input) -->
   @if (showSelectedTpl()) {
     <div
-      class="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center px-3"
+      [class]="selectedTplClassFinal()"
       aria-hidden="true"
     >
       <ng-container
@@ -13,17 +13,21 @@
     </div>
   }
 
-  <div [class.opacity-60]="isDisabled()" [class.pointer-events-none]="isDisabled()">
+  <div
+    [class]="inputWrapperClassFinal()"
+    [class.opacity-60]="isDisabledComputed()"
+    [class.pointer-events-none]="isDisabledComputed()"
+  >
     <input
       #inputEl
       type="text"
-      [class]="inputKlassFinal()"
+      [class]="inputClassFinal()"
       [class.text-transparent]="showSelectedTpl()"
       [class.caret-slate-900]="showSelectedTpl()"
       [class.bg-transparent]="showSelectedTpl()"
       [value]="inputValue()"
       [placeholder]="placeholder()"
-      [disabled]="isDisabled()"
+      [disabled]="disabledFinal()"
       (input)="onInput($event)"
       (focus)="overlayRef.requestOpen()"
       (blur)="onBlur()"
