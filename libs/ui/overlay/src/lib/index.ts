@@ -6,6 +6,7 @@ export { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 export * from './dialog/dialog.component';
 export * from './dialog/dialog-initial-focus.directive';
 export * from './option-list/option-list.component';
+export * from './option-list/option-list.slots';
 export * from './popover/popover.component';
 export * from './snackbar/snackbar-host.component';
 export * from './snackbar/snackbar.types';

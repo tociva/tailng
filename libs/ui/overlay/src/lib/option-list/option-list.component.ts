@@ -13,7 +13,9 @@ import {
 } from '@angular/core';
 import { OptionTplContext } from '@tailng-ui/cdk/util';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import { TngOverlayPanel } from '../overlay-panel/overlay-panel.component';
+import { TngOptionListSlot } from './option-list.slots';
 
 type TypeaheadMatchMode = 'startsWith' | 'includes';
 export type TngOptionListKeyAction = 'move' | 'select' | 'typeahead' | 'none';
@@ -46,10 +48,22 @@ export class TngOptionList<T> {
   readonly modal = input<boolean>(false);
 
   /** overlay-panel options (only used when modal=true) */
-  readonly panelKlass = input<string>('p-0');
   readonly restoreFocus = input<boolean>(true);
   readonly autoCapture = input<boolean>(true);
   readonly deferCaptureElements = input<boolean>(false);
+
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngOptionListSlot>>({});
+
+  /* ─────────────────────────
+   * Overlay panel slot (passed to tng-overlay-panel when modal=true)
+   * ───────────────────────── */
+  readonly overlayPanelSlot = computed(() => {
+    const panelSlot = this.slotClass('overlayPanel');
+    return panelSlot ? { panel: panelSlot } : { panel: 'p-0' };
+  });
 
   /** a11y (for listbox container) */
   readonly ariaLabel = input<string>(''); // applied to listbox container
@@ -75,11 +89,6 @@ export class TngOptionList<T> {
   readonly displayWith = input<(item: T) => string>((v) => String(v));
   readonly emptyText = input<string>('No results');
 
-  readonly containerKlass = input<string>('py-1 overflow-auto max-h-60');
-  readonly optionKlass = input<string>('px-3 py-2 text-sm cursor-pointer select-none');
-  readonly optionActiveKlass = input<string>('bg-primary text-on-primary');
-  readonly optionInactiveKlass = input<string>('bg-bg text-fg');
-  readonly emptyKlass = input<string>('px-3 py-2 text-sm text-disable');
 
   @ContentChild(TemplateRef, { descendants: true })
   optionTpl?: TemplateRef<OptionTplContext<T>>;
@@ -122,6 +131,59 @@ export class TngOptionList<T> {
    * ===================== */
   readonly hasItems = computed(() => (this.items()?.length ?? 0) > 0);
 
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx(
+      'py-1 overflow-auto max-h-60',
+      this.slotClass('container'),
+    ),
+  );
+
+  readonly optionClassFinal = computed(() =>
+    this.cx(
+      'px-3 py-2 text-sm cursor-pointer select-none',
+      this.slotClass('option'),
+    ),
+  );
+
+  readonly optionActiveClassFinal = computed(() =>
+    this.cx(
+      'bg-primary text-on-primary',
+      this.slotClass('optionActive'),
+    ),
+  );
+
+  readonly optionInactiveClassFinal = computed(() =>
+    this.cx(
+      'bg-bg text-fg',
+      this.slotClass('optionInactive'),
+    ),
+  );
+
+  readonly emptyClassFinal = computed(() =>
+    this.cx(
+      'px-3 py-2 text-sm text-disable',
+      this.slotClass('empty'),
+    ),
+  );
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngOptionListSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
+
   constructor() {
     /**
      * Scroll follows the controlled `activeIndex`:
@@ -157,8 +219,9 @@ export class TngOptionList<T> {
   }
 
   optionClasses(i: number) {
-    const state = this.isActive(i) ? this.optionActiveKlass() : this.optionInactiveKlass();
-    return `${this.optionKlass()} ${state}`.trim();
+    const base = this.optionClassFinal();
+    const state = this.isActive(i) ? this.optionActiveClassFinal() : this.optionInactiveClassFinal();
+    return this.cx(base, state);
   }
 
   onMouseDown(item: T, index: number, ev: MouseEvent) {

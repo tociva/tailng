@@ -1,1 +1,118 @@
-Api content.
+<div class="grid grid-cols-1 md:grid-cols-[10fr_auto_1fr] gap-5">
+  <section class="space-y-6">
+    <h3 class="text-2xl font-semibold text-primary">API reference for option-list</h3>
+
+    <div class="border border-border bg-bg">
+      <tng-code-block
+        [content]="importExample()"
+        [highlighter]="highlighter"
+        language="typescript"
+        preKlass="bg-bg h-15"
+        rootKlass="border-0 bg-bg h-20 overflow-y-hidden"
+      >
+      </tng-code-block>
+    </div>
+
+    <header class="flex flex-col gap-1">
+      <h3 class="text-2xl font-semibold text-primary">Inputs</h3>
+      <p class="text-sm text-fg">
+        <span class="font-mono">tng-option-list&lt;T&gt;</span> is a reusable primitive for rendering
+        selectable option lists. Used by Autocomplete, Select, and other popup-based components.
+      </p>
+    </header>
+
+    <section id="basic" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Basic</h3>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="basicRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="behavior" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Behavior</h3>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="behaviorRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="styling" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Styling</h3>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="stylingRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="a11y" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Accessibility</h3>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="a11yRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="outputs" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Outputs</h3>
+      </header>
+      <div class="rounded-md border text-fg">
+        <tng-table [rows]="outputRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <section id="content-projection" class="rounded-xl border bg-bg p-6 shadow-sm space-y-4 text-fg">
+      <h3 class="text-sm font-semibold text-primary">Content projection (templates)</h3>
+      <ul class="space-y-2 text-sm text-muted text-fg">
+        <li class="flex items-center gap-2">
+          <tng-tag label="TemplateRef"></tng-tag>
+          <span>— custom option template; context: <span class="font-mono">let-item</span> (T), <span class="font-mono">let-index</span> (number), <span class="font-mono">let-active</span> (boolean)</span>
+        </li>
+      </ul>
+    </section>
+  </section>
+
+  <aside
+    class="hidden md:block p-4 sticky text-fg top-10 h-[calc(50vh-1rem)] z-20 border-l-4 border-primary overflow-y-hidden"
+  >
+    <h3 class="mb-3 text-xs font-semibold tracking-wide">API Overview</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li><a href="#basic" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Basic</a></li>
+      <li><a href="#behavior" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Behavior</a></li>
+      <li><a href="#styling" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Styling</a></li>
+      <li><a href="#a11y" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Accessibility</a></li>
+      <li><a href="#outputs" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Outputs</a></li>
+      <li><a href="#content-projection" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Content projection</a></li>
+    </ul>
+  </aside>
+</div>

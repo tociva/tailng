@@ -124,7 +124,7 @@
           (activeIndexChange)="activeIndex.set($event)"
           (optionMouseDown)="onSelect($event)"
           (requestSelectActive)="selectActive()"
-          containerKlass="py-1 max-h-48 overflow-auto"
+          [slot]="customOptionListSlot"
         />
       </div>
 
@@ -183,7 +183,7 @@
           (activeIndexChange)="activeIndexLarge.set($event)"
           (optionMouseDown)="onSelectLarge($event)"
           (requestSelectActive)="selectActiveLarge()"
-          containerKlass="py-1 max-h-48 overflow-auto"
+          [slot]="customOptionListSlot"
         >
         <ng-template #countryTplLarge let-item>
           <div class="flex items-center gap-2">

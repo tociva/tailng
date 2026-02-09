@@ -1,1 +1,225 @@
-Styling content.
+<section class="space-y-6 text-fg">
+  <!-- Intro -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
+    <h2 class="text-sm font-semibold text-primary">Styling</h2>
+    <p class="text-sm leading-6 text-fg">
+      The <span class="font-mono">tng-option-list</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys:
+      <span class="font-mono">container</span>,
+      <span class="font-mono">option</span>,
+      <span class="font-mono">optionActive</span>,
+      <span class="font-mono">optionInactive</span>,
+      <span class="font-mono">empty</span>, and
+      <span class="font-mono">overlayPanel</span>. Each slot targets a specific
+      element in the component structure.
+    </p>
+  </div>
+
+  <!-- container slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">container slot</h3>
+      <tng-tag label="listbox"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono">container</span> slot applies classes to the listbox
+      <span class="font-mono">&lt;div&gt;</span> that wraps all options. Use this for padding, max-height,
+      overflow behavior, and other container-level styling.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="containerSlotExampleHtml()"
+        [tsContent]="containerSlotExampleTs()"
+        [styleContent]="containerSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <tng-option-list
+            [items]="options()"
+            [activeIndex]="activeIndex()"
+            (activeIndexChange)="activeIndex.set($event)"
+            [slot]="containerSlot"
+          />
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+      Default classes include <span class="font-mono text-foreground">py-1 overflow-auto max-h-60</span>.
+      Adjust max-height and overflow based on your design needs.
+    </div>
+  </div>
+
+  <!-- option slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">option slot</h3>
+      <tng-tag label="option element"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">option</span> slot applies base classes to all option
+      <span class="font-mono text-foreground">&lt;div&gt;</span> elements. Use this for padding, text styling,
+      cursor, and other base option appearance.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="optionSlotExampleHtml()"
+        [tsContent]="optionSlotExampleTs()"
+        [styleContent]="optionSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <tng-option-list
+            [items]="options()"
+            [activeIndex]="activeIndex()"
+            (activeIndexChange)="activeIndex.set($event)"
+            [slot]="optionSlot"
+          />
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      Default classes include <span class="font-mono text-foreground">px-3 py-2 text-sm cursor-pointer select-none</span>.
+      These are merged with active/inactive state classes.
+    </div>
+  </div>
+
+  <!-- optionActive / optionInactive slots -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">optionActive / optionInactive slots</h3>
+      <tng-tag label="state styling"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">optionActive</span> and
+      <span class="font-mono text-foreground">optionInactive</span> slots apply state-specific classes
+      to options based on whether they are currently focused/active. Use these for background colors,
+      text colors, and other state-dependent styling.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="optionStateSlotExampleHtml()"
+        [tsContent]="optionStateSlotExampleTs()"
+        [styleContent]="optionStateSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <tng-option-list
+            [items]="options()"
+            [activeIndex]="activeIndex()"
+            (activeIndexChange)="activeIndex.set($event)"
+            [slot]="optionStateSlot"
+          />
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+      Default active classes: <span class="font-mono text-foreground">bg-primary text-on-primary</span>.
+      Default inactive classes: <span class="font-mono text-foreground">bg-bg text-fg</span>.
+      Customize these to match your design system.
+    </div>
+  </div>
+
+  <!-- empty slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">empty slot</h3>
+      <tng-tag label="empty state"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">empty</span> slot applies classes to the empty state
+      message when no items are available. Use this for text styling, padding, and visual appearance
+      of the "no results" message.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="emptySlotExampleHtml()"
+        [tsContent]="emptySlotExampleTs()"
+        [styleContent]="emptySlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <tng-option-list
+            [items]="[]"
+            emptyText="No items found"
+            [slot]="emptySlot"
+          />
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      Default classes include <span class="font-mono text-foreground">px-3 py-2 text-sm text-disable</span>.
+      The empty text can be customized via the <span class="font-mono text-foreground">emptyText</span> input.
+    </div>
+  </div>
+
+  <!-- overlayPanel slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">overlayPanel slot</h3>
+      <tng-tag label="modal panel"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">overlayPanel</span> slot applies classes to the
+      <span class="font-mono text-foreground">tng-overlay-panel</span> component when
+      <span class="font-mono text-foreground">modal=true</span>. This controls the panel wrapper
+      appearance (padding, borders, etc.) around the option list in modal mode.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="overlayPanelSlotExampleHtml()"
+        [tsContent]="overlayPanelSlotExampleTs()"
+        [styleContent]="overlayPanelSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <tng-option-list
+            modal="true"
+            [items]="options()"
+            [activeIndex]="activeIndex()"
+            (activeIndexChange)="activeIndex.set($event)"
+            [slot]="overlayPanelSlot"
+          />
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      This slot only applies when <span class="font-mono text-foreground">modal=true</span>.
+      Default value is <span class="font-mono text-foreground">p-0</span> (no padding).
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
+    <h3 class="text-sm font-semibold text-primary">Best practices</h3>
+    <ul class="space-y-2 text-sm text-fg">
+      <li class="flex items-start gap-2">
+        <span class="text-foreground">•</span>
+        <span>Use <span class="font-mono text-foreground">container</span> slot for listbox container styling (max-height, overflow, padding).</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-foreground">•</span>
+        <span>Use <span class="font-mono text-foreground">option</span> slot for base option styling, and
+        <span class="font-mono text-foreground">optionActive</span>/<span class="font-mono text-foreground">optionInactive</span>
+        for state-specific styling.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-foreground">•</span>
+        <span>Ensure sufficient contrast between active and inactive states for accessibility.</span>
+      </li>
+    </ul>
+  </div>
+</section>

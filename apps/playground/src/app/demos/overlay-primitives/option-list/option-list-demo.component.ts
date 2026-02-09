@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { TngOptionList, TngOverlayPanel, TngSlotMap, TngOverlayPanelSlot } from '@tailng-ui/ui/overlay';
+import { TngOptionList, TngOverlayPanel, TngSlotMap, TngOverlayPanelSlot, TngOptionListSlot } from '@tailng-ui/ui/overlay';
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 
 interface Person {
@@ -114,5 +114,11 @@ export class OptionListDemoComponent {
    * ───────────────────────── */
   readonly customPanelSlot: TngSlotMap<TngOverlayPanelSlot> = {
     panel: 'border-2 border-purple-500 bg-purple-50',
+  };
+
+  readonly customOptionListSlot: TngSlotMap<TngOptionListSlot> = {
+    container: 'py-1 max-h-48 overflow-auto',
+    option: 'px-4 py-2',
+    optionActive: 'bg-purple-100 text-purple-900',
   };
 }
