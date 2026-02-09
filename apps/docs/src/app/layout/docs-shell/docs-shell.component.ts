@@ -5,7 +5,7 @@ import {
   TngAccordion,
   TngExpansionPanel,
 } from '@tailng-ui/ui/layout';
-import { TngTextInput } from '@tailng-ui/ui/form';
+import { TngSlotMap, TngTextInput, TngTextInputSlot } from '@tailng-ui/ui/form';
 import { TngSidenav } from '@tailng-ui/ui/navigation';
 import { docsNav } from '../../data/nav';
 import { TngIcon } from '@tailng-ui/icons/icon';
@@ -30,7 +30,7 @@ import { TngIcon } from '@tailng-ui/icons/icon';
 export class DocsShellComponent implements OnInit {
   mobileOpen = signal(false);
   nav = computed(() => docsNav);
-searchQuery = signal<string>('');
+  searchQuery = signal<string>('');
   
    form = new FormGroup({
     text: new FormControl(''),
@@ -52,5 +52,8 @@ filteredNav() {
     )
   );
 }
+readonly frameSlot: TngSlotMap<TngTextInputSlot> = {
+    frame: ['focus-within:!ring-0', 'focus-within:!ring-offset-0', 'border-0', 'focus-within:border-b-2', 'focus-within:border-primary', 'rounded-none'],
+  };
 
 }
