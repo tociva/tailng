@@ -35,6 +35,7 @@ export class AutocompleteStylingComponent {
   inputWrapperSlot = { inputWrapper: 'bg-red-500 rounded-md p-1' };
   inputSlot = { input: 'border-2 border-blue-500 rounded-lg shadow-md' };
   selectedTplSlot = { selectedTpl: 'bg-blue-50 rounded-md' };
+  overlayPanelSlot = { overlayPanel: 'border-2 border-green-500 bg-green-50' };
 
   // Form and options for selectedTpl demo
   formWithTemplate = new FormGroup({
@@ -227,6 +228,50 @@ export class AutocompleteDemoComponent {
 // Default selectedTpl classes are merged with slot selectedTpl:
 // pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center px-3
 // Slot classes allow customization of background, borders, rounded corners, etc.
+`,
+  );
+
+  readonly overlayPanelSlotExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-autocomplete
+    formControlName="country"
+    [options]="options()"
+    [displayWith]="displayCountry"
+    placeholder="Search country…"
+    (search)="onSearch($event)"
+    [slot]="{ overlayPanel: 'border-2 border-green-500 bg-green-50' }"
+  />
+</form>
+`,
+  );
+
+  readonly overlayPanelSlotExampleTs = computed(
+    () => `
+import { Component, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngAutocomplete } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'autocomplete-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngAutocomplete],
+  templateUrl: './autocomplete.component.html',
+})
+export class AutocompleteDemoComponent {
+  form = new FormGroup({ country: new FormControl<Country | null>(null) });
+  options = signal<Country[]>([]);
+  displayCountry = (c: Country) => c.name;
+  onSearch(term: string) { /* filter options */ }
+}
+`,
+  );
+
+  readonly overlayPanelSlotExampleCss = computed(
+    () => `
+// Default overlay panel classes are merged with slot overlayPanel:
+// bg-bg text-fg border border-border rounded-md shadow-lg max-h-60 overflow-auto outline-none
+// Slot classes allow customization of borders, backgrounds, shadows, max-height, etc.
 `,
   );
 }

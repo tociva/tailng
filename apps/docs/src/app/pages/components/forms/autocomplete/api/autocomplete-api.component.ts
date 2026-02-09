@@ -28,7 +28,7 @@ export class AutocompleteApiComponent implements AfterViewInit {
     { property: 'options', type: 'T[]', default: '[]', description: 'Options shown in the dropdown' },
     { property: 'displayWith', type: '(item: T) => string', default: '(v) => String(v)', description: 'String for input and list display' },
     { property: 'placeholder', type: 'string', default: "'Start typing…'", description: 'Input placeholder' },
-    { property: 'slot', type: 'TngSlotMap<TngAutocompleteSlot>', default: '{}', description: 'Slot-based micro styling for container and input' },
+    { property: 'slot', type: 'TngSlotMap<TngAutocompleteSlot>', default: '{}', description: 'Slot-based micro styling for container, inputWrapper, input, selectedTpl, and overlayPanel' },
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'search', type: 'OutputEventEmitter<string>', default: '—', description: 'Emits current input text when user types' },
     { property: 'selected', type: 'OutputEventEmitter<T>', default: '—', description: 'Emits selected item (non-form usage)' },

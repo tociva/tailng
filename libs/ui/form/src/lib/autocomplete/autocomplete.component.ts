@@ -166,6 +166,14 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
     ),
   );
 
+  /* ─────────────────────────
+   * Overlay panel slot (passed to tng-overlay-panel)
+   * ───────────────────────── */
+  readonly overlayPanelSlot = computed(() => {
+    const panelSlot = this.slotClass('overlayPanel');
+    return panelSlot ? { panel: panelSlot } : {};
+  });
+
   /** Form value (selected item) */
   private value: T | null = null;
 

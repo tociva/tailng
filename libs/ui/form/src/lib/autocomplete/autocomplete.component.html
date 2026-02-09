@@ -52,7 +52,7 @@
       width="anchor"
       (closed)="overlayRef.close($event)"
     >
-      <tng-overlay-panel>
+      <tng-overlay-panel [slot]="overlayPanelSlot()">
         <tng-option-list
           [items]="options()"
           [activeIndex]="focusedIndex()"
