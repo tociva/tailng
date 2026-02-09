@@ -79,6 +79,9 @@ export class AutocompleteDemoComponent {
     input: 'border-2 border-blue-500 rounded-lg shadow-md',
     selectedTpl: 'bg-blue-50 rounded-md',
     overlayPanel: 'border-2 border-green-500 bg-green-50',
+    optionListContainer: 'py-2 max-h-48',
+    optionListItem: 'px-4 py-2',
+    optionListItemActive: 'bg-blue-100 text-blue-900',
   };
   
   onClosed(reason: string) {

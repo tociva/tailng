@@ -8,8 +8,13 @@
       <span class="font-mono">container</span>,
       <span class="font-mono">inputWrapper</span>,
       <span class="font-mono">input</span>,
-      <span class="font-mono">selectedTpl</span>, and
-      <span class="font-mono">overlayPanel</span>. Each slot targets a specific
+      <span class="font-mono">selectedTpl</span>,
+      <span class="font-mono">overlayPanel</span>, and option-list slots
+      (<span class="font-mono">optionListContainer</span>,
+      <span class="font-mono">optionListItem</span>,
+      <span class="font-mono">optionListItemActive</span>,
+      <span class="font-mono">optionListItemInactive</span>,
+      <span class="font-mono">optionListEmpty</span>). Each slot targets a specific
       element in the component structure.
     </p>
   </div>
@@ -227,6 +232,51 @@
       <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
       The overlay panel slot is passed to the underlying <span class="font-mono text-foreground">tng-overlay-panel</span> component.
       Default classes include border, shadow, rounded corners, max-height, and overflow handling.
+    </div>
+  </div>
+
+  <!-- option-list slots -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Option List Slots</h3>
+      <tng-tag label="dropdown options"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The autocomplete component passes slot styling to the underlying
+      <span class="font-mono text-foreground">tng-option-list</span> component. Use these slots to customize
+      the appearance of the dropdown options: <span class="font-mono text-foreground">optionListContainer</span>
+      (listbox wrapper), <span class="font-mono text-foreground">optionListItem</span> (base option styling),
+      <span class="font-mono text-foreground">optionListItemActive</span> (focused option),
+      <span class="font-mono text-foreground">optionListItemInactive</span> (unfocused option), and
+      <span class="font-mono text-foreground">optionListEmpty</span> (empty state message).
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="optionListSlotExampleHtml()"
+        [tsContent]="optionListSlotExampleTs()"
+        [styleContent]="optionListSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+              [slot]="optionListSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      These slots are passed directly to the <span class="font-mono text-foreground">tng-option-list</span> component.
+      Default classes are provided by option-list; slot classes override or extend them.
     </div>
   </div>
 

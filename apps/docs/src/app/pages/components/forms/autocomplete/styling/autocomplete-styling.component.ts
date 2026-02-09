@@ -1,6 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TngAutocomplete } from '@tailng-ui/ui/form';
+import { TngAutocomplete, TngSlotMap, TngAutocompleteSlot } from '@tailng-ui/ui/form';
 import { TngTag } from '@tailng-ui/ui/primitives';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 import { Country, COUNTRY_LIST, toFlagEmoji } from '../../../../../shared/country-list';
@@ -36,6 +36,11 @@ export class AutocompleteStylingComponent {
   inputSlot = { input: 'border-2 border-blue-500 rounded-lg shadow-md' };
   selectedTplSlot = { selectedTpl: 'bg-blue-50 rounded-md' };
   overlayPanelSlot = { overlayPanel: 'border-2 border-green-500 bg-green-50' };
+  optionListSlot: TngSlotMap<TngAutocompleteSlot> = {
+    optionListContainer: 'py-2 max-h-48',
+    optionListItem: 'px-4 py-2',
+    optionListItemActive: 'bg-yellow-100 text-red-900',
+  };
 
   // Form and options for selectedTpl demo
   formWithTemplate = new FormGroup({
@@ -272,6 +277,57 @@ export class AutocompleteDemoComponent {
 // Default overlay panel classes are merged with slot overlayPanel:
 // bg-bg text-fg border border-border rounded-md shadow-lg max-h-60 overflow-auto outline-none
 // Slot classes allow customization of borders, backgrounds, shadows, max-height, etc.
+`,
+  );
+
+  readonly optionListSlotExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-autocomplete
+    formControlName="country"
+    [options]="options()"
+    [displayWith]="displayCountry"
+    placeholder="Search country…"
+    (search)="onSearch($event)"
+    [slot]="{
+      optionListContainer: 'py-2 max-h-48',
+      optionListItem: 'px-4 py-2',
+      optionListItemActive: 'bg-blue-100 text-blue-900'
+    }"
+  />
+</form>
+`,
+  );
+
+  readonly optionListSlotExampleTs = computed(
+    () => `
+import { Component, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TngAutocomplete, TngSlotMap, TngAutocompleteSlot } from '@tailng-ui/ui/form';
+
+@Component({
+  selector: 'autocomplete-demo',
+  standalone: true,
+  imports: [ReactiveFormsModule, TngAutocomplete],
+  templateUrl: './autocomplete.component.html',
+})
+export class AutocompleteDemoComponent {
+  form = new FormGroup({ country: new FormControl<Country | null>(null) });
+  options = signal<Country[]>([]);
+  displayCountry = (c: Country) => c.name;
+  onSearch(term: string) { /* filter options */ }
+}
+`,
+  );
+
+  readonly optionListSlotExampleCss = computed(
+    () => `
+// Option list slots are passed to tng-option-list component:
+// - optionListContainer: default 'py-1 overflow-auto max-h-60'
+// - optionListItem: default 'px-3 py-2 text-sm cursor-pointer select-none'
+// - optionListItemActive: default 'bg-primary text-on-primary'
+// - optionListItemInactive: default 'bg-bg text-fg'
+// - optionListEmpty: default 'px-3 py-2 text-sm text-disable'
 `,
   );
 }

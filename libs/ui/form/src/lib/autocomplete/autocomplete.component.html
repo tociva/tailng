@@ -60,6 +60,7 @@
           [optionTemplate]="optionTpl ?? null"
           [loop]="false"
           [typeahead]="false"
+          [slot]="optionListSlot()"
           (activeIndexChange)="onFocusedIndexChange($event)"
           (requestSelectActive)="requestSelectActive()"
           (optionMouseDown)="select($event.item)"

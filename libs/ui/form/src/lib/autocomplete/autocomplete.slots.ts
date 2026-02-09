@@ -5,4 +5,9 @@ export type TngAutocompleteSlot =
   | 'inputWrapper'
   | 'input'
   | 'selectedTpl'
-  | 'overlayPanel';
+  | 'overlayPanel'
+  | 'optionListContainer'
+  | 'optionListItem'
+  | 'optionListItemActive'
+  | 'optionListItemInactive'
+  | 'optionListEmpty';

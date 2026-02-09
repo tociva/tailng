@@ -21,6 +21,7 @@ import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import {
   TngConnectedOverlay,
   TngOptionList,
+  TngOptionListSlot,
   TngOverlayPanel,
   TngOverlayRef,
   type TngOverlayCloseReason,
@@ -172,6 +173,30 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   readonly overlayPanelSlot = computed(() => {
     const panelSlot = this.slotClass('overlayPanel');
     return panelSlot ? { panel: panelSlot } : {};
+  });
+
+  /* ─────────────────────────
+   * Option list slot (passed to tng-option-list)
+   * ───────────────────────── */
+  readonly optionListSlot = computed((): TngSlotMap<TngOptionListSlot> => {
+    const slotMap: TngSlotMap<TngOptionListSlot> = {};
+    
+    const container = this.slotClass('optionListContainer');
+    if (container) slotMap.container = container;
+    
+    const option = this.slotClass('optionListItem');
+    if (option) slotMap.option = option;
+    
+    const optionActive = this.slotClass('optionListItemActive');
+    if (optionActive) slotMap.optionActive = optionActive;
+    
+    const optionInactive = this.slotClass('optionListItemInactive');
+    if (optionInactive) slotMap.optionInactive = optionInactive;
+    
+    const empty = this.slotClass('optionListEmpty');
+    if (empty) slotMap.empty = empty;
+    
+    return slotMap;
   });
 
   /** Form value (selected item) */
