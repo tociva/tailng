@@ -1,11 +1,8 @@
-import {
-  Component,
-  computed,
-  forwardRef,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { TngSlotMap, TngSlotValue } from '../core/slot.types';
+import { TngTextInputSlot } from './text-input.slots';
 
 @Component({
   selector: 'tng-text-input',
@@ -25,7 +22,6 @@ export class TngTextInput implements ControlValueAccessor {
    * ───────────────────────── */
   id = input<string>('');
   name = input<string>('');
-
   placeholder = input<string>('');
 
   type = input<'text' | 'email' | 'password' | 'search' | 'tel' | 'url'>('text');
@@ -40,19 +36,12 @@ export class TngTextInput implements ControlValueAccessor {
   maxlength = input<number | null>(null);
   pattern = input<string | null>(null);
 
-  /**
-   * Prefix: non-clickable by default (safer UX).
-   * If you want clickable prefix, set prefixClickable=true and use a <button tngPrefix>.
-   */
   prefixClickable = input<boolean>(false);
 
   /* ─────────────────────────
-   * Klass hooks (theming)
+   * Slot hooks (micro styling)
    * ───────────────────────── */
-  frameKlass = input<string>('');
-  inputKlass = input<string>('');
-  prefixKlass = input<string>('');
-  suffixKlass = input<string>('');
+  slot = input<TngSlotMap<TngTextInputSlot>>({});
 
   /* ─────────────────────────
    * Internal value handling
@@ -89,38 +78,37 @@ export class TngTextInput implements ControlValueAccessor {
   }
 
   /* ─────────────────────────
-   * Klass finals (defaults + overrides)
+   * Slot finals (defaults + overrides)
    * ───────────────────────── */
   readonly frameClassFinal = computed(() =>
-    this.join(
+    this.cx(
       'flex h-10 w-full items-center rounded-md border border-border bg-bg text-foreground',
       'focus-within:border-transparent',
       'focus-within:ring-2 focus-within:ring-primary',
       'focus-within:ring-offset-1 focus-within:ring-offset-background',
       this.isDisabled() ? 'pointer-events-none opacity-50' : '',
       this.readonly() ? 'bg-muted/30 text-muted' : '',
-      this.frameKlass(),
+      this.slotClass('frame'),
     ),
   );
 
-  readonly inputKlassFinal = computed(() =>
-    this.join(
+  readonly inputClassFinal = computed(() =>
+    this.cx(
       'h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted',
-      this.inputKlass(),
+      this.slotClass('input'),
     ),
   );
 
-  readonly prefixKlassFinal = computed(() =>
-    this.join(
-      // spacing is provided by projected element classes; wrapper stays minimal
+  readonly prefixClassFinal = computed(() =>
+    this.cx(
       this.prefixClickable() ? '' : 'pointer-events-none',
-      this.prefixKlass(),
+      this.slotClass('prefix'),
     ),
   );
 
-  readonly suffixKlassFinal = computed(() =>
-    this.join(
-      this.suffixKlass(),
+  readonly suffixClassFinal = computed(() =>
+    this.cx(
+      this.slotClass('suffix'),
     ),
   );
 
@@ -153,7 +141,18 @@ export class TngTextInput implements ControlValueAccessor {
     this.onTouched();
   }
 
-  private join(...parts: Array<string | null | undefined>): string {
-    return parts.map((p) => (p ?? '').trim()).filter(Boolean).join(' ');
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngTextInputSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
   }
 }

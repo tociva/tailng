@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { TngIcon } from '@tailng-ui/icons/icon';
 import { TngTag } from '@tailng-ui/ui/primitives';
-import { TngTextInput } from '@tailng-ui/ui/form';
+import { TngTextInput, TngSlotMap, TngTextInputSlot } from '@tailng-ui/ui/form';
 import {
   ExampleBlockComponent,
   TngExampleDemo,
@@ -14,13 +14,17 @@ import {
   imports: [TngIcon, TngTextInput, TngTag, ExampleBlockComponent, TngExampleDemo],
 })
 export class TextInputOverviewComponent {
+  readonly customSlot: TngSlotMap<TngTextInputSlot> = {
+    frame: ['border-2', 'border-blue-900', 'rounded-md', 'shadow-md', 'focus-within:ring-blue-900'],
+  };
+
   readonly textInputBasicHtml = computed(
     () => `
 <form [formGroup]="login">
   <tng-text-input
     formControlName="userName"
     placeholder="Enter username"
-    frameKlass="border-2 border-blue-900 rounded-md shadow-md focus-within:ring-blue-900"
+    [slot]="customSlot"
   />
 </form>
 `,
@@ -30,7 +34,7 @@ export class TextInputOverviewComponent {
     () => `
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
-import { TngTextInput } from '@tailng-ui/ui/form';
+import { TngTextInput, TngSlotMap, TngTextInputSlot } from '@tailng-ui/ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
@@ -41,6 +45,10 @@ export class TextInputDemoComponent {
   login = new FormGroup({
     userName: new FormControl('', { nonNullable: true })
 });
+
+  readonly customSlot: TngSlotMap<TngTextInputSlot> = {
+    frame: ['border-2', 'border-blue-900', 'rounded-md', 'shadow-md', 'focus-within:ring-blue-900'],
+  };
 
 `,
   );
@@ -57,12 +65,16 @@ rootClass = flex h-10 w-full items-center rounded-md
 `,
   );
 
+  readonly searchSlot: TngSlotMap<TngTextInputSlot> = {
+    input: ['text-blue-700'],
+  };
+
   readonly textInputSearchHtml = computed(
     () => `
 <form [formGroup]="form">
   <tng-text-input placeholder="Search..."
     formControlName="search"
-    inputKlass="text-blue-700"
+    [slot]="searchSlot"
   >
     <tng-icon
       tngPrefix
@@ -79,7 +91,7 @@ rootClass = flex h-10 w-full items-center rounded-md
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
 import { TngIcon } from '@tailng-ui/icons/icon';
-import { TngTextInput } from '@tailng-ui/ui/form';
+import { TngTextInput, TngSlotMap, TngTextInputSlot } from '@tailng-ui/ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
@@ -91,13 +103,20 @@ export class TextInputDemoComponent {
     search: new FormControl('', { nonNullable: true })
 });
 
+  readonly searchSlot: TngSlotMap<TngTextInputSlot> = {
+    input: ['text-blue-700'],
+  };
+
 `,
   );
   readonly textInputSearchCss = computed(
     () => `
-inputKlass =  h-full min-w-0 flex-1 bg-transparent 
-              px-3 text-sm outline-none placeholder:text-muted
-tngPrefix  =  ml-3
+// Default slot values
+frame = flex h-10 w-full items-center rounded-md border border-border bg-bg text-foreground
+        focus-within:border-transparent focus-within:ring-2 focus-within:ring-primary
+        focus-within:ring-offset-1 focus-within:ring-offset-background
+input = h-full min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted
+tngPrefix = ml-3
 `,
   );
 }

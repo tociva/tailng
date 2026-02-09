@@ -2,7 +2,7 @@ import { Component, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TngIcon } from '@tailng-ui/icons/icon';
-import { TngTextInput } from '@tailng-ui/ui/form';
+import { TngTextInput, TngSlotMap, TngTextInputSlot } from '@tailng-ui/ui/form';
 import { TngTag } from '@tailng-ui/ui/primitives';
 
 import {
@@ -403,14 +403,18 @@ form = new FormGroup({
 `,
   );
 
+  readonly customStylingSlot: TngSlotMap<TngTextInputSlot> = {
+    frame: ['border-2', 'border-purple-500', 'rounded-xl', 'shadow-lg'],
+    input: ['text-purple-700', 'placeholder:text-purple-300'],
+  };
+
   readonly customStylingExampleHtml = computed(
     () => `
 <form [formGroup]="form">  
   <tng-text-input
     formControlName=search
     placeholder="Custom styled input"
-    frameKlass="border-2 border-purple-500 rounded-xl shadow-lg"
-    inputKlass="text-purple-700 placeholder:text-purple-300"
+    [slot]="customStylingSlot"
     >
     <tng-icon
       tngPrefix
@@ -427,7 +431,7 @@ form = new FormGroup({
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule} from '@angular/forms';
 import { TngIcon } from '@tailng-ui/icons/icon';
-import { TngTextInput } from '@tailng-ui/ui/form';
+import { TngTextInput, TngSlotMap, TngTextInputSlot } from '@tailng-ui/ui/form';
 @Component({
   selector: 'text-input-demo',
   standalone: true,
@@ -438,18 +442,23 @@ export class TextInputDemoComponent {
   form = new FormGroup({
     search: new FormControl('', { nonNullable: true })
 });
+
+  readonly customStylingSlot: TngSlotMap<TngTextInputSlot> = {
+    frame: ['border-2', 'border-purple-500', 'rounded-xl', 'shadow-lg'],
+    input: ['text-purple-700', 'placeholder:text-purple-300'],
+  };
 `);
 readonly customStylingExampleCss = computed(()=>
 // Default CSS
-`rootClass = flex h-10 w-full items-center rounded-md 
-            border border-border bg-bg text-foreground
-            focus-within:border-transparent 
-            focus-within:ring-2 focus-within:ring-primary 
-            focus-within:ring-offset-1 
-            focus-within:ring-offset-background
-inputKlass = h-full min-w-0 flex-1 bg-transparent 
-              px-3 text-sm outline-none 
-              placeholder:text-muted
+`frame = flex h-10 w-full items-center rounded-md 
+        border border-border bg-bg text-foreground
+        focus-within:border-transparent 
+        focus-within:ring-2 focus-within:ring-primary 
+        focus-within:ring-offset-1 
+        focus-within:ring-offset-background
+input = h-full min-w-0 flex-1 bg-transparent 
+        px-3 text-sm outline-none 
+        placeholder:text-muted
 tngPrefix = ml-3
 `);
 }

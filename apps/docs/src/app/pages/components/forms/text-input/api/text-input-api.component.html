@@ -145,40 +145,50 @@
           </ul>
         </div> -->
 
-    <div
-      class="space-y-2 text-fg sm:col-span-2 border-l-4 border-primary bg-bg px-4 py-4 rounded-md"
-    >
-      <div class="text-xs font-semibold text-muted text-primary">Prefix behavior</div>
-      <ul class="space-y-1 text-sm text-muted">
-        <li>
-          <span class="font-mono text-fg">prefixClickable: boolean</span> — when
-          <span class="font-mono">false</span>, prefix is non-clickable (safer UX); when
-          <span class="font-mono">true</span>, use a
-          <span class="font-mono text-foreground">&lt;button tngPrefix&gt;</span>.
-        </li>
-      </ul>
-    </div>
 
-    <!-- API – Klass hooks -->
+    <!-- Section: Styling -->
+    <section id="styling" class="flex flex-col gap-4 text-fg">
+      <header class="flex flex-col gap-1">
+        <h3 class="text-base font-semibold text-primary">Styling</h3>
+        <p class="text-sm text-fg">Properties for customizing component appearance.</p>
+      </header>
+
+      <div class="rounded-md border">
+        <tng-table [rows]="stylingRows()">
+          <tng-col id="property" header="Property" [value]="property"></tng-col>
+          <tng-col id="type" header="Type" [value]="type"></tng-col>
+          <tng-col id="default" header="Default" [value]="default"></tng-col>
+          <tng-col id="description" header="Description" [value]="description"></tng-col>
+        </tng-table>
+      </div>
+    </section>
+
+    <!-- API – Slot-based micro styling -->
     <div
-      id="klass-hooks"
+      id="slot-styling"
       class="rounded-xl border bg-bg p-6 shadow-sm space-y-4"
     >
       <!-- Header -->
       <div class="flex items-center justify-between text-fg ">
-        <h3 class="text-sm font-semibold text-primary">Klass hooks (theming)</h3>
+        <h3 class="text-sm font-semibold text-primary">Slot-based micro styling</h3>
         <tng-tag label="tailng"></tng-tag>
       </div>
+
+      <p class="text-sm text-muted">
+        Use the <span class="font-mono text-foreground">slot</span> input to customize styling for different parts of the component.
+        The slot object accepts keys: <span class="font-mono text-foreground">frame</span>, <span class="font-mono text-foreground">input</span>, 
+        <span class="font-mono text-foreground">prefix</span>, and <span class="font-mono text-foreground">suffix</span>.
+      </p>
 
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-fg">
         <!-- Left box -->
         <li class="border-2 p-3 rounded-lg space-y-2">
           <div class="flex items-center gap-2">
-            <tng-tag label="frameKlass"></tng-tag>
+            <tng-tag label="frame"></tng-tag>
             <span>— shell wrapper</span>
           </div>
           <div class="flex items-center gap-2">
-            <tng-tag label="inputKlass"></tng-tag>
+            <tng-tag label="input"></tng-tag>
             <span>— input element</span>
           </div>
         </li>
@@ -186,22 +196,33 @@
         <!-- Right box -->
         <li class="border-2 p-3 rounded-lg space-y-2">
           <div class="flex items-center gap-2">
-            <tng-tag label="prefixKlass"></tng-tag>
+            <tng-tag label="prefix"></tng-tag>
             <span>— prefix wrapper</span>
           </div>
           <div class="flex items-center gap-2">
-            <tng-tag label="suffixKlass"></tng-tag>
+            <tng-tag label="suffix"></tng-tag>
             <span>— suffix wrapper</span>
           </div>
         </li>
       </ul>
+
+      <!-- Example -->
+      <div class="rounded-md border bg-alternate-background p-4 text-sm text-fg">
+        <div class="font-semibold text-primary mb-2">Example:</div>
+        <tng-code-block
+          [content]="slotExampleCode()"
+          [highlighter]="highlighter"
+          language="typescript"
+          rootKlass="border-0 bg-alternate-background"
+        ></tng-code-block>
+      </div>
 
       <!-- Tip -->
       <div
         class="rounded-md border-l-4 border-primary bg-alternate-background p-4 text-sm text-muted text-fg "
       >
         <span class="font-semibold text-primary">Tip:</span>
-        Prefer <span class="font-mono text-foreground">frameKlass</span> for height, radius, borders,
+        Slot values can be strings or arrays of strings. Prefer <span class="font-mono text-foreground">frame</span> for height, radius, borders,
         and focus-ring changes to keep behavior consistent.
       </div>
     </div>
@@ -317,11 +338,21 @@
 
       <li class="flex items-center gap-2">
         <a
-          href="../components/forms/text-input/api#klass-hooks"
+          href="../components/forms/text-input/api#styling"
           class="flex items-center gap-2 p-1 hover:text-primary scroll-link"
         >
           <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
-          Klass hooks(theming)
+          Styling
+        </a>
+      </li>
+
+      <li class="flex items-center gap-2">
+        <a
+          href="../components/forms/text-input/api#slot-styling"
+          class="flex items-center gap-2 p-1 hover:text-primary scroll-link"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Slot-based micro styling
         </a>
       </li>
 
