@@ -4,6 +4,7 @@ export * from './button-toggle/button-toggle.component';
 export * from './checkbox/checkbox.component';
 export * from './checkbox/checkbox.slots';
 export * from './chips/chips.component';
+export * from './chips/chips.slots';
 export * from './datepicker/datepicker.component';
 export * from './datepicker/adapters';
 export * from './datepicker/utils/datepicker-input.util';

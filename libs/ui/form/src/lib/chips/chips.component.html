@@ -1,21 +1,21 @@
 <!-- chips.component.html -->
-<div [class]="rootKlass()">
+<div [class]="containerClassFinal()">
   <!-- Chips row + input -->
-  <div [class]="containerClasses()">
+  <div [class]="chipsWrapperClassFinal()">
     @for (chip of chips(); let i = $index; track i) {
-      <span [class]="chipKlass()">
+      <span [class]="chipClassFinal()">
         @if (chipTpl) {
           <ng-container
             [ngTemplateOutlet]="chipTpl"
             [ngTemplateOutletContext]="{ $implicit: chip, index: i }"
           />
         } @else {
-          <span [class]="chipLabelKlass()">{{ display(chip) }}</span>
+          <span [class]="chipLabelClassFinal()">{{ display(chip) }}</span>
         }
 
         <button
           type="button"
-          [class]="removeButtonKlass()"
+          [class]="removeButtonClassFinal()"
           [disabled]="isDisabled()"
           (click)="removeAt(i)"
           aria-label="Remove chip"
@@ -28,7 +28,7 @@
     <input
       #inputEl
       type="text"
-      [class]="inputKlass()"
+      [class]="inputClassFinal()"
       [value]="inputValue()"
       [placeholder]="placeholderText()"
       [disabled]="isDisabled()"
@@ -57,7 +57,7 @@
       width="anchor"
       (closed)="overlayRef.close($event)"
     >
-      <tng-overlay-panel>
+      <tng-overlay-panel [slot]="overlayPanelSlot()">
         <tng-option-list
           [items]="options()"
           [activeIndex]="focusedIndex()"
@@ -65,6 +65,7 @@
           [optionTemplate]="optionTpl ?? null"
           [loop]="false"
           [typeahead]="false"
+          [slot]="optionListSlot()"
           (activeIndexChange)="focusedIndex.set($event)"
           (requestSelectActive)="requestSelectActive()"
           (optionMouseDown)="selectOption($event.item)"

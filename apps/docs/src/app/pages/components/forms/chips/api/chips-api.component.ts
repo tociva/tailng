@@ -37,12 +37,7 @@ export class ChipsApiComponent implements AfterViewInit {
     { property: 'chipAdded', type: 'OutputEventEmitter<T>', default: '—', description: 'Emits when a chip is added' },
     { property: 'chipRemoved', type: 'OutputEventEmitter<T>', default: '—', description: 'Emits when a chip is removed' },
     { property: 'closed', type: 'OutputEventEmitter<ChipsCloseReason>', default: '—', description: 'Emits when overlay closes' },
-    { property: 'rootKlass', type: 'string', default: "'relative'", description: 'Root wrapper' },
-    { property: 'containerKlass', type: 'string', default: '(see source)', description: 'Chips + input container' },
-    { property: 'chipKlass', type: 'string', default: '(see source)', description: 'Each chip wrapper' },
-    { property: 'chipLabelKlass', type: 'string', default: "'truncate max-w-[200px]'", description: 'Chip label' },
-    { property: 'removeButtonKlass', type: 'string', default: "'ml-1 text-disable hover:text-fg'", description: 'Remove button' },
-    { property: 'inputKlass', type: 'string', default: "'flex-1 min-w-[140px]...'", description: 'Text input' },
+    { property: 'slot', type: 'TngSlotMap<TngChipsSlot>', default: '{}', description: 'Slot-based micro styling for container, chipsWrapper, chip, chipLabel, removeButton, input, overlayPanel, and option-list slots (optionListContainer, optionListItem, optionListItemActive, optionListItemInactive, optionListEmpty)' },
   ];
 
   readonly inputRows = signal<displayDetails[]>(this.seed.filter((p) =>
@@ -51,8 +46,8 @@ export class ChipsApiComponent implements AfterViewInit {
   readonly outputRows = signal<displayDetails[]>(this.seed.filter((p) =>
     ['search', 'valueChange', 'chipAdded', 'chipRemoved', 'closed'].includes(p.property)
   ));
-  readonly klassRows = signal<displayDetails[]>(this.seed.filter((p) =>
-    ['rootKlass', 'containerKlass', 'chipKlass', 'chipLabelKlass', 'removeButtonKlass', 'inputKlass'].includes(p.property)
+  readonly stylingRows = signal<displayDetails[]>(this.seed.filter((p) =>
+    ['slot'].includes(p.property)
   ));
 
   readonly property = (r: displayDetails) => r.property;

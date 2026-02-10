@@ -53,6 +53,22 @@
   <!-- Debug -->
   <div class="text-sm text-gray-600">
     <div class="font-medium mb-1">Selected countries:</div>
-    <pre class="bg-gray-50 border rounded-md p-2">{{ countriesCtrl.value | json }}</pre>
+    <pre class="bg-gray-50 border rounded-md p-2">{{ countriesCtrl2.value | json }}</pre>
+  </div>
+
+  <!-- Custom slot styling example -->
+  <div class="mt-8 pt-8 border-t">
+    <h3 class="text-lg font-semibold mb-4">Chips with custom slot styling</h3>
+    <tng-chips
+      [formControl]="countriesCtrl"
+      [options]="options()"
+      placeholder="Add countries…"
+      [displayWith]="displayCountry"
+      [allowFreeText]="false"
+      (search)="onSearch($event)"
+      (chipAdded)="onChipAdded($event)"
+      (chipRemoved)="onChipRemoved($event)"
+      [slot]="customSlot"
+    />
   </div>
 </div>

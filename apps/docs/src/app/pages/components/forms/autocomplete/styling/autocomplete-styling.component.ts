@@ -292,7 +292,7 @@ export class AutocompleteDemoComponent {
     [slot]="{
       optionListContainer: 'py-2 max-h-48',
       optionListItem: 'px-4 py-2',
-      optionListItemActive: 'bg-blue-100 text-blue-900'
+      optionListItemActive: 'bg-yellow-100 text-red-900'
     }"
   />
 </form>
