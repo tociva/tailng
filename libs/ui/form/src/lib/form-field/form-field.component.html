@@ -1,15 +1,15 @@
-<div [class]="rootKlass()">
+<div [class]="formFieldClassFinal()">
   @if (label()) {
-    <label class="mb-1 block" [class]="labelClasses()">
+    <label class="mb-1 block" [class]="labelClassFinal()">
       {{ label() }}
       @if (isRequired()) {
-        <span [class]="requiredMarkKlass()">&nbsp;*</span>
+        <span [class]="requiredIndicatorClassFinal()">&nbsp;*</span>
       }
     </label>
   }
 
-  <div [class]="controlShellClasses()">
-    <span [class]="prefixKlass()">
+  <div [class]="controlWrapperClassFinal()">
+    <span [class]="prefixClassFinal()">
       <ng-content select="[tngPrefix]" />
     </span>
 
@@ -17,17 +17,17 @@
       <ng-content />
     </div>
 
-    <span [class]="suffixKlass()">
+    <span [class]="suffixClassFinal()">
       <ng-content select="[tngSuffix]" />
     </span>
   </div>
 
   @if (showHint() || showError()) {
-    <div [class]="footerKlass()">
+    <div [class]="messagesClassFinal()">
       @if (showError()) {
-        <div [class]="errorKlass()">{{ errorText() }}</div>
+        <div [class]="errorTextClassFinal()">{{ errorText() }}</div>
       } @else {
-        <div [class]="hintKlass()">{{ hint() }}</div>
+        <div [class]="helperTextClassFinal()">{{ hint() }}</div>
       }
     </div>
   }

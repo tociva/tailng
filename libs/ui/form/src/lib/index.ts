@@ -12,6 +12,7 @@ export * from './datepicker/utils/datepicker-input.util';
 export * from './file-upload/file-upload.component';
 export * from './file-upload/file-dropzone.directive';
 export * from './form-field/form-field.component';
+export * from './form-field/form-field.slots';
 export * from './number-input/number-input.component';
 export * from './number-input/number-input.slots';
 export * from './radio-button/radio-button.component';

@@ -12,6 +12,9 @@ import { NgControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, of } from 'rxjs';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
+import { TngFormFieldSlot } from './form-field.slots';
+
 export type TngFormFieldSize = 'sm' | 'md' | 'lg';
 export type TngFormFieldAppearance = 'outline' | 'filled';
 
@@ -62,24 +65,10 @@ export class TngFormField {
   readonly size = input<TngFormFieldSize>('md');
   readonly appearance = input<TngFormFieldAppearance>('outline');
 
-  /* =====================
-   * Theming / class hooks (section-wise)
-   * ===================== */
-  readonly rootKlass = input<string>('w-full');
-
-  readonly labelKlass = input<string>('text-sm font-medium text-fg');
-  readonly requiredMarkKlass = input<string>('text-danger');
-
-  readonly hintKlass = input<string>('text-xs text-disable');
-  readonly errorKlass = input<string>('text-xs text-danger');
-
-  /** Wrapper around projected control */
-  readonly controlShellKlass = input<string>('');
-
-  readonly prefixKlass = input<string>('text-disable');
-  readonly suffixKlass = input<string>('text-disable');
-
-  readonly footerKlass = input<string>('mt-1 flex items-start justify-between gap-3');
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngFormFieldSlot>>({});
 
   /* =====================
    * Control wiring
@@ -159,9 +148,13 @@ export class TngFormField {
   readonly showHint = computed(() => !!this.hint() && !this.errorText());
   readonly showError = computed(() => !!this.errorText());
 
-  /* =====================
-   * Classes
-   * ===================== */
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly formFieldClassFinal = computed(() =>
+    this.cx('w-full', this.slotClass('formField')),
+  );
+
   private readonly sizeShell = computed(() => {
     switch (this.size()) {
       case 'sm':
@@ -192,7 +185,19 @@ export class TngFormField {
       : 'bg-bg border-border';
   });
 
-  readonly controlShellClasses = computed(() => {
+  readonly labelClassFinal = computed(() =>
+    this.cx(
+      'text-sm font-medium text-fg',
+      this.sizeLabel(),
+      this.slotClass('label'),
+    ),
+  );
+
+  readonly requiredIndicatorClassFinal = computed(() =>
+    this.cx('text-danger', this.slotClass('requiredIndicator')),
+  );
+
+  readonly controlWrapperClassFinal = computed(() => {
     // ensure this recomputes when form state changes
     this._tick();
 
@@ -205,8 +210,52 @@ export class TngFormField {
     const ring = this.isInvalid() ? ' focus-within:ring-danger' : '';
     const disabled = this.isDisabled() ? ' opacity-60 pointer-events-none' : '';
 
-    return `${base} ${this.sizeShell()} ${this.appearanceShell()}${border}${ring}${disabled} ${this.controlShellKlass()}`.trim();
+    return this.cx(
+      base,
+      this.sizeShell(),
+      this.appearanceShell(),
+      border,
+      ring,
+      disabled,
+      this.slotClass('controlWrapper'),
+    );
   });
 
-  readonly labelClasses = computed(() => `${this.labelKlass()} ${this.sizeLabel()}`.trim());
+  readonly prefixClassFinal = computed(() =>
+    this.cx('text-disable', this.slotClass('prefix')),
+  );
+
+  readonly suffixClassFinal = computed(() =>
+    this.cx('text-disable', this.slotClass('suffix')),
+  );
+
+  readonly messagesClassFinal = computed(() =>
+    this.cx(
+      'mt-1 flex items-start justify-between gap-3',
+      this.slotClass('messages'),
+    ),
+  );
+
+  readonly helperTextClassFinal = computed(() =>
+    this.cx('text-xs text-disable', this.slotClass('helperText')),
+  );
+
+  readonly errorTextClassFinal = computed(() =>
+    this.cx('text-xs text-danger', this.slotClass('errorText')),
+  );
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngFormFieldSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 }
