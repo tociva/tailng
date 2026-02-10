@@ -26,22 +26,15 @@ export class FileUploadApiComponent implements AfterViewInit {
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'accept', type: 'string', default: "''", description: 'Accept attribute (e.g. "image/*", ".pdf")' },
     { property: 'multiple', type: 'boolean', default: 'false', description: 'Allow multiple files' },
-    { property: 'title', type: 'string', default: "'Upload files'", description: 'Dropzone title' },
-    { property: 'subtitle', type: 'string', default: "'Drag & drop here or click to browse'", description: 'Dropzone subtitle' },
+    { property: 'titleText', type: 'string', default: "'Upload files'", description: 'Dropzone title text' },
+    { property: 'subtitleText', type: 'string', default: "'Drag & drop here or click to browse'", description: 'Dropzone subtitle text' },
     { property: 'valueChange', type: 'OutputEventEmitter<File[] | null>', default: '—', description: 'Emits when files change' },
-    { property: 'rootKlass', type: 'string', default: "'w-full'", description: 'Root wrapper classes' },
-    { property: 'dropzoneKlass', type: 'string', default: "''", description: 'Dropzone box classes' },
-    { property: 'titleKlass', type: 'string', default: "'text-sm font-medium text-fg'", description: 'Title text classes' },
-    { property: 'subtitleKlass', type: 'string', default: "'text-xs text-disable'", description: 'Subtitle text classes' },
-    { property: 'hintKlass', type: 'string', default: "'text-xs text-disable'", description: 'Hint text classes' },
-    { property: 'fileListKlass', type: 'string', default: "'mt-2 space-y-1'", description: 'File list container classes' },
-    { property: 'fileItemKlass', type: 'string', default: '…', description: 'Single file row classes' },
-    { property: 'clearButtonKlass', type: 'string', default: '…', description: 'Clear button classes' },
+    { property: 'slot', type: 'TngSlotMap<TngFileUploadSlot>', default: '{}', description: 'Slot-based micro styling object' },
   ];
 
-  readonly configRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['disabled', 'accept', 'multiple', 'title', 'subtitle'].includes(p.property)));
+  readonly configRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['disabled', 'accept', 'multiple', 'titleText', 'subtitleText'].includes(p.property)));
   readonly outputRows = signal<DisplayDetails[]>(this.seed.filter((p) => p.property === 'valueChange'));
-  readonly klassRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['rootKlass', 'dropzoneKlass', 'titleKlass', 'subtitleKlass', 'hintKlass', 'fileListKlass', 'fileItemKlass', 'clearButtonKlass'].includes(p.property)));
+  readonly stylingRows = signal<DisplayDetails[]>(this.seed.filter((p) => p.property === 'slot'));
 
   readonly property = (r: DisplayDetails) => r.property;
   readonly type = (r: DisplayDetails) => r.type;

@@ -6,8 +6,8 @@
       accept="image/*,.pdf"
       [multiple]="true"
       (valueChange)="files.set($event)"
-      title="Upload attachments"
-      subtitle="Drag & drop files here, or click to select"
+      titleText="Upload attachments"
+      subtitleText="Drag & drop files here, or click to select"
     />
   </div>
 
@@ -26,15 +26,14 @@
   </div>
 
   <div class="space-y-2">
-    <h3 class="text-sm font-medium text-fg">Custom classes</h3>
+    <h3 class="text-sm font-medium text-fg">Custom styling</h3>
 
     <tng-file-upload
       accept=".png,.jpg,.jpeg"
       [multiple]="true"
-      dropzoneKlass="border-dashed"
-      title="Upload images"
-      subtitle="Drop images here or click"
-      fileItemKlass="border border-primary bg-on-primary"
+      titleText="Upload images"
+      subtitleText="Drop images here or click"
+      [slot]="{ dropzone: 'border-dashed', fileItem: 'border border-primary bg-on-primary' }"
     />
   </div>
 </div>

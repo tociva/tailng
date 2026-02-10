@@ -1,56 +1,290 @@
 <section class="space-y-6 text-fg">
+  <!-- Intro -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      <span class="font-mono">tng-file-upload</span> exposes klass hooks: <span class="font-mono">rootKlass</span>,
-      <span class="font-mono">dropzoneKlass</span>, <span class="font-mono">titleKlass</span>,
-      <span class="font-mono">subtitleKlass</span>, <span class="font-mono">hintKlass</span>,
-      <span class="font-mono">fileListKlass</span>, <span class="font-mono">fileItemKlass</span>,
-      <span class="font-mono">clearButtonKlass</span>.
+      The <span class="font-mono">tng-file-upload</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys:
+      <span class="font-mono">container</span>, <span class="font-mono">dropzone</span>,
+      <span class="font-mono">dropzoneActive</span>, <span class="font-mono">dropzoneDisabled</span>,
+      <span class="font-mono">header</span>, <span class="font-mono">title</span>,
+      <span class="font-mono">subtitle</span>, <span class="font-mono">hint</span>,
+      <span class="font-mono">clearButton</span>, <span class="font-mono">fileList</span>,
+      <span class="font-mono">fileItem</span>, <span class="font-mono">fileName</span>, and
+      <span class="font-mono">fileSize</span>. Each slot targets a specific element in the component structure.
     </p>
   </div>
 
+  <!-- container slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">dropzoneKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">container slot</h3>
+      <tng-tag label="root wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The root wrapper element. Default: w-full.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="containerSlotHtml()"
+      [tsContent]="containerSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full">
+          <tng-file-upload formControlName="files" [slot]="containerSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- dropzone slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">dropzone slot</h3>
       <tng-tag label="dropzone"></tng-tag>
     </div>
     <p class="text-sm text-fg">Applies to the drag-and-drop area (border, padding, focus ring).</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="dropzoneKlassHtml()"
+      [htmlContent]="dropzoneSlotHtml()"
+      [tsContent]="dropzoneSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-md">
-          <tng-file-upload formControlName="files" dropzoneKlass="border-2 border-dashed border-primary rounded-xl bg-primary/5" />
+          <tng-file-upload formControlName="files" [slot]="dropzoneSlot" />
         </form>
       </div>
     </docs-example-block>
   </div>
 
+  <!-- dropzoneActive slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">titleKlass & subtitleKlass</h3>
-      <tng-tag label="text"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">dropzoneActive slot</h3>
+      <tng-tag label="dropzone state"></tng-tag>
     </div>
-    <p class="text-sm text-fg">Style the dropzone title and subtitle.</p>
+    <p class="text-sm text-fg">Applied when files are being dragged over the dropzone. Default includes border-primary ring styles.</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="titleSubtitleHtml()"
+      [htmlContent]="dropzoneActiveSlotHtml()"
+      [tsContent]="dropzoneActiveSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="dropzoneActiveSlot" />
+          <p class="text-xs text-disable mt-2">Drag files over the dropzone to see the active state</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- dropzoneDisabled slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">dropzoneDisabled slot</h3>
+      <tng-tag label="dropzone state"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Applied when the component is disabled. Default includes opacity-60 pointer-events-none.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="dropzoneDisabledSlotHtml()"
+      [tsContent]="dropzoneDisabledSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [disabled]="true" [slot]="dropzoneDisabledSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- header slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">header slot</h3>
+      <tng-tag label="header wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The container for title, subtitle, and clear button. Default: flex items-start justify-between gap-4.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="headerSlotHtml()"
+      [tsContent]="headerSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="headerSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- title & subtitle slots -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">title & subtitle slots</h3>
+      <tng-tag label="text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Style the dropzone title and subtitle text.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="titleSubtitleSlotHtml()"
+      [tsContent]="titleSubtitleSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-md">
           <tng-file-upload
             formControlName="files"
-            title="Drop files here"
-            subtitle="or click to browse"
-            titleKlass="text-base font-bold text-primary"
-            subtitleKlass="text-sm text-disable"
+            titleText="Drop files here"
+            subtitleText="or click to browse"
+            [slot]="titleSubtitleSlot"
           />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- hint slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">hint slot</h3>
+      <tng-tag label="hint text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The hint text showing accepted file types. Default: text-xs text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="hintSlotHtml()"
+      [tsContent]="hintSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" accept="image/*" [slot]="hintSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- clearButton slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">clearButton slot</h3>
+      <tng-tag label="button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The clear button that appears when files are selected. Default: text-xs text-danger hover:text-danger-hover.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="clearButtonSlotHtml()"
+      [tsContent]="clearButtonSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="clearButtonSlot" />
+          <p class="text-xs text-disable mt-2">Select files to see the clear button</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- fileList slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">fileList slot</h3>
+      <tng-tag label="file list"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The container for the list of uploaded files. Default: mt-2 space-y-1.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="fileListSlotHtml()"
+      [tsContent]="fileListSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="fileListSlot" />
+          <p class="text-xs text-disable mt-2">Upload files to see the file list</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- fileItem slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">fileItem slot</h3>
+      <tng-tag label="file item"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Each individual file row in the list. Default includes flex, border, padding, and text styles.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="fileItemSlotHtml()"
+      [tsContent]="fileItemSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="fileItemSlot" />
+          <p class="text-xs text-disable mt-2">Upload files to see styled file items</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- fileName slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">fileName slot</h3>
+      <tng-tag label="file name"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The file name text within each file item. Default: truncate.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="fileNameSlotHtml()"
+      [tsContent]="fileNameSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="fileNameSlot" />
+          <p class="text-xs text-disable mt-2">Upload files to see styled file names</p>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- fileSize slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">fileSize slot</h3>
+      <tng-tag label="file size"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The file size text within each file item. Default: ml-3 text-xs text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="fileSizeSlotHtml()"
+      [tsContent]="fileSizeSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-file-upload formControlName="files" [slot]="fileSizeSlot" />
+          <p class="text-xs text-disable mt-2">Upload files to see styled file sizes</p>
         </form>
       </div>
     </docs-example-block>
