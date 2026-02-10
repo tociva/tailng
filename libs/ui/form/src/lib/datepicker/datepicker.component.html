@@ -1,13 +1,13 @@
-<div [class]="hostKlassFinal()">
+<div [class]="containerClassFinal()">
   <!-- =====================
        Input + calendar icon
        ===================== -->
-  <div [class]="disabledKlassFinal()" [class.opacity-60]="isDisabled()" [class.pointer-events-none]="isDisabled()">
-    <div [class]="fieldKlassFinal()">
+  <div [class]="disabledClassFinal()" [class.opacity-60]="isDisabled()" [class.pointer-events-none]="isDisabled()">
+    <div [class]="fieldClassFinal()">
       <input
         #inputEl
         type="text"
-        [class]="inputKlassFinal()"
+        [class]="inputClassFinal()"
         [value]="inputValue()"
         [placeholder]="displayFormat()"
         [disabled]="isDisabled()"
@@ -21,14 +21,14 @@
       <!-- Calendar icon -->
       <button
         type="button"
-        [class]="toggleKlassFinal()"
+        [class]="toggleClassFinal()"
         (click)="toggleOverlay()"
         aria-label="Open calendar"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          [class]="toggleIconKlassFinal()"
+          [class]="toggleIconClassFinal()"
           fill="currentColor"
         >
           <path
@@ -59,21 +59,21 @@
       [closeOnInsideClick]="false"
       (closed)="overlayRef.close($event)"
     >
-      <tng-overlay-panel [slot]="{ panel: panelKlassFinal() }">
+      <tng-overlay-panel [slot]="overlayPanelSlot()">
         <!-- Popup frame -->
-        <div [class]="panelFrameKlassFinal()">
+        <div [class]="panelFrameClassFinal()">
           <!-- =====================
                Body layout
                ===================== -->
-          <div [class]="panelLayoutKlassFinal()">
+          <div [class]="panelLayoutClassFinal()">
 
             <!-- ========= Months ========= -->
-            <div [class]="monthRailKlassFinal()">
-              <div [class]="monthListKlassFinal()">
+            <div [class]="monthRailClassFinal()">
+              <div [class]="monthListClassFinal()">
                 @for (m of months; track m.index) {
                   <button
                     type="button"
-                    [class]="monthItemKlassFinal()"
+                    [class]="monthItemClassFinal()"
                     [class.bg-fg]="isMonthSelected(m.index)"
                     [class.text-bg]="isMonthSelected(m.index)"
                     [class.opacity-40]="isMonthDisabled(m.index)"
@@ -87,24 +87,24 @@
             </div>
 
             <!-- ========= Calendar ========= -->
-            <div [class]="calendarKlassFinal()">
-              <div [class]="titleKlassFinal()">
+            <div [class]="calendarClassFinal()">
+              <div [class]="titleClassFinal()">
                 Select Date
               </div>
 
               <!-- Weekdays -->
-              <div [class]="weekdayRowKlassFinal()">
+              <div [class]="weekdayRowClassFinal()">
                 @for (d of weekdays; track d) {
-                  <div [class]="weekdayCellKlassFinal()">{{ d }}</div>
+                  <div [class]="weekdayCellClassFinal()">{{ d }}</div>
                 }
               </div>
 
               <!-- Days -->
-              <div [class]="dayGridKlassFinal()">
+              <div [class]="dayGridClassFinal()">
                 @for (cell of calendarCells(); track $index) {
                   <button
                     type="button"
-                    [class]="dayCellKlassFinal()"
+                    [class]="dayCellClassFinal()"
                     [class.text-fg]="cell.isOutsideMonth"
                     [class.hover:bg-fg]="!isCellDisabled(cell) && !isCellSelected(cell)"
                     [class.hover:text-bg]="!isCellDisabled(cell) && !isCellSelected(cell)"
@@ -122,15 +122,15 @@
               </div>
 
               <!-- Preview -->
-              <div [class]="previewTextKlassFinal()">
+              <div [class]="previewTextClassFinal()">
                 {{ previewLabel() }}
               </div>
 
               <!-- Actions -->
-              <div [class]="actionBarKlassFinal()">
+              <div [class]="actionBarClassFinal()">
                 <button
                   type="button"
-                  [class]="cancelKlassFinal()"
+                  [class]="cancelClassFinal()"
                   (click)="cancel()"
                 >
                   Cancel
@@ -138,7 +138,7 @@
 
                 <button
                   type="button"
-                  [class]="confirmKlassFinal()"
+                  [class]="confirmClassFinal()"
                   (click)="confirm()"
                 >
                   Confirm
@@ -147,12 +147,12 @@
             </div>
 
             <!-- ========= Years (10 at a time) ========= -->
-            <div [class]="yearRailKlassFinal()">
+            <div [class]="yearRailClassFinal()">
 
               <!-- Up -->
               <button
                 type="button"
-                [class]="yearNavPrevKlassFinal()"
+                [class]="yearNavPrevClassFinal()"
                 (click)="prevYearWindow()"
                 [disabled]="!canPrevYearWindow()"
                 aria-label="Previous 10 years"
@@ -161,11 +161,11 @@
               </button>
 
               <!-- Year list -->
-              <div [class]="yearListKlassFinal()">
+              <div [class]="yearListClassFinal()">
                 @for (y of years(); track (yearBase() + ':' + y)) {
                   <button
                     type="button"
-                    [class]="yearItemKlassFinal()"
+                    [class]="yearItemClassFinal()"
                     [class.bg-fg]="isYearSelected(y)"
                     [class.text-bg]="isYearSelected(y)"
                     [class.opacity-40]="isYearDisabled(y)"
@@ -180,7 +180,7 @@
               <!-- Down -->
               <button
                 type="button"
-                [class]="yearNavNextKlassFinal()"
+                [class]="yearNavNextClassFinal()"
                 (click)="nextYearWindow()"
                 [disabled]="!canNextYearWindow()"
                 aria-label="Next 10 years"

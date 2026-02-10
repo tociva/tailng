@@ -1,55 +1,614 @@
 <section class="space-y-6 text-fg">
+  <!-- Intro -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      <span class="font-mono">tng-datepicker</span> exposes many klass hooks: input, toggle button,
-      toggle icon, host, and the full overlay panel (frame, layout, month rail, calendar grid,
-      day cells, year list, action bar, etc.). Use the main ones to theme the field and panel.
+      The <span class="font-mono">tng-datepicker</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys for all internal elements:
+      <span class="font-mono">container</span>, <span class="font-mono">disabled</span>, <span class="font-mono">field</span>,
+      <span class="font-mono">input</span>, <span class="font-mono">toggle</span>, <span class="font-mono">toggleIcon</span>,
+      <span class="font-mono">overlayPanel</span>, <span class="font-mono">panelFrame</span>, <span class="font-mono">panelLayout</span>,
+      <span class="font-mono">monthRail</span>, <span class="font-mono">monthList</span>, <span class="font-mono">monthItem</span>,
+      <span class="font-mono">calendar</span>, <span class="font-mono">title</span>, <span class="font-mono">weekdayRow</span>,
+      <span class="font-mono">weekdayCell</span>, <span class="font-mono">dayGrid</span>, <span class="font-mono">dayCell</span>,
+      <span class="font-mono">previewText</span>, <span class="font-mono">actionBar</span>, <span class="font-mono">cancel</span>,
+      <span class="font-mono">confirm</span>, <span class="font-mono">yearRail</span>, <span class="font-mono">yearNavPrev</span>,
+      <span class="font-mono">yearList</span>, <span class="font-mono">yearItem</span>, and <span class="font-mono">yearNavNext</span>.
+      Each slot targets a specific element in the component structure.
     </p>
   </div>
 
+  <!-- container slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">inputKlass</h3>
-      <tng-tag label="input"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">container slot</h3>
+      <tng-tag label="root wrapper"></tng-tag>
     </div>
-    <p class="text-sm text-fg">Classes for the text input. Default includes border, padding, focus ring.</p>
+    <p class="text-sm text-fg">The root wrapper element. Default: relative.</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="inputKlassHtml()"
+      [htmlContent]="containerSlotHtml()"
+      [tsContent]="containerSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-sm">
-          <tng-datepicker formControlName="period" inputKlass="border-2 border-blue-500 rounded-lg font-semibold" />
+          <tng-datepicker formControlName="period" [slot]="containerSlot" />
         </form>
       </div>
     </docs-example-block>
   </div>
 
+  <!-- disabled slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">toggleKlass</h3>
-      <tng-tag label="toggle"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">disabled slot</h3>
+      <tng-tag label="disabled wrapper"></tng-tag>
     </div>
-    <p class="text-sm text-fg">Classes for the calendar toggle button (right side of the field).</p>
+    <p class="text-sm text-fg">Wrapper around the field when disabled. Automatically applies opacity-60 and pointer-events-none when disabled.</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="toggleKlassHtml()"
+      [htmlContent]="disabledSlotHtml()"
+      [tsContent]="disabledSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-sm">
-          <tng-datepicker formControlName="period" toggleKlass="bg-blue-100 hover:bg-blue-200 rounded-r-md" />
+          <tng-datepicker formControlName="period" [slot]="disabledSlot" />
         </form>
       </div>
     </docs-example-block>
   </div>
 
-  <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
-    <h3 class="text-sm font-semibold text-primary">Other klass hooks</h3>
-    <p class="text-sm text-fg">Panel: <span class="font-mono">panelKlass</span>, <span class="font-mono">panelFrameKlass</span>, <span class="font-mono">panelLayoutKlass</span>, <span class="font-mono">monthItemKlass</span>, <span class="font-mono">dayCellKlass</span>, <span class="font-mono">yearItemKlass</span>, <span class="font-mono">cancelKlass</span>, <span class="font-mono">confirmKlass</span>, and more. See the component source for the full list.</p>
+  <!-- field slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">field slot</h3>
+      <tng-tag label="input wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Wrapper around the input and toggle button. Default: relative.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="fieldSlotHtml()"
+      [tsContent]="fieldSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="fieldSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- input slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">input slot</h3>
+      <tng-tag label="text input"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The text input element. Default includes border, padding, focus ring.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="inputSlotHtml()"
+      [tsContent]="inputSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="inputSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- toggle slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">toggle slot</h3>
+      <tng-tag label="calendar button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The calendar toggle button (right side of the field). Default includes absolute positioning, hover effects.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="toggleSlotHtml()"
+      [tsContent]="toggleSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="toggleSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- toggleIcon slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">toggleIcon slot</h3>
+      <tng-tag label="calendar icon"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The calendar icon SVG inside the toggle button. Default: h-5 w-5.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="toggleIconSlotHtml()"
+      [tsContent]="toggleIconSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="toggleIconSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- overlayPanel slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">overlayPanel slot</h3>
+      <tng-tag label="overlay panel"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Passed to the internal tng-overlay-panel component.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="overlayPanelSlotHtml()"
+      [tsContent]="overlayPanelSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="overlayPanelSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- panelFrame slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">panelFrame slot</h3>
+      <tng-tag label="panel frame"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The outer frame of the calendar panel. Default includes border, shadow, rounded corners.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="panelFrameSlotHtml()"
+      [tsContent]="panelFrameSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="panelFrameSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- panelLayout slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">panelLayout slot</h3>
+      <tng-tag label="layout grid"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The main layout grid container (months | calendar | years). Default: grid h-full grid-cols-[64px_1fr_64px].</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="panelLayoutSlotHtml()"
+      [tsContent]="panelLayoutSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="panelLayoutSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- monthRail slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">monthRail slot</h3>
+      <tng-tag label="month sidebar"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The left sidebar containing month buttons. Default: bg-bg p-1 text-fg.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="monthRailSlotHtml()"
+      [tsContent]="monthRailSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="monthRailSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- monthList slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">monthList slot</h3>
+      <tng-tag label="month list"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Container for the list of month buttons. Default: space-y-0.5.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="monthListSlotHtml()"
+      [tsContent]="monthListSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="monthListSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- monthItem slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">monthItem slot</h3>
+      <tng-tag label="month button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Individual month button. Default includes rounded, padding, font-semibold, transition.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="monthItemSlotHtml()"
+      [tsContent]="monthItemSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="monthItemSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- calendar slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">calendar slot</h3>
+      <tng-tag label="calendar area"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The main calendar area (center column). Default includes flex, padding, borders.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="calendarSlotHtml()"
+      [tsContent]="calendarSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="calendarSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- title slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">title slot</h3>
+      <tng-tag label="calendar title"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The "Select Date" title above the calendar. Default: mb-1 text-center text-sm font-semibold.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="titleSlotHtml()"
+      [tsContent]="titleSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="titleSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- weekdayRow slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">weekdayRow slot</h3>
+      <tng-tag label="weekday header"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Row containing weekday labels (Sun, Mon, Tue, etc.). Default: grid grid-cols-7 gap-0.5 text-[10px] font-semibold text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="weekdayRowSlotHtml()"
+      [tsContent]="weekdayRowSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="weekdayRowSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- weekdayCell slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">weekdayCell slot</h3>
+      <tng-tag label="weekday label"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Individual weekday label cell. Default: text-center.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="weekdayCellSlotHtml()"
+      [tsContent]="weekdayCellSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="weekdayCellSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- dayGrid slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">dayGrid slot</h3>
+      <tng-tag label="day grid"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Grid container for day cells. Default: mt-1 grid grid-cols-7 gap-0.5.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="dayGridSlotHtml()"
+      [tsContent]="dayGridSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="dayGridSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- dayCell slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">dayCell slot</h3>
+      <tng-tag label="day button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Individual day cell button. Default includes h-7, rounded, text-[11px], transition.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="dayCellSlotHtml()"
+      [tsContent]="dayCellSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="dayCellSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- previewText slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">previewText slot</h3>
+      <tng-tag label="preview text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Preview text showing the selected date. Default: pt-2 text-center text-[11px] text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="previewTextSlotHtml()"
+      [tsContent]="previewTextSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="previewTextSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- actionBar slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">actionBar slot</h3>
+      <tng-tag label="action buttons"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Container for Cancel and Confirm buttons. Default: mt-auto flex items-center justify-end gap-2 pt-4.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="actionBarSlotHtml()"
+      [tsContent]="actionBarSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="actionBarSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- cancel slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">cancel slot</h3>
+      <tng-tag label="cancel button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The Cancel button. Default includes rounded-md, border, padding, font-semibold, hover effects.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="cancelSlotHtml()"
+      [tsContent]="cancelSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="cancelSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- confirm slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">confirm slot</h3>
+      <tng-tag label="confirm button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The Confirm button. Default includes rounded-md, bg-fg, padding, font-semibold, hover effects.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="confirmSlotHtml()"
+      [tsContent]="confirmSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="confirmSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- yearRail slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">yearRail slot</h3>
+      <tng-tag label="year sidebar"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The right sidebar containing year buttons. Default: bg-bg p-1 text-fg flex flex-col.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="yearRailSlotHtml()"
+      [tsContent]="yearRailSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="yearRailSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- yearNavPrev slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">yearNavPrev slot</h3>
+      <tng-tag label="prev year button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Button to navigate to previous 10-year window. Default includes rounded, bg-bg/10, hover effects, disabled styles.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="yearNavPrevSlotHtml()"
+      [tsContent]="yearNavPrevSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="yearNavPrevSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- yearList slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">yearList slot</h3>
+      <tng-tag label="year list"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Container for the list of year buttons. Default: space-y-0.5.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="yearListSlotHtml()"
+      [tsContent]="yearListSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="yearListSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- yearItem slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">yearItem slot</h3>
+      <tng-tag label="year button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Individual year button. Default includes w-full, rounded, padding, font-semibold, transition.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="yearItemSlotHtml()"
+      [tsContent]="yearItemSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="yearItemSlot" />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- yearNavNext slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">yearNavNext slot</h3>
+      <tng-tag label="next year button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Button to navigate to next 10-year window. Default includes rounded, bg-bg/10, hover effects, disabled styles.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="yearNavNextSlotHtml()"
+      [tsContent]="yearNavNextSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-sm">
+          <tng-datepicker formControlName="period" [slot]="yearNavNextSlot" />
+        </form>
+      </div>
+    </docs-example-block>
   </div>
 </section>

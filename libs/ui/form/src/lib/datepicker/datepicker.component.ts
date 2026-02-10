@@ -19,12 +19,15 @@ import {
   type TngOverlayCloseReason,
 } from '@tailng-ui/ui/overlay';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
+
 import { TngNativeDateAdapter } from './adapters/native-date.adapter';
 import { TNG_DATE_ADAPTER, TngDateAdapter } from './adapters/tng-date-adapter';
 import {
   computeNextCaretPos,
   parseSmartDate
 } from './utils/datepicker-input.util';
+import { TngDatepickerSlot } from './datepicker.slots';
 
 const MONTHS = [
   { index: 0, label: 'Jan' },
@@ -84,35 +87,10 @@ export class TngDatepicker implements ControlValueAccessor {
 
   readonly dateAdapter = input<TngDateAdapter | null>(null);
 
-  /** Klass applied to the text input element */
-  readonly inputKlass = input<string>('');
-  readonly toggleKlass = input<string>('');
-
-  readonly hostKlass = input<string>('');
-  readonly disabledKlass = input<string>('');
-  readonly fieldKlass = input<string>('');
-  readonly toggleIconKlass = input<string>('');
-  readonly panelKlass = input<string>('');
-  readonly panelFrameKlass = input<string>('');
-  readonly panelLayoutKlass = input<string>('');
-  readonly monthRailKlass = input<string>('');
-  readonly monthListKlass = input<string>('');
-  readonly monthItemKlass = input<string>('');
-  readonly calendarKlass = input<string>('');
-  readonly titleKlass = input<string>('');
-  readonly weekdayRowKlass = input<string>('');
-  readonly weekdayCellKlass = input<string>('');
-  readonly dayGridKlass = input<string>('');
-  readonly dayCellKlass = input<string>('');
-  readonly previewTextKlass = input<string>('');
-  readonly actionBarKlass = input<string>('');
-  readonly cancelKlass = input<string>('');
-  readonly confirmKlass = input<string>('');
-  readonly yearRailKlass = input<string>('');
-  readonly yearNavPrevKlass = input<string>('');
-  readonly yearListKlass = input<string>('');
-  readonly yearItemKlass = input<string>('');
-  readonly yearNavNextKlass = input<string>('');
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngDatepickerSlot>>({});
 
   @ViewChild('inputEl', { static: true })
   inputEl!: ElementRef<HTMLInputElement>;
@@ -130,155 +108,188 @@ export class TngDatepicker implements ControlValueAccessor {
     () => this.dateAdapter() ?? this.injectedAdapter ?? this.nativeAdapter,
   );
 
-  /* =====================
-   * Klass (input theming)
-   * ===================== */
-  readonly inputKlassFinal = computed(() =>
-    this.join(
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx('relative', this.slotClass('container')),
+  );
+
+  readonly disabledClassFinal = computed(() =>
+    this.cx(this.slotClass('disabled')),
+  );
+
+  readonly fieldClassFinal = computed(() =>
+    this.cx('relative', this.slotClass('field')),
+  );
+
+  readonly inputClassFinal = computed(() =>
+    this.cx(
       'w-full rounded-md border border-border bg-bg px-3 py-2 pr-10 text-sm',
       'focus:outline-none focus:ring-2 focus:ring-primary',
-      this.inputKlass(),
+      this.slotClass('input'),
     ),
   );
 
-  readonly toggleKlassFinal = computed(() =>
-    this.join(
+  readonly toggleClassFinal = computed(() =>
+    this.cx(
       'absolute inset-y-0 right-0 flex w-10 items-center justify-center',
       'rounded-r-md text-fg hover:bg-alternate-background',
-      this.toggleKlass(),
+      this.slotClass('toggle'),
     ),
   );
 
-  readonly hostKlassFinal = computed(() =>
-    this.join('relative', this.hostKlass()),
+  readonly toggleIconClassFinal = computed(() =>
+    this.cx('h-5 w-5', this.slotClass('toggleIcon')),
   );
-  readonly disabledKlassFinal = computed(() =>
-    this.join(this.disabledKlass()),
-  );
-  readonly fieldKlassFinal = computed(() =>
-    this.join('relative', this.fieldKlass()),
-  );
-  readonly toggleIconKlassFinal = computed(() =>
-    this.join('h-5 w-5', this.toggleIconKlass()),
-  );
-  readonly panelKlassFinal = computed(() =>
-    this.join(
-      'w-[372px] h-[322px] max-h-[322px] p-0',
-      this.panelKlass(),
-    ),
-  );
-  readonly panelFrameKlassFinal = computed(() =>
-    this.join(
+
+  readonly overlayPanelSlot = computed(() => {
+    const panelSlot = this.slotClass('overlayPanel');
+    return panelSlot ? { panel: panelSlot } : {};
+  });
+
+  readonly panelFrameClassFinal = computed(() =>
+    this.cx(
       'w-[370px] h-[320px] overflow-hidden rounded-lg',
       'border border-border bg-bg shadow-lg',
-      this.panelFrameKlass(),
+      this.slotClass('panelFrame'),
     ),
   );
-  readonly panelLayoutKlassFinal = computed(() =>
-    this.join('grid h-full grid-cols-[64px_1fr_64px]', this.panelLayoutKlass()),
+
+  readonly panelLayoutClassFinal = computed(() =>
+    this.cx('grid h-full grid-cols-[64px_1fr_64px]', this.slotClass('panelLayout')),
   );
-  readonly monthRailKlassFinal = computed(() =>
-    this.join('bg-bg p-1 text-fg', this.monthRailKlass()),
+
+  readonly monthRailClassFinal = computed(() =>
+    this.cx('bg-bg p-1 text-fg', this.slotClass('monthRail')),
   );
-  readonly monthListKlassFinal = computed(() =>
-    this.join('space-y-0.5', this.monthListKlass()),
+
+  readonly monthListClassFinal = computed(() =>
+    this.cx('space-y-0.5', this.slotClass('monthList')),
   );
-  readonly monthItemKlassFinal = computed(() =>
-    this.join(
+
+  readonly monthItemClassFinal = computed(() =>
+    this.cx(
       'w-full rounded px-1 py-0.5 text-[11px] font-semibold transition',
-      this.monthItemKlass(),
+      this.slotClass('monthItem'),
     ),
   );
-  readonly calendarKlassFinal = computed(() =>
-    this.join(
+
+  readonly calendarClassFinal = computed(() =>
+    this.cx(
       'flex h-full flex-col p-2 border-r border-l border-border',
-      this.calendarKlass(),
+      this.slotClass('calendar'),
     ),
   );
-  readonly titleKlassFinal = computed(() =>
-    this.join(
+
+  readonly titleClassFinal = computed(() =>
+    this.cx(
       'mb-1 text-center text-sm font-semibold',
-      this.titleKlass(),
+      this.slotClass('title'),
     ),
   );
-  readonly weekdayRowKlassFinal = computed(() =>
-    this.join(
+
+  readonly weekdayRowClassFinal = computed(() =>
+    this.cx(
       'grid grid-cols-7 gap-0.5 text-[10px] font-semibold text-disable',
-      this.weekdayRowKlass(),
+      this.slotClass('weekdayRow'),
     ),
   );
-  readonly weekdayCellKlassFinal = computed(() =>
-    this.join('text-center', this.weekdayCellKlass()),
+
+  readonly weekdayCellClassFinal = computed(() =>
+    this.cx('text-center', this.slotClass('weekdayCell')),
   );
-  readonly dayGridKlassFinal = computed(() =>
-    this.join('mt-1 grid grid-cols-7 gap-0.5', this.dayGridKlass()),
+
+  readonly dayGridClassFinal = computed(() =>
+    this.cx('mt-1 grid grid-cols-7 gap-0.5', this.slotClass('dayGrid')),
   );
-  readonly dayCellKlassFinal = computed(() =>
-    this.join(
+
+  readonly dayCellClassFinal = computed(() =>
+    this.cx(
       'h-7 rounded text-[11px] transition',
-      this.dayCellKlass(),
+      this.slotClass('dayCell'),
     ),
   );
-  readonly previewTextKlassFinal = computed(() =>
-    this.join(
+
+  readonly previewTextClassFinal = computed(() =>
+    this.cx(
       'pt-2 text-center text-[11px] text-disable',
-      this.previewTextKlass(),
+      this.slotClass('previewText'),
     ),
   );
-  readonly actionBarKlassFinal = computed(() =>
-    this.join(
+
+  readonly actionBarClassFinal = computed(() =>
+    this.cx(
       'mt-auto flex items-center justify-end gap-2 pt-4',
-      this.actionBarKlass(),
+      this.slotClass('actionBar'),
     ),
   );
-  readonly cancelKlassFinal = computed(() =>
-    this.join(
+
+  readonly cancelClassFinal = computed(() =>
+    this.cx(
       'rounded-md border border-border bg-bg',
       'px-3 py-1.5 text-[11px] font-semibold text-fg',
       'shadow-sm hover:bg-alternate-background active:translate-y-[1px]',
-      this.cancelKlass(),
-    ),
-  );
-  readonly confirmKlassFinal = computed(() =>
-    this.join(
-      'rounded-md bg-fg',
-      'px-3 py-1.5 text-[11px] font-semibold text-bg',
-      'shadow-sm hover:opacity-95 active:translate-y-[1px]',
-      this.confirmKlass(),
-    ),
-  );
-  readonly yearRailKlassFinal = computed(() =>
-    this.join(
-      'bg-bg p-1 text-fg flex flex-col',
-      this.yearRailKlass(),
-    ),
-  );
-  readonly yearNavPrevKlassFinal = computed(() =>
-    this.join(
-      'mx-auto mb-1 flex h-6 w-6 items-center justify-center',
-      'rounded bg-bg/10 text-[12px] hover:bg-bg/15 disabled:opacity-40',
-      this.yearNavPrevKlass(),
-    ),
-  );
-  readonly yearListKlassFinal = computed(() =>
-    this.join('space-y-0.5', this.yearListKlass()),
-  );
-  readonly yearItemKlassFinal = computed(() =>
-    this.join(
-      'w-full rounded px-1 py-0.5 text-[11px] font-semibold transition',
-      this.yearItemKlass(),
-    ),
-  );
-  readonly yearNavNextKlassFinal = computed(() =>
-    this.join(
-      'mx-auto mt-1 flex h-6 w-6 items-center justify-center',
-      'rounded bg-bg/10 text-[12px] hover:bg-bg/15 disabled:opacity-40',
-      this.yearNavNextKlass(),
+      this.slotClass('cancel'),
     ),
   );
 
-  private join(...parts: Array<string | null | undefined>): string {
-    return parts.map((p) => (p ?? '').trim()).filter(Boolean).join(' ');
+  readonly confirmClassFinal = computed(() =>
+    this.cx(
+      'rounded-md bg-fg',
+      'px-3 py-1.5 text-[11px] font-semibold text-bg',
+      'shadow-sm hover:opacity-95 active:translate-y-[1px]',
+      this.slotClass('confirm'),
+    ),
+  );
+
+  readonly yearRailClassFinal = computed(() =>
+    this.cx(
+      'bg-bg p-1 text-fg flex flex-col',
+      this.slotClass('yearRail'),
+    ),
+  );
+
+  readonly yearNavPrevClassFinal = computed(() =>
+    this.cx(
+      'mx-auto mb-1 flex h-6 w-6 items-center justify-center',
+      'rounded bg-bg/10 text-[12px] hover:bg-bg/15 disabled:opacity-40',
+      this.slotClass('yearNavPrev'),
+    ),
+  );
+
+  readonly yearListClassFinal = computed(() =>
+    this.cx('space-y-0.5', this.slotClass('yearList')),
+  );
+
+  readonly yearItemClassFinal = computed(() =>
+    this.cx(
+      'w-full rounded px-1 py-0.5 text-[11px] font-semibold transition',
+      this.slotClass('yearItem'),
+    ),
+  );
+
+  readonly yearNavNextClassFinal = computed(() =>
+    this.cx(
+      'mx-auto mt-1 flex h-6 w-6 items-center justify-center',
+      'rounded bg-bg/10 text-[12px] hover:bg-bg/15 disabled:opacity-40',
+      this.slotClass('yearNavNext'),
+    ),
+  );
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngDatepickerSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
   }
 
   /* =====================
