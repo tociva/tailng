@@ -99,7 +99,6 @@ export class TngDatepicker implements ControlValueAccessor {
    * Overlay state
    * ===================== */
   readonly isOpen = signal(false);
-  readonly isDisabled = signal(false);
 
   private readonly injectedAdapter = inject(TNG_DATE_ADAPTER, { optional: true });
   private readonly nativeAdapter = inject(TngNativeDateAdapter);
@@ -107,6 +106,23 @@ export class TngDatepicker implements ControlValueAccessor {
   readonly adapter = computed(
     () => this.dateAdapter() ?? this.injectedAdapter ?? this.nativeAdapter,
   );
+
+  /* ─────────────────────────
+   * Disabled state (forms + input)
+   * ───────────────────────── */
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
+
+  protected readonly isDisabled = computed(() => this.disabledFinal());
 
   /* ─────────────────────────
    * Slot finals (defaults + overrides)
@@ -378,7 +394,6 @@ export class TngDatepicker implements ControlValueAccessor {
 
   constructor() {
     effect(() => {
-      this.isDisabled.set(this.disabled());
       if (this.isDisabled()) this.close('programmatic');
     });
   }
@@ -430,8 +445,7 @@ export class TngDatepicker implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
-    if (isDisabled) this.close('programmatic');
+    this._formDisabled.set(isDisabled);
   }
 
   /* =====================
