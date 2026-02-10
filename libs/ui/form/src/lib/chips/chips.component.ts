@@ -100,17 +100,31 @@ export class TngChips<T> implements ControlValueAccessor {
   readonly isOpen = signal(false);
   readonly focusedIndex = signal(-1);
 
-  protected readonly isDisabled = signal(false);
-
   private readonly chipsValue = signal<T[]>([]);
   private usingCva = false;
 
   private onChange: (value: T[]) => void = () => {};
   private onTouched: () => void = () => {};
 
+  /* ─────────────────────────
+   * Disabled state (forms + input)
+   * ───────────────────────── */
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
+
+  protected readonly isDisabled = computed(() => this.disabledFinal());
+
   constructor() {
     effect(() => {
-      this.isDisabled.set(this.disabled());
       if (this.isDisabled()) this.close('programmatic');
     });
 
@@ -139,8 +153,7 @@ export class TngChips<T> implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
-    if (isDisabled) this.close('programmatic');
+    this._formDisabled.set(isDisabled);
   }
 
   /* =====================

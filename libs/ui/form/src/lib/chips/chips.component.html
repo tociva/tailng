@@ -16,7 +16,7 @@
         <button
           type="button"
           [class]="removeButtonClassFinal()"
-          [disabled]="isDisabled()"
+          [disabled]="disabledFinal()"
           (click)="removeAt(i)"
           aria-label="Remove chip"
         >
@@ -31,7 +31,7 @@
       [class]="inputClassFinal()"
       [value]="inputValue()"
       [placeholder]="placeholderText()"
-      [disabled]="isDisabled()"
+      [disabled]="disabledFinal()"
       (input)="onInput($event)"
       (focus)="open('programmatic')"
       (blur)="onBlur()"
