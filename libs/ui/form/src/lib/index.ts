@@ -10,6 +10,7 @@ export * from './datepicker/datepicker.slots';
 export * from './datepicker/adapters';
 export * from './datepicker/utils/datepicker-input.util';
 export * from './file-upload/file-upload.component';
+export * from './file-upload/file-upload.slots';
 export * from './file-upload/file-dropzone.directive';
 export * from './form-field/form-field.component';
 export * from './form-field/form-field.slots';

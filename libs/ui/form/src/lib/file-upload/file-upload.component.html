@@ -1,4 +1,4 @@
-<div [class]="rootKlass()">
+<div [class]="containerClassFinal()">
   <!-- Hidden native input -->
   <input
     #fileInput
@@ -19,23 +19,23 @@
     [multiple]="multiple()"
     (filesDropped)="onDropped($event)"
     (dragActiveChange)="onDragActiveChange($event)"
-    [class]="dropzoneClasses()"
+    [class]="dropzoneClassFinal()"
     role="button"
     tabindex="0"
     (click)="openPicker()"
     (keydown.enter)="openPicker()"
     (keydown.space)="openPicker()"
   >
-    <div class="flex items-start justify-between gap-4">
+    <div [class]="headerClassFinal()">
       <div class="space-y-1">
-        <div [class]="titleKlass()">{{ title() }}</div>
-        <div [class]="subtitleKlass()">{{ subtitle() }}</div>
+        <div [class]="titleClassFinal()">{{ titleText() }}</div>
+        <div [class]="subtitleClassFinal()">{{ subtitleText() }}</div>
       </div>
 
       @if (value()?.length) {
         <button
           type="button"
-          [class]="clearButtonKlass()"
+          [class]="clearButtonClassFinal()"
           (click)="$event.stopPropagation(); clear()"
         >
           Clear
@@ -44,7 +44,7 @@
     </div>
 
     @if (accept()) {
-      <div class="mt-2" [class]="hintKlass()">
+      <div class="mt-2" [class]="hintClassFinal()">
         Accepted: {{ accept() }}
       </div>
     }
@@ -52,11 +52,11 @@
 
   <!-- File list -->
   @if (value()?.length) {
-    <div [class]="fileListKlass()">
+    <div [class]="fileListClassFinal()">
       @for (f of value()!; track trackByName($index, f)) {
-        <div [class]="fileItemKlass()">
-          <span class="truncate">{{ f.name }}</span>
-          <span class="ml-3 text-xs text-disable">
+        <div [class]="fileItemClassFinal()">
+          <span [class]="fileNameClassFinal()">{{ f.name }}</span>
+          <span [class]="fileSizeClassFinal()">
             {{ (f.size / 1024).toFixed(1) }} KB
           </span>
         </div>
