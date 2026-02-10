@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, computed, inject, signal } from '@angular/core';
 import { TngCol, TngTable } from '@tailng-ui/ui/table';
 import { TngCodeBlock } from '@tailng-ui/ui/utilities';
+import { TngTag } from '@tailng-ui/ui/primitives';
 import { ShikiHighlighterService } from '../../../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../../../shared/tng-shiki.adapter';
 
@@ -15,7 +16,7 @@ type displayDetails = {
   standalone: true,
   selector: 'docs-radio-button-api',
   templateUrl: './radio-button-api.component.html',
-  imports: [TngCodeBlock, TngTable, TngCol],
+  imports: [TngCodeBlock, TngTable, TngCol, TngTag],
 })
 export class RadioButtonApiComponent implements AfterViewInit {
   private shiki = inject(ShikiHighlighterService);
@@ -29,12 +30,11 @@ export class RadioButtonApiComponent implements AfterViewInit {
     { property: 'label', type: 'string', default: "''", description: 'Label text' },
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'required', type: 'boolean', default: 'false', description: 'Required (HTML)' },
-    { property: 'rootKlass', type: 'string', default: "'inline-flex items-center gap-2...'", description: 'Root label' },
-    { property: 'inputKlass', type: 'string', default: "''", description: 'Input element' },
-    { property: 'labelKlass', type: 'string', default: "'text-sm text-fg'", description: 'Label span' },
+    { property: 'slot', type: 'TngSlotMap<TngRadioButtonSlot>', default: '{}', description: 'Slot-based micro styling object' },
   ];
 
-  readonly inputRows = signal<displayDetails[]>(this.seed);
+  readonly inputRows = signal<displayDetails[]>(this.seed.filter((p) => ['id', 'name', 'value', 'label', 'disabled', 'required'].includes(p.property)));
+  readonly stylingRows = signal<displayDetails[]>(this.seed.filter((p) => p.property === 'slot'));
   readonly property = (r: displayDetails) => r.property;
   readonly type = (r: displayDetails) => r.type;
   readonly default = (r: displayDetails) => r.default;

@@ -1,4 +1,4 @@
-<label [class]="rootKlass()">
+<label [class]="containerClassFinal()">
   <input
     type="radio"
     [id]="id() || null"
@@ -7,13 +7,13 @@
     [checked]="isChecked()"
     [disabled]="isDisabled()"
     [required]="required()"
-    [class]="classes()"
+    [class]="inputClassFinal()"
     (change)="onSelect($event)"
     (blur)="onBlur()"
   />
 
   @if (label()) {
-    <span [class]="labelKlass()">
+    <span [class]="labelClassFinal()">
       {{ label() }}
     </span>
   }

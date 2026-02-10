@@ -7,6 +7,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
+import { TngRadioButtonSlot } from './radio-button.slots';
+
 @Component({
   selector: 'tng-radio-button',
   standalone: true,
@@ -28,19 +31,10 @@ export class TngRadioButton implements ControlValueAccessor {
   readonly disabled = input(false);
   readonly required = input(false);
 
-  /* =====================
-   * Theming / class hooks (section-wise)
-   * ===================== */
-  /** Root <label> */
-  readonly rootKlass = input<string>(
-    'inline-flex items-center gap-2 cursor-pointer select-none'
-  );
-
-  /** <input type="radio"> */
-  readonly inputKlass = input<string>('');
-
-  /** Label <span> */
-  readonly labelKlass = input<string>('text-sm text-fg');
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngRadioButtonSlot>>({});
 
   private readonly _formValue = signal<string | null>(null);
   readonly isChecked = computed(() => this._formValue() === this.value());
@@ -67,24 +61,52 @@ export class TngRadioButton implements ControlValueAccessor {
     this._formDisabled.set(isDisabled);
   }
 
-  /** Final classes */
-  readonly classes = computed(() =>
-    (
-      // size + shape
-      `h-4 w-4 rounded-full ` +
-      // theme tokens
-      `border border-border bg-bg ` +
-      `accent-primary ` +
-      // focus ring
-      `focus-visible:outline-none ` +
-      `focus-visible:ring-2 focus-visible:ring-primary ` +
-      `focus-visible:ring-offset-2 focus-visible:ring-offset-background ` +
-      // disabled
-      `disabled:opacity-50 disabled:pointer-events-none ` +
-      // user override
-      this.inputKlass()
-    ).trim()
+  /* ─────────────────────────
+   * Computed slot classes
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx(
+      'inline-flex items-center gap-2 cursor-pointer select-none',
+      this.slotClass('container'),
+    ),
   );
+
+  readonly inputClassFinal = computed(() =>
+    this.cx(
+      // size + shape
+      'h-4 w-4 rounded-full',
+      // theme tokens
+      'border border-border bg-bg',
+      'accent-primary',
+      // focus ring
+      'focus-visible:outline-none',
+      'focus-visible:ring-2 focus-visible:ring-primary',
+      'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+      // disabled
+      'disabled:opacity-50 disabled:pointer-events-none',
+      // user override
+      this.slotClass('input'),
+    ),
+  );
+
+  readonly labelClassFinal = computed(() =>
+    this.cx('text-sm text-fg', this.slotClass('label')),
+  );
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngRadioButtonSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 
   onSelect(event: Event): void {
     if (this.isDisabled()) return;
