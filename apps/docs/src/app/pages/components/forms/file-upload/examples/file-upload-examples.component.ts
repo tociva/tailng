@@ -40,7 +40,7 @@ form = new FormGroup({
   readonly acceptMultipleHtml = computed(
     () => `
 <tng-file-upload formControlName="files" accept="image/*" [multiple]="true"
-  titleText="Upload images" subtitleText="Images only, multiple allowed" />
+  title="Upload images" subtitle="Images only, multiple allowed" />
 `,
   );
 

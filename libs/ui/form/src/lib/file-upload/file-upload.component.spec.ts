@@ -88,8 +88,8 @@ class RfMultipleHost {
     <form [formGroup]="form">
       <tng-file-upload
         formControlName="files"
-        [titleText]="'Custom title'"
-        [subtitleText]="'Custom subtitle'"
+        [title]="'Custom title'"
+        [subtitle]="'Custom subtitle'"
       />
     </form>
   `,
@@ -128,8 +128,8 @@ class RfDisabledViaControlHost {
       [disabled]="disabled"
       [accept]="accept"
       [multiple]="multiple"
-      [titleText]="title"
-      [subtitleText]="subtitle"
+      [title]="title"
+      [subtitle]="subtitle"
       (valueChange)="onValueChange($event)"
     />
   `,

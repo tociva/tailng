@@ -6,8 +6,8 @@
       accept="image/*,.pdf"
       [multiple]="true"
       (valueChange)="files.set($event)"
-      titleText="Upload attachments"
-      subtitleText="Drag & drop files here, or click to select"
+      title="Upload attachments"
+      subtitle="Drag & drop files here, or click to select"
     />
   </div>
 
@@ -31,8 +31,8 @@
     <tng-file-upload
       accept=".png,.jpg,.jpeg"
       [multiple]="true"
-      titleText="Upload images"
-      subtitleText="Drop images here or click"
+      title="Upload images"
+      subtitle="Drop images here or click"
       [slot]="{ dropzone: 'border-dashed', fileItem: 'border border-primary bg-on-primary' }"
     />
   </div>

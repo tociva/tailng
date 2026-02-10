@@ -105,7 +105,7 @@ export class MyComponent {
   readonly titleSubtitleSlotHtml = computed(
     () => `
 <form [formGroup]="form">
-  <tng-file-upload formControlName="files" titleText="Drop files here" subtitleText="or click to browse"
+  <tng-file-upload formControlName="files" title="Drop files here" subtitle="or click to browse"
     [slot]="{ title: 'text-base font-bold text-primary', subtitle: 'text-sm text-disable' }" />
 </form>
 `,

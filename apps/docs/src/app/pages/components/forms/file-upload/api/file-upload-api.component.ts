@@ -26,13 +26,13 @@ export class FileUploadApiComponent implements AfterViewInit {
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'accept', type: 'string', default: "''", description: 'Accept attribute (e.g. "image/*", ".pdf")' },
     { property: 'multiple', type: 'boolean', default: 'false', description: 'Allow multiple files' },
-    { property: 'titleText', type: 'string', default: "'Upload files'", description: 'Dropzone title text' },
-    { property: 'subtitleText', type: 'string', default: "'Drag & drop here or click to browse'", description: 'Dropzone subtitle text' },
+    { property: 'title', type: 'string', default: "'Upload files'", description: 'Dropzone title text' },
+    { property: 'subtitle', type: 'string', default: "'Drag & drop here or click to browse'", description: 'Dropzone subtitle text' },
     { property: 'valueChange', type: 'OutputEventEmitter<File[] | null>', default: '—', description: 'Emits when files change' },
     { property: 'slot', type: 'TngSlotMap<TngFileUploadSlot>', default: '{}', description: 'Slot-based micro styling object' },
   ];
 
-  readonly configRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['disabled', 'accept', 'multiple', 'titleText', 'subtitleText'].includes(p.property)));
+  readonly configRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['disabled', 'accept', 'multiple', 'title', 'subtitle'].includes(p.property)));
   readonly outputRows = signal<DisplayDetails[]>(this.seed.filter((p) => p.property === 'valueChange'));
   readonly stylingRows = signal<DisplayDetails[]>(this.seed.filter((p) => p.property === 'slot'));
 

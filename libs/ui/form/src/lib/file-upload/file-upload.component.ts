@@ -37,8 +37,8 @@ export class TngFileUpload implements ControlValueAccessor {
   readonly multiple = input(false);
 
   // texts
-  readonly titleText = input<string>('Upload files');
-  readonly subtitleText = input<string>('Drag & drop here or click to browse');
+  readonly title = input<string>('Upload files');
+  readonly subtitle = input<string>('Drag & drop here or click to browse');
 
   /* ─────────────────────────
    * Slot hooks (micro styling)
