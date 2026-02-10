@@ -50,12 +50,24 @@ export class TngTextarea implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
+  /* ─────────────────────────
+   * Disabled state (forms + input)
+   * ───────────────────────── */
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
+
   setDisabledState(isDisabled: boolean): void {
     this._formDisabled.set(isDisabled);
   }
-
-  private readonly _formDisabled = signal(false);
-  readonly isDisabled = computed(() => this.disabled() || this._formDisabled());
 
   readonly textareaClassFinal = computed(() =>
     this.cx(
