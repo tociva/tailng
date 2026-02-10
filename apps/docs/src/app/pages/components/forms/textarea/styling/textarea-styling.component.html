@@ -2,24 +2,32 @@
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      <span class="font-mono">tng-textarea</span> exposes a single <span class="font-mono">klass</span> input.
-      Classes are merged with default (border, padding, focus ring, disabled).
+      The <span class="font-mono">tng-textarea</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts a single key:
+      <span class="font-mono">textarea</span>. This slot targets the textarea element itself.
     </p>
   </div>
+
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">klass</h3>
+      <h3 class="text-sm font-semibold text-primary">textarea slot</h3>
       <tng-tag label="textarea"></tng-tag>
     </div>
+    <p class="text-sm text-fg">
+      The textarea element. Default includes: w-full rounded-md border border-gray-300 px-3 py-2 text-sm,
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary,
+      disabled:opacity-50 disabled:pointer-events-none.
+    </p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="klassHtml()"
+      [htmlContent]="textareaSlotHtml()"
+      [tsContent]="textareaSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-md">
-          <tng-textarea formControlName="message" placeholder="Custom styled" klass="border-2 border-blue-500 rounded-lg shadow-md min-h-[100px]" />
+          <tng-textarea formControlName="message" placeholder="Custom styled" [slot]="textareaSlot" />
         </form>
       </div>
     </docs-example-block>

@@ -1,6 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TngTextarea } from '@tailng-ui/ui/form';
+import { TngTextarea, TngSlotMap, TngTextareaSlot } from '@tailng-ui/ui/form';
 import { TngTag } from '@tailng-ui/ui/primitives';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
@@ -21,12 +21,29 @@ export class TextareaStylingComponent {
     message: new FormControl('', { nonNullable: true }),
   });
 
-  readonly klassHtml = computed(
+  // Slot example
+  textareaSlot: TngSlotMap<TngTextareaSlot> = {
+    textarea: 'border-2 border-blue-500 rounded-lg shadow-md min-h-[100px]',
+  };
+
+  readonly textareaSlotHtml = computed(
     () => `
 <form [formGroup]="form">
   <tng-textarea formControlName="message" placeholder="Custom styled"
-    klass="border-2 border-blue-500 rounded-lg shadow-md min-h-[100px]" />
+    [slot]="{ textarea: 'border-2 border-blue-500 rounded-lg shadow-md min-h-[100px]' }" />
 </form>
+`,
+  );
+
+  readonly textareaSlotTs = computed(
+    () => `
+import { TngTextarea, TngSlotMap, TngTextareaSlot } from '@tailng-ui/ui/form';
+
+export class MyComponent {
+  textareaSlot: TngSlotMap<TngTextareaSlot> = {
+    textarea: 'border-2 border-blue-500 rounded-lg shadow-md min-h-[100px]',
+  };
+}
 `,
   );
 }
