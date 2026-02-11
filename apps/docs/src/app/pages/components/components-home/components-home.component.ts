@@ -94,20 +94,20 @@ sectionMatchesQuery(section: ComponentDemoSection): boolean {
           routerLink: '../components/forms/autocomplete/overview',
           title: 'Auto Complete',
           description: 'Footer',
-          imageUrl: '/assets/components/form/fake.png',
+          imageUrl: '/assets/autocomplete.png',
         },
         {
           routerLink: '../components/forms/checkbox/overview',
           title: 'Checkbox',
           description:
             'Captures a boolean value with support for checked unchecked, and optional labeling for clear selection feedback.',
-          imageUrl: '/assets/components/form/fake.png',
+          imageUrl: '/assets/check-box.png',
         },
         {
           routerLink: '../components/forms/chips/overview',
           title: 'Chips',
           description: 'Footer',
-          imageUrl: '/assets/components/form/fake.png',
+          imageUrl: '/assets/chips.png',
         },
         {
           routerLink: '../components/forms/datepicker/overview',
