@@ -91,8 +91,6 @@ export class TngSelect<T> implements ControlValueAccessor {
   readonly isOpen = signal(false);
   readonly activeIndex = signal<number>(-1);
 
-  protected readonly isDisabled = signal(false);
-
   private readonly selectedValue = signal<T | null>(null);
   private usingCva = false;
 
@@ -102,9 +100,13 @@ export class TngSelect<T> implements ControlValueAccessor {
   private onChange: (value: T | null) => void = () => {};
   private onTouched: () => void = () => {};
 
+  private readonly _cvaDisabled = signal(false);
+
+  readonly isDisabled = computed(() => this.disabled() || this._cvaDisabled());
+
   constructor() {
+    // close when disabled (either via input or CVA)
     effect(() => {
-      this.isDisabled.set(this.disabled());
       if (this.isDisabled()) this.close('programmatic');
     });
 
@@ -113,6 +115,11 @@ export class TngSelect<T> implements ControlValueAccessor {
       if (this.usingCva) return;
       this.selectedValue.set(v);
     });
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this._cvaDisabled.set(isDisabled);
+    if (isDisabled) this.close('programmatic');
   }
 
   writeValue(value: T | null): void {
@@ -127,11 +134,6 @@ export class TngSelect<T> implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
-    if (isDisabled) this.close('programmatic');
   }
 
   /* =====================
