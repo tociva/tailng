@@ -19,6 +19,7 @@ export * from './number-input/number-input.slots';
 export * from './radio-button/radio-button.component';
 export * from './radio-button/radio-button.slots';
 export * from './select/select.component';
+export * from './select/select.slots';
 export * from './slider/slider.component';
 export * from './slide-toggle/slide-toggle.component';
 export * from './slide-toggle/slide-toggle-slots.directive';

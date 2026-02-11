@@ -22,7 +22,9 @@ import {
   type TngOverlayCloseReason,
 } from '@tailng-ui/ui/overlay';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import { OptionTplContext } from '@tailng-ui/cdk/util';
+import { TngSelectSlot } from './select.slots';
 
 export type SelectCloseReason = TngOverlayCloseReason;
 export type SelectValueTplContext<T> = { $implicit: T };
@@ -78,27 +80,10 @@ export class TngSelect<T> implements ControlValueAccessor {
   readonly selected = output<T>();
   readonly closed = output<SelectCloseReason>();
 
-  /* =====================
-   * Theming
-   * ===================== */
-  readonly rootKlass = input<string>('relative');
-
-  readonly triggerKlass = input<string>(
-    [
-      'w-full',
-      'flex items-center justify-between',
-      'border border-border rounded-md',
-      'px-3 py-2',
-      'text-sm',
-      'bg-bg text-fg',
-      'focus:outline-none',
-      'focus:ring-2 focus:ring-primary',
-    ].join(' ')
-  );
-
-  readonly valueKlass = input<string>('truncate text-left');
-  readonly placeholderKlass = input<string>('text-disable');
-  readonly iconKlass = input<string>('ml-2 text-disable');
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngSelectSlot>>({});
 
   /* =====================
    * State
@@ -160,9 +145,70 @@ export class TngSelect<T> implements ControlValueAccessor {
     return this.selectedValue();
   }
 
-  readonly triggerClasses = computed(() =>
-    (this.triggerKlass() + (this.isDisabled() ? ' opacity-60 pointer-events-none' : '')).trim()
+  /* ─────────────────────────
+   * Computed slot classes
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx('relative', this.slotClass('container')),
   );
+
+  readonly triggerButtonClassFinal = computed(() => {
+    const base = this.cx(
+      'w-full flex items-center justify-between',
+      'border border-border rounded-md px-3 py-2 text-sm',
+      'bg-bg text-fg',
+      'focus:outline-none focus:ring-2 focus:ring-primary',
+      this.slotClass('triggerButton'),
+    );
+    const disabled = this.isDisabled()
+      ? this.cx('opacity-60 pointer-events-none')
+      : '';
+    return this.cx(base, disabled);
+  });
+
+  readonly triggerValueClassFinal = computed(() =>
+    this.cx('truncate text-left', this.slotClass('triggerValue')),
+  );
+
+  readonly triggerPlaceholderClassFinal = computed(() =>
+    this.cx('text-disable', this.slotClass('triggerPlaceholder')),
+  );
+
+  readonly triggerIconClassFinal = computed(() =>
+    this.cx('ml-2 text-disable', this.slotClass('triggerIcon')),
+  );
+
+  readonly overlayPanelSlot = computed(() => {
+    const panel = this.slotClass('overlayPanel');
+    return panel ? { panel } : {};
+  });
+
+  readonly optionListSlot = computed(() => {
+    const s = this.slot();
+    if (!s) return {};
+    const out: Record<string, unknown> = {};
+    if (s.optionListContainer != null) out.container = s.optionListContainer;
+    if (s.option != null) out.option = s.option;
+    if (s.optionActive != null) out.optionActive = s.optionActive;
+    if (s.optionInactive != null) out.optionInactive = s.optionInactive;
+    if (s.optionListEmpty != null) out.empty = s.optionListEmpty;
+    return out;
+  });
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngSelectSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 
   /* =====================
    * Overlay state
