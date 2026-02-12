@@ -29,8 +29,7 @@
           [options]="titleOptions"
           [value]="cdkStatus"
           (valueChange)="cdkStatus = $event"
-            groupKlass="!w-1/5"
-            buttonKlass="font-normal h-7 py-[0]"
+            [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
         />
         
         <tng-code-block
@@ -50,8 +49,7 @@
           [options]="titleOptions"
           [value]="packageStatus"
           (valueChange)="packageStatus = $event"
-            groupKlass="!w-1/5"
-            buttonKlass="font-normal h-7 py-[0]"
+            [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
         />
         
         <tng-code-block
@@ -71,8 +69,7 @@
           [options]="titleOptions"
           [value]="tailwindStatus"
           (valueChange)="tailwindStatus = $event"
-            groupKlass="!w-1/5"
-            buttonKlass="font-normal h-7 py-[0]"
+            [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
           />
           
         <tng-code-block
@@ -134,8 +131,7 @@
           [options]="titleOptions"
           [value]="runStatus"
           (valueChange)="runStatus = $event"
-            groupKlass="!w-1/5"
-            buttonKlass="font-normal h-7 py-[0]"
+            [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
         />
         <tng-code-block
           [content]="tailngRun"

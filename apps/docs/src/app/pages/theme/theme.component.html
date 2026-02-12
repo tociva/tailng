@@ -46,8 +46,7 @@ Avoid hard-coded Tailwind colors like bg-slate-* or text-slate-* because they br
         [options]="titleOptions"
         [value]="installStatus"
         (valueChange)="installStatus = $event"
-        groupKlass="!w-1/5"
-        buttonKlass="font-normal h-7 py-[0]"
+        [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
       />
 
       <tng-code-block

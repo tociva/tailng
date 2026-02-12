@@ -1,6 +1,7 @@
 export * from './autocomplete/autocomplete.component';
 export * from './autocomplete/autocomplete.slots';
 export * from './button-toggle/button-toggle.component';
+export * from './button-toggle/button-toggle.slots';
 export * from './checkbox/checkbox.component';
 export * from './checkbox/checkbox.slots';
 export * from './chips/chips.component';

@@ -24,8 +24,7 @@
           [options]="titleOptions"
           [value]="installStatus"
           (valueChange)="installStatus = $event"
-          groupKlass="!w-1/5"
-          buttonKlass="font-normal h-7 py-[0]"
+          [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
         />
 
         <tng-code-block
@@ -167,8 +166,7 @@
           [options]="titleOptions"
           [value]="runStatus"
           (valueChange)="runStatus = $event"
-          groupKlass="!w-1/5"
-          buttonKlass="font-normal h-7 py-[0]"
+          [slot]="{ container: '!w-1/5', button: 'font-normal h-7 py-[0]' }"
         />
 
         <tng-code-block
