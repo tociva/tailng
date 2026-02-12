@@ -117,8 +117,7 @@
         <tng-slide-toggle
           [checked]="docsThemeService.isDark()"
           (checkedChange)="onModeToggle($event)"
-          thumbOffKlass="bg-fg text-bg pt-1"
-          thumbOnKlass="bg-bg text-fg pl-1 pt-1"
+          [slot]="{ thumbUnchecked: 'bg-fg text-bg pt-1', thumbChecked: 'bg-bg text-fg pl-1 pt-1' }"
         >
           <tng-icon name="bootstrapMoonFill" tngSlideToggleOn></tng-icon>
           <tng-icon name="bootstrapSunFill" tngSlideToggleOff></tng-icon>

@@ -23,6 +23,7 @@ export * from './select/select.slots';
 export * from './slider/slider.component';
 export * from './slider/slider.slots';
 export * from './slide-toggle/slide-toggle.component';
+export * from './slide-toggle/slide-toggle.slots';
 export * from './slide-toggle/slide-toggle-slots.directive';
 export * from './textarea/textarea.component';
 export * from './textarea/textarea.slots';
