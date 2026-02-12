@@ -62,7 +62,8 @@ export class TngButtonToggle<T extends TngButtonToggleValue> implements ControlV
    * Internal state
    * ===================== */
 
-  protected isDisabled = signal(false);
+  private readonly formDisabled = signal(false);
+  readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
 
   /** Authoritative selected value inside component */
   private selectedValue = signal<TngButtonToggleSelection<T>>(null);
@@ -81,10 +82,6 @@ export class TngButtonToggle<T extends TngButtonToggleValue> implements ControlV
   private onTouched: () => void = () => {};
 
   constructor() {
-    // sync external disabled -> internal
-    effect(() => {
-      this.isDisabled.set(this.disabled());
-    });
 
     // sync external [value] -> internal only when NOT using CVA
     effect(() => {
@@ -135,7 +132,7 @@ export class TngButtonToggle<T extends TngButtonToggleValue> implements ControlV
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this.formDisabled.set(isDisabled);
   }
 
   /* =====================
