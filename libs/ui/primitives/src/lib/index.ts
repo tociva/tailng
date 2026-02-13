@@ -8,3 +8,4 @@ export * from './progress-spinner/progress-spinner.component';
 export * from './ripples/ripples.directive';
 export * from './skeleton/skeleton.component';
 export * from './tag/tag.component';
+export * from './tag/tag.slots';
