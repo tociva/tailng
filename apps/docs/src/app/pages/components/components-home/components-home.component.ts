@@ -249,7 +249,7 @@ sectionMatchesQuery(section: ComponentDemoSection): boolean {
           routerLink: '../components/layout/divider/overview',
           title: 'Divider',
           description: 'Footer',
-          imageUrl: '/assets/components/form/fake.png',
+          imageUrl: '/assets/divider.png',
         },
         {
           routerLink: '../components/layout/expansion-panel/overview',
