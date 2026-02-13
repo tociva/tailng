@@ -1,15 +1,27 @@
 import { Component, inject } from '@angular/core';
 import { TngCard } from '@tailng-ui/ui/layout';
-import { TngCodeBlock } from '@tailng-ui/ui/utilities';
+import {
+  TngCodeBlock,
+  TngCodeBlockCopiedSlot,
+  TngCodeBlockCopySlot,
+} from '@tailng-ui/ui/utilities';
 import { ShikiHighlighterService } from '../../../shared/shiki-highlighter.service';
 import { TngShikiAdapter } from '../../../shared/tng-shiki.adapter';
 import { TngButtonToggle, TngButtonToggleOption } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
 
 @Component({
   standalone: true,
   selector: 'docs-installation',
   templateUrl: './installation.component.html',
-  imports: [TngCard, TngCodeBlock, TngButtonToggle],
+  imports: [
+    TngCard,
+    TngCodeBlock,
+    TngCodeBlockCopySlot,
+    TngCodeBlockCopiedSlot,
+    TngButtonToggle,
+    TngIcon,
+  ],
 })
 export class InstallationComponent {
   private shiki = inject(ShikiHighlighterService);
@@ -48,8 +60,8 @@ cd tailng-starter`;
   readonly npmCdk = `npm i @angular/cdk`;
 
   // Tailng packages
-  readonly yarnTailng = `yarn add @tailng-ui/cdk @tailng-ui/theme @tailng-ui/icons @tailng-ui/ui`;
-  readonly npmTailng = `npm i @tailng-ui/cdk @tailng-ui/theme @tailng-ui/icons @tailng-ui/ui`;
+  readonly yarnTailng = `yarn add @tailng-ui/cdk @tailng-ui/theme @tailng-ui/icons @ng-icons/core @tailng-ui/ui`;
+  readonly npmTailng = `npm i @tailng-ui/cdk @tailng-ui/theme @tailng-ui/icons @ng-icons/core @tailng-ui/ui`;
 
   // Tailwind install
   readonly yarnTailwind = `yarn add -D tailwindcss@^3.4 postcss autoprefixer

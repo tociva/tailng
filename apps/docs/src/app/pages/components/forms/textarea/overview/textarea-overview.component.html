@@ -6,12 +6,12 @@
         <span class="font-mono text-primary/20">tng-textarea</span> is a standalone textarea that
         implements <span class="font-mono text-primary/20">ControlValueAccessor</span>. It supports
         <span class="font-mono text-primary/20">placeholder</span>, <span class="font-mono text-primary/20">rows</span>,
-        <span class="font-mono text-primary/20">disabled</span>, and a single <span class="font-mono text-primary/20">klass</span> for theming.
+        <span class="font-mono text-primary/20">disabled</span>, and slot-based micro styling via <span class="font-mono text-primary/20">slot</span>.
       </p>
       <div class="flex flex-wrap gap-2 pt-1">
         <tng-tag label="CVA" color="default"></tng-tag>
         <tng-tag label="rows" color="default"></tng-tag>
-        <tng-tag label="klass" color="default"></tng-tag>
+        <tng-tag label="slot" color="default"></tng-tag>
         <tng-tag label="Standalone" color="default"></tng-tag>
       </div>
     </div>
@@ -45,8 +45,8 @@
           <p class="text-xs leading-5 text-muted">Number of visible text rows. Default: 4.</p>
         </div>
         <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
-          <div class="text-sm font-semibold text-primary/20">klass</div>
-          <p class="text-xs leading-5 text-muted">Additional CSS classes merged with default (border, focus ring, disabled).</p>
+          <div class="text-sm font-semibold text-primary/20">slot</div>
+          <p class="text-xs leading-5 text-muted">Slot-based micro styling for the textarea element.</p>
         </div>
       </div>
     </div>

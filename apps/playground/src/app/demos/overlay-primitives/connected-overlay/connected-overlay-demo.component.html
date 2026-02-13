@@ -23,11 +23,11 @@
     width="anchor"
     (closed)="close()"
   >
-    <tng-overlay-panel>
+    <tng-overlay-panel [slot]="customSlot">
       <div class="p-4 space-y-2">
         <div class="font-medium">Overlay Content</div>
         <div class="text-sm text-gray-600">
-          This is a reusable overlay panel.
+          This is a reusable overlay panel with custom slot styling.
         </div>
 
         <button

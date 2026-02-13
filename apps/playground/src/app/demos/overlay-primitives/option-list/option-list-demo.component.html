@@ -12,7 +12,7 @@
     <h2 class="text-lg font-semibold">Basic Usage</h2>
 
     <div class="max-w-xs">
-      <tng-overlay-panel>
+      <tng-overlay-panel [slot]="customPanelSlot">
         <tng-option-list
           [items]="options()"
           [activeIndex]="activeIndex()"
@@ -24,6 +24,7 @@
 
       <p class="text-xs text-gray-500 mt-2">
         Tip: click inside the list (or Tab into it) and use ↑/↓, Home/End, PageUp/PageDown.
+        This example uses custom slot styling.
       </p>
     </div>
   </section>
@@ -123,7 +124,7 @@
           (activeIndexChange)="activeIndex.set($event)"
           (optionMouseDown)="onSelect($event)"
           (requestSelectActive)="selectActive()"
-          containerKlass="py-1 max-h-48 overflow-auto"
+          [slot]="customOptionListSlot"
         />
       </div>
 
@@ -182,7 +183,7 @@
           (activeIndexChange)="activeIndexLarge.set($event)"
           (optionMouseDown)="onSelectLarge($event)"
           (requestSelectActive)="selectActiveLarge()"
-          containerKlass="py-1 max-h-48 overflow-auto"
+          [slot]="customOptionListSlot"
         >
         <ng-template #countryTplLarge let-item>
           <div class="flex items-center gap-2">

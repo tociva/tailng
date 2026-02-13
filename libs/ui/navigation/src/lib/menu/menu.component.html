@@ -35,7 +35,7 @@
       (closed)="overlayRef.close($event)"
 
     >
-      <tng-overlay-panel [klass]="panelKlass()" [modal]="modal()">
+      <tng-overlay-panel [slot]="{ panel: panelKlass() }" [modal]="modal()">
         <div [id]="menuId()" role="menu">
           @if (menuTemplate) {
             <ng-container [ngTemplateOutlet]="menuTemplate!" />

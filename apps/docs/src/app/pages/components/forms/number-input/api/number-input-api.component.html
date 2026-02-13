@@ -87,38 +87,116 @@
       </div>
     </section>
 
-    <section id="klass-hooks" class="flex flex-col gap-4 text-fg">
+    <section id="styling" class="flex flex-col gap-4 text-fg">
       <header class="flex flex-col gap-1">
-        <h3 class="text-base font-semibold text-primary">Klass hook (theming)</h3>
+        <h3 class="text-base font-semibold text-primary">Styling</h3>
         <p class="text-sm text-fg">
-          <span class="font-mono">tng-number-input</span> exposes a single <span class="font-mono">klass</span>
-          input; classes are merged with the default input styles.
+          Properties for customizing component appearance.
         </p>
       </header>
       <div class="rounded-md border">
-        <tng-table [rows]="klassRows()">
+        <tng-table [rows]="stylingRows()">
           <tng-col id="property" header="Property" [value]="property"></tng-col>
           <tng-col id="type" header="Type" [value]="type"></tng-col>
           <tng-col id="default" header="Default" [value]="default"></tng-col>
           <tng-col id="description" header="Description" [value]="description"></tng-col>
         </tng-table>
       </div>
-      <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
-        <div class="flex items-center justify-between text-fg">
-          <h3 class="text-sm font-semibold text-primary">Klass (theming)</h3>
-          <tng-tag label="tailng"></tng-tag>
-        </div>
-        <p class="text-sm text-fg">
-          <span class="font-mono">klass</span> — applied to the single input element (wrapper + input
-          are the same). Use for borders, padding, text size, or focus overrides.
-        </p>
-        <div class="rounded-md border-l-4 border-primary bg-alternate-background p-4 text-sm text-muted text-fg">
-          <span class="font-semibold text-primary">Tip:</span>
-          Default classes include focus ring, disabled, and readonly styles. Override with
-          <span class="font-mono text-foreground">klass</span> as needed.
-        </div>
-      </div>
     </section>
+
+    <!-- API – Slot-based micro styling -->
+    <div
+      id="slot-styling"
+      class="rounded-xl border bg-bg p-6 shadow-sm space-y-4"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between text-fg ">
+        <h3 class="text-sm font-semibold text-primary">Slot-based micro styling</h3>
+        <tng-tag label="tailng"></tng-tag>
+      </div>
+
+      <p class="text-sm text-muted">
+        Use the <span class="font-mono text-foreground">slot</span> input to customize styling for different parts of the component.
+        The slot object accepts keys: <span class="font-mono text-foreground">frame</span>, <span class="font-mono text-foreground">input</span>, 
+        <span class="font-mono text-foreground">prefix</span>, and <span class="font-mono text-foreground">suffix</span>.
+      </p>
+
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-fg">
+        <!-- Left box -->
+        <li class="border-2 p-3 rounded-lg space-y-2">
+          <div class="flex items-center gap-2">
+            <tng-tag label="frame"></tng-tag>
+            <span>— shell wrapper</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <tng-tag label="input"></tng-tag>
+            <span>— input element</span>
+          </div>
+        </li>
+
+        <!-- Right box -->
+        <li class="border-2 p-3 rounded-lg space-y-2">
+          <div class="flex items-center gap-2">
+            <tng-tag label="prefix"></tng-tag>
+            <span>— prefix wrapper</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <tng-tag label="suffix"></tng-tag>
+            <span>— suffix wrapper</span>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Example -->
+      <div class="rounded-md border bg-alternate-background p-4 text-sm text-fg">
+        <div class="font-semibold text-primary mb-2">Example:</div>
+        <tng-code-block
+          [content]="slotExampleCode()"
+          [highlighter]="highlighter"
+          language="typescript"
+          rootKlass="border-0 bg-alternate-background"
+        ></tng-code-block>
+      </div>
+
+      <!-- Tip -->
+      <div
+        class="rounded-md border-l-4 border-primary bg-alternate-background p-4 text-sm text-muted text-fg "
+      >
+        <span class="font-semibold text-primary">Tip:</span>
+        Slot values can be strings or arrays of strings. Prefer <span class="font-mono text-foreground">frame</span> for height, radius, borders,
+        and focus-ring changes to keep behavior consistent.
+      </div>
+    </div>
+
+    <!-- API – Content projection -->
+    <div
+      id="content-projection"
+      class="rounded-xl border bg-bg p-6 shadow-sm space-y-4 text-fg "
+    >
+      <!-- Header -->
+      <h3 class="text-sm font-semibold text-primary ">Content projection</h3>
+
+      <!-- List of projected content -->
+      <ul class="space-y-2 text-sm text-muted text-fg">
+        <li class="flex items-center gap-2">
+          <tng-tag label="[tngPrefix]"></tng-tag>
+          <span>— prefix content (icons, labels)</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <tng-tag label="[tngSuffix]"></tng-tag>
+          <span>— suffix content (icons, buttons)</span>
+        </li>
+      </ul>
+
+      <!-- Tip / Note -->
+      <div
+        class="rounded-md border-l-4 text-fg  border-primary bg-alternate-background p-4 text-sm text-muted"
+      >
+        Spacing is controlled by the projected elements themselves (e.g.
+        <span class="font-mono text-foreground">ml-3</span> /
+        <span class="font-mono text-foreground">mr-3</span>).
+      </div>
+    </div>
 
     <div id="form-integration" class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4 text-fg">
       <h3 class="text-sm font-semibold text-primary">Forms integration</h3>
@@ -170,12 +248,24 @@
             </a>
           </li>
           <li class="flex items-center gap-2">
-            <a href="#klass-hooks" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+            <a href="#styling" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
               <span class="h-1 w-1 rounded-full bg-primary"></span>
-              Klass hook
+              Styling
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <a href="#slot-styling" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+              <span class="h-1 w-1 rounded-full bg-primary"></span>
+              Slot-based micro styling
             </a>
           </li>
         </ul>
+      </li>
+      <li class="flex items-center gap-2">
+        <a href="#content-projection" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          Content projection
+        </a>
       </li>
       <li class="flex items-center gap-2">
         <a href="#form-integration" class="flex items-center gap-2 p-1 hover:text-primary scroll-link">

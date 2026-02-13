@@ -30,6 +30,14 @@ private shiki = inject(ShikiHighlighterService);
   
    readonly inputKlassExample = computed(() => `import { TngTextInput } from '@tailng-ui/ui';`);
 
+  readonly slotExampleCode = computed(() => `readonly searchSlot: TngSlotMap<TngTextInputSlot> = {
+  frame: ['rounded-full', 'border-slate-300', 'bg-white'],
+  input: ['text-sm', 'placeholder:text-slate-400'],
+  prefix: ['text-slate-400'],
+};
+
+<tng-text-input [slot]="searchSlot" />`);
+
 
   private readonly seed: displayDetails[] = [
     { property: 'id', type: 'string', default: '', description: 'Input element id' },
@@ -54,6 +62,10 @@ private shiki = inject(ShikiHighlighterService);
     // browser Hints
     { property: 'autocomplete',type: 'string',default: 'off',description: "Browser hints: 'on' | 'off'"},
     { property: 'input mode', type: 'string', default: 'text', description: '' },
+    
+    // Styling
+    { property: 'slot', type: 'TngSlotMap<TngTextInputSlot>', default: '{}', description: 'Slot-based micro styling for frame, input, prefix, and suffix' },
+    { property: 'prefixClickable', type: 'boolean', default: 'false', description: 'When false, prefix is non-clickable (safer UX); when true, use a <button tngPrefix>' },
   ];
 
   readonly basicRows = signal<displayDetails[]>(
@@ -70,6 +82,10 @@ private shiki = inject(ShikiHighlighterService);
 
   readonly browserHintsRows = signal<displayDetails[]>(
     this.seed.filter((p) => ['autocomplete','input mode'].includes(p.property)),
+  );
+
+  readonly stylingRows = signal<displayDetails[]>(
+    this.seed.filter((p) => ['slot', 'prefixClickable'].includes(p.property)),
   );
 
   // bind function references (no arrow functions in template)

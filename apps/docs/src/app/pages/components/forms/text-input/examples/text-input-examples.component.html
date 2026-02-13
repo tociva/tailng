@@ -344,11 +344,12 @@
     </div>
 
     <p class="text-sm text-fg">
-      Customize the appearance using klass hooks:
-      <span class="font-mono text-foreground">frameKlass</span>,
-      <span class="font-mono text-foreground">inputKlass</span>,
-      <span class="font-mono text-foreground">prefixKlass</span>, and
-      <span class="font-mono text-foreground">suffixKlass</span>.
+      Customize the appearance using slot-based micro styling via the
+      <span class="font-mono text-foreground">slot</span> input with keys:
+      <span class="font-mono text-foreground">frame</span>,
+      <span class="font-mono text-foreground">input</span>,
+      <span class="font-mono text-foreground">prefix</span>, and
+      <span class="font-mono text-foreground">suffix</span>.
     </p>
 
     <div class="grid gap-4 lg:grid-cols-1">
@@ -365,8 +366,7 @@
           <!-- <label class="text-xs font-semibold text-muted">Example</label> -->
           <tng-text-input
             placeholder="Custom styled input"
-            frameKlass="border-2 border-purple-500 rounded-xl shadow-lg"
-            inputKlass="text-purple-700 placeholder:text-purple-300"
+            [slot]="customStylingSlot"
           >
             <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-purple-600" />
           </tng-text-input>

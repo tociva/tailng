@@ -17,13 +17,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { OptionTplContext } from '@tailng-ui/cdk/util';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import {
   TngConnectedOverlay,
   TngOptionList,
+  TngOptionListSlot,
   TngOverlayPanel,
   TngOverlayRef,
   type TngOverlayCloseReason,
 } from '@tailng-ui/ui/overlay';
+import { TngAutocompleteSlot } from './autocomplete.slots';
 
 export type AutocompleteCloseReason = TngOverlayCloseReason;
 
@@ -70,12 +73,16 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   /* =====================
   * Inputs / Outputs
   * ===================== */
-  readonly inputKlass = input<string>('');
   readonly options = input<T[]>([]);
   readonly placeholder = input<string>('Start typing…');
 
   /** External disabled input (read-only InputSignal) */
   readonly disabled = input<boolean>(false);
+
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngAutocompleteSlot>>({});
 
   /** String representation (used for actual input.value + fallback) */
   readonly displayWith = input<(item: T) => string>((v) => String(v));
@@ -96,9 +103,6 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   readonly isOpen = signal(false);
   readonly focusedIndex = signal(-1);
 
-  /** eslint-safe + template-safe internal disabled state */
-  protected readonly isDisabled = signal(false);
-
   /** Selected item (for inputTpl rendering) */
   readonly selectedValue = signal<T | null>(null);
 
@@ -113,9 +117,82 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
     () => !!this.inputTpl && this.selectedValue() != null && !this.isOpen()
   );
 
-  readonly inputKlassFinal = computed(() =>
-  ['relative z-0 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary bg-bg text-fg', this.inputKlass()].join(' ')
-  );  
+  /* ─────────────────────────
+   * Disabled state (forms + input)
+   * ───────────────────────── */
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
+
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx(
+      'relative',
+      this.slotClass('container'),
+    ),
+  );
+
+  readonly inputClassFinal = computed(() =>
+    this.cx(
+      'relative z-0 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary bg-bg text-fg',
+      this.slotClass('input'),
+    ),
+  );
+
+  readonly selectedTplClassFinal = computed(() =>
+    this.cx(
+      'pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center px-3',
+      this.slotClass('selectedTpl'),
+    ),
+  );
+
+  readonly inputWrapperClassFinal = computed(() =>
+    this.cx(
+      this.slotClass('inputWrapper'),
+    ),
+  );
+
+  /* ─────────────────────────
+   * Overlay panel slot (passed to tng-overlay-panel)
+   * ───────────────────────── */
+  readonly overlayPanelSlot = computed(() => {
+    const panelSlot = this.slotClass('overlayPanel');
+    return panelSlot ? { panel: panelSlot } : {};
+  });
+
+  /* ─────────────────────────
+   * Option list slot (passed to tng-option-list)
+   * ───────────────────────── */
+  readonly optionListSlot = computed((): TngSlotMap<TngOptionListSlot> => {
+    const slotMap: TngSlotMap<TngOptionListSlot> = {};
+    
+    const container = this.slotClass('optionListContainer');
+    if (container) slotMap.container = container;
+    
+    const option = this.slotClass('optionListItem');
+    if (option) slotMap.option = option;
+    
+    const optionActive = this.slotClass('optionListItemActive');
+    if (optionActive) slotMap.optionActive = optionActive;
+    
+    const optionInactive = this.slotClass('optionListItemInactive');
+    if (optionInactive) slotMap.optionInactive = optionInactive;
+    
+    const empty = this.slotClass('optionListEmpty');
+    if (empty) slotMap.empty = empty;
+    
+    return slotMap;
+  });
 
   /** Form value (selected item) */
   private value: T | null = null;
@@ -127,10 +204,11 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   constructor() {
-    // Sync external [disabled] -> internal state
+    // Close overlay when disabled state changes to true
     effect(() => {
-      this.isDisabled.set(this.disabled());
-      if (this.isDisabled()) this.close('programmatic');
+      if (this.disabledFinal()) {
+        this.close('programmatic');
+      }
     });
   }
 
@@ -161,8 +239,23 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this._formDisabled.set(isDisabled);
     if (isDisabled) this.close('programmatic');
+  }
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngAutocompleteSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
   }
 
   /* =====================
@@ -176,7 +269,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * State Transitions
    * ===================== */
   open(_reason: AutocompleteCloseReason) {
-    if (this.isDisabled()) return;
+    if (this.disabledFinal()) return;
 
     this.isOpen.set(true);
 
@@ -201,7 +294,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
   }
 
   onOverlayOpenChange(open: boolean) {
-    if (this.isDisabled()) {
+    if (this.disabledFinal()) {
       this.isOpen.set(false);
       return;
     }
@@ -214,7 +307,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * UI Events
    * ===================== */
   onInput(ev: Event) {
-    if (this.isDisabled()) return;
+    if (this.disabledFinal()) return;
 
     const text = (ev.target as HTMLInputElement).value ?? '';
     this.inputValue.set(text);
@@ -244,7 +337,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * - Printable keys are NOT delegated (input typing controls filtering)
    */
   onKeydown(ev: KeyboardEvent) {
-    if (this.isDisabled()) return;
+    if (this.disabledFinal()) return;
   
     // Close on escape
     if (ev.key === 'Escape' && this.isOpen()) {
@@ -308,7 +401,7 @@ export class TngAutocomplete<T> implements ControlValueAccessor {
    * Selection
    * ===================== */
   select(item: T) {
-    if (this.isDisabled()) return;
+    if (this.disabledFinal()) return;
 
     this.value = item;
     this.selectedValue.set(item);

@@ -1,30 +1,35 @@
 <section class="space-y-6 text-fg">
+  <!-- Intro -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      <span class="font-mono">tng-form-field</span> exposes klass hooks: <span class="font-mono">rootKlass</span>,
-      <span class="font-mono">labelKlass</span>, <span class="font-mono">requiredMarkKlass</span>,
-      <span class="font-mono">hintKlass</span>, <span class="font-mono">errorKlass</span>,
-      <span class="font-mono">controlShellKlass</span>, <span class="font-mono">prefixKlass</span>,
-      <span class="font-mono">suffixKlass</span>, <span class="font-mono">footerKlass</span>.
+      The <span class="font-mono">tng-form-field</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys:
+      <span class="font-mono">formField</span>, <span class="font-mono">label</span>,
+      <span class="font-mono">requiredIndicator</span>, <span class="font-mono">controlWrapper</span>,
+      <span class="font-mono">prefix</span>, <span class="font-mono">suffix</span>,
+      <span class="font-mono">messages</span>, <span class="font-mono">helperText</span>, and
+      <span class="font-mono">errorText</span>. Each slot targets a specific element in the component structure.
     </p>
   </div>
 
+  <!-- formField slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">labelKlass</h3>
-      <tng-tag label="label"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">formField slot</h3>
+      <tng-tag label="root wrapper"></tng-tag>
     </div>
-    <p class="text-sm text-fg">Applies to the label element.</p>
+    <p class="text-sm text-fg">The root wrapper element. Default: w-full.</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="labelKlassHtml()"
+      [htmlContent]="formFieldSlotHtml()"
+      [tsContent]="formFieldSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-md">
-          <tng-form-field label="Custom label" labelKlass="text-base font-bold text-primary" [required]="true">
+          <tng-form-field label="Name" [slot]="formFieldSlot">
             <tng-text-input formControlName="name" placeholder="Your name" />
           </tng-form-field>
         </form>
@@ -32,21 +37,193 @@
     </docs-example-block>
   </div>
 
+  <!-- label slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">hintKlass & errorKlass</h3>
-      <tng-tag label="hint / error"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">label slot</h3>
+      <tng-tag label="label"></tng-tag>
     </div>
-    <p class="text-sm text-fg">Style the hint and error text below the control.</p>
+    <p class="text-sm text-fg">The label element. Default includes text-sm font-medium text-fg, plus size-based text size (text-xs for sm, text-sm for md, text-base for lg).</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="hintErrorKlassHtml()"
+      [htmlContent]="labelSlotHtml()"
+      [tsContent]="labelSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
         <form [formGroup]="form" class="w-full max-w-md">
-          <tng-form-field label="Email" hint="We'll never share it." error="Invalid email" hintKlass="text-xs text-primary/80" errorKlass="text-sm font-semibold text-red-600">
+          <tng-form-field label="Custom label" [required]="true" [slot]="labelSlot">
+            <tng-text-input formControlName="name" placeholder="Your name" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- requiredIndicator slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">requiredIndicator slot</h3>
+      <tng-tag label="asterisk"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The required asterisk (*) indicator. Default: text-danger.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="requiredIndicatorSlotHtml()"
+      [tsContent]="requiredIndicatorSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Required field" [required]="true" [slot]="requiredIndicatorSlot">
+            <tng-text-input formControlName="name" placeholder="Your name" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- controlWrapper slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">controlWrapper slot</h3>
+      <tng-tag label="control wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The wrapper around the projected control (input/select/etc), prefix, and suffix. Default includes border, focus ring, size-based padding, appearance styles, and automatically applies border-danger and focus-within:ring-danger when invalid, opacity-60 pointer-events-none when disabled.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="controlWrapperSlotHtml()"
+      [tsContent]="controlWrapperSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" [slot]="controlWrapperSlot">
+            <tng-text-input formControlName="email" placeholder="Email" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- prefix slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">prefix slot</h3>
+      <tng-tag label="prefix"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The prefix slot wrapper (content projected via [tngPrefix]). Default: text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="prefixSlotHtml()"
+      [tsContent]="prefixSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" [slot]="prefixSlot">
+            <span tngPrefix>@</span>
+            <tng-text-input formControlName="email" placeholder="Email" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- suffix slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">suffix slot</h3>
+      <tng-tag label="suffix"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The suffix slot wrapper (content projected via [tngSuffix]). Default: text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="suffixSlotHtml()"
+      [tsContent]="suffixSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" [slot]="suffixSlot">
+            <tng-text-input formControlName="email" placeholder="Email" />
+            <span tngSuffix>✓</span>
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- messages slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">messages slot</h3>
+      <tng-tag label="messages footer"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The container for helper text and error messages. Default: mt-1 flex items-start justify-between gap-3.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="messagesSlotHtml()"
+      [tsContent]="messagesSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" hint="Helper text" [slot]="messagesSlot">
+            <tng-text-input formControlName="email" placeholder="Email" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- helperText slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">helperText slot</h3>
+      <tng-tag label="helper text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The helper/hint text element. Default: text-xs text-disable.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="helperTextSlotHtml()"
+      [tsContent]="helperTextSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" hint="We'll never share it." [slot]="helperTextSlot">
+            <tng-text-input formControlName="email" placeholder="Email" />
+          </tng-form-field>
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- errorText slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">errorText slot</h3>
+      <tng-tag label="error text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The error message text element. Default: text-xs text-danger.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="errorTextSlotHtml()"
+      [tsContent]="errorTextSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-form-field label="Email" error="Invalid email" [slot]="errorTextSlot">
             <tng-text-input formControlName="email" placeholder="Email" />
           </tng-form-field>
         </form>

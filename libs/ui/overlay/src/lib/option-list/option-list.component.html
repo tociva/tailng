@@ -4,7 +4,7 @@
 @if (modal()) {
   <tng-overlay-panel
     [modal]="true"
-    [klass]="panelKlass()"
+    [slot]="overlayPanelSlot()"
     [restoreFocus]="restoreFocus()"
     [autoCapture]="autoCapture()"
     [deferCaptureElements]="deferCaptureElements()"
@@ -12,7 +12,7 @@
     <div
       #listbox
       role="listbox"
-      [class]="containerKlass()"
+      [class]="containerClassFinal()"
       [attr.tabindex]="tabindex()"
       (keydown)="onKeydown($event)"
       [attr.aria-label]="ariaLabel() || null"
@@ -42,7 +42,7 @@
           </div>
         }
       } @else {
-        <div [class]="emptyKlass()">{{ emptyText() }}</div>
+        <div [class]="emptyClassFinal()">{{ emptyText() }}</div>
       }
     </div>
   </tng-overlay-panel>
@@ -50,7 +50,7 @@
   <div
     #listbox
     role="listbox"
-    [class]="containerKlass()"
+    [class]="containerClassFinal()"
     [attr.tabindex]="tabindex()"
     (keydown)="onKeydown($event)"
     [attr.aria-label]="ariaLabel() || null"
@@ -80,7 +80,7 @@
         </div>
       }
     } @else {
-      <div [class]="emptyKlass()">{{ emptyText() }}</div>
+      <div [class]="emptyClassFinal()">{{ emptyText() }}</div>
     }
   </div>
 }

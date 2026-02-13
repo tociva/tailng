@@ -28,14 +28,12 @@ export class CheckboxApiComponent implements AfterViewInit {
     { property: 'label', type: 'string', default: "''", description: 'Optional label text next to the checkbox' },
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'required', type: 'boolean', default: 'false', description: 'Required (HTML attribute)' },
-    { property: 'rootKlass', type: 'string', default: "'inline-flex items-center gap-2 cursor-pointer select-none'", description: 'Classes for the root <label>' },
-    { property: 'inputKlass', type: 'string', default: "''", description: 'Classes for the <input type="checkbox">' },
-    { property: 'labelKlass', type: 'string', default: "'text-sm text-fg'", description: 'Classes for the label <span>' },
+    { property: 'slot', type: 'TngSlotMap<TngCheckboxSlot>', default: '{}', description: 'Slot-based micro styling for root, input, and label' },
   ];
 
   readonly basicRows = signal<displayDetails[]>(this.seed.filter((p) => ['id', 'name', 'label'].includes(p.property)));
   readonly stateRows = signal<displayDetails[]>(this.seed.filter((p) => ['disabled', 'required'].includes(p.property)));
-  readonly klassRows = signal<displayDetails[]>(this.seed.filter((p) => ['rootKlass', 'inputKlass', 'labelKlass'].includes(p.property)));
+  readonly stylingRows = signal<displayDetails[]>(this.seed.filter((p) => ['slot'].includes(p.property)));
 
   readonly property = (r: displayDetails) => r.property;
   readonly type = (r: displayDetails) => r.type;

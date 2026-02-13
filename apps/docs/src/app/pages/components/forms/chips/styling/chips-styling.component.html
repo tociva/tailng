@@ -1,22 +1,38 @@
 <section class="space-y-6 text-fg">
+  <!-- Intro -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      <span class="font-mono">tng-chips</span> exposes klass hooks for the root, container (chips + input),
-      chip wrapper, chip label, remove button, and input. Use them to match your theme.
+      The <span class="font-mono">tng-chips</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys:
+      <span class="font-mono">container</span>,
+      <span class="font-mono">chipsWrapper</span>,
+      <span class="font-mono">chip</span>,
+      <span class="font-mono">chipLabel</span>,
+      <span class="font-mono">removeButton</span>,
+      <span class="font-mono">input</span>,
+      <span class="font-mono">overlayPanel</span>, and option-list slots
+      (<span class="font-mono">optionListContainer</span>,
+      <span class="font-mono">optionListItem</span>,
+      <span class="font-mono">optionListItemActive</span>,
+      <span class="font-mono">optionListItemInactive</span>,
+      <span class="font-mono">optionListEmpty</span>). Each slot targets a specific
+      element in the component structure.
     </p>
   </div>
 
+  <!-- container slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">containerKlass</h3>
-      <tng-tag label="chips + input"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">container slot</h3>
+      <tng-tag label="root wrapper"></tng-tag>
     </div>
-    <p class="text-sm text-fg">The main container holding chips and the text input. Default includes border, rounded, focus ring.</p>
+    <p class="text-sm text-fg">The root wrapper element. Default: relative.</p>
     <docs-example-block
       [docLink]="'https://example.com/docs'"
       [stackBlitzLink]="'https://stackblitz.com/example'"
-      [htmlContent]="containerKlassHtml()"
+      [htmlContent]="containerSlotHtml()"
+      [tsContent]="containerSlotTs()"
     >
       <span tngExampleTitle>Example</span>
       <div tngExampleDemo>
@@ -27,22 +43,253 @@
             [displayWith]="displayCountry"
             [allowFreeText]="false"
             (search)="onSearch($event)"
-            containerKlass="w-full min-h-[42px] px-3 py-2 flex flex-wrap gap-2 border-2 border-blue-500 rounded-lg bg-blue-50/30"
+            [slot]="containerSlot"
           />
         </form>
       </div>
     </docs-example-block>
   </div>
 
+  <!-- chipsWrapper slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">chipsWrapper slot</h3>
+      <tng-tag label="chips + input"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The main container holding chips and the text input. Default includes border, rounded, focus ring. Automatically applies opacity-60 and pointer-events-none when disabled.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="chipsWrapperSlotHtml()"
+      [tsContent]="chipsWrapperSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+            [slot]="chipsWrapperSlot"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- chip slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">chip slot</h3>
+      <tng-tag label="chip wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">Each chip wrapper element. Default includes inline-flex, items-center, gap, padding, rounded, background, border.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="chipSlotHtml()"
+      [tsContent]="chipSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+            [slot]="chipSlot"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- chipLabel slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">chipLabel slot</h3>
+      <tng-tag label="chip text"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The chip label text span. Default: truncate max-w-[200px].</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="chipLabelSlotHtml()"
+      [tsContent]="chipLabelSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+            [slot]="chipLabelSlot"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- removeButton slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">removeButton slot</h3>
+      <tng-tag label="remove button"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The remove (×) button. Default: ml-1 text-disable hover:text-fg.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="removeButtonSlotHtml()"
+      [tsContent]="removeButtonSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+            [slot]="removeButtonSlot"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- input slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">input slot</h3>
+      <tng-tag label="text input"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">The text input element. Default: flex-1 min-w-[140px] px-2 py-2 outline-none bg-transparent.</p>
+    <docs-example-block
+      [docLink]="'https://example.com/docs'"
+      [stackBlitzLink]="'https://stackblitz.com/example'"
+      [htmlContent]="inputSlotHtml()"
+      [tsContent]="inputSlotTs()"
+    >
+      <span tngExampleTitle>Example</span>
+      <div tngExampleDemo>
+        <form [formGroup]="form" class="w-full max-w-md">
+          <tng-chips
+            formControlName="countries"
+            [options]="options()"
+            [displayWith]="displayCountry"
+            [allowFreeText]="false"
+            (search)="onSearch($event)"
+            [slot]="inputSlot"
+          />
+        </form>
+      </div>
+    </docs-example-block>
+  </div>
+
+  <!-- overlayPanel slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">overlayPanel slot</h3>
+      <tng-tag label="dropdown panel"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">overlayPanel</span> slot applies classes to the
+      <span class="font-mono text-foreground">tng-overlay-panel</span> component that wraps the option list.
+      This is the dropdown panel that appears when typing. Use this for customizing
+      the panel's appearance: borders, background colors, shadows, rounded corners, max-height, and overflow behavior.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="overlayPanelSlotHtml()"
+        [tsContent]="overlayPanelSlotTs()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-chips
+              formControlName="countries"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              [allowFreeText]="false"
+              (search)="onSearch($event)"
+              [slot]="overlayPanelSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+  </div>
+
+  <!-- option-list slots -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Option List Slots</h3>
+      <tng-tag label="dropdown options"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The chips component passes slot styling to the underlying
+      <span class="font-mono text-foreground">tng-option-list</span> component. Use these slots to customize
+      the appearance of the dropdown options: <span class="font-mono text-foreground">optionListContainer</span>
+      (listbox wrapper), <span class="font-mono text-foreground">optionListItem</span> (base option styling),
+      <span class="font-mono text-foreground">optionListItemActive</span> (focused option),
+      <span class="font-mono text-foreground">optionListItemInactive</span> (unfocused option), and
+      <span class="font-mono text-foreground">optionListEmpty</span> (empty state message).
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="optionListSlotHtml()"
+        [tsContent]="optionListSlotTs()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-chips
+              formControlName="countries"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              [allowFreeText]="false"
+              (search)="onSearch($event)"
+              [slot]="optionListSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      These slots are passed directly to the <span class="font-mono text-foreground">tng-option-list</span> component.
+      Default classes are provided by option-list; slot classes override or extend them.
+    </div>
+  </div>
+
   <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
-    <h3 class="text-sm font-semibold text-primary">Klass hooks</h3>
+    <h3 class="text-sm font-semibold text-primary">Slot hooks</h3>
     <ul class="space-y-1 text-sm text-fg">
-      <li><span class="font-mono">rootKlass</span> — root wrapper</li>
-      <li><span class="font-mono">containerKlass</span> — chips + input container</li>
-      <li><span class="font-mono">chipKlass</span> — each chip</li>
-      <li><span class="font-mono">chipLabelKlass</span> — chip label text</li>
-      <li><span class="font-mono">removeButtonKlass</span> — remove (×) button</li>
-      <li><span class="font-mono">inputKlass</span> — text input</li>
+      <li><span class="font-mono">container</span> — root wrapper</li>
+      <li><span class="font-mono">chipsWrapper</span> — chips + input container</li>
+      <li><span class="font-mono">chip</span> — each chip</li>
+      <li><span class="font-mono">chipLabel</span> — chip label text</li>
+      <li><span class="font-mono">removeButton</span> — remove (×) button</li>
+      <li><span class="font-mono">input</span> — text input</li>
+      <li><span class="font-mono">overlayPanel</span> — dropdown panel</li>
+      <li><span class="font-mono">optionListContainer</span> — option list wrapper</li>
+      <li><span class="font-mono">optionListItem</span> — base option styling</li>
+      <li><span class="font-mono">optionListItemActive</span> — focused option</li>
+      <li><span class="font-mono">optionListItemInactive</span> — unfocused option</li>
+      <li><span class="font-mono">optionListEmpty</span> — empty state</li>
     </ul>
   </div>
 </section>

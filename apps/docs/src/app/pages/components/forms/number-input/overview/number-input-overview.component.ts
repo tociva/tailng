@@ -1,7 +1,8 @@
 import { Component, computed } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TngTag } from '@tailng-ui/ui/primitives';
-import { TngNumberInput } from '@tailng-ui/ui/form';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+import { TngIcon } from '@tailng-ui/icons/icon';
 import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/example-block/example-block.component';
 
 @Component({
@@ -11,6 +12,7 @@ import { ExampleBlockComponent, TngExampleDemo } from '../../../../../shared/exa
   imports: [
     ReactiveFormsModule,
     TngNumberInput,
+    TngIcon,
     TngTag,
     ExampleBlockComponent,
     TngExampleDemo,
@@ -59,6 +61,14 @@ export class NumberInputDemoComponent {
 `,
   );
 
+  readonly customSlot: TngSlotMap<TngNumberInputSlot> = {
+    frame: ['border-2', 'border-primary', 'rounded-lg'],
+  };
+
+  readonly prefixSlot: TngSlotMap<TngNumberInputSlot> = {
+    input: ['text-blue-700'],
+  };
+
   readonly minMaxStepHtml = computed(
     () => `
 <form [formGroup]="form">
@@ -68,7 +78,7 @@ export class NumberInputDemoComponent {
     [min]="0"
     [max]="1000"
     [step]="0.01"
-    klass="border-2 border-primary rounded-lg"
+    [slot]="customSlot"
   />
 </form>
 `,
@@ -76,10 +86,45 @@ export class NumberInputDemoComponent {
 
   readonly minMaxStepTs = computed(
     () => `
+import { TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+
 form = new FormGroup({
   amount: new FormControl<number | null>(null, { nonNullable: false }),
 });
+
+readonly customSlot: TngSlotMap<TngNumberInputSlot> = {
+  frame: ['border-2', 'border-primary', 'rounded-lg'],
+};
+
 // min/max clamp on blur; step affects browser stepper and validation.
+`,
+  );
+
+  readonly prefixExampleHtml = computed(
+    () => `
+<form [formGroup]="form">
+  <tng-number-input
+    placeholder="Amount"
+    [slot]="prefixSlot"
+  >
+    <tng-icon
+      tngPrefix
+      name="bootstrapCurrencyDollar"
+      class="ml-3 text-muted"
+    />
+  </tng-number-input>
+</form>
+`,
+  );
+
+  readonly prefixExampleTs = computed(
+    () => `
+import { TngIcon } from '@tailng-ui/icons/icon';
+import { TngNumberInput, TngSlotMap, TngNumberInputSlot } from '@tailng-ui/ui/form';
+
+readonly prefixSlot: TngSlotMap<TngNumberInputSlot> = {
+  input: ['text-blue-700'],
+};
 `,
   );
 }

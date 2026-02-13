@@ -26,7 +26,7 @@ export class TextareaApiComponent implements AfterViewInit {
     { property: 'placeholder', type: 'string', default: "''", description: 'Placeholder text' },
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'rows', type: 'number', default: '4', description: 'Number of visible rows' },
-    { property: 'klass', type: 'string', default: "''", description: 'Additional CSS classes for the textarea' },
+    { property: 'slot', type: 'TngSlotMap<TngTextareaSlot>', default: '{}', description: 'Slot-based micro styling for textarea' },
   ];
 
   readonly inputRows = signal<displayDetails[]>(this.seed);

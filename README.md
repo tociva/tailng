@@ -1,5 +1,20 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/tailng/tailng-ui/main/apps/docs/src/assets/logo.svg" width="128" alt="TailNG logo" />
+  <img
+    src="https://raw.githubusercontent.com/tailng/tailng-ui/main/apps/docs/src/assets/logo.svg"
+    width="120"
+    alt="TailNG logo"
+  />
+
+  <h1>TailNG</h1>
+
+  <p>
+    <strong>Scalability of Angular. Simplicity of Tailwind.</strong>
+  </p>
+
+  <p>
+    A modern Angular 21 component system built with Tailwind CSS —
+    designed for large applications and design systems.
+  </p>
 </div>
 
 # TailNG – Angular 21
@@ -304,4 +319,10 @@ cd dist/libs/cdk   && npm publish --access public
 cd ../theme        && npm publish --access public
 cd ../icons        && npm publish --access public
 cd ../ui           && npm publish --access public
+```
+
+### Test Automation ###
+```sh
+yarn nx test ui
+yarn nx test ui --testPathPattern=libs/ui/form/src/lib/autocomplete/autocomplete.component.spec.ts
 ```

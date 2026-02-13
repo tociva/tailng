@@ -1,9 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { TngAutocomplete } from '@tailng-ui/ui/form';
+import { TngAutocomplete, TngSlotMap, TngAutocompleteSlot } from '@tailng-ui/ui/form';
 
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 import { toFlagEmoji } from '../../util/common.util';
+
+const countryCodeToFlag = (code: string): string =>
+  code
+    .toUpperCase()
+    .replace(/./g, char =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
 
 @Component({
   selector: 'playground-autocomplete-demo',
@@ -60,8 +67,22 @@ export class AutocompleteDemoComponent {
     this.options2.set(filtered);
   }
 
-  displayCountryText = (c: Country) => `(${c.code}) ${c.name}`;
+  displayCountryText = (c: Country) =>
+  `${countryCodeToFlag(c.code)} ${c.name}`;
 
+  /* ─────────────────────────
+   * Demo: slot overrides (keep in TS)
+   * ───────────────────────── */
+  readonly customSlot: TngSlotMap<TngAutocompleteSlot> = {
+    container: 'border-2 border-blue-200',
+    inputWrapper: 'bg-gray-50 rounded-md',
+    input: 'border-2 border-blue-500 rounded-lg shadow-md',
+    selectedTpl: 'bg-blue-50 rounded-md',
+    overlayPanel: 'border-2 border-green-500 bg-green-50',
+    optionListContainer: 'py-2 max-h-48',
+    optionListItem: 'px-4 py-2',
+    optionListItemActive: 'bg-blue-100 text-blue-900',
+  };
   
   onClosed(reason: string) {
     console.log('Autocomplete closed:', reason);

@@ -30,19 +30,14 @@ export class DatepickerApiComponent implements AfterViewInit {
     { property: 'previewFormat', type: 'string', default: "'DD MMM YYYY'", description: 'Preview in panel' },
     { property: 'locale', type: 'string | null', default: 'null', description: 'Optional locale for formatting' },
     { property: 'dateAdapter', type: 'TngDateAdapter | null', default: 'null', description: 'Custom date adapter' },
-    { property: 'inputKlass', type: 'string', default: "''", description: 'Text input classes' },
-    { property: 'toggleKlass', type: 'string', default: "''", description: 'Calendar toggle button' },
-    { property: 'hostKlass', type: 'string', default: "''", description: 'Host wrapper' },
-    { property: 'panelKlass', type: 'string', default: "''", description: 'Overlay panel' },
-    { property: 'panelFrameKlass', type: 'string', default: "''", description: 'Panel frame (border, shadow)' },
-    { property: 'dayCellKlass', type: 'string', default: "''", description: 'Calendar day cell' },
+    { property: 'slot', type: 'TngSlotMap<TngDatepickerSlot>', default: '{}', description: 'Slot-based micro styling for container, disabled, field, input, toggle, toggleIcon, overlayPanel, panelFrame, panelLayout, monthRail, monthList, monthItem, calendar, title, weekdayRow, weekdayCell, dayGrid, dayCell, previewText, actionBar, cancel, confirm, yearRail, yearNavPrev, yearList, yearItem, and yearNavNext' },
   ];
 
   readonly mainRows = signal<displayDetails[]>(this.seed.filter((p) =>
     ['min', 'max', 'disabled', 'displayFormat', 'previewFormat', 'locale', 'dateAdapter'].includes(p.property)
   ));
-  readonly klassRows = signal<displayDetails[]>(this.seed.filter((p) =>
-    ['inputKlass', 'toggleKlass', 'hostKlass', 'panelKlass', 'panelFrameKlass', 'dayCellKlass'].includes(p.property)
+  readonly stylingRows = signal<displayDetails[]>(this.seed.filter((p) =>
+    ['slot'].includes(p.property)
   ));
 
   readonly property = (r: displayDetails) => r.property;

@@ -28,7 +28,7 @@ export class AutocompleteApiComponent implements AfterViewInit {
     { property: 'options', type: 'T[]', default: '[]', description: 'Options shown in the dropdown' },
     { property: 'displayWith', type: '(item: T) => string', default: '(v) => String(v)', description: 'String for input and list display' },
     { property: 'placeholder', type: 'string', default: "'Start typing…'", description: 'Input placeholder' },
-    { property: 'inputKlass', type: 'string', default: "''", description: 'CSS classes for the input element' },
+    { property: 'slot', type: 'TngSlotMap<TngAutocompleteSlot>', default: '{}', description: 'Slot-based micro styling for container, inputWrapper, input, selectedTpl, overlayPanel, and option-list slots (optionListContainer, optionListItem, optionListItemActive, optionListItemInactive, optionListEmpty)' },
     { property: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' },
     { property: 'search', type: 'OutputEventEmitter<string>', default: '—', description: 'Emits current input text when user types' },
     { property: 'selected', type: 'OutputEventEmitter<T>', default: '—', description: 'Emits selected item (non-form usage)' },
@@ -36,7 +36,7 @@ export class AutocompleteApiComponent implements AfterViewInit {
   ];
 
   readonly inputRows = signal<displayDetails[]>(this.seed.filter((p) =>
-    ['options', 'displayWith', 'placeholder', 'inputKlass', 'disabled'].includes(p.property)
+    ['options', 'displayWith', 'placeholder', 'slot', 'disabled'].includes(p.property)
   ));
   readonly outputRows = signal<displayDetails[]>(this.seed.filter((p) =>
     ['search', 'selected', 'closed'].includes(p.property)

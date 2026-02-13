@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { TngChips } from '@tailng-ui/ui/form';
+import { TngChips, TngSlotMap, TngChipsSlot } from '@tailng-ui/ui/form';
 import { Country, COUNTRY_LIST } from '../../util/country-list';
 import { toFlagEmoji } from '../../util/common.util';
 
@@ -89,4 +89,20 @@ export class ChipsDemoComponent {
   onChipRemoved2(country: Country) {
     console.log('Country removed:', country);
   }
+
+  /* ─────────────────────────
+   * Demo: slot overrides (keep in TS)
+   * ───────────────────────── */
+  readonly customSlot: TngSlotMap<TngChipsSlot> = {
+    container: 'border-2 border-blue-200 p-2',
+    chipsWrapper: 'border-2 border-blue-500 rounded-lg bg-blue-50/30',
+    chip: 'rounded-full bg-blue-100 border border-blue-300',
+    chipLabel: 'font-semibold text-blue-900',
+    removeButton: 'text-red-600 hover:text-red-800',
+    input: 'border-2 border-green-500 rounded-lg',
+    overlayPanel: 'border-2 border-green-500 bg-green-50',
+    optionListContainer: 'py-2 max-h-48',
+    optionListItem: 'px-4 py-2',
+    optionListItemActive: 'bg-blue-100 text-blue-900',
+  };
 }

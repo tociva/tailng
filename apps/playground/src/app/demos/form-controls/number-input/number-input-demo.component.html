@@ -16,6 +16,28 @@
       }
     </section>
 
+    <section>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Amount with Prefix Icon
+      </label>
+
+      <tng-number-input
+        formControlName="amount"
+        placeholder="Amount…"
+        [slot]="amountSlot"
+      >
+        <tng-icon
+          tngPrefix
+          name="bootstrapCurrencyDollar"
+          class="ml-3 text-gray-400"
+        ></tng-icon>
+      </tng-number-input>
+
+      @if (amountCtrl.touched && amountCtrl.invalid) {
+        <p class="text-sm mt-2 text-red-600">Amount is required</p>
+      }
+    </section>
+
     <pre class="text-xs bg-gray-50 border rounded p-3 overflow-auto">
 Value: {{ form.value | json }}
 </pre>

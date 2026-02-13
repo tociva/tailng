@@ -11,7 +11,7 @@
   [closeOnOutsideClick]="false"
   [closeOnEscape]="false"
 >
-  <tng-overlay-panel [klass]="surfaceKlass() + ' ' + panelKlass()">
+  <tng-overlay-panel [slot]="{ panel: surfaceKlass() + ' ' + panelKlass() }">
     @if (tpl()) {
       <ng-container [ngTemplateOutlet]="tpl()"></ng-container>
     } @else {

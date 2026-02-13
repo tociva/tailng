@@ -1,8 +1,8 @@
 <textarea
-  [disabled]="isDisabled()"
+  [disabled]="disabledFinal()"
   [placeholder]="placeholder()"
   [rows]="rows()"
-  [class]="classes()"
+  [class]="textareaClassFinal()"
   [value]="value()"
   (input)="onInput($event)"
   (blur)="onBlur()"

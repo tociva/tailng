@@ -1,29 +1,42 @@
 <section class="space-y-6 text-fg">
+  <!-- Intro -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      The <span class="font-mono">tng-autocomplete</span> component exposes a single
-      <span class="font-mono">inputKlass</span> input. Classes are merged with the default
-      input styles. Use it for borders, width, rounded corners, and focus styling.
+      The <span class="font-mono">tng-autocomplete</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys:
+      <span class="font-mono">container</span>,
+      <span class="font-mono">inputWrapper</span>,
+      <span class="font-mono">input</span>,
+      <span class="font-mono">selectedTpl</span>,
+      <span class="font-mono">overlayPanel</span>, and option-list slots
+      (<span class="font-mono">optionListContainer</span>,
+      <span class="font-mono">optionListItem</span>,
+      <span class="font-mono">optionListItemActive</span>,
+      <span class="font-mono">optionListItemInactive</span>,
+      <span class="font-mono">optionListEmpty</span>). Each slot targets a specific
+      element in the component structure.
     </p>
   </div>
 
+  <!-- container slot -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">inputKlass</h3>
-      <tng-tag label="input element"></tng-tag>
+      <h3 class="text-sm font-semibold text-primary">container slot</h3>
+      <tng-tag label="wrapper"></tng-tag>
     </div>
     <p class="text-sm text-fg">
-      <span class="font-mono">inputKlass</span> applies additional CSS classes to the
-      text input. Defaults include border, padding, focus ring, and disabled state.
+      The <span class="font-mono">container</span> slot applies classes to the root
+      wrapper <span class="font-mono">&lt;div&gt;</span> that contains the entire
+      autocomplete structure. Use this for styling the container: positioning, layout, and spacing.
     </p>
     <div class="grid gap-4 lg:grid-cols-1">
       <docs-example-block
         [docLink]="'https://example.com/docs'"
         [stackBlitzLink]="'https://stackblitz.com/example'"
-        [htmlContent]="klassExampleHtml()"
-        [tsContent]="klassExampleTs()"
-        [styleContent]="klassExampleCss()"
+        [htmlContent]="containerSlotExampleHtml()"
+        [tsContent]="containerSlotExampleTs()"
+        [styleContent]="containerSlotExampleCss()"
       >
         <span tngExampleTitle>Example</span>
         <div tngExampleDemo>
@@ -34,7 +47,89 @@
               [displayWith]="displayCountry"
               placeholder="Search country…"
               (search)="onSearch($event)"
-              inputKlass="border-2 border-blue-500 rounded-lg shadow-md"
+              [slot]="containerSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
+      The default container class includes <span class="font-mono text-foreground">relative</span> for positioning the overlay.
+    </div>
+  </div>
+
+  <!-- inputWrapper slot -->
+  <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">inputWrapper slot</h3>
+      <tng-tag label="input wrapper"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono">inputWrapper</span> slot applies classes to the wrapper
+      <span class="font-mono">&lt;div&gt;</span> that contains the input element. This wrapper
+      handles disabled state styling (opacity and pointer-events). Use this slot for background colors,
+      borders, padding, and other wrapper-level styling that should apply around the input.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="inputWrapperSlotExampleHtml()"
+        [tsContent]="inputWrapperSlotExampleTs()"
+        [styleContent]="inputWrapperSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+              [slot]="inputWrapperSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      The wrapper automatically applies <span class="font-mono text-foreground">opacity-60</span> and
+      <span class="font-mono text-foreground">pointer-events-none</span> when disabled. Slot classes
+      are merged with these conditional classes.
+    </div>
+  </div>
+
+  <!-- input slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">input slot</h3>
+      <tng-tag label="input element"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">input</span> slot applies classes directly
+      to the <span class="font-mono text-foreground">&lt;input&gt;</span> element. Use this for borders, width, rounded corners, focus styling, padding, and other input-specific customizations.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="inputSlotExampleHtml()"
+        [tsContent]="inputSlotExampleTs()"
+        [styleContent]="inputSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+              [slot]="inputSlot"
             />
           </form>
         </div>
@@ -46,12 +141,151 @@
     </div>
   </div>
 
+  <!-- selectedTpl slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">selectedTpl slot</h3>
+      <tng-tag label="selected overlay"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">selectedTpl</span> slot applies classes to the overlay
+      <span class="font-mono text-foreground">&lt;div&gt;</span> that displays the selected value template
+      (when using <span class="font-mono text-foreground">#inputTpl</span>). This overlay appears inside the input
+      when a value is selected and the dropdown is closed. Use this for background colors, borders, rounded corners,
+      and other visual styling of the selected value display.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="selectedTplSlotExampleHtml()"
+        [tsContent]="selectedTplSlotExampleTs()"
+        [styleContent]="selectedTplSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="formWithTemplate" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="optionsWithTemplate()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearchWithTemplate($event)"
+              [slot]="selectedTplSlot"
+            >
+              <ng-template #inputTpl let-item>
+                <div class="flex items-center gap-2">
+                  <span class="opacity-70">({{ item.code }})</span>
+                  <span class="font-semibold">{{ item.name }}</span>
+                </div>
+              </ng-template>
+            </tng-autocomplete>
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      The <span class="font-mono text-foreground">selectedTpl</span> slot only applies when using the
+      <span class="font-mono text-foreground">#inputTpl</span> template. Default classes include positioning
+      (<span class="font-mono text-foreground">absolute</span>, <span class="font-mono text-foreground">inset-y-0</span>)
+      and layout (<span class="font-mono text-foreground">flex items-center</span>).
+    </div>
+  </div>
+
+  <!-- overlayPanel slot -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">overlayPanel slot</h3>
+      <tng-tag label="dropdown panel"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The <span class="font-mono text-foreground">overlayPanel</span> slot applies classes to the
+      <span class="font-mono text-foreground">tng-overlay-panel</span> component that wraps the option list.
+      This is the dropdown panel that appears when the autocomplete is open. Use this for customizing
+      the panel's appearance: borders, background colors, shadows, rounded corners, max-height, and overflow behavior.
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="overlayPanelSlotExampleHtml()"
+        [tsContent]="overlayPanelSlotExampleTs()"
+        [styleContent]="overlayPanelSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+              [slot]="overlayPanelSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      The overlay panel slot is passed to the underlying <span class="font-mono text-foreground">tng-overlay-panel</span> component.
+      Default classes include border, shadow, rounded corners, max-height, and overflow handling.
+    </div>
+  </div>
+
+  <!-- option-list slots -->
+  <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-primary">Option List Slots</h3>
+      <tng-tag label="dropdown options"></tng-tag>
+    </div>
+    <p class="text-sm text-fg">
+      The autocomplete component passes slot styling to the underlying
+      <span class="font-mono text-foreground">tng-option-list</span> component. Use these slots to customize
+      the appearance of the dropdown options: <span class="font-mono text-foreground">optionListContainer</span>
+      (listbox wrapper), <span class="font-mono text-foreground">optionListItem</span> (base option styling),
+      <span class="font-mono text-foreground">optionListItemActive</span> (focused option),
+      <span class="font-mono text-foreground">optionListItemInactive</span> (unfocused option), and
+      <span class="font-mono text-foreground">optionListEmpty</span> (empty state message).
+    </p>
+    <div class="grid gap-4 lg:grid-cols-1">
+      <docs-example-block
+        [docLink]="'https://example.com/docs'"
+        [stackBlitzLink]="'https://stackblitz.com/example'"
+        [htmlContent]="optionListSlotExampleHtml()"
+        [tsContent]="optionListSlotExampleTs()"
+        [styleContent]="optionListSlotExampleCss()"
+      >
+        <span tngExampleTitle>Example</span>
+        <div tngExampleDemo>
+          <form [formGroup]="form" class="w-full max-w-md">
+            <tng-autocomplete
+              formControlName="country"
+              [options]="options()"
+              [displayWith]="displayCountry"
+              placeholder="Search country…"
+              (search)="onSearch($event)"
+              [slot]="optionListSlot"
+            />
+          </form>
+        </div>
+      </docs-example-block>
+    </div>
+    <div class="space-y-2 border-l-4 border-primary bg-alternate-background px-4 py-4 rounded-md text-fg">
+      <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
+      These slots are passed directly to the <span class="font-mono text-foreground">tng-option-list</span> component.
+      Default classes are provided by option-list; slot classes override or extend them.
+    </div>
+  </div>
+
   <div class="rounded-xl border bg-alternate-background p-6 space-y-3">
     <h3 class="text-sm font-semibold text-primary">Best practices</h3>
     <ul class="space-y-2 text-sm text-fg">
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>
-        <span>Use <span class="font-mono text-foreground">inputKlass</span> for input appearance; overlay panel styling is controlled by overlay/option-list components.</span>
+        <span>Use <span class="font-mono text-foreground">input</span> slot for input appearance and <span class="font-mono text-foreground">overlayPanel</span> slot for dropdown panel styling.</span>
       </li>
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>

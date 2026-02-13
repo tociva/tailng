@@ -31,20 +31,12 @@ export class FormFieldApiComponent implements AfterViewInit {
     { property: 'required', type: 'boolean', default: 'false', description: 'Shows required asterisk' },
     { property: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Field size' },
     { property: 'appearance', type: "'outline' | 'filled'", default: "'outline'", description: 'Visual appearance' },
-    { property: 'rootKlass', type: 'string', default: "'w-full'", description: 'Root wrapper classes' },
-    { property: 'labelKlass', type: 'string', default: "'text-sm font-medium text-fg'", description: 'Label classes' },
-    { property: 'requiredMarkKlass', type: 'string', default: "'text-danger'", description: 'Asterisk classes' },
-    { property: 'hintKlass', type: 'string', default: "'text-xs text-disable'", description: 'Hint text classes' },
-    { property: 'errorKlass', type: 'string', default: "'text-xs text-danger'", description: 'Error text classes' },
-    { property: 'controlShellKlass', type: 'string', default: "''", description: 'Control wrapper classes' },
-    { property: 'prefixKlass', type: 'string', default: "'text-disable'", description: 'Prefix slot classes' },
-    { property: 'suffixKlass', type: 'string', default: "'text-disable'", description: 'Suffix slot classes' },
-    { property: 'footerKlass', type: 'string', default: "'mt-1 flex...'", description: 'Hint/error footer classes' },
+    { property: 'slot', type: 'TngSlotMap<TngFormFieldSlot>', default: '{}', description: 'Slot-based micro styling for formField, label, requiredIndicator, controlWrapper, prefix, suffix, messages, helperText, errorText' },
   ];
 
   readonly contentRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['label', 'hint', 'error', 'invalid', 'disabled', 'required'].includes(p.property)));
   readonly variantRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['size', 'appearance'].includes(p.property)));
-  readonly klassRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['rootKlass', 'labelKlass', 'requiredMarkKlass', 'hintKlass', 'errorKlass', 'controlShellKlass', 'prefixKlass', 'suffixKlass', 'footerKlass'].includes(p.property)));
+  readonly stylingRows = signal<DisplayDetails[]>(this.seed.filter((p) => ['slot'].includes(p.property)));
 
   readonly property = (r: DisplayDetails) => r.property;
   readonly type = (r: DisplayDetails) => r.type;

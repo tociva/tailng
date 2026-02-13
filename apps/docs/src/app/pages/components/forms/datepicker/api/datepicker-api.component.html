@@ -28,11 +28,11 @@
       </div>
     </section>
 
-    <section id="klass-hooks" class="flex flex-col gap-4 text-fg">
-      <h3 class="text-base font-semibold text-primary">Klass hooks (selection)</h3>
-      <p class="text-sm text-fg">The datepicker exposes many klass inputs for the input, toggle, and full panel (month rail, calendar, year list, buttons, etc.). Shown below are the most commonly used.</p>
+    <section id="styling" class="flex flex-col gap-4 text-fg">
+      <h3 class="text-base font-semibold text-primary">Styling</h3>
+      <p class="text-sm text-fg">The datepicker uses slot-based micro styling via the <span class="font-mono">slot</span> input. The slot object accepts keys for all internal elements: container, disabled, field, input, toggle, toggleIcon, overlayPanel, panelFrame, panelLayout, monthRail, monthList, monthItem, calendar, title, weekdayRow, weekdayCell, dayGrid, dayCell, previewText, actionBar, cancel, confirm, yearRail, yearNavPrev, yearList, yearItem, and yearNavNext.</p>
       <div class="rounded-md border text-fg">
-        <tng-table [rows]="klassRows()">
+        <tng-table [rows]="stylingRows()">
           <tng-col id="property" header="Property" [value]="property"></tng-col>
           <tng-col id="type" header="Type" [value]="type"></tng-col>
           <tng-col id="default" header="Default" [value]="default"></tng-col>
@@ -51,7 +51,7 @@
     <h3 class="mb-3 text-xs font-semibold tracking-wide">API Overview</h3>
     <ul class="space-y-2 text-sm text-fg">
       <li><a href="#inputs" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Inputs</a></li>
-      <li><a href="#klass-hooks" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Klass hooks</a></li>
+      <li><a href="#styling" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Styling</a></li>
       <li><a href="#form-integration" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Forms integration</a></li>
     </ul>
   </aside>

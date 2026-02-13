@@ -18,12 +18,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   TngConnectedOverlay,
   TngOptionList,
+  TngOptionListSlot,
   TngOverlayPanel,
   TngOverlayRef,
   type TngOverlayCloseReason,
 } from '@tailng-ui/ui/overlay';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
 import { OptionTplContext } from '@tailng-ui/cdk/util';
+import { TngChipsSlot } from './chips.slots';
 
 export type ChipsCloseReason = TngOverlayCloseReason;
 export type ChipTplContext<T> = { $implicit: T; index: number };
@@ -85,32 +88,10 @@ export class TngChips<T> implements ControlValueAccessor {
   readonly chipRemoved = output<T>();
   readonly closed = output<ChipsCloseReason>();
 
-  /* =====================
-   * Theming
-   * ===================== */
-  readonly rootKlass = input<string>('relative');
-
-  readonly containerKlass = input<string>(
-    [
-      'w-full min-h-[42px] px-2 py-1 text-sm',
-      'flex flex-wrap items-center gap-2',
-      'border border-border rounded-md',
-      'bg-bg text-fg',
-      'focus-within:ring-2 focus-within:ring-primary',
-    ].join(' ')
-  );
-
-  readonly chipKlass = input<string>(
-    [
-      'inline-flex items-center gap-1 px-2 py-1 rounded-md',
-      'bg-alternate-background border border-border',
-      'text-sm',
-    ].join(' ')
-  );
-
-  readonly chipLabelKlass = input<string>('truncate max-w-[200px]');
-  readonly removeButtonKlass = input<string>('ml-1 text-disable hover:text-fg');
-  readonly inputKlass = input<string>('flex-1 min-w-[140px] px-2 py-2 outline-none bg-transparent');
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngChipsSlot>>({});
 
   /* =====================
    * Internal State
@@ -119,17 +100,31 @@ export class TngChips<T> implements ControlValueAccessor {
   readonly isOpen = signal(false);
   readonly focusedIndex = signal(-1);
 
-  protected readonly isDisabled = signal(false);
-
   private readonly chipsValue = signal<T[]>([]);
   private usingCva = false;
 
   private onChange: (value: T[]) => void = () => {};
   private onTouched: () => void = () => {};
 
+  /* ─────────────────────────
+   * Disabled state (forms + input)
+   * ───────────────────────── */
+  private readonly _formDisabled = signal<boolean | null>(null);
+
+  /**
+   * Final disabled value:
+   * - Standalone usage: uses `disabled()` input
+   * - Reactive Forms (CVA): uses `setDisabledState` value once called
+   */
+  readonly disabledFinal = computed(() => {
+    const form = this._formDisabled();
+    return form === null ? this.disabled() : form;
+  });
+
+  protected readonly isDisabled = computed(() => this.disabledFinal());
+
   constructor() {
     effect(() => {
-      this.isDisabled.set(this.disabled());
       if (this.isDisabled()) this.close('programmatic');
     });
 
@@ -158,8 +153,7 @@ export class TngChips<T> implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
-    if (isDisabled) this.close('programmatic');
+    this._formDisabled.set(isDisabled);
   }
 
   /* =====================
@@ -171,13 +165,105 @@ export class TngChips<T> implements ControlValueAccessor {
 
   readonly placeholderText = computed(() => (this.chipsValue().length ? '' : this.placeholder()));
 
-  readonly containerClasses = computed(() =>
-    (this.containerKlass() + (this.isDisabled() ? ' opacity-60 pointer-events-none' : '')).trim()
+  /* ─────────────────────────
+   * Slot finals (defaults + overrides)
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx(
+      'relative',
+      this.slotClass('container'),
+    ),
   );
 
-  /* =====================
+  readonly chipsWrapperClassFinal = computed(() =>
+    this.cx(
+      'w-full min-h-[42px] px-2 py-1 text-sm',
+      'flex flex-wrap items-center gap-2',
+      'border border-border rounded-md',
+      'bg-bg text-fg',
+      'focus-within:ring-2 focus-within:ring-primary',
+      this.isDisabled() ? 'opacity-60 pointer-events-none' : '',
+      this.slotClass('chipsWrapper'),
+    ),
+  );
+
+  readonly chipClassFinal = computed(() =>
+    this.cx(
+      'inline-flex items-center gap-1 px-2 py-1 rounded-md',
+      'bg-alternate-background border border-border',
+      'text-sm',
+      this.slotClass('chip'),
+    ),
+  );
+
+  readonly chipLabelClassFinal = computed(() =>
+    this.cx(
+      'truncate max-w-[200px]',
+      this.slotClass('chipLabel'),
+    ),
+  );
+
+  readonly removeButtonClassFinal = computed(() =>
+    this.cx(
+      'ml-1 text-disable hover:text-fg',
+      this.slotClass('removeButton'),
+    ),
+  );
+
+  readonly inputClassFinal = computed(() =>
+    this.cx(
+      'flex-1 min-w-[140px] px-2 py-2 outline-none bg-transparent',
+      this.slotClass('input'),
+    ),
+  );
+
+  /* ─────────────────────────
+   * Overlay panel slot (passed to tng-overlay-panel)
+   * ───────────────────────── */
+  readonly overlayPanelSlot = computed(() => {
+    const panelSlot = this.slotClass('overlayPanel');
+    return panelSlot ? { panel: panelSlot } : {};
+  });
+
+  /* ─────────────────────────
+   * Option list slot (passed to tng-option-list)
+   * ───────────────────────── */
+  readonly optionListSlot = computed((): TngSlotMap<TngOptionListSlot> => {
+    const slotMap: TngSlotMap<TngOptionListSlot> = {};
+    
+    const container = this.slotClass('optionListContainer');
+    if (container) slotMap.container = container;
+    
+    const option = this.slotClass('optionListItem');
+    if (option) slotMap.option = option;
+    
+    const optionActive = this.slotClass('optionListItemActive');
+    if (optionActive) slotMap.optionActive = optionActive;
+    
+    const optionInactive = this.slotClass('optionListItemInactive');
+    if (optionInactive) slotMap.optionInactive = optionInactive;
+    
+    const empty = this.slotClass('optionListEmpty');
+    if (empty) slotMap.empty = empty;
+    
+    return slotMap;
+  });
+
+  /* ─────────────────────────
    * Helpers
-   * ===================== */
+   * ───────────────────────── */
+  private slotClass(key: TngChipsSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
+
   display(item: T): string {
     return this.displayWith()(item);
   }

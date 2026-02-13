@@ -7,13 +7,13 @@
         input that implements <span class="font-mono text-primary/20">ControlValueAccessor</span>
         for Angular forms. It supports <span class="font-mono text-primary/20">min</span>,
         <span class="font-mono text-primary/20">max</span>, <span class="font-mono text-primary/20">step</span>,
-        optional clamping on blur, and Tailng’s klass-based theming.
+        optional clamping on blur, and Tailng’s slot-based micro styling.
       </p>
       <div class="flex flex-wrap gap-2 pt-1">
         <tng-tag label="CVA" color="default"></tng-tag>
         <tng-tag label="min / max / step" color="default"></tng-tag>
         <tng-tag label="Clamp on blur" color="default"></tng-tag>
-        <tng-tag label="Klass hooks" color="default"></tng-tag>
+        <tng-tag label="Slot styling" color="default"></tng-tag>
         <tng-tag label="Standalone" color="default"></tng-tag>
       </div>
     </div>
@@ -41,7 +41,6 @@
                 [min]="0"
                 [max]="100"
                 [step]="1"
-                klass="border border-border rounded-md px-3 w-48"
               />
             </form>
             <p class="text-xs text-muted mt-2">
@@ -66,12 +65,37 @@
                 [min]="0"
                 [max]="1000"
                 [step]="0.01"
-                klass="border border-border rounded-md px-3 w-56"
+                [slot]="customSlot"
               />
             </form>
             <p class="text-xs text-muted mt-2">
               Use <span class="font-mono text-primary/20">[step]="0.01"</span> for decimals;
               value is clamped to min/max on blur.
+            </p>
+          </div>
+        </docs-example-block>
+
+        <docs-example-block
+          [docLink]="'https://example.com/docs'"
+          [stackBlitzLink]="'https://stackblitz.com/example'"
+          [htmlContent]="prefixExampleHtml()"
+          [tsContent]="prefixExampleTs()"
+        >
+          <span tngExampleTitle>With prefix icon</span>
+          <div tngExampleDemo>
+            <tng-number-input
+              placeholder="Amount"
+              [slot]="prefixSlot"
+            >
+              <tng-icon
+                tngPrefix
+                name="bootstrapCurrencyDollar"
+                class="ml-3 text-muted"
+              />
+            </tng-number-input>
+            <p class="text-xs text-muted mt-2">
+              Use <span class="font-mono text-primary/20">[tngPrefix]</span> and
+              <span class="font-mono text-primary/20">[tngSuffix]</span> for icons/actions.
             </p>
           </div>
         </docs-example-block>
@@ -94,9 +118,21 @@
           </p>
         </div>
         <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
-          <div class="text-sm font-semibold text-primary/20">Klass theming</div>
+          <div class="text-sm font-semibold text-primary/20">Slot-based micro styling</div>
           <p class="text-xs leading-5 text-muted">
-            Customize the input via <span class="font-mono text-foreground">klass</span> input.
+            Customize styling via the <span class="font-mono text-foreground">slot</span> input with keys:
+            <span class="font-mono text-foreground">frame</span>,
+            <span class="font-mono text-foreground">input</span>,
+            <span class="font-mono text-foreground">prefix</span>,
+            <span class="font-mono text-foreground">suffix</span>.
+          </p>
+        </div>
+        <div class="rounded-lg border bg-alternate-background p-4 space-y-1">
+          <div class="text-sm font-semibold text-primary/20">Prefix / Suffix slots</div>
+          <p class="text-xs leading-5 text-muted">
+            Project icons or actions before/after the input using
+            <span class="font-mono text-foreground">tngPrefix</span> /
+            <span class="font-mono text-foreground">tngSuffix</span>.
           </p>
         </div>
         <div class="rounded-lg border bg-alternate-background p-4 space-y-1">

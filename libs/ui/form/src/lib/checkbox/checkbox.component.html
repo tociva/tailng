@@ -1,18 +1,19 @@
-<label [class]="rootKlass()">
+<label [class]="rootClassFinal()">
   <input
+    #inputEl
     type="checkbox"
     [id]="id() || null"
     [name]="name() || null"
-    [checked]="value()"
-    [disabled]="isDisabled()"
+    [checked]="value() === true"
+    [disabled]="disabledFinal()"
     [required]="required()"
-    [class]="classes()"
+    [class]="inputClassFinal()"
     (change)="onToggle($event)"
     (blur)="onBlur()"
   />
 
   @if (label()) {
-    <span [class]="labelKlass()">
+    <span [class]="labelClassFinal()">
       {{ label() }}
     </span>
   }

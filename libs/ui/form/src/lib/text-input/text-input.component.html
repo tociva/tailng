@@ -1,5 +1,5 @@
 <div [class]="frameClassFinal()">
-  <span [class]="prefixKlassFinal()">
+  <span [class]="prefixClassFinal()">
     <ng-content select="[tngPrefix]"></ng-content>
   </span>
 
@@ -7,11 +7,11 @@
     [id]="id() || null"
     [name]="name() || null"
     [type]="type()"
-    [disabled]="isDisabled()"
+    [disabled]="disabledFinal()"
     [readOnly]="readonly()"
     [placeholder]="placeholder()"
     [autocomplete]="autocomplete()"
-    [class]="inputKlassFinal()"
+    [class]="inputClassFinal()"
     [value]="value()"
     [attr.inputmode]="inputmode() || null"
     [attr.minlength]="minlength() ?? null"
@@ -23,7 +23,7 @@
     (compositionend)="onCompositionEnd($event)"
   />
 
-  <span [class]="suffixKlassFinal()">
+  <span [class]="suffixClassFinal()">
     <ng-content select="[tngSuffix]"></ng-content>
   </span>
 </div>

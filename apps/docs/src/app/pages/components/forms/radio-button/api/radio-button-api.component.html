@@ -25,6 +25,27 @@
         </tng-table>
       </div>
     </section>
+    <section id="styling" class="flex flex-col gap-4 text-fg">
+      <div class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-semibold text-primary">Slot-based micro styling</h3>
+          <tng-tag label="tailng"></tng-tag>
+        </div>
+        <p class="text-sm text-muted">
+          Use the <span class="font-mono text-foreground">slot</span> input to customize styling for different parts of the component.
+          The slot object accepts keys: <span class="font-mono text-foreground">container</span>, <span class="font-mono text-foreground">input</span>, 
+          and <span class="font-mono text-foreground">label</span>.
+        </p>
+        <div class="rounded-md border text-fg">
+          <tng-table [rows]="stylingRows()">
+            <tng-col id="property" header="Property" [value]="property"></tng-col>
+            <tng-col id="type" header="Type" [value]="type"></tng-col>
+            <tng-col id="default" header="Default" [value]="default"></tng-col>
+            <tng-col id="description" header="Description" [value]="description"></tng-col>
+          </tng-table>
+        </div>
+      </div>
+    </section>
     <div id="form-integration" class="rounded-xl border border-border bg-bg p-6 shadow-sm space-y-4 text-fg">
       <h3 class="text-sm font-semibold text-primary">Forms integration</h3>
       <p class="text-sm leading-6 text-muted">Implements <span class="font-mono">ControlValueAccessor</span>. Use <span class="font-mono">formControlName</span> and same <span class="font-mono">name</span> on each radio in the group.</p>
@@ -34,6 +55,7 @@
     <h3 class="mb-3 text-xs font-semibold tracking-wide">API Overview</h3>
     <ul class="space-y-2 text-sm text-fg">
       <li><a href="#inputs" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Inputs</a></li>
+      <li><a href="#styling" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Styling</a></li>
       <li><a href="#form-integration" class="flex items-center gap-2 p-1 hover:text-primary scroll-link"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span> Forms integration</a></li>
     </ul>
   </aside>

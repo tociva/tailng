@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "types": ["jest", "node"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "full"
+  },
+  "include": [
+    "form/**/*.spec.ts",
+    "layout/**/*.spec.ts",
+    "navigation/**/*.spec.ts",
+    "overlay/**/*.spec.ts",
+    "primitives/**/*.spec.ts",
+    "table/**/*.spec.ts",
+    "utilities/**/*.spec.ts",
+    "src/**/*.spec.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

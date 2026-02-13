@@ -3,12 +3,12 @@
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-3">
     <h2 class="text-sm font-semibold text-primary">Styling</h2>
     <p class="text-sm leading-6 text-fg">
-      The <span class="font-mono">tng-text-input</span> component provides four
-      klass hooks for customizing different parts of the input:
-      <span class="font-mono">frameKlass</span>,
-      <span class="font-mono">inputKlass</span>,
-      <span class="font-mono">prefixKlass</span>, and
-      <span class="font-mono">suffixKlass</span>. Each hook targets a specific
+      The <span class="font-mono">tng-text-input</span> component uses slot-based micro styling via the
+      <span class="font-mono">slot</span> input. The slot object accepts keys:
+      <span class="font-mono">frame</span>,
+      <span class="font-mono">input</span>,
+      <span class="font-mono">prefix</span>, and
+      <span class="font-mono">suffix</span>. Each slot targets a specific
       element in the component structure.
     </p>
   </div>
@@ -16,12 +16,12 @@
   <!-- frameKlass -->
   <div class="rounded-xl border bg-bg p-4 shadow-sm space-y-2">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">frameKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">frame slot</h3>
       <tng-tag label="wrapper"></tng-tag>
     </div>
 
     <p class="text-sm text-fg">
-      The <span class="font-mono">frameKlass</span> input applies classes to the root
+      The <span class="font-mono">frame</span> slot applies classes to the root
       wrapper <span class="font-mono">&lt;div&gt;</span> that contains the entire
       input structure. Use this for styling the container: borders, background, rounded corners,
       shadows, and focus ring styles.
@@ -39,7 +39,7 @@
         <div tngExampleDemo>
           <tng-text-input
             placeholder="Custom root styling"
-            frameKlass="border-2 border-blue-900 rounded-md shadow-md focus-within:ring-blue-900 max-w-2xl"
+            [slot]="frameSlot"
           />
         </div>
       </docs-example-block>
@@ -49,7 +49,7 @@
     >
       <strong class="text-sm font-bold text-muted text-primary">Tip:</strong>
       The default root classes include focus ring styling. When overriding
-      <span class="font-mono text-foreground">frameKlass</span>, you may want to include your own
+      <span class="font-mono text-foreground">frame</span> slot, you may want to include your own
       focus states for consistency.
     </div>
   </div>
@@ -57,12 +57,12 @@
   <!-- inputKlass -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">inputKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">input slot</h3>
       <tng-tag label="input element"></tng-tag>
     </div>
 
     <p class="text-sm text-fg">
-      The <span class="font-mono text-foreground">inputKlass</span> input applies classes directly
+      The <span class="font-mono text-foreground">input</span> slot applies classes directly
       to the <span class="font-mono text-foreground">&lt;input&gt;</span> element. Use this for text
       styling, padding adjustments, placeholder styling, and other input-specific customizations.
     </p>
@@ -79,7 +79,7 @@
         <div tngExampleDemo>
           <tng-text-input
             placeholder="Custom input styling"
-            inputKlass="text-lg font-semibold text-blue-600"
+            [slot]="inputSlot"
           />
         </div>
       </docs-example-block>
@@ -89,7 +89,7 @@
     >
       <strong class="text-sm font-bold text-muted text-primary">Note:</strong>
       The default input classes include
-      <span class="font-mono text-foreground">px-3</span>for horizontal padding. Adjust this if you
+      <span class="font-mono text-foreground">px-3</span> for horizontal padding. Adjust this if you
       need different spacing.
     </div>
   </div>
@@ -97,12 +97,12 @@
   <!-- prefixKlass -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">prefixKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">prefix slot</h3>
       <tng-tag label="prefix wrapper"></tng-tag>
     </div>
 
     <p class="text-sm text-fg">
-      The <span class="font-mono text-foreground">prefixKlass</span> input applies classes to the
+      The <span class="font-mono text-foreground">prefix</span> slot applies classes to the
       wrapper <span class="font-mono text-foreground">&lt;span&gt;</span> that contains projected
       prefix content. Use this for styling the prefix area: background colors, borders, or other
       visual treatments.
@@ -137,8 +137,8 @@
             <span tngExampleTitle>With custom prefixKlass</span>
 
             <div tngExampleDemo>
-              <!-- <label class="text-xs font-semibold text-muted">With custom prefixKlass</label> -->
-              <tng-text-input placeholder="Search..." prefixKlass="bg-blue-50 rounded-l-md">
+              <!-- <label class="text-xs font-semibold text-muted">With custom prefix slot</label> -->
+              <tng-text-input placeholder="Search..." [slot]="prefixSlot">
                 <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-blue-600" />
               </tng-text-input>
             </div>
@@ -161,19 +161,19 @@
       <strong class="text-sm font-bold text-muted text-primary">Important:</strong>
       Spacing for prefix content (like
       <span class="font-mono text-foreground">ml-3</span>) should be applied to the projected
-      element itself, not the prefix wrapper.
+      element itself, not the prefix slot wrapper.
     </div>
   </div>
 
   <!-- suffixKlass -->
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-primary">suffixKlass</h3>
+      <h3 class="text-sm font-semibold text-primary">suffix slot</h3>
       <tng-tag label="suffix wrapper"></tng-tag>
     </div>
 
     <p class="text-sm text-fg">
-      The <span class="font-mono text-foreground">suffixKlass</span> input applies classes to the
+      The <span class="font-mono text-foreground">suffix</span> slot applies classes to the
       wrapper <span class="font-mono text-foreground">&lt;span&gt;</span> that contains projected
       suffix content. Use this for styling the suffix area: background colors, borders, or other
       visual treatments.
@@ -209,8 +209,8 @@
             <span tngExampleTitle>With custom suffixKlass</span>
 
             <div tngExampleDemo>
-              <!-- <label class="text-xs font-semibold text-muted">With custom suffixKlass</label> -->
-              <tng-text-input placeholder="Enter email" suffixKlass="bg-green-50 rounded-r-md">
+              <!-- <label class="text-xs font-semibold text-muted">With custom suffix slot</label> -->
+              <tng-text-input placeholder="Enter email" [slot]="suffixSlot">
                 <tng-icon tngSuffix name="bootstrapCheck" class="mr-3 text-green-600" />
               </tng-text-input>
             </div>
@@ -223,8 +223,8 @@
     >
       <strong class="text-sm font-bold text-muted text-primary">Important:</strong>
       Spacing for suffix content (like
-      <span class="font-mono text-foreground">mr-3</span>)should be applied to the projected element
-      itself, not the suffix wrapper.
+      <span class="font-mono text-foreground">mr-3</span>) should be applied to the projected element
+      itself, not the suffix slot wrapper.
     </div>
   </div>
 
@@ -232,12 +232,12 @@
   <div class="rounded-xl border bg-bg p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
       <h3 class="text-sm font-semibold text-primary">Full Working Example</h3>
-      <tng-tag label="all klass hooks"></tng-tag>
+      <tng-tag label="all slots"></tng-tag>
     </div>
 
     <p class="text-sm text-fg">
-      You can combine all klass hooks together to create fully customized inputs. Here's an example
-      using all four hooks:
+      You can combine all slot keys together to create fully customized inputs. Here's an example
+      using all four slots:
     </p>
 
     <div class="grid gap-4 lg:grid-cols-1">
@@ -255,10 +255,7 @@
             <!-- <label class="text-xs font-semibold text-muted">Fully Customized Input</label> -->
             <tng-text-input
               placeholder="Fully customized"
-              frameKlass="border-2 border-purple-500 rounded-xl"
-              inputKlass="text-purple-700 placeholder:text-purple-300"
-              prefixKlass="bg-purple-50"
-              suffixKlass="bg-purple-50"
+              [slot]="combinedSlot"
             >
               <tng-icon tngPrefix name="bootstrapSearch" class="ml-3 text-purple-600" />
               <tng-icon tngSuffix name="bootstrapCheck" class="mr-3 text-purple-600" />
@@ -282,14 +279,14 @@
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>
         <span>
-          Use <span class="font-mono text-foreground">frameKlass</span> for container-level styling
+          Use <span class="font-mono text-foreground">frame</span> slot for container-level styling
           (borders, shadows, focus rings).
         </span>
       </li>
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>
         <span>
-          Use <span class="font-mono text-foreground">inputKlass</span> for text and input-specific
+          Use <span class="font-mono text-foreground">input</span> slot for text and input-specific
           styling.
         </span>
       </li>
@@ -297,21 +294,21 @@
         <span class="text-foreground">•</span>
         <span>
           Apply spacing classes (e.g., <span class="font-mono text-foreground">ml-3</span>,
-          <span class="font-mono text-foreground">mr-3</span>) to projected elements, not the klass
+          <span class="font-mono text-foreground">mr-3</span>) to projected elements, not the slot
           wrappers.
         </span>
       </li>
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>
         <span>
-          When overriding <span class="font-mono text-foreground">frameKlass</span>, include focus
+          When overriding <span class="font-mono text-foreground">frame</span> slot, include focus
           states for accessibility.
         </span>
       </li>
       <li class="flex items-start gap-2">
         <span class="text-foreground">•</span>
         <span>
-          The component merges your klass inputs with default classes, so you only need to override
+          The component merges your slot values with default classes, so you only need to override
           what you want to change.
         </span>
       </li>

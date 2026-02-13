@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, signal } from '@angular/core';
-import { TngConnectedOverlay, TngOverlayPanel } from '@tailng-ui/ui/overlay';
+import { TngConnectedOverlay, TngOverlayPanel, TngSlotMap, TngOverlayPanelSlot } from '@tailng-ui/ui/overlay';
 
 @Component({
   selector: 'playground-connected-overlay-demo',
@@ -12,6 +12,13 @@ export class ConnectedOverlayDemoComponent {
   anchorBtn!: ElementRef<HTMLElement>;
 
   open = signal(false);
+
+  /* ─────────────────────────
+   * Demo: slot overrides (keep in TS)
+   * ───────────────────────── */
+  readonly customSlot: TngSlotMap<TngOverlayPanelSlot> = {
+    panel: 'border-2 border-blue-500 bg-blue-50',
+  };
 
   toggle() {
     this.open.update(v => !v);

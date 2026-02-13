@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
+import { TngSlotMap, TngSlotValue } from '@tailng-ui/ui';
+import { TngFileUploadSlot } from './file-upload.slots';
 import { TngFileDropzone } from './file-dropzone.directive';
 
 @Component({
@@ -38,19 +40,10 @@ export class TngFileUpload implements ControlValueAccessor {
   readonly title = input<string>('Upload files');
   readonly subtitle = input<string>('Drag & drop here or click to browse');
 
-  // theming hooks (section-wise)
-  readonly rootKlass = input<string>('w-full');
-  readonly dropzoneKlass = input<string>(''); // outer box
-  readonly titleKlass = input<string>('text-sm font-medium text-fg');
-  readonly subtitleKlass = input<string>('text-xs text-disable');
-  readonly hintKlass = input<string>('text-xs text-disable');
-  readonly fileListKlass = input<string>('mt-2 space-y-1');
-  readonly fileItemKlass = input<string>(
-    'flex items-center justify-between rounded-md border border-border bg-bg px-3 py-2 text-sm text-fg'
-  );
-  readonly clearButtonKlass = input<string>(
-    'text-xs text-danger hover:text-danger-hover'
-  );
+  /* ─────────────────────────
+   * Slot hooks (micro styling)
+   * ───────────────────────── */
+  slot = input<TngSlotMap<TngFileUploadSlot>>({});
 
   // optional outputs (non-form usage)
   readonly valueChange = output<File[] | null>();
@@ -83,20 +76,87 @@ export class TngFileUpload implements ControlValueAccessor {
     this._formDisabled.set(isDisabled);
   }
 
-  // computed classes
-  readonly dropzoneClasses = computed(() => {
-    const base =
-      'relative w-full rounded-md border px-4 py-4 transition ' +
-      'bg-bg text-fg border-border ' +
-      'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background';
+  /* ─────────────────────────
+   * Computed slot classes
+   * ───────────────────────── */
+  readonly containerClassFinal = computed(() =>
+    this.cx('w-full', this.slotClass('container')),
+  );
 
-    const disabled = this.isDisabled() ? ' opacity-60 pointer-events-none' : ' cursor-pointer';
+  readonly dropzoneClassFinal = computed(() => {
+    const base = this.cx(
+      'relative w-full rounded-md border px-4 py-4 transition',
+      'bg-bg text-fg border-border',
+      'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background',
+      this.slotClass('dropzone'),
+    );
+
+    const disabled = this.isDisabled()
+      ? this.cx('opacity-60 pointer-events-none', this.slotClass('dropzoneDisabled'))
+      : this.cx('cursor-pointer');
     const active = this.dragActive()
-      ? ' border-primary ring-2 ring-primary ring-offset-2 ring-offset-background'
+      ? this.cx(
+          'border-primary ring-2 ring-primary ring-offset-2 ring-offset-background',
+          this.slotClass('dropzoneActive'),
+        )
       : '';
 
-    return `${base} ${disabled} ${active} ${this.dropzoneKlass()}`.trim();
+    return this.cx(base, disabled, active);
   });
+
+  readonly headerClassFinal = computed(() =>
+    this.cx('flex items-start justify-between gap-4', this.slotClass('header')),
+  );
+
+  readonly titleClassFinal = computed(() =>
+    this.cx('text-sm font-medium text-fg', this.slotClass('title')),
+  );
+
+  readonly subtitleClassFinal = computed(() =>
+    this.cx('text-xs text-disable', this.slotClass('subtitle')),
+  );
+
+  readonly hintClassFinal = computed(() =>
+    this.cx('text-xs text-disable', this.slotClass('hint')),
+  );
+
+  readonly clearButtonClassFinal = computed(() =>
+    this.cx('text-xs text-danger hover:text-danger-hover', this.slotClass('clearButton')),
+  );
+
+  readonly fileListClassFinal = computed(() =>
+    this.cx('mt-2 space-y-1', this.slotClass('fileList')),
+  );
+
+  readonly fileItemClassFinal = computed(() =>
+    this.cx(
+      'flex items-center justify-between rounded-md border border-border bg-bg px-3 py-2 text-sm text-fg',
+      this.slotClass('fileItem'),
+    ),
+  );
+
+  readonly fileNameClassFinal = computed(() =>
+    this.cx('truncate', this.slotClass('fileName')),
+  );
+
+  readonly fileSizeClassFinal = computed(() =>
+    this.cx('ml-3 text-xs text-disable', this.slotClass('fileSize')),
+  );
+
+  /* ─────────────────────────
+   * Helpers
+   * ───────────────────────── */
+  private slotClass(key: TngFileUploadSlot): TngSlotValue {
+    return this.slot()?.[key];
+  }
+
+  private cx(...parts: Array<TngSlotValue>): string {
+    return parts
+      .flatMap((p) => (Array.isArray(p) ? p : [p]))
+      .map((p) => (p ?? '').toString().trim())
+      .filter(Boolean)
+      .join(' ');
+  }
 
   openPicker() {
     if (this.isDisabled()) return;
