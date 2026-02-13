@@ -34,7 +34,7 @@
   </div>
 
   <!-- Code Panel -->
-  <tng-expansion-panel rootKlass="border-0 mt-4" headerKlass="hidden" [open]="isCodePanelOpen()">
+  <tng-expansion-panel [slot]="{ container: 'border-0 mt-4', header: 'hidden' }" [open]="isCodePanelOpen()">
     <tng-tabs defaultValue="html" tngExpansionContent>
       <tng-tab
         value="html"
