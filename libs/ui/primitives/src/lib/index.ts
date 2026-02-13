@@ -1,4 +1,5 @@
 export * from './badge/badge.component';
+export * from './badge/badge.slots';
 export * from './button/button.component';
 export * from './button/button.slots';
 export * from './button/button.types';
