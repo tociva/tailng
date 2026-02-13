@@ -8,5 +8,7 @@ export * from './divider/divider.slots';
 export * from './expansion-panel/expansion-panel.component';
 export * from './expansion-panel/expansion-panel.slots';
 export * from './tabs/tabs.component';
+export * from './tabs/tabs.slots';
 export * from './tabs/tab.component';
+export * from './tabs/tab.slots';
 export * from './tabs/tab-panel.component';
