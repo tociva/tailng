@@ -149,13 +149,13 @@ You must apply:
       <tng-card rootKlass="rounded-lg border border-border bg-bg mb-4" contentKlass="p-4">
         <p class="text-sm text-fg m-0 mb-2">Step 4) Use token-based utilities in templates</p>
         <p class="text-sm text-fg m-0 mb-1 flex items-center gap-2">
-          <tng-icon name="bootstrapCheck" iconKlass="text-success shrink-0" [size]="18"></tng-icon>
+          <tng-icon name="bootstrapCheck" [slot]="{ icon: 'text-success shrink-0' }" [size]="18"></tng-icon>
           Correct:
         </p>
         <pre class="text-sm whitespace-pre-wrap text-fg m-0 ml-6 mb-3">- bg-bg / text-fg
 - components that use tokens (tailng)</pre>
         <p class="text-sm text-fg m-0 mb-1 flex items-center gap-2">
-          <tng-icon name="bootstrapX" iconKlass="text-danger shrink-0" [size]="18"></tng-icon>
+          <tng-icon name="bootstrapX" [slot]="{ icon: 'text-danger shrink-0' }" [size]="18"></tng-icon>
           Incorrect:
         </p>
         <pre class="text-sm whitespace-pre-wrap text-fg m-0 ml-6">- bg-slate-* / text-slate-* / text-white (hard-coded)</pre>
