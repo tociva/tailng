@@ -9,5 +9,6 @@ export * from './progress-spinner/progress-spinner.component';
 export * from './progress-spinner/progress-spinner.slots';
 export * from './ripples/ripples.directive';
 export * from './skeleton/skeleton.component';
+export * from './skeleton/skeleton.slots';
 export * from './tag/tag.component';
 export * from './tag/tag.slots';
